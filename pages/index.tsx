@@ -1,8 +1,28 @@
+import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+const TEST_API = gql`
+  query fetchBoards($search: String, $page: Int) {
+    fetchBoards(search: $search, page: $page) {
+      _id
+      title
+      writer
+      createdAt
+    }
+  }
+`;
+
 export default function Home() {
+  const { data } = useQuery(TEST_API, {
+    variables: {
+      page: 1,
+    },
+  });
+
+  console.log("data 환경 세팅?", data);
+
   return (
     <div className={styles.container}>
       <Head>

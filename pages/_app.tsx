@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import ApolloConfig from "../src/components/apollo";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ApolloConfig>
+      <Component {...pageProps} />
+    </ApolloConfig>
+  );
 }
 
-export default MyApp
+export default MyApp;
