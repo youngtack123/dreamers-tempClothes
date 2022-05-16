@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Modal from "../src/components/commonModal";
+import Modal from "../src/components/common/commonModal";
 import styles from "../styles/Home.module.css";
 
 const TEST_API = gql`
