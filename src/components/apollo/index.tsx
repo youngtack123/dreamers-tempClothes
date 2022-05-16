@@ -4,9 +4,8 @@ import {
   ApolloProvider,
   InMemoryCache,
 } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+
 import { createUploadLink } from "apollo-upload-client";
-import { useEffect } from "react";
 
 const ApolloConfig = (props: any) => {
   const uploadLink = createUploadLink({
