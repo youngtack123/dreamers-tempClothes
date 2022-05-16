@@ -1,45 +1,81 @@
-import { gql, useQuery } from "@apollo/client";
-import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
-import Modal from "../src/components/commonModal";
-import styles from "../styles/Home.module.css";
+import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
-const TEST_API = gql`
-  query fetchBoards($search: String, $page: Int) {
-    fetchBoards(search: $search, page: $page) {
-      _id
-      title
-      writer
-      createdAt
+const MainWrapperDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+const WrapperDiv = styled.div`
+  width: 97.7rem;
+  height: 197.9rem;
+  margin-top: -87rem;
+  background-image: url("/images/landing.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: .75;
+`
+const RemarkDiv = styled.div`
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  margin-bottom: 60rem;
+  font-family: 'Noto Serif KR', serif;
+`
+const ServiceNameDiv = styled.div`
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  position: absolute;
+  font-size: 9.8rem;
+  color: #FFEA86;
+  font-family: 'Noto Serif KR', serif;
+`
+const LoginDiv = styled.div`
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  font-family: 'Noto Serif KR', serif;
+  margin-top: 50rem;
+  cursor: pointer;
+  :hover {
+        opacity: .6;
     }
-  }
-`;
+`
+const LookAroundDiv = styled.div`
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  font-family: 'Noto Serif KR', serif;
+  margin-top: 65rem;
+  cursor: pointer;
+  :hover {
+        opacity: .6;
+    }
+`
 
 export default function Home() {
-  const { data } = useQuery(TEST_API, {
-    variables: {
-      page: 1,
-    },
-  });
-  console.log("data 환경 세팅?", data);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter()
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  const onMoveToLogin = () => {
+    router.push("/login")
+  }
+
+  const onMoveToOnboarding1 = () => {
+    router.push("/onboarding1")
+  }
 
   return (
-    <div>
-      {/* 모달 사용법 */}
-      <button onClick={openModal}>모달 팝업</button>
-      <Modal open={modalOpen} close={closeModal} header="결제">
-        결제 관련된 컴포넌트
-      </Modal>
-    </div>
+    <MainWrapperDiv>
+      <WrapperDiv />
+      <RemarkDiv>기온에 맞는 옷을 입고 싶은 날,</RemarkDiv>
+      <ServiceNameDiv>온도<span style={{color: "#44BD48"}}>衣</span></ServiceNameDiv>
+      <LoginDiv onClick={onMoveToLogin}>로그인</LoginDiv>
+      <LookAroundDiv onClick={onMoveToOnboarding1}>둘러보기</LookAroundDiv>
+    </MainWrapperDiv>
+
   );
 }

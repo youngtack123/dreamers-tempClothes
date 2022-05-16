@@ -4,158 +4,91 @@ export const WrapperDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 5px solid #EEEEEE;
-
-    /* width: 100%; */
+    justify-content: center;
 `
 export const QuestionDiv = styled.div`
-    /* font-size: 36px;
-    margin-top: 165px;
-    margin-bottom: 137px;
-    margin-right: 250px; */
-
-    font-size: 3.6rem;
-    margin-top: 16.5rem;
-    margin-bottom: 13.7rem;
-    margin-right: 25rem;
+    font-size: 1.9rem;
+    margin-top: 13.3rem;
+    margin-bottom: 6rem;
+    margin-right: 24rem;
 `
 export const StyleDiv = styled.div`
-    /* width: 675px;
+    width: 53.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 64px;  */
-
-    /* width: 67.5rem; */
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 6.4rem;
+    align-items: center;
+    margin-bottom: 3rem;
 `
 export const WhichStyleDiv = styled.div`
-    /* width: 179px; */
-    /* width: 11.188rem; */
-    /* height: 78px;
-    line-height: 81px;
-    background-color: #EEEEEE;
-    font-size: 32px;
-    border: none;
+    width: 16rem;
+    height: 5.5rem;
+    line-height: 5.5rem;
+    font-size: 2rem;
+    border: 1px solid #BEBEBE;
+    text-align: center;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    :hover {
-        background-color: #FFEA86;
-    } */
-
-    width: 11.18rem;
-    /* width: 17.9rem; */
-    height: 7.8rem;
-    line-height: 8.1rem;
-    background-color: #EEEEEE;
-    font-size: 3.2rem;
-    border: none;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     :hover {
         background-color: #FFEA86;
     }
 `
 export const RestDiv = styled.div`
-    /* width: 425px;
+    width: 34.6rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 328px;
-    margin-right: 250px; */
-
-    /* width: 42.5rem; */
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 32.8rem;
-    margin-right: 25rem;
+    align-items: center;
+    margin-right: 19rem;
+    margin-bottom: 17.2rem;
 `
-
 export const AreYouUserDiv = styled.div`
-    /* width: 305px;
+    width: 26.9rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 98px; */
-
-    width: 30.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 9.8rem;
+    margin-bottom: 25.4rem;
 `
 export const AlreadyUserDiv = styled.div`
-    /* font-size: 18px;
-    color: #7E7272; */
-
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #7E7272;
 `
 export const GoToLoginDiv = styled.div`
-    /* font-size: 18px;
-    text-decoration: underline; */
-
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     text-decoration: underline;
+    cursor: pointer;
+    :hover {
+        opacity: .6;
+    }
 `
 export const PrevNextDiv = styled.div`
-    /* width: 1069px;
+    width: 53.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 82px; */
-
-    width: 106.9rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 8.2rem;
+    align-items: center;
+    margin-bottom: 7.8rem;
 `
 export const PrevButton = styled.button`
-    /* width: 174px;
-    height: 69px;
-    line-height: 69px;
-    background-color: #EEEEEE;
-    font-size: 22px;
-    color: #8A8A8A;
-    border: none;
-    border-radius: 10px; */
-
-    width: 17.4rem;
-    height: 6.9rem;
-    line-height: 6.9rem;
-    background-color: #EEEEEE;
-    font-size: 2.2rem;
-    color: #8A8A8A;
-    border: none;
-    border-radius: 10px;
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    font-size: 2rem;
+    color: #bebebe;
+    border: 1px solid #bebebe;
+    border-radius: 50%;
+    :hover {
+        background-color: #FFEA86;
+    }
 `
 export const NextButton = styled.button`
-    /* width: 174px;
-    height: 69px;
-    line-height: 69px;
-    background-color: #EEEEEE;
-    font-size: 22px;
-    color: #8A8A8A;
-    border: none;
-    border-radius: 10px; */
-
-    width: 17.4rem;
-    height: 6.9rem;
-    line-height: 6.9rem;
-    background-color: #EEEEEE;
-    font-size: 2.2rem;
-    color: #8A8A8A;
-    border: none;
-    border-radius: 10px;
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    font-size: 2rem;
+    color: #bebebe;
+    border: 1px solid #bebebe;
+    border-radius: 50%;
+    :hover {
+        background-color: #FFEA86;
+    }
 `

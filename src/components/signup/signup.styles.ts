@@ -1,17 +1,16 @@
 import styled from "@emotion/styled";
 
 export const WrapperDiv = styled.div`
-    width: 75rem;
-    margin: 0 auto;
-    padding: 30px 50px;
-    text-align: center;
-    border: 2px solid #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 export const TitleH1 = styled.h1`
-    font-weight: 400;
-    font-size: 36px;
-    margin-bottom: 75px;
-    margin-top: 76px;
+    font-weight: 500;
+    font-size: 3rem;
+    margin-top: 7.6rem;
+    margin-bottom: 9rem;
 `
 // ========================================
 //                 인풋값 부분
@@ -20,43 +19,98 @@ export const InputWrapperDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 101px;
+    margin-bottom: 4.5rem;
 `
 export const ItemInputDiv = styled.div`
-    width: 580px;
+    width: 50.1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 3.5rem;
 `
 export const ItemNameDiv = styled.div`
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 1.9rem;
 `
 export const ItemInput = styled.input`
-    width: 21.875rem;
-    height: 3.75rem;
-    border: none;
+    width: 26rem;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #BEBEBE;
     border-radius: 10px;
-    box-shadow: 4px 4px 8px -1px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    :focus {
+        outline: 1px solid #B7E576;
+    }
+`
+export const ItemLongInput = styled.input`
+    width: 41.1rem;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #BEBEBE;
+    border-radius: 10px;
+    padding: 10px;
+    :focus {
+        outline: 1px solid #B7E576;
+    }
 `
 export const SendVerifiButton = styled.button`
-    width: 101px;
-    height: 44px;
-    font-size: 14px;
+    width: 12.1rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.4rem;
     background-color: #EEEEEE;
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
+    cursor: pointer;
 `
 export const VerifyButton = styled.button`
-    width: 87px;
-    height: 44px;
-    font-size: 14px;
+    width: 12.1rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.2rem;
     background-color: #EEEEEE;
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
+    cursor: pointer;
 `
-
+export const EmailItemInputDiv = styled.div`
+    width: 50.1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    margin-right: 0.8rem;
+`
+export const PasswordInputDiv = styled.div`
+    width: 51.8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    margin-right: 2.5rem;
+`
+export const PasswordCheckInputDiv = styled.div`
+    width: 55.6rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    margin-right: 6rem;
+`
+export const VerifyDiv = styled.div`
+    width: 51.8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    margin-right: 1.5rem;
+`
 // ========================================
 //                 태그 부분
 // ========================================
@@ -64,34 +118,74 @@ export const TagsDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 104px;
+    margin-bottom: 6.4rem;
+`
+export const GenderTagWrapperDiv = styled.div`
+    width: 23.7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 24rem;
+    margin-bottom: 3.5rem;
+`
+export const StyleTagWrapperDiv = styled.div`
+    width: 34.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 16.5rem;
+    margin-bottom: 2rem;
 `
 export const TagWrapperDiv = styled.div`
-    width: 359px;
+    width: 23.7rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 `
-// 여기!!!
 export const TagBottomLineDiv = styled.div`
+    width: 16.2rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 3.6rem;
+    margin-right: 18rem;
+`
+export const RegionTagWrapperDiv = styled.div`
+    width: 45.1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-right: 9rem;
+`
+export const RegionTagBottomLineDiv = styled.div`
+    width: 25.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 8.5rem;
 `
 export const GenderDiv = styled.div`
-    font-size: 22px;
+    font-size: 2.2rem;
 `
 export const TagItemDiv = styled.div`
-    width: 71px;
-    height: 32px;
-    line-height: 32px;
-    font-size: 14px;
+    width: 7.1rem;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    font-size: 1.4rem;
     border-radius: 50px;
     background-color: #EEEEEE;
-    margin-right: 20px;
+    text-align: center;
+    :hover {
+        background-color: #FFF2B2;
+    }
+    cursor: pointer;
 `
 // ========================================
 //        회원가입 버튼, 이미 회원인가요 부분
@@ -101,28 +195,36 @@ export const RestDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 118px;
+    margin-bottom: 11.8rem;
 `
 export const SignupButton = styled.button`
-    width: 136px;
-    height: 54px;
+    width: 10rem;
+    height: 4rem;
+    line-height: 4rem;
     background-color: #EEEEEE;
-    font-size: 22px;
+    font-size: 1.8rem;
     color: #bdbdbd;
     border: none;
-    border-radius: 5px;
-    margin-bottom: 106px;
+    border-radius: 10px;
+    margin-bottom: 17.1rem;
+    cursor: pointer;
 `
 export const AlreadyUserDiv = styled.div`
+    width: 30rem;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `
 export const AreYouUserDiv = styled.div`
-    font-size: 18px;
-    color: #7E7272;
-    margin-right: 50px;
+    font-size: 1.8rem;
+    color: #BEBEBE;
 `
 export const GoToLoginDiv = styled.div`
-    font-size: 18px;
+    font-size: 1.8rem;
     text-decoration: underline;
+    cursor: pointer;
+    :hover {
+        opacity: .6;
+    }
 `
