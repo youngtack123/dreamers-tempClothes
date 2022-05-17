@@ -8,8 +8,6 @@ export const MyPageHeaderWrapper = styled.div`
 `;
 
 export const MyPageHeaderProfileDiv = styled.div`
-  /* width: 79.2rem;
-  height: 24.6rem; */
   border-radius: 10px;
   display: flex;
   flex-direction: row;
@@ -30,7 +28,6 @@ export const MyPageHeaderProfileDataDiv = styled.div`
 
 export const MyPageHeaderDataTagFlexDiv = styled.div`
   display: flex;
-
   flex-direction: column;
 `;
 
@@ -41,6 +38,10 @@ export const MyPageHeaderListDiv = styled.div`
   align-items: flex-start;
   margin-right: 8.3rem;
 `;
+
+export const MyPageButtonUl = styled.ul`
+  padding: 0px;
+`;
 export const MyLookBookDiv = styled.div`
   height: 16.5rem;
   display: flex;
@@ -48,16 +49,14 @@ export const MyLookBookDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin-right: 8.3rem;
-`
+`;
 export const MyPageHeaderTagDiv = styled.div`
   width: 14rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`
-
-export const FontSizeHeaderLastDiv = styled.div``;
+`;
 
 export const MypageHeaderDataTagDiv = styled.div`
   background-color: #b7e576;
@@ -74,22 +73,21 @@ export const MypageHeaderDataTagDiv = styled.div`
 export const DivideLine1 = styled.div`
   width: 1px;
   height: 20rem;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #bebebe;
   margin-right: 8.1rem;
-`
+`;
 export const DivideLine2 = styled.div`
   width: 1px;
   height: 20rem;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #bebebe;
   margin-right: 8.4rem;
-`
+`;
 
 export const MyPageHeaderWeatherDiv = styled.div`
   width: 33.4rem;
   height: 24.6rem;
   display: flex;
   justify-content: center;
-
   border-radius: 10px;
   border: 1px solid #bebebe;
 `;
@@ -100,6 +98,10 @@ export const MyPageHeaderWeatherFlexDiv = styled.div`
   align-items: center;
 `;
 
+export const MyPageHeaderWeatherWrapperDiv = styled.div`
+  margin-top: 3.9rem;
+`;
+
 export const MyPageHeaderWeatherP = styled.p`
   font-weight: 800;
   font-size: 2.6rem;
@@ -108,28 +110,47 @@ export const MyPageHeaderWeatherP = styled.p`
   margin-bottom: 2rem;
   margin-left: 1.3rem;
 `;
-export const FontSizeHeaderTitleP = styled.p`
+export const FontSizeHeaderTitleP = styled.span`
   font-size: 1.6rem;
   font-weight: 600;
   margin: 0rem;
-  margin-bottom: 8.1rem;
-`
+  margin-bottom: 7rem;
+`;
 export const CurrentPointDiv = styled.div`
   font-size: 1.4rem;
   margin: 0px;
   margin-bottom: 2.5rem;
-`
+`;
 //font size HeaderList
-export const FontSizeHeaderListP = styled.p`
-  /* width: 8.8rem; */
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; */
+export const FontSizeHeaderListSpan = styled.span`
   font-size: 1.4rem;
   cursor: pointer;
   margin: 0rem;
-  /* margin-bottom: 2.5rem; */
+`;
+
+export const ButtonListCountSpan = styled.span`
+  font-weight: 600;
+  margin-left: 1rem;
+  font-size: 1.4rem;
+`;
+
+export const FontSizeHeaderListLastSpan = styled.span`
+  margin-bottom: 4.7rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin: 0rem;
+`;
+
+export const MyPlageHeaderListUl = styled.ul`
+  margin: 0px;
+`;
+
+export const MyPageHeaderButtonListLi = styled.li`
+  margin-bottom: 2.5rem;
+`;
+
+export const MyPageHeaderListLi = styled.li`
+  margin-bottom: 2rem;
 `;
 //font size Temperture
 export const FontSizeTempertureP = styled.p`
@@ -142,8 +163,8 @@ export const MyLookBookP = styled.p`
   font-weight: 700;
   font-size: 1.4rem;
   margin: 0rem;
-`
+`;
 export const UserImg = styled.img`
   width: 9.6rem;
   height: 9.6rem;
-`
+`;

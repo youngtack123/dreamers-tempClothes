@@ -9,6 +9,7 @@ const MyPageHeaderContainer = () => {
   const onClickMyPageList = (index: number) => {
     // console.log(selectMyPageRef.current[index].innerText);
     setSelectMyPageList(selectMyPageRef.current[index].innerText);
+    console.log(index);
   };
 
   return (
