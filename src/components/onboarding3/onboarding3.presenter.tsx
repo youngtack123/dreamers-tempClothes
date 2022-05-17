@@ -23,16 +23,16 @@ export default function Onboarding3UI() {
 
             <s.StyleDiv>
                 <s.RegionDiv>서울</s.RegionDiv>
-                <s.RegionDiv>경기</s.RegionDiv>
-                <s.RegionDiv>강원</s.RegionDiv>
+                <s.RegionDiv>경기도</s.RegionDiv>
+                <s.RegionDiv>강원도</s.RegionDiv>
             </s.StyleDiv>
 
             <s.RestDiv>
-                <s.RegionDiv>충청</s.RegionDiv>
-                <s.RegionDiv>경상</s.RegionDiv>
-                <s.RegionDiv>전라</s.RegionDiv>
+                <s.RegionDiv>충청도</s.RegionDiv>
+                <s.RegionDiv>경상도</s.RegionDiv>
+                <s.RegionDiv>전라도</s.RegionDiv>
             </s.RestDiv>
-            <s.JejuRegionDiv>제주</s.JejuRegionDiv>
+            <s.JejuRegionDiv>제주도</s.JejuRegionDiv>
 
             <s.PrevNextDiv>
                 <s.PrevButton onClick={onMoveToOnboarding2}>{`<`}</s.PrevButton>

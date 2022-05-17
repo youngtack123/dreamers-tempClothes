@@ -26,6 +26,7 @@ export const MyPageEditInfoInputDiv = styled.div`
 export const MyPageEditInfoInputFlexDiv = styled.div`
   display: flex;
   margin-bottom: 3rem;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -44,7 +45,7 @@ export const MyPageEditInfoInputs = styled.input`
 `;
 
 export const MyPageEditInfoShortInputs = styled.input`
-  width: 25.8rem;
+  width: 24.3rem;
   height: 4rem;
   border: 1px solid #bebebe;
   border-radius: 10px;
@@ -60,8 +61,9 @@ export const MyPageEditInfoInputsP = styled.p`
 
 //개인정보 수정 안에 인증번호 전송과 인증하기
 export const MyPageEditButton = styled.button`
-  width: 8.2rem;
+  width: 8.4rem;
   height: 4rem;
+  font-size: 1.3rem;
   background-color: #eeeeee;
   border: 1px solid #bebebe;
   border-radius: 1rem;

@@ -70,14 +70,14 @@ export default function SignupUI() {
                 <s.RegionTagWrapperDiv>
                     <s.GenderDiv>거주지역</s.GenderDiv>
                     <s.TagItemDiv>#서울</s.TagItemDiv>
-                    <s.TagItemDiv>#강원</s.TagItemDiv>
-                    <s.TagItemDiv>#전라</s.TagItemDiv>
-                    <s.TagItemDiv>#제주</s.TagItemDiv>
+                    <s.TagItemDiv>#경기도</s.TagItemDiv>
+                    <s.TagItemDiv>#강원도</s.TagItemDiv>
+                    <s.TagItemDiv>#충청도</s.TagItemDiv>
                 </s.RegionTagWrapperDiv>
                 <s.RegionTagBottomLineDiv>
-                    <s.TagItemDiv>#경기</s.TagItemDiv>
-                    <s.TagItemDiv>#충청</s.TagItemDiv>
-                    <s.TagItemDiv>#경상</s.TagItemDiv>
+                    <s.TagItemDiv>#경상도</s.TagItemDiv>
+                    <s.TagItemDiv>#전라도</s.TagItemDiv>
+                    <s.TagItemDiv>#제주도</s.TagItemDiv>
                 </s.RegionTagBottomLineDiv>
             </s.TagsDiv>
 
