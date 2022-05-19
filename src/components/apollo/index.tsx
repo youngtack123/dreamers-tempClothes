@@ -9,7 +9,7 @@ import { createUploadLink } from "apollo-upload-client";
 
 const ApolloConfig = (props: any) => {
   const uploadLink = createUploadLink({
-    uri: "https://backend06.codebootcamp.co.kr/graphql", // api 연결
+    uri: "https://team01.leo3179.shop/graphql", // api 연결
   });
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
