@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from '../common/commonModal';
+import FeedsWrite from '../feeds/write/feedsWrite.container';
 import * as s from "./tempClothes.styles"
 
 const arr = Array.from(Array(33), (_, index) => index + 1);
@@ -28,6 +30,21 @@ const AmPm = () => {
 }
 
 const TempClothesUI = () => {
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [showImage, setShowImage] = useState("")
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const onClickImage = (event) => {
+        setShowImage(event.target.value)
+    }
+
   return (
     <s.WrapperDiv>
         {/* 현재 시간, 기온, 추천 옷차림 태그 부분 */}
@@ -59,7 +76,10 @@ const TempClothesUI = () => {
             ))}
         </s.RightLookBookDiv>
 
-        <s.WriteButton>+</s.WriteButton>
+        <s.WriteButton onClick={openModal}>+</s.WriteButton>
+        <Modal open={modalOpen} close={closeModal} header="게시물 등록">
+            <FeedsWrite />
+        </Modal>
     </s.WrapperDiv>
   )
 }

@@ -12,7 +12,7 @@ export default function LoginUI() {
     return(
         <s.WrapperDiv>
 
-            <s.TitleH1>로그인dddd</s.TitleH1>
+            <s.TitleH1>로그인</s.TitleH1>
 
             <s.InputWrapperDiv>
                 <s.ItemInputDiv>
