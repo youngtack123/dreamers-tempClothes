@@ -1,11 +1,14 @@
 import ApolloConfig from "../src/components/apollo";
 import "../styles/globals.css";
 import { RecoilRoot } from "recoil";
+import LayOut from "../src/components/layout";
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <ApolloConfig>
-        <Component {...pageProps} />
+        <LayOut>
+          <Component {...pageProps} />
+        </LayOut>
       </ApolloConfig>
     </RecoilRoot>
   );

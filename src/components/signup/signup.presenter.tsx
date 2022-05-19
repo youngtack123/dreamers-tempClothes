@@ -1,95 +1,150 @@
-import { useRouter } from "next/router"
-import * as s from "./signup.styles"
+import { useRouter } from "next/router";
+import * as s from "./signup.styles";
 
-export default function SignupUI() {
+export default function SignupUI(props: any) {
+  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs } = props;
 
-    const router = useRouter()
+  const router = useRouter();
+  const onMoveToLogin = () => {
+    router.push("/login");
+  };
+  return (
+    <s.WrapperDiv>
+      <s.TitleH1>회원가입</s.TitleH1>
 
-    const onMoveToLogin = () => {
-        router.push("/login")
-    }
+      {/* 인풋값 부분 */}
+      <s.InputWrapperDiv>
+        <div>
+          <s.ItemInputDiv>
+            <s.ItemNameDiv>아이디</s.ItemNameDiv>
+            <s.ItemInput name="id" onChange={handleSignUpInputs} />
+            <s.SendVerifiButton onClick={overLapId}>중복확인</s.SendVerifiButton>
+          </s.ItemInputDiv>
+          <s.ErrorTextP>{!inputs.id && "아이디를 입력해 주세요!"}</s.ErrorTextP>
+        </div>
+        <div>
+          <s.ItemInputDiv>
+            <s.ItemNameDiv>닉네임</s.ItemNameDiv>
+            <s.ItemInput name="nickname" onChange={handleSignUpInputs} />
+            <s.SendVerifiButton onClick={overLapNic}>중복확인</s.SendVerifiButton>
+          </s.ItemInputDiv>
+          <s.ErrorTextP>{!inputs.nickname && "닉네임을 입력해주세요!"}</s.ErrorTextP>
+        </div>
+        <div>
+          <s.EmailItemInputDiv>
+            <s.ItemNameDiv>이메일</s.ItemNameDiv>
+            <s.ItemLongInput name="email" onChange={handleSignUpInputs} />
+          </s.EmailItemInputDiv>
+          <s.ErrorTextP>{!inputs.email && "이메일을 정상적으로 입력해주세요!"}</s.ErrorTextP>
+        </div>
+        <div>
+          <s.PasswordInputDiv>
+            <s.ItemNameDiv>비밀번호</s.ItemNameDiv>
+            <s.ItemLongInput name="password" onChange={handleSignUpInputs} />
+          </s.PasswordInputDiv>
+          <s.ErrorTextPassWordP>{!inputs.password && "비밀번호를 입력해 주세요!"}</s.ErrorTextPassWordP>
+        </div>
+        <div>
+          <s.PasswordCheckInputDiv>
+            <s.ItemNameDiv>비밀번호 확인</s.ItemNameDiv>
+            <s.ItemLongInput name="passwordOk" onChange={handleSignUpInputs} />
+          </s.PasswordCheckInputDiv>
+          <s.ErrorTextPassWordOkP>{!inputs.passwordOk && "비밀번호를 다시 확인해 주세요!"}</s.ErrorTextPassWordOkP>
+        </div>
+        <div>
+          <s.ItemInputDiv>
+            <s.ItemNameDiv>휴대폰</s.ItemNameDiv>
+            <s.ItemInput name="phone" onChange={handleSignUpInputs} />
+            <s.VerifyButton>인증번호 전송</s.VerifyButton>
+          </s.ItemInputDiv>
+          <s.ErrorTextP>{!inputs.phone && "핸드폰 번호를 입력해주세요!"}</s.ErrorTextP>
+        </div>
+        <div>
+          <s.VerifyDiv>
+            <s.ItemNameDiv>인증번호</s.ItemNameDiv>
+            <s.ItemInput />
+            <s.SendVerifiButton>인증하기</s.SendVerifiButton>
+          </s.VerifyDiv>
+          <s.ErrorTextAuthP>{!inputs.authNumber && "인증 번호를 입력해주세요!"}</s.ErrorTextAuthP>
+        </div>
+      </s.InputWrapperDiv>
+      {/* 태그 부분 */}
+      <s.TagsDiv>
+        <s.GenderTagWrapperDiv>
+          <s.GenderDiv>성별</s.GenderDiv>
+          <s.TagItemDiv id="gender" onClick={onClickEventTag}>
+            남성
+          </s.TagItemDiv>
+          <s.TagItemDiv id="gender" onClick={onClickEventTag}>
+            여성
+          </s.TagItemDiv>
+        </s.GenderTagWrapperDiv>
+        <s.StyleTagWrapperDiv>
+          <s.GenderDiv>스타일</s.GenderDiv>
+          <s.TagItemDiv>
+            <span onClick={onClickEventTag} id="style">
+              캐주얼
+            </span>
+          </s.TagItemDiv>
+          <s.TagItemDiv>
+            <span onClick={onClickEventTag} id="style">
+              스트릿
+            </span>
+          </s.TagItemDiv>
+          <s.TagItemDiv>
+            <span onClick={onClickEventTag} id="style">
+              트레이닝
+            </span>
+          </s.TagItemDiv>
+        </s.StyleTagWrapperDiv>
+        <s.TagBottomLineDiv>
+          <s.TagItemDiv>
+            <span onClick={onClickEventTag} id="style">
+              세미포멀
+            </span>
+          </s.TagItemDiv>
+          <s.TagItemDiv>
+            <span onClick={onClickEventTag} id="style">
+              포멀
+            </span>
+          </s.TagItemDiv>
+        </s.TagBottomLineDiv>
+        <s.RegionTagWrapperDiv>
+          <s.GenderDiv>거주지역</s.GenderDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            서울
+          </s.TagItemDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            경기
+          </s.TagItemDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            강원
+          </s.TagItemDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            충북
+          </s.TagItemDiv>
+        </s.RegionTagWrapperDiv>
+        <s.RegionTagBottomLineDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            경상
+          </s.TagItemDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            전라
+          </s.TagItemDiv>
+          <s.TagItemDiv id="region" onClick={onClickEventTag}>
+            제주
+          </s.TagItemDiv>
+        </s.RegionTagBottomLineDiv>
+      </s.TagsDiv>
 
-    return(
-        <s.WrapperDiv>
-
-            <s.TitleH1>회원가입</s.TitleH1>
-
-            {/* 인풋값 부분 */}
-            <s.InputWrapperDiv>
-                <s.ItemInputDiv>
-                    <s.ItemNameDiv>아이디</s.ItemNameDiv>
-                    <s.ItemInput />
-                    <s.SendVerifiButton>중복확인</s.SendVerifiButton>
-                </s.ItemInputDiv>
-                <s.ItemInputDiv>
-                    <s.ItemNameDiv>닉네임</s.ItemNameDiv>
-                    <s.ItemInput />
-                    <s.SendVerifiButton>중복확인</s.SendVerifiButton>
-                </s.ItemInputDiv>
-                <s.EmailItemInputDiv>
-                    <s.ItemNameDiv>이메일</s.ItemNameDiv>
-                    <s.ItemLongInput />
-                </s.EmailItemInputDiv>
-                <s.PasswordInputDiv>
-                    <s.ItemNameDiv>비밀번호</s.ItemNameDiv>
-                    <s.ItemLongInput />
-                </s.PasswordInputDiv>
-                <s.PasswordCheckInputDiv>
-                    <s.ItemNameDiv>비밀번호 확인</s.ItemNameDiv>
-                    <s.ItemLongInput />
-                </s.PasswordCheckInputDiv>
-                <s.ItemInputDiv>
-                    <s.ItemNameDiv>휴대폰</s.ItemNameDiv>
-                    <s.ItemInput />
-                    <s.VerifyButton>인증번호 전송</s.VerifyButton>
-                </s.ItemInputDiv>
-                <s.VerifyDiv>
-                    <s.ItemNameDiv>인증번호</s.ItemNameDiv>
-                    <s.ItemInput />
-                    <s.SendVerifiButton>인증하기</s.SendVerifiButton>
-                </s.VerifyDiv>
-            </s.InputWrapperDiv>
-
-            {/* 태그 부분 */}
-            <s.TagsDiv>
-                <s.GenderTagWrapperDiv>
-                    <s.GenderDiv>성별</s.GenderDiv>
-                    <s.TagItemDiv>#남성</s.TagItemDiv>
-                    <s.TagItemDiv>#여성</s.TagItemDiv>
-                </s.GenderTagWrapperDiv>
-                <s.StyleTagWrapperDiv>
-                    <s.GenderDiv>스타일</s.GenderDiv>
-                    <s.TagItemDiv>#캐주얼</s.TagItemDiv>
-                    <s.TagItemDiv>#스트릿</s.TagItemDiv>
-                    <s.TagItemDiv>#트레이닝</s.TagItemDiv>
-                </s.StyleTagWrapperDiv>
-                <s.TagBottomLineDiv>
-                    <s.TagItemDiv>#세미포멀</s.TagItemDiv>
-                    <s.TagItemDiv>#포멀</s.TagItemDiv>
-                </s.TagBottomLineDiv>
-                <s.RegionTagWrapperDiv>
-                    <s.GenderDiv>거주지역</s.GenderDiv>
-                    <s.TagItemDiv>#서울</s.TagItemDiv>
-                    <s.TagItemDiv>#경기도</s.TagItemDiv>
-                    <s.TagItemDiv>#강원도</s.TagItemDiv>
-                    <s.TagItemDiv>#충청도</s.TagItemDiv>
-                </s.RegionTagWrapperDiv>
-                <s.RegionTagBottomLineDiv>
-                    <s.TagItemDiv>#경상도</s.TagItemDiv>
-                    <s.TagItemDiv>#전라도</s.TagItemDiv>
-                    <s.TagItemDiv>#제주도</s.TagItemDiv>
-                </s.RegionTagBottomLineDiv>
-            </s.TagsDiv>
-
-            {/* 회원가입 버튼, 이미 회원인가요 부분 */}
-            <s.RestDiv>
-                <s.SignupButton>회원가입</s.SignupButton>
-                <s.AlreadyUserDiv>
-                    <s.AreYouUserDiv>이미 회원이신가요?</s.AreYouUserDiv>
-                    <s.GoToLoginDiv onClick={onMoveToLogin}>로그인 하러가기</s.GoToLoginDiv>
-                </s.AlreadyUserDiv>
-            </s.RestDiv>
-
-        </s.WrapperDiv>
-    )
+      {/* 회원가입 버튼, 이미 회원인가요 부분 */}
+      <s.RestDiv>
+        <s.SignupButton onClick={signUpFunc}>회원가입</s.SignupButton>
+        <s.AlreadyUserDiv>
+          <s.AreYouUserDiv>이미 회원이신가요?</s.AreYouUserDiv>
+          <s.GoToLoginDiv onClick={onMoveToLogin}>로그인 하러가기</s.GoToLoginDiv>
+        </s.AlreadyUserDiv>
+      </s.RestDiv>
+    </s.WrapperDiv>
+  );
 }
