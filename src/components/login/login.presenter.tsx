@@ -28,7 +28,7 @@ export default function LoginUI() {
         <s.AlreadyUserDiv>
           <s.AreYouUserDiv>계정이 없으신가요?</s.AreYouUserDiv>
           {/* prettier-ignore */}
-          <s.GoToLoginDiv onClick={onMoveToSignUp}>회원가입 해</s.GoToLoginDiv>
+          <s.GoToLoginDiv onClick={onMoveToSignUp}>회원가입 해라</s.GoToLoginDiv>
         </s.AlreadyUserDiv>
         <s.DivideLineDiv />
 
