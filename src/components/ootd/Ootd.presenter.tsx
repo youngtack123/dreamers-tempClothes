@@ -1,25 +1,11 @@
-import { useMediaQuery } from "react-responsive";
-import OotdFeed from "../commonFeed";
-import * as Ootd from "./Ootd.styles";
-import { ReactComponent as Fillheart } from "../../../public/images/fillheart.svg";
+import { withAuth } from "../hoc/withAuth";
+import * as s from "./Ootd.styles";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../common/store";
 
-const OotdUI = (props) => {
-  // const isPc = useMediaQuery({
-  //   query: "(min-width : 1024px) and (max-width : 1920px)",
-  // });
-  // const isTablet = useMediaQuery({
-  //   query: "(min-width:768px) and (max-width:1023px)",
-  // });
-  // const isMobile = useMediaQuery({
-  //   query: "(max-width:767px)",
-  // });
-
-  const breakpointColumnsObj = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1,
-  };
+const OotdUI = () => {
+  const [accessToken] = useRecoilState(accessTokenState);
+  console.log("???", accessToken);
 
   return (
     <Ootd.Container__Div>
