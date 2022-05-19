@@ -1,3 +1,4 @@
+import OotdFeed from "../commonFeed";
 import { withAuth } from "../hoc/withAuth";
 import * as s from "./Ootd.styles";
 import { useRecoilState } from "recoil";
@@ -6,7 +7,6 @@ import { accessTokenState } from "../common/store";
 const OotdUI = () => {
   const [accessToken] = useRecoilState(accessTokenState);
   console.log("???", accessToken);
-
   return (
     <Ootd.Container__Div>
       {/* <s.Container_head__Div> */}
