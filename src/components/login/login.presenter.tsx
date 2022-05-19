@@ -27,6 +27,7 @@ export default function LoginUI() {
         <s.LoginButton>로그인</s.LoginButton>
         <s.AlreadyUserDiv>
           <s.AreYouUserDiv>계정이 없으신가요?</s.AreYouUserDiv>
+          {/* prettier-ignore */}
           <s.GoToLoginDiv onClick={onMoveToSignUp}>회원가입 하러가기</s.GoToLoginDiv>
         </s.AlreadyUserDiv>
         <s.DivideLineDiv />
