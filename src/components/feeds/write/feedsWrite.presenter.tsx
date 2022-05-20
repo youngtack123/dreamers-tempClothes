@@ -14,26 +14,6 @@ const settings = {
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
-  // responsive: [ // 반응형 웹 구현 옵션
-  //     {
-  //         breakpoint: 1200, // 화면 사이즈 1200px
-  //         settings: {
-  //           slidesToShow: 4,
-  //         }
-  //     },
-  //     {
-  //       breakpoint: 1023,
-  //       settings: {
-  //         slidesToShow: 4
-  //       }
-  //     },
-  //     {
-  //       breakpoint: 767,
-  //       settings: {
-  //         slidesToShow: 4
-  //       }
-  //     }
-  //   ]
 };
 
 const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
@@ -42,21 +22,35 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
       {/* 사진, 옷 정보 섹션 */}
       <s.LeftDiv>
         <s.PhotoLabel>사진</s.PhotoLabel>
-        <s.PhotoBoxDiv onClick={props.onClickImage}>
+
+        {props.showPhoto ? (
+          <s.PhotoBoxDiv onClick={props.onClickImage}>
+            <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+            {props.showPhoto.map((item: any, index: number) => (
+              <div key={uuidv4()}>{<s.PhotoClickImg key={index} src={`https://storage.cloud.google.com//${item}`} />}</div>
+            ))}
+          </s.PhotoBoxDiv>
+        ) : (
+          <s.PhotoBoxDiv onClick={props.onClickImage}>
+            <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+          </s.PhotoBoxDiv>
+        )}
+
+        {/* <s.PhotoBoxDiv onClick={props.onClickImage}>
           <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
           {props.showPhoto.map((item: any, index: number) => (
-            <div key={uuidv4()}>{/* <s.PhotoClickImg key={index} src={`https://storage.googleapis.com/${item}`} /> */}</div>
+            <div key={uuidv4()}>{<s.PhotoClickImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
           ))}
-        </s.PhotoBoxDiv>
+        </s.PhotoBoxDiv> */}
         <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
         <s.Slick {...settings}>
           {props.imageUrl.map((el: any, index: any) => (
             <s.MomDiv key={uuidv4()}>
-              <s.PhotoImg key={index} src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+              <s.PhotoImg key={index} src={`https://storage.cloud.google.com//${el}`} onClick={() => props.onClickPhoto(el)} />
               <s.ChildDiv onClick={() => props.onClickDelete(index)}>X</s.ChildDiv>
             </s.MomDiv>
           ))}
-          <s.ThumbnailDiv>
+          {/* <s.ThumbnailDiv>
             <s.PhotoImg src="/images/landing.jpg" />
           </s.ThumbnailDiv>
           <s.ThumbnailDiv>
@@ -73,7 +67,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
           </s.ThumbnailDiv>
           <s.ThumbnailDiv>
             <s.PhotoImg src="/images/landing.jpg" />
-          </s.ThumbnailDiv>
+          </s.ThumbnailDiv> */}
         </s.Slick>
 
         <s.ClothesInfoLabel>옷 정보</s.ClothesInfoLabel>

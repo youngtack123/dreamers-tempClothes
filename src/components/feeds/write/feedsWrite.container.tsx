@@ -1,12 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { ChangeEvent, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
-
-const UPLOAD_IMG = gql`
-  mutation uploadImg($imgs: [Upload!]!) {
-    uploadImg(imgs: $imgs)
-  }
-`;
+import { M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
 
 const FeedsWrite = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -14,7 +9,7 @@ const FeedsWrite = () => {
 
   const [showPhoto, setShowPhoto] = useState([]);
 
-  const [uploadImg] = useMutation(UPLOAD_IMG);
+  const [uploadFeedImgs] = useMutation(M_UPLOAD_FEED_IMGS);
 
   const onClickImage = () => {
     fileRef.current?.click();
@@ -22,22 +17,19 @@ const FeedsWrite = () => {
 
   const onChangeImgUrls = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
-    const imageUrlList = [...file];
-    console.log(imageUrlList);
 
-    imageUrlList.map(async (el) => {
-      try {
-        const result = await uploadImg({
-          variables: {
-            imgs: imageUrl,
-          },
-        });
-        setImageUrl((prev: string[]) => [...prev, result.data?.uploadFile.url]);
-        setShowPhoto(showPhoto[0]);
-      } catch (error: any) {
-        alert(error.message);
-      }
-    });
+    try {
+      const result = await uploadFeedImgs({
+        variables: {
+          imgs: file,
+        },
+      });
+      console.log("result", result);
+      setImageUrl((prev: string[]) => [...prev, result?.data.uploadFeedImgs]);
+      setShowPhoto(showPhoto[0]);
+    } catch (error: any) {
+      alert(error.message);
+    }
   };
 
   const onClickDelete = (deleteIndex: any) => {
