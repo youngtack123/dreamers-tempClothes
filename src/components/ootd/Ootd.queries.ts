@@ -7,6 +7,9 @@ export const Q_FETCH_FEEDS_WITH_TAGS = gql`
       feedTag {
         tagName
       }
+      user {
+        userId
+      }
     }
   }
 `;
