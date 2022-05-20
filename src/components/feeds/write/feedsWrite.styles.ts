@@ -280,12 +280,7 @@ export const SubmitButton = styled.button`
   border: none;
   margin-top: 397px;
 `;
-export const PhotoImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-`;
+
 export const ThumbnailDiv = styled.div`
   width: 65px;
   height: 65px;
@@ -296,8 +291,10 @@ export const Slick = styled(Slider)`
   width: 300px;
   height: 65px;
   margin-bottom: 25px;
-  margin-left: 20px;
-
+  /* margin-left: 10px; */
+  .slick-slider /*슬라이드 틀 조정*/ {
+    display: inline-block;
+  }
   .slick-prev {
     left: -20px !important;
     z-index: 1000;
@@ -322,12 +319,34 @@ export const Slick = styled(Slider)`
     font-family: "SUIT";
   }
 `;
+export const PhotoImg = styled.img`
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 10px;
+`;
 export const MomDiv = styled.div`
   position: relative;
 `;
 export const ChildDiv = styled.div`
   position: absolute;
   color: black;
-  top: 15px;
-  left: 160px;
+  top: 1px;
+  left: 54px;
+`;
+export const ShowImg = styled.img`
+  width: 340px;
+  height: 330px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  border-radius: 10px;
+`;
+export const SlickDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;

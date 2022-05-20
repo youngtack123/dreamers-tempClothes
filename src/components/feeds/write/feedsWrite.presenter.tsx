@@ -3,15 +3,17 @@ import Slider from "react-slick";
 import styled from "@emotion/styled";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
 import Modal from "../../common/commonModal";
 import { IFeedsWriteUIProps } from "./feedsWrite.types";
 import { v4 as uuidv4 } from "uuid";
 
+const showMaxCnt = 4;
+const arr = Array.from(new Array(3));
+
 const settings = {
   dots: false,
-  infinite: true,
-  speed: 500,
+  infinite: arr.length > showMaxCnt,
+  speed: 1000,
   slidesToShow: 4,
   slidesToScroll: 1,
 };
@@ -27,7 +29,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
           <s.PhotoBoxDiv onClick={props.onClickImage}>
             <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
             {props.showPhoto.map((item: any, index: number) => (
-              <div key={uuidv4()}>{<s.PhotoClickImg key={index} src={`https://storage.cloud.google.com//${item}`} />}</div>
+              <div key={uuidv4()}>{<s.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
             ))}
           </s.PhotoBoxDiv>
         ) : (
@@ -35,40 +37,21 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
             <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
           </s.PhotoBoxDiv>
         )}
-
-        {/* <s.PhotoBoxDiv onClick={props.onClickImage}>
-          <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
-          {props.showPhoto.map((item: any, index: number) => (
-            <div key={uuidv4()}>{<s.PhotoClickImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
-          ))}
-        </s.PhotoBoxDiv> */}
         <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
-        <s.Slick {...settings}>
-          {props.imageUrl.map((el: any, index: any) => (
-            <s.MomDiv key={uuidv4()}>
-              <s.PhotoImg key={index} src={`https://storage.cloud.google.com//${el}`} onClick={() => props.onClickPhoto(el)} />
-              <s.ChildDiv onClick={() => props.onClickDelete(index)}>X</s.ChildDiv>
-            </s.MomDiv>
-          ))}
-          {/* <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/landing.jpg" />
-          </s.ThumbnailDiv>
-          <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/google.png" />
-          </s.ThumbnailDiv>
-          <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/kakao.png" />
-          </s.ThumbnailDiv>
-          <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/landing.jpg" />
-          </s.ThumbnailDiv>
-          <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/landing.jpg" />
-          </s.ThumbnailDiv>
-          <s.ThumbnailDiv>
-            <s.PhotoImg src="/images/landing.jpg" />
-          </s.ThumbnailDiv> */}
-        </s.Slick>
+
+        <s.SlickDiv>
+          <s.Slick {...settings}>
+            {props.imageUrl.map((el: any, index: any) => {
+              console.log(el);
+              return (
+                <s.MomDiv key={uuidv4()}>
+                  <s.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+                  <s.ChildDiv onClick={() => props.onClickDelete(index)}>x</s.ChildDiv>
+                </s.MomDiv>
+              );
+            })}
+          </s.Slick>
+        </s.SlickDiv>
 
         <s.ClothesInfoLabel>옷 정보</s.ClothesInfoLabel>
         <s.ItemDiv>

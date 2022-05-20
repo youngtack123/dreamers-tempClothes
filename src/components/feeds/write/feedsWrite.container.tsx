@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
 import { M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
 
@@ -17,6 +17,7 @@ const FeedsWrite = () => {
 
   const onChangeImgUrls = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
+    let temp = [];
 
     try {
       const result = await uploadFeedImgs({
@@ -24,13 +25,14 @@ const FeedsWrite = () => {
           imgs: file,
         },
       });
-      console.log("result", result);
-      setImageUrl((prev: string[]) => [...prev, result?.data.uploadFeedImgs]);
-      setShowPhoto(showPhoto[0]);
+      setImageUrl((prev: string[]) => [...prev, ...result?.data?.uploadFeedImgs]);
+      temp = [...result?.data?.uploadFeedImgs].reverse();
+      setShowPhoto((prev) => [...prev, ...temp]);
     } catch (error: any) {
       alert(error.message);
     }
   };
+  console.log(imageUrl);
 
   const onClickDelete = (deleteIndex: any) => {
     // setImageUrl(imageUrl.filter((photo) => photo !== deleteUrl));
