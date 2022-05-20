@@ -3,12 +3,10 @@ import Masonry from "react-masonry-css";
 
 export const Container__Div = styled.div`
   display: flex;
-  // flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  max-width: 1200px;
-  padding-left: 200px;
-  // position: relative;
+  width: 1200px;
+  height: auto;
+  position: relative;
+  margin: 0 auto;
 `;
 
 export const Container_head__Div = styled.div`
@@ -23,8 +21,9 @@ export const Container_head__Div = styled.div`
 export const Container_Side__Div = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
+  // position: relative;
   width: 230px;
+  position: fixed;
 
   /* position: fixed;
   z-index: 1;
@@ -39,6 +38,7 @@ export const Container_Body__Div = styled.div`
   // margin-left: 210px;
   // padding-left: 150px;
   flex-wrap: wrap;
+  margin-left: 300px;
 
   width: 965px;
 `;
@@ -54,8 +54,8 @@ export const TodayInfo__Div = styled.div`
   margin-bottom: 26px;
   margin-right: 20px;
   border: 1px solid #bebebe;
-  position: fixed;
-  left: 0;
+  /* position: fixed;
+  left: 0; */
 
   /* width: 20.3rem;
   height: 8rem;
@@ -111,7 +111,7 @@ export const MyTag__Div = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding-top: 15px;
-  height: 80px;
+  height: 100px;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 26px;
@@ -128,6 +128,7 @@ export const MyTag__Div = styled.div`
 
 export const TagSelect__Div = styled.div`
   display: flex;
+  width: 965px;
   justify-content: flex-start;
   flex-wrap: wrap;
 `;
@@ -140,6 +141,7 @@ export const TagSeletedUnit__Span = styled.span`
   font-size: 14px;
   font-weight: 400;
   margin-right: 7px;
+  margin-bottom: 5px;
 
   /* background: #fff2b2;
   border-radius: 5rem;
@@ -162,9 +164,9 @@ export const TagWrapper__Div = styled.div`
   border-radius: 10px;
   background-color: #fff;
   margin-right: 15px;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  top: 90px;
+  top: 180px; */
 
   /* width: 20.3rem;
   height: 73rem;
@@ -241,9 +243,9 @@ export const StyleList__Ul = styled.ul`
 `;
 
 export const StyleTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 1.3rem;
-  margin-bottom: 0.8rem;
+  font-size: 12px;
+  margin-right: 13px;
+  margin-bottom: 8px;
   list-style: none;
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
@@ -330,7 +332,8 @@ export const Feeds__Div = styled.div`
 
 export const Aaa = styled(Masonry)`
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
+  justify-content: space-between;
   z-index: 9999;
 
   .my-masonry-grid {
