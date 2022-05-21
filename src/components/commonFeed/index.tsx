@@ -1,8 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import Fillheart from "../../../public/images/fillheart.svg";
 import Emptyheart from "../../../public/images/emptyheart.svg";
 import DMIcon from "../../../public/images/dm.svg";
+import { useRouter } from "next/router";
 
 // const FeedWrapper__Div = styled.div`
 //   width: 230px;
@@ -196,7 +197,21 @@ const Q_FETCH_FEED = gql`
   }
 `;
 
+const Q_FETCH_USER = gql`
+  query fetchUser {
+    userId
+  }
+`;
+
+const M_TOGGLE_LIKE_FEED = gql`
+  mutation toggleLikeFeed($userId: String!, $feedId: String!) {
+    toggleLikeFeed(userId: $userId, feedId: $feedId)
+  }
+`;
+
 const OotdFeed = (props) => {
+  const router = useRouter();
+
   const { data } = useQuery(Q_FETCH_FEEDS_WITH_TAGS, {
     variables: {
       feedTags: props.myTag,
@@ -210,6 +225,20 @@ const OotdFeed = (props) => {
     },
   });
 
+  const { data: userData } = useQuery(Q_FETCH_USER);
+
+  const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
+  // const [isLike, setIsLike] = setState(false)
+
+  const onClickLike = (e) => {
+    toggleLikeFeed({
+      variables: {
+        userId: "userData.userId",
+        feedId: e.target.value,
+      },
+    });
+  };
+
   return (
     // <FeedWrapper__Div>
     <>
@@ -222,8 +251,8 @@ const OotdFeed = (props) => {
         <FeedImageBox__Div>
           <FeedImage__Img src="https://i0.wp.com/echeveau.net/wp-content/uploads/2021/03/OOTD-20210312-2.jpg?w=1200&ssl=1" />
           <HoverIcon__Div>
-            <LikeHeart />
-            <UnLikeHeart />
+            <UnLikeHeart onClick={onClickLike} />
+            {/* {toggleLikeFeed ? <LikeHeart /> : <UnLikeHeart />} */}
             <Dm />
           </HoverIcon__Div>
         </FeedImageBox__Div>

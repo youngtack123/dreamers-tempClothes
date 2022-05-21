@@ -229,7 +229,7 @@ export const RegionTags__Li = styled.li`
   font-size: 1.2rem;
   margin-right: 0.5rem;
   margin-bottom: 0.8rem;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.regionSelected ? 700 : 400)};
 `;
 
 export const StyleList__Ul = styled.ul`
@@ -271,6 +271,7 @@ export const OuterTags__Li = styled.li`
     color: #601098;
     text-decoration: underline;
   }
+  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
 
 export const TopTagsList__Ul = styled.ul`
@@ -288,6 +289,7 @@ export const TopTags__Li = styled.li`
   margin-right: 0.8rem;
   margin-bottom: 0.8rem;
   list-style: none;
+  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
 
 export const BottomList__Ul = styled.ul`
@@ -305,6 +307,7 @@ export const BottomTags__Li = styled.li`
   margin-right: 0.8rem;
   margin-bottom: 0.3rem;
   list-style: none;
+  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
 
 export const EtcList__Ul = styled.ul`
@@ -322,6 +325,7 @@ export const EtcTags__Li = styled.li`
   margin-right: 0.8rem;
   margin-bottom: 0.8rem;
   list-style: none;
+  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
 
 export const Feeds__Div = styled.div`
