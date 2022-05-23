@@ -15,18 +15,7 @@ const OotdPage = () => {
   //   query: "(max-width:767px)",
   // });
 
-  const regionCategory = [
-    "서울",
-    "경기",
-    "강원",
-    "충북",
-    "충남",
-    "경북",
-    "경남",
-    "전북",
-    "전남",
-    "제주",
-  ];
+  const regionCategory = ["서울", "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주"];
   const tagCategory = [
     {
       id: 1,
@@ -69,12 +58,7 @@ const OotdPage = () => {
   // 지역 선택하기
   const onClickRegion = (e) => {
     setMyRegion(e);
-    // if (myRegion.includes(e)) {
-    //   setIsSelected(true);
-    // }
   };
-
-  console.log(myRegion);
 
   // 태그 선택하기
   const onClickTag = (e) => {
@@ -82,7 +66,12 @@ const OotdPage = () => {
       return;
     }
     setMyTag([...myTag, e]);
-    setIsSelected(true);
+  };
+
+  const onClickSelect = (idx) => {
+    if (idx) {
+      setIsSelected(true);
+    }
   };
 
   // console.log(myTag);
@@ -91,7 +80,6 @@ const OotdPage = () => {
   const onClickRemoveTag = (e) => {
     const newMyTag = myTag.filter((tagEl) => tagEl !== e);
     setMyTag(newMyTag);
-    setIsSelected(false);
   };
 
   return (

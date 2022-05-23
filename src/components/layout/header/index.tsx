@@ -2,6 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { useEffect } from "react";
+import { accessTokenState } from "../../common/store/index";
 const HeaderWrapperDiv = styled.div`
   background-color: white;
   width: 100%;
@@ -35,11 +38,11 @@ const Header = () => {
 
   const logout = async () => {
     try {
+      router.push("/");
       const logoutResult = await m_logout();
       console.log("logoutResult", logoutResult);
-      location.reload();
       alert("로그아웃 성공!");
-      router.push("/");
+      location.reload();
     } catch (error) {
       alert(error.message);
     }
