@@ -6,7 +6,11 @@ export const WrapperDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 1px solid bisque;
+  border-bottom: 1px solid #c4c4c4;
+  border-left: 1px solid #c4c4c4;
+  border-right: 1px solid #c4c4c4;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
 export const DetailWrapperDiv = styled.div`
   width: 455px;
@@ -23,11 +27,23 @@ export const DetailInput = styled.input`
   border-radius: 30px;
   border: none;
   font-size: 12px;
-  color: #bebebe;
   padding: 15px;
   :focus {
     outline: none;
   }
+  ::placeholder {
+    color: #bebebe;
+  }
+`;
+export const WriteCommentButton = styled.button`
+  width: 14px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 export const CommentImg = styled.img`
   width: 14px;
