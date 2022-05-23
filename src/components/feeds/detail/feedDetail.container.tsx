@@ -1,19 +1,33 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import React from "react";
 import FeedDetailUI from "./feedDetail.presenter";
-import { Q_FETCH_FEED } from "./feedDetail.queries";
+import { M_DELETE_FEED, Q_FETCH_FEED } from "./feedDetail.queries";
 
 function FeedDetail() {
+  const router = useRouter();
   const { data } = useQuery(Q_FETCH_FEED, {
     variables: {
-      feedId: "10c3b5f0-06b9-47c5-a2b1-221953b0c863",
+      feedId: String(router.query.feedId),
     },
   });
-  console.log(data);
+  const [deleteFeed] = useMutation(M_DELETE_FEED);
+
+  const onClickDeleteFeed = async () => {
+    try {
+      await deleteFeed({
+        variables: { feedId: String(router.query.feedId) },
+      });
+      alert("게시물이 삭제되었습니다");
+      router.push("/");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <>
-      <FeedDetailUI data={data} />
+      <FeedDetailUI data={data} onClickDeleteFeed={onClickDeleteFeed} />
     </>
   );
 }

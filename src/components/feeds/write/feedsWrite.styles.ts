@@ -10,6 +10,12 @@ export const WrapperDiv = styled.div`
   border: 1px solid #bebebe;
   border-radius: 10px;
 `;
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+`;
+
 // ======================================================
 //                사진, 옷 정보 섹션
 // ======================================================
@@ -145,9 +151,10 @@ export const RegionTagDiv = styled.div`
   line-height: 24px;
   text-align: center;
   font-size: 13px;
-  background: #dddddd;
   border-radius: 50px;
-  color: white;
+  margin-bottom: 14px;
+  background: ${(props) => (props.regionSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.regionSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -168,8 +175,9 @@ export const StyleTagDiv = styled.div`
   font-size: 12px;
   background: #dddddd;
   border-radius: 50px;
-  color: white;
   margin-bottom: 14px;
+  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -188,10 +196,10 @@ export const OuterTagDiv = styled.div`
   line-height: 24px;
   text-align: center;
   font-size: 12px;
-  background: #dddddd;
   border-radius: 50px;
-  color: white;
   margin-bottom: 14px;
+  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -212,8 +220,9 @@ export const TopTagDiv = styled.div`
   font-size: 12px;
   background: #dddddd;
   border-radius: 50px;
-  color: white;
   margin-bottom: 14px;
+  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -249,8 +258,9 @@ export const BottomTagDiv = styled.div`
   font-size: 12px;
   background: #dddddd;
   border-radius: 50px;
-  color: white;
   margin-bottom: 14px;
+  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -262,9 +272,9 @@ export const OnePieceDiv = styled.div`
   line-height: 24px;
   text-align: center;
   font-size: 12px;
-  background: #dddddd;
   border-radius: 50px;
-  color: white;
+  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
