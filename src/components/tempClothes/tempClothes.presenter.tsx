@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import Modal from "../common/commonModal";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
@@ -28,9 +29,20 @@ const AmPm = () => {
   }
 };
 
+const FETCH_USER = gql`
+  query {
+    fetchUser {
+      email
+      phone
+    }
+  }
+`;
+
 const TempClothesUI = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showImage, setShowImage] = useState("");
+  const { data } = useQuery(FETCH_USER);
+  console.log(data);
 
   const openModal = () => {
     setModalOpen(true);

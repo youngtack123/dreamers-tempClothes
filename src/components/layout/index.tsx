@@ -6,11 +6,12 @@ interface ILayoutProps {
   children: ReactNode;
 }
 
-const HIDDEN = ["/"];
+const HIDDEN = ["/", "/login", "/signup"];
 
 const LayOut = (props: ILayoutProps) => {
   const router = useRouter();
   const isHidden = HIDDEN.includes(router.asPath);
+  console.log(router.asPath);
   return (
     <>
       {!isHidden && <Header></Header>}

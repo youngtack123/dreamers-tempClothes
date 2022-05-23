@@ -22,6 +22,7 @@ export default function Signup() {
   const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
+  const [authOk, setAuthFalse] = useState(false);
 
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
@@ -105,6 +106,8 @@ export default function Signup() {
         },
       });
       console.log("authNumberResult", authNumberResult);
+      alert("정상적으로 인증이 완료되었습니다!");
+      setAuthFalse(true);
     } catch (error) {
       alert(error.message);
     }
@@ -146,6 +149,7 @@ export default function Signup() {
       overLapNic={overLapNic}
       inputs={inputs}
       createPhoneAuth={createPhoneAuth}
+      authOk={authOk}
       confirmAuthNumber={confirmAuthNumber}
     />
   );

@@ -19,7 +19,6 @@ export const restoreAccessTokenLoadable = selector({
   key: v1(),
   get: async () => {
     const newAccessToken = await getAccessToken();
-    console.log("newAccessToken", newAccessToken);
     return newAccessToken;
   },
 });

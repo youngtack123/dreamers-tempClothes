@@ -42,6 +42,7 @@ const Header = () => {
       const logoutResult = await m_logout();
       console.log("logoutResult", logoutResult);
       alert("로그아웃 성공!");
+      localStorage.clear()
       location.reload();
     } catch (error) {
       alert(error.message);
