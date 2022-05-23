@@ -190,6 +190,7 @@ export const Edit__Span = styled.span`
   :hover {
     font-weight: 700;
   }
+  cursor: pointer;
 `;
 
 export const Delete__Span = styled.span`
@@ -197,6 +198,7 @@ export const Delete__Span = styled.span`
   :hover {
     font-weight: 700;
   }
+  cursor: pointer;
 `;
 
 export const CommentBox__Div = styled.div`

@@ -59,6 +59,9 @@ const FeedImage__Img = styled.img`
   /* width: 230px;
   height: 300px; */
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
 `;
 
 const HoverIcon__Div = styled.div`
@@ -73,7 +76,7 @@ const HoverIcon__Div = styled.div`
   align-items: center;
   opacity: 0;
   transition-duration: 0.15s;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.25) 30%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
 `;
 
 const LikeHeart = styled(Emptyheart)`
@@ -172,20 +175,10 @@ const ClothName__Span = styled.span`
   text-overflow: ellipsis;
 `;
 
-const Q_FETCH_FEEDS_WITH_TAGS = gql`
-  query fetchFeedsWithTags($feedTags: [String!]!, $regionId: String!) {
-    fetchFeedsWithTags(feedTags: $feedTags, regionId: $regionId) {
-      detail
-      feedTag {
-        tagName
-      }
-    }
-  }
-`;
-
 const Q_FETCH_FEED = gql`
   query fetchFeed($feedId: String!) {
     fetchFeed(feedId: $feedId) {
+      id
       detail
       feedTag {
         tagName
@@ -193,13 +186,10 @@ const Q_FETCH_FEED = gql`
       user {
         nickname
       }
+      # feedImg {
+      #   imgURL
+      # }
     }
-  }
-`;
-
-const Q_FETCH_USER = gql`
-  query fetchUser {
-    userId
   }
 `;
 
@@ -212,23 +202,13 @@ const M_TOGGLE_LIKE_FEED = gql`
 const OotdFeed = (props) => {
   const router = useRouter();
 
-  const { data } = useQuery(Q_FETCH_FEEDS_WITH_TAGS, {
-    variables: {
-      feedTags: props.myTag,
-      regionId: props.myRegion,
-    },
-  });
-
   const { data: feedData } = useQuery(Q_FETCH_FEED, {
     variables: {
-      feedId: "fe603d8e-1414-4efe-be66-7e15165617fb",
+      feedId: String(router.query.feedId),
     },
   });
 
-  const { data: userData } = useQuery(Q_FETCH_USER);
-
   const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
-  // const [isLike, setIsLike] = setState(false)
 
   const onClickLike = (e) => {
     toggleLikeFeed({
@@ -239,17 +219,23 @@ const OotdFeed = (props) => {
     });
   };
 
+  const onClickMoveToDetail = (event) => {
+    router.push(`/feeds/${event.currentTarget.id}`);
+  };
+
+  console.log(props.el);
+
   return (
     // <FeedWrapper__Div>
     <>
       <FeedTop__Div>
         <UserIcon__Div></UserIcon__Div>
-        <UserName__Span>{props.el.user?.nickname}</UserName__Span>
+        <UserName__Span>{props.el.user.nickname}</UserName__Span>
       </FeedTop__Div>
 
       <FeedBody__Div>
-        <FeedImageBox__Div>
-          <FeedImage__Img src="https://i0.wp.com/echeveau.net/wp-content/uploads/2021/03/OOTD-20210312-2.jpg?w=1200&ssl=1" />
+        <FeedImageBox__Div id={props.el.id} onClick={onClickMoveToDetail}>
+          <FeedImage__Img src={`https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` ? `https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` : ""} />
           <HoverIcon__Div>
             <UnLikeHeart onClick={onClickLike} />
             {/* {toggleLikeFeed ? <LikeHeart /> : <UnLikeHeart />} */}
@@ -261,25 +247,47 @@ const OotdFeed = (props) => {
       <FeedBottom__Div>
         <BottomTop__Div>
           <SelectedTag__Span>#{props.myRegion}</SelectedTag__Span>
-
           {props.el.feedTag.map((el, idx) => (
             <SelectedTag__Span key={idx}>#{el.tagName}</SelectedTag__Span>
           ))}
-
-          {/* {feedData?.feedTag?.map((el, idx) => (
-            <SelectedTag__Span key={idx}>#{el.tagName}</SelectedTag__Span>
-          ))} */}
-          {/* <NoSelectedTag__Span>#스트릿</NoSelectedTag__Span> */}
         </BottomTop__Div>
 
         <BottomBottom__Div>
-          <ClothInfo__Div>
-            <ClothIcon__Div></ClothIcon__Div>
-            {/* {props.el.detail.map((el, idx) => (
-              <ClothName__Span key={idx}>{el}</ClothName__Span>
-            ))} */}
-            <ClothName__Span>{props.el.detail}</ClothName__Span>
-          </ClothInfo__Div>
+          {props.el.outer ? (
+            <ClothInfo__Div>
+              <ClothIcon__Div></ClothIcon__Div>
+              <ClothName__Span>{props.el?.outer}</ClothName__Span>
+            </ClothInfo__Div>
+          ) : (
+            ""
+          )}
+
+          {props.el.top ? (
+            <ClothInfo__Div>
+              <ClothIcon__Div></ClothIcon__Div>
+              <ClothName__Span>{props.el?.top}</ClothName__Span>
+            </ClothInfo__Div>
+          ) : (
+            ""
+          )}
+
+          {props.el.bottom ? (
+            <ClothInfo__Div>
+              <ClothIcon__Div></ClothIcon__Div>
+              <ClothName__Span>{props.el?.bottom}</ClothName__Span>
+            </ClothInfo__Div>
+          ) : (
+            ""
+          )}
+
+          {props.el.etc ? (
+            <ClothInfo__Div>
+              <ClothIcon__Div></ClothIcon__Div>
+              <ClothName__Span>{props.el?.etc}</ClothName__Span>
+            </ClothInfo__Div>
+          ) : (
+            ""
+          )}
         </BottomBottom__Div>
       </FeedBottom__Div>
     </>

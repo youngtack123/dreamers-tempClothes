@@ -1,14 +1,24 @@
 import { gql } from "@apollo/client";
 
-export const Q_FETCH_FEEDS_WITH_TAGS = gql`
-  query fetchFeedsWithTags($feedTags: [String!]!, $regionId: String!) {
-    fetchFeedsWithTags(feedTags: $feedTags, regionId: $regionId) {
-      detail
-      feedTag {
-        tagName
-      }
-      user {
-        userId
+export const Q_FETCH_FEEDS = gql`
+  query fetchFeeds($feedTags: [String!], $regionId: String!) {
+    fetchFeeds(feedTags: $feedTags, regionId: $regionId) {
+      feeds {
+        id
+        detail
+        top
+        bottom
+        outer
+        etc
+        user {
+          nickname
+        }
+        feedTag {
+          tagName
+        }
+        feedImg {
+          imgURL
+        }
       }
     }
   }

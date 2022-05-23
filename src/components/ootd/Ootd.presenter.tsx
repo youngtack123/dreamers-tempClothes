@@ -14,6 +14,7 @@ const OotdUI = (props) => {
     760: 2,
     600: 1,
   };
+  console.log(props.data?.fetchFeeds.feeds[0]?.id);
 
   const date = new Date();
 
@@ -135,7 +136,7 @@ const OotdUI = (props) => {
         {/* 게시물 페칭 */}
         <Ootd.Feeds__Div>
           <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-            {props.data?.fetchFeedsWithTags.map((el, idx) => (
+            {props.data?.fetchFeeds.feeds.map((el, idx) => (
               <div key={idx}>
                 <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} />
               </div>
