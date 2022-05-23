@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import * as s from "./signup.styles";
 
 export default function SignupUI(props: any) {
-  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber } = props;
+  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, authOk } = props;
 
   const router = useRouter();
   const onMoveToLogin = () => {
@@ -60,6 +60,7 @@ export default function SignupUI(props: any) {
             <s.SendVerifiButton onClick={confirmAuthNumber}>인증하기</s.SendVerifiButton>
           </s.VerifyDiv>
           <s.ErrorTextAuthP>{!inputs.authNumber && "인증 번호를 입력해주세요!"}</s.ErrorTextAuthP>
+          {authOk && "인증이 완료되었습니다!"}
         </div>
       </s.InputWrapperDiv>
       {/* 태그 부분 */}

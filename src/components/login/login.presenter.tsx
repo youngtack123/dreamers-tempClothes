@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import * as s from "./login.styles";
 
 export default function LoginUI(props: any) {
-  const { handleLoginInputs, login } = props;
+  const { handleLoginInputs, login, loginInputs } = props;
   const router = useRouter();
   const onMoveToSignUp = () => {
     router.push("/signup");
@@ -22,9 +22,9 @@ export default function LoginUI(props: any) {
           <s.ItemInput type="password" name="password" onChange={handleLoginInputs} />
         </s.PasswordInputDiv>
       </s.InputWrapperDiv>
-
       <s.RestDiv>
-        <s.LoginButton onClick={login}>로그인</s.LoginButton>
+        {loginInputs.email && loginInputs.password ? <s.LoginButtonOk onClick={login}>로그인</s.LoginButtonOk> : <s.LoginButton>로그인</s.LoginButton>}
+
         <s.AlreadyUserDiv>
           <s.AreYouUserDiv>계정이 없으신가요?</s.AreYouUserDiv>
           <s.GoToLoginDiv onClick={onMoveToSignUp}>회원가입 하러가기</s.GoToLoginDiv>

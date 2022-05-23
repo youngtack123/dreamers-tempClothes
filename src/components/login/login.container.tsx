@@ -8,7 +8,7 @@ import { accessTokenState } from "../common/store/index";
 
 export default function Login() {
   const router = useRouter();
-  const [, setAccessTokenState] = useRecoilState(accessTokenState);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
   const [loginInputs, setLoginInputs] = useState({
     email: "",
     password: "",
@@ -32,8 +32,7 @@ export default function Login() {
           password: loginInputs.password,
         },
       });
-      localStorage.setItem("Token", loginResult?.data?.login);
-      setAccessTokenState(loginResult?.data?.login);
+      setAccessToken(loginResult?.data?.login);
       console.log(loginResult?.data?.login);
       alert("로그인이 성공!");
       router.push("/tempClothes");
@@ -43,5 +42,5 @@ export default function Login() {
     }
   };
 
-  return <LoginUI handleLoginInputs={handleLoginInputs} login={login} />;
+  return <LoginUI handleLoginInputs={handleLoginInputs} login={login} loginInputs={loginInputs} />;
 }
