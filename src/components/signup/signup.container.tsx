@@ -21,6 +21,7 @@ export default function Signup() {
   const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
   const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
+  const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
 
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
@@ -82,11 +83,28 @@ export default function Signup() {
     }
   };
 
+  const createPhoneAuth = async () => {
+    try {
+      const createPhoneAuthResult = await m_phoneAuth({
+        variables: {
+          phone: inputs.phone,
+        },
+      });
+      console.log(createPhoneAuthResult);
+      alert("인증 번호가 발송 되었습니다!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const confirmAuthNumber = async () => {
     try {
       const authNumberResult = await m_authNumber({
-        variables: {},
+        variables: {
+          authNumber: inputs.authNumber,
+        },
       });
+      console.log("authNumberResult", authNumberResult);
     } catch (error) {
       alert(error.message);
     }
@@ -115,5 +133,20 @@ export default function Signup() {
     }
   };
 
-  return <SignupUI handleSignUpInputs={handleSignUpInputs} signUpFunc={signUpFunc} onClickEventTag={onClickEventTag} overLapId={overLapId} overLapNic={overLapNic} inputs={inputs} />;
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
+
+  return (
+    <SignupUI
+      handleSignUpInputs={handleSignUpInputs}
+      signUpFunc={signUpFunc}
+      onClickEventTag={onClickEventTag}
+      overLapId={overLapId}
+      overLapNic={overLapNic}
+      inputs={inputs}
+      createPhoneAuth={createPhoneAuth}
+      confirmAuthNumber={confirmAuthNumber}
+    />
+  );
 }
