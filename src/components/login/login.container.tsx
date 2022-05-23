@@ -10,7 +10,7 @@ export default function Login() {
   const router = useRouter();
   const [, setAccessTokenState] = useRecoilState(accessTokenState);
   const [loginInputs, setLoginInputs] = useState({
-    userId: "",
+    email: "",
     password: "",
   });
 
@@ -28,7 +28,7 @@ export default function Login() {
     try {
       const loginResult = await loginUser({
         variables: {
-          userId: loginInputs.userId,
+          email: loginInputs.email,
           password: loginInputs.password,
         },
       });
