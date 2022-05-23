@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import LikeIcon from "../../../public/images/emptyheart.svg";
-import DMIcon from "../../../public/images/dm.svg";
+import LikeIcon from "../../../../public/images/emptyheart.svg";
+import DMIcon from "../../../../public/images/dm.svg";
 
 export const Wrapper__Div = styled.div`
   width: 1020px;
@@ -10,6 +10,7 @@ export const Wrapper__Div = styled.div`
   justify-content: space-between;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
+  margin: 0 auto; ;
 `;
 
 export const Wrapper_Left__Div = styled.div`
@@ -78,7 +79,7 @@ export const Wrapper_Right__Div = styled.div`
 export const FeedDetailBox__Div = styled.div`
   width: 100%;
   height: 270px;
-  padding: 20px 13px 15px 12px;
+  padding: 10px 13px 15px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -92,21 +93,23 @@ export const FeedDetail_Top__Div = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 5px;
   border-bottom: 1px solid #bebebe;
 `;
 
 // 나중에 이미지로 수정하기
 export const UserIconImg__Div = styled.div`
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: #bebebe;
 `;
 
 export const UserId__Div = styled.div`
   width: 332px;
-  padding-left: 20px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+  padding-left: 3px;
 `;
 
 export const IconBox__Div = styled.div`
@@ -116,17 +119,17 @@ export const IconBox__Div = styled.div`
   justify-content: space-between;
 `;
 
-export const LikeIcon__SVG = styled(LikeIcon)`
-  width: 18px;
-  height: 16px;
-  stroke: #bebebe;
-`;
+// export const LikeIcon__SVG = styled(LikeIcon)`
+//   width: 18px;
+//   height: 16px;
+//   stroke: #bebebe;
+// `;
 
-export const DMIcon__SVG = styled(DMIcon)`
-  width: 18px;
-  height: 15px;
-  fill: #bebebe;
-`;
+// export const DMIcon__SVG = styled(DMIcon)`
+//   width: 18px;
+//   height: 15px;
+//   fill: #bebebe;
+// `;
 
 export const Content__Div = styled.div`
   width: 430px;
@@ -136,16 +139,64 @@ export const Content__Div = styled.div`
 
 export const ContentDetail__P = styled.p`
   width: 100%;
-  height: 155px;
+  font-size: 13px;
+  padding-left: 5px;
+  margin: 5px 0;
+`;
+
+export const FeedDetail_Bottom__Div = styled.div`
+  width: 430px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 5px;
+  position: relative;
 `;
 
 export const Tag__Div = styled.div`
-  width: 430px;
+  width: 400px;
   height: 30px;
   padding-top: 15px;
   display: flex;
   justify-content: flex-start;
-  /* gap: 1; */
+
+  padding-left: 5px;
+`;
+
+export const TagUnit__Span = styled.span`
+  font-size: 12px;
+  margin-right: 10px;
+`;
+
+export const SettingBox__Div = styled.div`
+  width: 43px;
+  height: 60px;
+  background: #ffffff;
+  border: 1px solid #bebebe;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+`;
+
+export const Edit__Span = styled.span`
+  &:active,
+  :hover {
+    font-weight: 700;
+  }
+`;
+
+export const Delete__Span = styled.span`
+  &:active,
+  :hover {
+    font-weight: 700;
+  }
 `;
 
 export const CommentBox__Div = styled.div`

@@ -42,7 +42,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>지역</Ootd.TagCategory__Span>
             <Ootd.RegionList__Ul>
               {props.regionCategory.map((el, idx) => (
-                <Ootd.RegionTags__Li key={idx} id={idx} onClick={() => props.onClickRegion(el)} isSelected={props.isSelected}>
+                <Ootd.RegionTags__Li key={idx} id={idx} onClick={() => props.onClickRegion(el)} regionSelected={props.regionSelected === el}>
                   {el}
                 </Ootd.RegionTags__Li>
               ))}
@@ -54,7 +54,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>스타일</Ootd.TagCategory__Span>
             <Ootd.StyleList__Ul>
               {props.tagCategory[0].tagItem.map((el, idx) => (
-                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected}>
+                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected.includes(el)}>
                   {el}
                 </Ootd.StyleTags__Li>
               ))}
@@ -66,7 +66,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>아우터</Ootd.TagCategory__Span>
             <Ootd.OuterList__Ul>
               {props.tagCategory[1].tagItem.map((el, idx) => (
-                <Ootd.OuterTags__Li key={idx} onClick={() => props.onClickTag(el)}>
+                <Ootd.OuterTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected.includes(el)}>
                   {el}
                 </Ootd.OuterTags__Li>
               ))}
@@ -78,7 +78,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>상의</Ootd.TagCategory__Span>
             <Ootd.TopTagsList__Ul>
               {props.tagCategory[2].tagItem.map((el, idx) => (
-                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)}>
+                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected.includes(el)}>
                   {el}
                 </Ootd.StyleTags__Li>
               ))}
@@ -90,7 +90,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>하의</Ootd.TagCategory__Span>
             <Ootd.BottomList__Ul>
               {props.tagCategory[3].tagItem.map((el, idx) => (
-                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)}>
+                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected.includes(el)}>
                   {el}
                 </Ootd.StyleTags__Li>
               ))}
@@ -102,7 +102,7 @@ const OotdUI = (props) => {
             <Ootd.TagCategory__Span>기타</Ootd.TagCategory__Span>
             <Ootd.EtcList__Ul>
               {props.tagCategory[4].tagItem.map((el, idx) => (
-                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)}>
+                <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} isSelected={props.isSelected.includes(el)}>
                   {el}
                 </Ootd.StyleTags__Li>
               ))}

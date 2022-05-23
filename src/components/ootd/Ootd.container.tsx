@@ -46,7 +46,8 @@ const OotdPage = () => {
 
   const [myTag, setMyTag] = useState(["청바지"]);
   const [myRegion, setMyRegion] = useState("제주");
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(["청바지"]);
+  const [regionSelected, setRegionSelected] = useState("제주");
 
   const { data } = useQuery(Q_FETCH_FEEDS_WITH_TAGS, {
     variables: {
@@ -58,6 +59,7 @@ const OotdPage = () => {
   // 지역 선택하기
   const onClickRegion = (e) => {
     setMyRegion(e);
+    setRegionSelected(e);
   };
 
   // 태그 선택하기
@@ -66,20 +68,14 @@ const OotdPage = () => {
       return;
     }
     setMyTag([...myTag, e]);
+    setIsSelected([...isSelected, e]);
   };
-
-  const onClickSelect = (idx) => {
-    if (idx) {
-      setIsSelected(true);
-    }
-  };
-
-  // console.log(myTag);
 
   // 태그 지우기
   const onClickRemoveTag = (e) => {
     const newMyTag = myTag.filter((tagEl) => tagEl !== e);
     setMyTag(newMyTag);
+    setIsSelected(newMyTag);
   };
 
   return (
@@ -93,6 +89,7 @@ const OotdPage = () => {
       myTag={myTag}
       data={data}
       isSelected={isSelected}
+      regionSelected={regionSelected}
     />
   );
 };
