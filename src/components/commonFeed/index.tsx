@@ -191,7 +191,7 @@ const Q_FETCH_FEED = gql`
         tagName
       }
       user {
-        userId
+        nickname
       }
     }
   }
@@ -244,7 +244,7 @@ const OotdFeed = (props) => {
     <>
       <FeedTop__Div>
         <UserIcon__Div></UserIcon__Div>
-        <UserName__Span>{props.el.user?.userId}</UserName__Span>
+        <UserName__Span>{props.el.user?.nickname}</UserName__Span>
       </FeedTop__Div>
 
       <FeedBody__Div>
