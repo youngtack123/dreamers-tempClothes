@@ -32,6 +32,7 @@ export default function Login() {
           password: loginInputs.password,
         },
       });
+      localStorage.setItem("Token", loginResult?.data?.login);
       setAccessTokenState(loginResult?.data?.login);
       console.log(loginResult?.data?.login);
       alert("로그인이 성공!");
