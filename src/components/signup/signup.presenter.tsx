@@ -16,11 +16,11 @@ export default function SignupUI(props: any) {
       <s.InputWrapperDiv>
         <div>
           <s.ItemInputDiv>
-            <s.ItemNameDiv>아이디</s.ItemNameDiv>
-            <s.ItemInput name="id" onChange={handleSignUpInputs} />
+            <s.ItemNameDiv>이메일</s.ItemNameDiv>
+            <s.ItemInput name="email" onChange={handleSignUpInputs} />
             <s.SendVerifiButton onClick={overLapId}>중복확인</s.SendVerifiButton>
           </s.ItemInputDiv>
-          <s.ErrorTextP>{!inputs.id && "아이디를 입력해 주세요!"}</s.ErrorTextP>
+          <s.ErrorTextP>{!inputs.email && "이메일을 정상적으로 입력해주세요!"}</s.ErrorTextP>
         </div>
         <div>
           <s.ItemInputDiv>
@@ -30,13 +30,7 @@ export default function SignupUI(props: any) {
           </s.ItemInputDiv>
           <s.ErrorTextP>{!inputs.nickname && "닉네임을 입력해주세요!"}</s.ErrorTextP>
         </div>
-        <div>
-          <s.EmailItemInputDiv>
-            <s.ItemNameDiv>이메일</s.ItemNameDiv>
-            <s.ItemLongInput name="email" onChange={handleSignUpInputs} />
-          </s.EmailItemInputDiv>
-          <s.ErrorTextP>{!inputs.email && "이메일을 정상적으로 입력해주세요!"}</s.ErrorTextP>
-        </div>
+
         <div>
           <s.PasswordInputDiv>
             <s.ItemNameDiv>비밀번호</s.ItemNameDiv>

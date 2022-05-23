@@ -3,11 +3,10 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
-import { CREATE_USER, CONFIRM_OVERLAP_ID, CONFIRM_OVERLAP_NIC } from "./signup.quries";
+import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH } from "./signup.quries";
 export default function Signup() {
   const router = useRouter();
   const [inputs, setInputs] = useState({
-    id: " ",
     nickname: " ",
     email: " ",
     password: " ",
@@ -19,8 +18,9 @@ export default function Signup() {
     region: " ",
   });
   const [m_createUser] = useMutation(CREATE_USER);
-  const [m_overLapId] = useMutation(CONFIRM_OVERLAP_ID);
+  const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
   const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
+  const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
 
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
@@ -35,7 +35,6 @@ export default function Signup() {
       const signUpResult = await m_createUser({
         variables: {
           createUserInput: {
-            userId: inputs.id,
             regionId: inputs.region,
             email: inputs.email,
             password: inputs.password,
@@ -57,13 +56,13 @@ export default function Signup() {
 
   const overLapId = async () => {
     try {
-      const overLapIdResult = await m_overLapId({
+      const overLapIdResult = await m_overLapEmail({
         variables: {
-          userId: inputs.id,
+          email: inputs.email,
         },
       });
       console.log("중복 ID 결과값:", overLapIdResult);
-      alert("사용가능한 ID 입니다!");
+      alert("사용가능한 Email 입니다!");
     } catch (error) {
       alert(error.message);
     }
@@ -78,6 +77,16 @@ export default function Signup() {
       });
       console.log("중복 닉네임 결과값:", overLapNicResult);
       alert("사용 가능한 닉네임 입니다!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const confirmAuthNumber = async () => {
+    try {
+      const authNumberResult = await m_authNumber({
+        variables: {},
+      });
     } catch (error) {
       alert(error.message);
     }
