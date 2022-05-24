@@ -43,15 +43,15 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
           <s.PhotoLabel>사진</s.PhotoLabel>
 
           {props.showPhoto ? (
-            <s.PhotoBoxDiv onClick={() => props.onClickImage}>
-              <s.PhotoClickImg src="/images/uploadimg.png" onClick={() => props.onClickImage} />
+            <s.PhotoBoxDiv onClick={props.onClickImage}>
+              <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
               {props.showPhoto.map((item: any, index: number) => (
                 <div key={uuidv4()}>{<s.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
               ))}
             </s.PhotoBoxDiv>
           ) : (
-            <s.PhotoBoxDiv onClick={() => props.onClickImage}>
-              <s.PhotoClickImg src="/images/uploadimg.png" onClick={() => props.onClickImage} />
+            <s.PhotoBoxDiv onClick={props.onClickImage}>
+              <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
             </s.PhotoBoxDiv>
           )}
           <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
