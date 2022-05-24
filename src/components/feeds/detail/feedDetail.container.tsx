@@ -30,9 +30,13 @@ function FeedDetail(props) {
     }
   };
 
+  const onClickMoveToEdit = (event) => {
+    router.push(`/feeds/${event.currentTarget.id}/edit`);
+  };
+
   return (
     <>
-      <FeedDetailUI data={data} onClickDeleteFeed={onClickDeleteFeed} />
+      <FeedDetailUI data={data} onClickDeleteFeed={onClickDeleteFeed} onClickMoveToEdit={onClickMoveToEdit} />
     </>
   );
 }
