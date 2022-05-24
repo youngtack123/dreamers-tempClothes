@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH } from "./signup.quries";
+import { useRecoilState } from "recoil";
+import { timerState } from "../common/store";
 export default function Signup() {
   const router = useRouter();
   const [inputs, setInputs] = useState({
@@ -23,6 +25,7 @@ export default function Signup() {
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
   const [authOk, setAuthFalse] = useState(false);
+  const [, setSendAuthNumber] = useRecoilState(timerState);
 
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
@@ -93,6 +96,7 @@ export default function Signup() {
       });
       console.log(createPhoneAuthResult);
       alert("인증 번호가 발송 되었습니다!");
+      setSendAuthNumber(true);
     } catch (error) {
       alert(error.message);
     }
@@ -107,6 +111,7 @@ export default function Signup() {
       });
       console.log("authNumberResult", authNumberResult);
       alert("정상적으로 인증이 완료되었습니다!");
+      setSendAuthNumber(false);
       setAuthFalse(true);
     } catch (error) {
       alert(error.message);
@@ -136,6 +141,10 @@ export default function Signup() {
     }
   };
 
+  const noAuthSignUp = () => {
+    alert("인증을 정상적으로 하지 않았습니다!");
+  };
+
   useEffect(() => {
     console.log(inputs);
   }, [inputs]);
@@ -151,6 +160,7 @@ export default function Signup() {
       createPhoneAuth={createPhoneAuth}
       authOk={authOk}
       confirmAuthNumber={confirmAuthNumber}
+      noAuthSignUp={noAuthSignUp}
     />
   );
 }

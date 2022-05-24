@@ -4,13 +4,18 @@ import React from "react";
 import FeedDetailUI from "./feedDetail.presenter";
 import { M_DELETE_FEED, Q_FETCH_FEED } from "./feedDetail.queries";
 
-function FeedDetail() {
+function FeedDetail(props) {
+  const { myPageFeedId } = props; //mypage으로부터 받아오는 feedId
   const router = useRouter();
+
   const { data } = useQuery(Q_FETCH_FEED, {
     variables: {
-      feedId: String(router.query.feedId),
+      feedId: myPageFeedId ? String(myPageFeedId) : String(router.query.feedId),
     },
   });
+
+  console.log("data", data);
+
   const [deleteFeed] = useMutation(M_DELETE_FEED);
 
   const onClickDeleteFeed = async () => {

@@ -52,3 +52,14 @@ export const tagCategory = [
     tagItem: ["원피스"],
   },
 ];
+//--------------결제--------------//
+export const amountState = atom({
+  key: v1(),
+  default: 100,
+});
+
+//-------------타이머-----------//
+export const timerState = atom({
+  key: v1(),
+  default: false,
+});

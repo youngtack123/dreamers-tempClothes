@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import MyPagePresenter from "./MyPagePresenter";
 
