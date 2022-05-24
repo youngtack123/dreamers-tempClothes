@@ -1,4 +1,4 @@
-import OotdFeed from "../commonFeed";
+import OotdFeed from "../commonFeed/coomonFeed.container";
 // import { withAuth } from "../hoc/withAuth";
 import * as Ootd from "./Ootd.styles";
 import { useRecoilState } from "recoil";
@@ -14,7 +14,7 @@ const OotdUI = (props) => {
     760: 2,
     600: 1,
   };
-  console.log(props.data?.fetchFeeds.feeds[0]?.id);
+  console.log("렌더링");
 
   const date = new Date();
 
@@ -138,7 +138,7 @@ const OotdUI = (props) => {
           <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
             {props.data?.fetchFeeds.feeds.map((el, idx) => (
               <div key={idx}>
-                <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} />
+                <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} id={el.id} onClick={() => props.onClickLike} />
               </div>
             ))}
           </Ootd.Aaa>
@@ -150,6 +150,7 @@ const OotdUI = (props) => {
           ))} */}
         </Ootd.Feeds__Div>
       </Ootd.Container_Body__Div>
+
       {/* </s.Container_Body__Div> */}
     </Ootd.Container__Div>
   );

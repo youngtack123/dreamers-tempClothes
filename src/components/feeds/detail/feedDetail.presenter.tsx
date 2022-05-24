@@ -68,6 +68,7 @@ function FeedDetailUI(props) {
 
           <Detail.FeedDetail_Bottom__Div>
             <Detail.Tag__Div>
+              <Detail.TagUnit__Span>#{props.data?.fetchFeed.region.id}</Detail.TagUnit__Span>
               {props.data?.fetchFeed.feedTag.map((el, idx) => (
                 <Detail.TagUnit__Span key={idx}>#{el.tagName}</Detail.TagUnit__Span>
               ))}
@@ -75,8 +76,10 @@ function FeedDetailUI(props) {
             <MoreIcon onClick={() => toggleMenu()} style={{ cursor: "pointer" }} />
             {isOpen ? (
               <Detail.SettingBox__Div>
-                <Detail.Edit__Span onClick={props.onClickMoveToEdit}>수정</Detail.Edit__Span>
-                <Detail.Delete__Span onClick={props.onClickDeleteFeed}>삭제</Detail.Delete__Span>
+                <Detail.Edit__Span id={props.data?.fetchFeed.id} onClick={props.onClickMoveToEdit}>
+                  수정
+                </Detail.Edit__Span>
+                <Detail.Delete__Span onClick={() => props.onClickDeleteFeed}>삭제</Detail.Delete__Span>
               </Detail.SettingBox__Div>
             ) : (
               ""

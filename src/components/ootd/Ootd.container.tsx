@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import OotdUI from "./Ootd.presenter";
@@ -22,7 +22,7 @@ const OotdPage = () => {
   const [myTag, setMyTag] = useState(["청바지"]);
   const [myRegion, setMyRegion] = useState("서울");
   const [isSelected, setIsSelected] = useState(["청바지"]);
-  const [regionSelected, setRegionSelected] = useState("서울");
+  const [regionSelected, setRegionSelected] = useState("제주");
 
   const { data } = useQuery(Q_FETCH_FEEDS, {
     variables: {

@@ -153,8 +153,9 @@ export const RegionTagDiv = styled.div`
   font-size: 13px;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.regionSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.regionSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myRegion ? "#fff2b2" : "#ddd")};
+  /* background: ${(props) => (props.aaa ? "#fff2b2" : "#ddd")}; */
+  color: ${(props) => (props.myRegion ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -176,8 +177,8 @@ export const StyleTagDiv = styled.div`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -198,8 +199,8 @@ export const OuterTagDiv = styled.div`
   font-size: 12px;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -221,8 +222,8 @@ export const TopTagDiv = styled.div`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -259,8 +260,8 @@ export const BottomTagDiv = styled.div`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -273,8 +274,8 @@ export const OnePieceDiv = styled.div`
   text-align: center;
   font-size: 12px;
   border-radius: 50px;
-  background: ${(props) => (props.tagSelected ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.tagSelected ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;

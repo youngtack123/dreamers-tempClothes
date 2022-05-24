@@ -8,4 +8,5 @@ export interface IFeedsWriteUIProps {
   fileRef: any;
   imageUrl: any;
   showPhoto: any;
+  editRegion: string;
 }

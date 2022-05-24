@@ -1,37 +1,60 @@
 import { useMutation } from "@apollo/client";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
-import { M_CREATE_FEED, M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
-import { regionCategory, tagCategory } from "../../common/store";
+import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
+import { regionCategory, selectMyRegion, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
-const FeedsWrite = () => {
+const FeedsWrite = (props) => {
+  const router = useRouter();
+
   const [myTag, setMyTag] = useState<String[]>([]);
-  const [myRegion, setMyRegion] = useState<String>();
-  const [tagSelected, setTagSelected] = useState<String[]>([]);
-  const [regionSelected, setRegionSelected] = useState<String>();
+  const [myRegion, setMyRegion] = useState<String>("");
+  const [editRegion, setEditRegion] = useState(props.fetchData?.fetchFeed.region.id);
+  console.log(editRegion);
+
+  const aaa = props.fetchData?.fetchFeed.region.id;
+  console.log("페치 region", props.fetchData?.fetchFeed.region.id);
+  // setEditRegion(props.fetchData?.fetchFeed.region.id);
+  // console.log(editRegion);
+  //console.log(regionSelected);
+  // const [regionSelected, setRegionSelected] = useRecoilState<String>(selectMyRegion);
+
+  // setEditRegion(props.fetchData?.fetchFeed.region.id);
+
+  // useEffect(() => {
+  //   setEditRegion(props.feedData?.fetchData.region.id);
+  //   console.log("use", editRegion);
+  // }, [editRegion]);
 
   const { register, handleSubmit, formState } = useForm({
     mode: "onChange",
   });
 
+  // useEffect(() => {
+  //   if (props.fetchData?.fetchFeed.region.id) {
+  //     setRegionSelected(props.fetchData?.fetchFeed.region.id);
+  //   }
+  // }, [regionSelected]);
+
+  // console.log(tagSelected);
+
   const [createFeed] = useMutation(M_CREATE_FEED);
+  const [updateFeed] = useMutation(M_UPDATE_FEED);
 
   const onClickRegion = (e) => {
     setMyRegion(e);
-    setRegionSelected(e);
   };
 
   // 태그 선택하기
   const onClickTag = (e) => {
-    if (myTag.includes(e) || tagSelected.includes(e)) {
+    if (myTag.includes(e)) {
       const newMyTag = myTag.filter((tagEl) => tagEl !== e);
       setMyTag(newMyTag);
-      setTagSelected(newMyTag);
       return;
     }
     setMyTag([...myTag, e]);
-    setTagSelected([...tagSelected, e]);
   };
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -59,7 +82,6 @@ const FeedsWrite = () => {
       alert(error.message);
     }
   };
-  console.log(imageUrl);
 
   const onClickDelete = (deleteIndex: any) => {
     // setImageUrl(imageUrl.filter((photo) => photo !== deleteUrl));
@@ -95,6 +117,36 @@ const FeedsWrite = () => {
     }
   };
 
+  // 피드 수정 버튼
+  const onClickUpdate = async (data) => {
+    const currentImgFiles = JSON.stringify(imageUrl);
+    const fetchImgFiles = JSON.stringify(props.fetchData.fetchFeed.feedImg.imgURL);
+    const isChangedImgFiles = currentImgFiles !== fetchImgFiles;
+
+    const updateFeedInput = {};
+    if (data.detail) updateFeedInput.detail = data.detail;
+    if (myRegion) updateFeedInput.regionId = myRegion;
+    if (myTag) updateFeedInput.feedTags = myTag;
+    if (data.outer) updateFeedInput.outer = data.outer;
+    if (data.top) updateFeedInput.top = data.top;
+    if (data.bottom) updateFeedInput.bottom = data.bottom;
+    if (data.etc) updateFeedInput.etc = data.etc;
+    if (isChangedImgFiles) updateFeedInput.imgURLs = imageUrl;
+    try {
+      const result = await updateFeed({
+        variables: {
+          updateFeedInput,
+          feedId: String(router.query.feedId),
+        },
+      });
+      alert("피드가 수정되었습니다");
+      console.log(result);
+      router.push(`/feeds/${router.query.feedId}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <FeedsWriteUI
       onClickImage={onClickImage}
@@ -113,9 +165,16 @@ const FeedsWrite = () => {
       // 지역, 태그
       regionCategory={regionCategory}
       tagCategory={tagCategory}
-      // 선택값
-      regionSelected={regionSelected}
-      tagSelected={tagSelected}
+      // 수정
+      isEdit={props.isEdit}
+      fetchData={props.fetchData}
+      onClickUpdate={onClickUpdate}
+      // 수정 태그
+      editRegion={editRegion}
+      aaa={aaa}
+      // 해보는 중
+      myRegion={myRegion}
+      myTag={myTag}
     />
   );
 };
