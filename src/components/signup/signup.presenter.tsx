@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
+import Timer from "../lib/timer";
 import * as s from "./signup.styles";
+import { useRecoilState } from "recoil";
+import { timerState } from "../common/store";
 
 export default function SignupUI(props: any) {
-  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, authOk } = props;
-
+  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, authOk, noAuthSignUp } = props;
+  const [sendAuthNumber] = useRecoilState(timerState);
   const router = useRouter();
   const onMoveToLogin = () => {
     router.push("/login");
@@ -11,7 +14,6 @@ export default function SignupUI(props: any) {
   return (
     <s.WrapperDiv>
       <s.TitleH1>회원가입</s.TitleH1>
-
       {/* 인풋값 부분 */}
       <s.InputWrapperDiv>
         <div>
@@ -50,6 +52,7 @@ export default function SignupUI(props: any) {
             <s.ItemNameDiv>휴대폰</s.ItemNameDiv>
             <s.ItemInput name="phone" onChange={handleSignUpInputs} />
             <s.VerifyButton onClick={createPhoneAuth}>인증번호 전송</s.VerifyButton>
+            {sendAuthNumber && <Timer></Timer>}
           </s.ItemInputDiv>
           <s.ErrorTextP>{!inputs.phone && "핸드폰 번호를 입력해주세요!"}</s.ErrorTextP>
         </div>
@@ -134,7 +137,13 @@ export default function SignupUI(props: any) {
 
       {/* 회원가입 버튼, 이미 회원인가요 부분 */}
       <s.RestDiv>
-        <s.SignupButton onClick={signUpFunc}>회원가입</s.SignupButton>
+        {authOk ? (
+          <s.SignupButton onClick={signUpFunc} style={{ backgroundColor: "yellow" }}>
+            회원가입
+          </s.SignupButton>
+        ) : (
+          <s.SignupButton onClick={noAuthSignUp}>회원가입</s.SignupButton>
+        )}
         <s.AlreadyUserDiv>
           <s.AreYouUserDiv>이미 회원이신가요?</s.AreYouUserDiv>
           <s.GoToLoginDiv onClick={onMoveToLogin}>로그인 하러가기</s.GoToLoginDiv>

@@ -42,6 +42,9 @@ export const MyPageEditInfoInputs = styled.input`
   height: 4rem;
   border: 1px solid #bebebe;
   border-radius: 10px;
+  :focus {
+    outline: 1px solid #b7e576;
+  }
 `;
 
 export const MyPageEditInfoShortInputs = styled.input`
@@ -50,6 +53,9 @@ export const MyPageEditInfoShortInputs = styled.input`
   border: 1px solid #bebebe;
   border-radius: 10px;
   margin-right: 1rem;
+  :focus {
+    outline: 1px solid #b7e576;
+  }
 `;
 
 //개인정보 수정 안에 입력 값

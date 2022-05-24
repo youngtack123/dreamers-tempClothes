@@ -42,19 +42,29 @@ const Header = () => {
       const logoutResult = await m_logout();
       console.log("logoutResult", logoutResult);
       alert("로그아웃 성공!");
-      localStorage.clear()
+      localStorage.clear();
       location.reload();
     } catch (error) {
       alert(error.message);
     }
   };
 
+  const moveToTodayCloth = () => {
+    router.push("/tempClothes");
+  };
+  const moveToOOTD = () => {
+    router.push("/ootd");
+  };
+  const moveToMyPage = () => {
+    router.push("/mypage");
+  };
+
   return (
     <HeaderWrapperDiv>
       <HeaderContentDiv>
-        <div>오늘衣</div>
-        <HeaderContentOOTDDiv>#OOTD</HeaderContentOOTDDiv>
-        <img src="../images/user.png" width="40px" height="40px" style={{ marginRight: "17.2rem " }}></img>
+        <div onClick={moveToTodayCloth}>오늘衣</div>
+        <HeaderContentOOTDDiv onClick={moveToOOTD}>#OOTD</HeaderContentOOTDDiv>
+        <img src="../images/user.png" width="40px" height="40px" style={{ marginRight: "17.2rem " }} onClick={moveToMyPage}></img>
         <div onClick={logout}>로그아웃</div>
       </HeaderContentDiv>
     </HeaderWrapperDiv>

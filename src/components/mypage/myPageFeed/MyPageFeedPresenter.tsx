@@ -1,27 +1,41 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
+import Modal from "../../common/commonModal";
+import FeedDetail from "../../feeds/detail/feedDetail.container";
 import * as S from "./MyPageFeedStyles";
-const MyPageFeedPresenter = () => {
-  const testArr = Array.from({ length: 16 }, (v, i) => i + 1);
-  console.log(testArr);
+const MyPageFeedPresenter = (props) => {
+  const { fetchMyFeed, selectId, myPageFeedId } = props;
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   return (
     <S.RealMyPageFeedWrapper>
       <S.MyPageFeedWrapper>
         <div>
           <S.MyPageFeedHeadP>나衣 룩북</S.MyPageFeedHeadP>
           <S.MyPageFeedLookBooxDiv>
-            {testArr.map((res, index) => {
+            {fetchMyFeed?.fetchMyFeeds.feeds.map((el, index) => {
               return (
                 <div
                   key={index}
-                  style={{ marginBottom: "1.5rem", marginRight: "1.1rem" }}
+                  onClick={() => {
+                    selectId(el.id), openModal();
+                  }}
                 >
-                  <img src="../images/image 37.png" alt="test"></img>
+                  <S.MypageFeedImage src={`https://storage.googleapis.com/${el.feedImg[0].imgURL}`} alt="mypageImage" key={index} width={242} height={362}></S.MypageFeedImage>
                 </div>
               );
             })}
           </S.MyPageFeedLookBooxDiv>
         </div>
       </S.MyPageFeedWrapper>
+      <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">
+        <FeedDetail myPageFeedId={myPageFeedId}></FeedDetail>
+      </Modal>
     </S.RealMyPageFeedWrapper>
   );
 };

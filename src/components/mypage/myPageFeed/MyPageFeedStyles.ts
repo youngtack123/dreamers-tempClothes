@@ -27,3 +27,7 @@ export const MyPageFeedHeadP = styled.div`
   font-size: 1.8rem;
   margin-bottom: 2.5rem;
 `;
+
+export const MypageFeedImage = styled.img`
+  border-radius: 30px;
+`;
