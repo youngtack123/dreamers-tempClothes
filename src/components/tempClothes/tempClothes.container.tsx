@@ -1,9 +1,16 @@
-import React from 'react'
-import TempClothesUI from './tempClothes.presenter'
-
+import { useQuery } from "@apollo/client";
+import React from "react";
+import TempClothesUI from "./tempClothes.presenter";
+import { Q_FETCH_USER, Q_GET_WEATHER } from "./tempClothes.queries";
 
 const TempClothes = () => {
-  return <TempClothesUI />
-}
+  const { data: userData } = useQuery(Q_FETCH_USER);
 
-export default TempClothes
+  const { data: weatherData } = useQuery(Q_GET_WEATHER, {
+    variables: { regionName: String(userData?.fetchUser.region.id) },
+  });
+
+  return <TempClothesUI weatherData={weatherData} userData={userData} />;
+};
+
+export default TempClothes;

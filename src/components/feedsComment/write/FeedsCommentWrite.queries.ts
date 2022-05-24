@@ -1,34 +1,33 @@
 import { gql } from "@apollo/client";
 
 export const M_CREATE_COMMENT = gql`
-  mutation createComment($userId: String!, $createCommentInput: createCommentInput!) {
-    createComment(userId: $userId, createCommentInput: $createCommentInput) {
+  mutation createComment($createCommentInput: createCommentInput!) {
+    createComment(createCommentInput: $createCommentInput) {
       id
-      comment
+      commentDetail
     }
   }
 `;
 
 export const Q_FETCH_USER = gql`
-  query fetchUser {
-    userId
-    nickname
+  query {
+    fetchUser {
+      id
+      email
+      nickname
+    }
   }
 `;
-export const Q_FETCH_COMMENT = gql`
-  query fetchComment($feedId: String!) {
-    fetchComment(feedId: $feedId) {
+export const Q_FETCH_COMMENTS = gql`
+  query fetchComments($page: Float, $feedId: String!) {
+    fetchComments(page: $page, feedId: $feedId) {
       id
-      comment
-      feed {
-        id
-        comment {
-          id
-          comment
-        }
-      }
+      commentDetail
       user {
-        userId
+        nickname
+      }
+      pComment {
+        id
       }
     }
   }

@@ -14,6 +14,8 @@ export const CommentListDiv = styled.div`
   align-items: center;
   padding: 15px;
   padding-bottom: 2px;
+  padding-top: 0px;
+  margin-left: 30px;
 `;
 export const UserImg = styled.img`
   width: 20px;
@@ -29,22 +31,13 @@ export const CommentDiv = styled.div`
   font-size: 11px;
   margin-left: 5px;
 `;
-export const BottomDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 45px;
-  margin-bottom: 20px;
-`;
-export const NestedCommentDiv = styled.div`
-  font-size: 10px;
-  margin-right: 10px;
-  color: #bebebe;
-  cursor: pointer;
-  :hover {
-    color: #333333;
-  }
-`;
+// export const BottomDiv = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   margin-left: 75px;
+//   margin-bottom: 20px;
+// `;
 export const DeleteCommentDiv = styled.div`
   font-size: 10px;
   color: #bebebe;
@@ -52,4 +45,5 @@ export const DeleteCommentDiv = styled.div`
   :hover {
     color: #333333;
   }
+  margin-left: 10px;
 `;

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "../common/commonModal";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import * as s from "./tempClothes.styles";
+import { ITempClothesUIProps } from "./tempClothes.types";
 
 const arr = Array.from(Array(33), (_, index) => index + 1);
 
@@ -29,20 +30,9 @@ const AmPm = () => {
   }
 };
 
-const FETCH_USER = gql`
-  query {
-    fetchUser {
-      email
-      phone
-    }
-  }
-`;
-
-const TempClothesUI = () => {
+const TempClothesUI = (props: ITempClothesUIProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showImage, setShowImage] = useState("");
-  const { data } = useQuery(FETCH_USER);
-  console.log(data);
 
   const openModal = () => {
     setModalOpen(true);
@@ -65,11 +55,17 @@ const TempClothesUI = () => {
           <s.Time>{today()}</s.Time>
         </s.TimeDiv>
 
-        <s.TodayTempDiv>
-          <s.TodayDiv>지금 기온</s.TodayDiv>
-          <s.TempNumDiv>22</s.TempNumDiv>
-          <s.DegreeDiv>°C</s.DegreeDiv>
-        </s.TodayTempDiv>
+        <s.MiddleDiv>
+          <s.RegionDiv>
+            <s.TodayDiv>지금 지역</s.TodayDiv>
+            <s.SelectedRegionDiv>{props.userData?.fetchUser.region.id}</s.SelectedRegionDiv>
+          </s.RegionDiv>
+          <s.TodayTempDiv>
+            <s.TodayDiv>지금 기온</s.TodayDiv>
+            <s.TempNumDiv>{Math.round(props.weatherData?.getWeather.temp) || 0}</s.TempNumDiv>
+            <s.DegreeDiv>°C</s.DegreeDiv>
+          </s.TodayTempDiv>
+        </s.MiddleDiv>
 
         <s.TagDiv>
           <s.PageDiv>지금衣</s.PageDiv>
