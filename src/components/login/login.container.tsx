@@ -4,11 +4,13 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "./login.quries";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../common/store/index";
+import { accessTokenState, socialSignUpState } from "../common/store/index";
+import useUpdateEffect from "../common/customHook/useUpdateEffect";
 
 export default function Login() {
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
+  const [socialSignUp] = useRecoilState(socialSignUpState);
   const [loginInputs, setLoginInputs] = useState({
     email: "",
     password: "",

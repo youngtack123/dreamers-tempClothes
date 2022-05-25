@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { io } from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -7,7 +6,14 @@ const Chat = () => {
   const [nickName, setNickName] = useState("");
   const [room, setRoom] = useState("");
   const [socket, setSocket] = useState("");
+
+  const [anotherMessage, setAnotherMessage] = useState(null);
+  const [receiveMessage, setReceiveMessage] = useState([]);
+  const [mySendMessage, setMySendMessage] = useState(null);
+
+  const [messageArr, setMessageArr] = useState([]);
   const messageDiv = useRef(null);
+
   useEffect(() => {
     const socket = io("http://localhost:3000/chat");
     const nickname = prompt("닉네임을 알려주세요.");
@@ -22,19 +28,27 @@ const Chat = () => {
       socket.on(room, (data) => {
         console.log("data:", data);
         // setOtherSendMessage([...myOtherSendMessage, data]);
-        messageDiv.current.append(`${data[0]} : ${data[1]}`);
+        const e = React.createElement("div", { className: "test" }, `${data[0]} : ${data[1]}`);
+        setReceiveMessage([...receiveMessage, e]);
       });
       /* 누군가 입장 */
       socket.on("receive" + room, (receive) => {
         console.log("receive", receive);
         // setReceive([...Receive, receive]);
-        messageDiv.current.append(`${receive}`);
+        const e = React.createElement("div", { className: "test" }, `${receive}`);
+        console.log(e);
+        // messageDiv.current.append(e);
+        setReceiveMessage([...receiveMessage, e]);
       });
     });
     setNickName(nickName);
     setRoom(room);
     setSocket(socket);
   }, []);
+
+  useEffect(() => {
+    console.log(receiveMessage);
+  }, [receiveMessage]);
 
   const messageHandler = (e: any) => {
     setMessage(e.target.value);
@@ -45,17 +59,19 @@ const Chat = () => {
     console.log("전송?");
     // setMySendMessage([...mySendMessage, message]);
     socket.emit("send", room, nickName, message);
-    messageDiv.current.append(`나:${message}`);
+    const e = React.createElement("div", { className: "test" }, `나:${message}`);
+    setReceiveMessage([...receiveMessage, e]);
   }
-
   return (
     <div>
       <h1>
         재형이의 시크릿쥬쥬 <span id="room"></span>
       </h1>
 
-      <div id="chatList">
-        <li ref={messageDiv}></li>
+      <div id="chatList" ref={messageDiv}>
+        {receiveMessage.map((el, index) => {
+          return <div key={index}>{el}</div>;
+        })}
       </div>
 
       <div id="sendMessage">
