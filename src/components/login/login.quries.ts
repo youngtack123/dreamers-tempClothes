@@ -5,3 +5,9 @@ export const LOGIN = gql`
     login(email: $email, password: $password)
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation {
+    deleteUser
+  }
+`;

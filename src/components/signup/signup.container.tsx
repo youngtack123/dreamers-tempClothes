@@ -3,11 +3,43 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
-import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH } from "./signup.quries";
+import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
 import { useRecoilState } from "recoil";
 import { timerState } from "../common/store";
+
+const FETCH_USER = gql`
+  query {
+    fetchUser {
+      id
+      email
+      phone
+      gender
+      style
+      nickname
+      userImgURL
+      button
+      region {
+        id
+        lat
+        lon
+      }
+      deletedAt
+    }
+  }
+`;
+
 export default function Signup() {
   const router = useRouter();
+  const [m_createUser] = useMutation(CREATE_USER);
+  const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
+  const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
+  const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
+  const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
+  const [m_updateUser] = useMutation(UPDATE_USER);
+  const [authOk, setAuthFalse] = useState(false);
+  const [, setSendAuthNumber] = useRecoilState(timerState);
+  const { data: socialLoginData } = useQuery(FETCH_USER);
+
   const [inputs, setInputs] = useState({
     nickname: " ",
     email: " ",
@@ -19,13 +51,6 @@ export default function Signup() {
     style: " ",
     region: " ",
   });
-  const [m_createUser] = useMutation(CREATE_USER);
-  const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
-  const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
-  const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
-  const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
-  const [authOk, setAuthFalse] = useState(false);
-  const [, setSendAuthNumber] = useRecoilState(timerState);
 
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
@@ -56,6 +81,26 @@ export default function Signup() {
     } catch (error) {
       alert(error.message);
       console.log(error.message);
+    }
+  };
+
+  const updateUserFunc = async () => {
+    try {
+      const updateUserFuncResult = await m_updateUser({
+        variables: {
+          updateUserInput: {
+            regionId: inputs.region,
+            phone: inputs.phone,
+            gender: inputs.gender,
+            style: inputs.style,
+            nickname: inputs.nickname,
+          },
+        },
+      });
+      alert("정상적으로 회원가입이 완료되었습니다!");
+      router.push("/login");
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -94,6 +139,7 @@ export default function Signup() {
           phone: inputs.phone,
         },
       });
+
       console.log(createPhoneAuthResult);
       alert("인증 번호가 발송 되었습니다!");
       setSendAuthNumber(true);
@@ -161,6 +207,8 @@ export default function Signup() {
       authOk={authOk}
       confirmAuthNumber={confirmAuthNumber}
       noAuthSignUp={noAuthSignUp}
+      socialLoginData={socialLoginData}
+      updateUserFunc={updateUserFunc}
     />
   );
 }

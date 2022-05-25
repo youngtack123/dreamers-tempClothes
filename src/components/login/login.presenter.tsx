@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import * as s from "./login.styles";
+import Link from "next/link";
 
 export default function LoginUI(props: any) {
   const { handleLoginInputs, login, loginInputs } = props;
@@ -36,15 +37,26 @@ export default function LoginUI(props: any) {
 
           <s.SocialItemDiv>
             <s.NaverImg src="/images/naver.png" />
-            <s.EachItemDiv>네이버 계정으로 로그인</s.EachItemDiv>
+            <Link href="https://team01.leo3179.shop/login/naver">
+              <a>
+                <s.EachItemDiv>네이버 계정으로 로그인</s.EachItemDiv>
+              </a>
+            </Link>
+            {/* <s.EachItemDiv onClick={() => window.open("http://team01.leo3179.shop/login/naver")}>네이버 계정으로 로그인</s.EachItemDiv> */}
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.KakaoImg src="/images/kakao.png" />
-            <s.EachItemDiv>카카오 계정으로 로그인</s.EachItemDiv>
+            <Link href="https://team01.leo3179.shop/login/kakao">
+              <a>
+                <s.EachItemDiv>카카오 계정으로 로그인</s.EachItemDiv>
+              </a>
+            </Link>
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.GoogleImg src="/images/google.png" />
-            <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
+            <Link href="https://team01.leo3179.shop/login/google">
+              <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
+            </Link>
           </s.SocialItemDiv>
         </s.SocialLoginDiv>
       </s.RestDiv>

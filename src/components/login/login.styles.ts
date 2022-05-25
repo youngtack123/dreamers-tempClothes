@@ -82,11 +82,15 @@ export const LoginButtonOk = styled.button`
   font-size: 1.8rem;
   line-height: 1.8rem;
   text-align: center;
-  color: #bdbdbd;
-  background-color: yellow;
+  color: #333;
+  background-color: #fff2b2;
   border: none;
   border-radius: 10px;
   margin-bottom: 4.7rem;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;
 export const AlreadyUserDiv = styled.div`
   width: 30rem;

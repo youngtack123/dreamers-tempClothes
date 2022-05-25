@@ -34,3 +34,22 @@ export const CREATE_PHONE_AUTH = gql`
     createPhoneAuth(phone: $phone)
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($updateUserInput: updateUserInput!) {
+    updateUser(updateUserInput: $updateUserInput) {
+      id
+      email
+      phone
+      gender
+      style
+      nickname
+      userImgURL
+      region {
+        id
+        lat
+        lon
+      }
+    }
+  }
+`;
