@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/dm.svg";
+import Slider from "react-slick";
+
+export const Body = styled.body`
+  background-color: transparent;
+`;
 
 export const Wrapper__Div = styled.div`
   width: 1020px;
@@ -21,12 +26,81 @@ export const Wrapper_Left__Div = styled.div`
   justify-content: space-between;
 `;
 
-export const ImageBox__Div = styled.div`
+export const PhotoBoxDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 509px;
+  height: 455px;
+  background: #eeeeee;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  position: relative;
+`;
+
+export const ShowImg = styled.img`
+  width: 340px;
+  height: 330px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  border-radius: 10px;
+`;
+
+export const ImageBox__Div = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /* width: 509px;
   height: 455px;
   overflow: hidden;
   border: 1px solid #bebebe;
-  border-radius: 10px;
+  border-radius: 10px; */
+`;
+
+export const Slick = styled(Slider)`
+  width: 300px;
+  height: 65px;
+  margin-bottom: 25px;
+  /* margin-left: 10px; */
+  .slick-slider /*슬라이드 틀 조정*/ {
+    display: inline-block;
+  }
+  .slick-prev {
+    left: -20px !important;
+    z-index: 1000;
+    background-color: white;
+  }
+
+  .slick-next {
+    right: -20px !important;
+    z-index: 1000;
+    background-color: white;
+  }
+  .slick-prev:before {
+    content: "<";
+    color: black;
+    font-weight: 600;
+    font-family: "SUIT";
+  }
+  .slick-next:before {
+    content: ">";
+    color: black;
+    font-weight: 600;
+    font-family: "SUIT";
+  }
+`;
+
+export const MomDiv = styled.div`
+  position: relative;
+`;
+export const ChildDiv = styled.div`
+  position: absolute;
+  color: black;
+  top: 1px;
+  left: 54px;
 `;
 
 export const ImageDetail__Img = styled.img`

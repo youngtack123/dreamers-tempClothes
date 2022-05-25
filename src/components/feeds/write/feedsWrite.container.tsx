@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
-import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
+import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
 import { regionCategory, selectMyRegion, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";

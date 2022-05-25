@@ -22,9 +22,9 @@ const OotdPage = () => {
   const [myTag, setMyTag] = useState(["청바지"]);
   const [myRegion, setMyRegion] = useState("서울");
   const [isSelected, setIsSelected] = useState(["청바지"]);
-  const [regionSelected, setRegionSelected] = useState("제주");
+  const [regionSelected, setRegionSelected] = useState("서울");
 
-  const { data } = useQuery(Q_FETCH_FEEDS, {
+  const { data, fetchMore } = useQuery(Q_FETCH_FEEDS, {
     variables: {
       feedTags: myTag,
       regionId: myRegion,
@@ -57,6 +57,22 @@ const OotdPage = () => {
   //   router.push(`/feeds/${event.target?.id}`);
   // };
 
+  const onLoadMore = () => {
+    if (!data) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil(data.fetchFeeds.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchFeeds) return { fetchFeeds: [...prev.fetchFeeds] };
+
+        return {
+          fetchFeeds: [...prev.fetchFeeds, ...fetchMoreResult.fetchFeeds],
+        };
+      },
+    });
+  };
+
   return (
     <OotdUI
       onClickRegion={onClickRegion}
@@ -70,6 +86,7 @@ const OotdPage = () => {
       isSelected={isSelected}
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
+      onLoadMore={onLoadMore}
     />
   );
 };
