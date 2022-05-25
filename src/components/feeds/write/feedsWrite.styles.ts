@@ -6,9 +6,10 @@ export const WrapperDiv = styled.div`
   /* width: 100%; */
   display: flex;
   flex-direction: row;
-  padding: 26px 29px 24px 44px;
+  padding: 20px 29px 15px 44px;
   border: 1px solid #bebebe;
   border-radius: 10px;
+  margin: 0 auto;
 `;
 
 export const Form = styled.form`
@@ -123,13 +124,16 @@ export const ItemLabel = styled.label`
   font-size: 14px;
   margin-bottom: 9px;
 `;
-export const RegionDiv = styled.div`
+export const RegionUl = styled.ul`
   width: 340px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  // margin-bottom: 14px;
+  margin: 0;
+  padding: 0;
 `;
 export const TagDiv = styled.div`
   width: 60px;
@@ -145,7 +149,7 @@ export const TagDiv = styled.div`
     color: #333333;
   }
 `;
-export const RegionTagDiv = styled.div`
+export const RegionTagLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -161,14 +165,16 @@ export const RegionTagDiv = styled.div`
     color: #333333;
   }
 `;
-export const StyleDiv = styled.div`
+export const StyleUl = styled.ul`
   width: 340px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  margin: 0;
 `;
-export const StyleTagDiv = styled.div`
+export const StyleTagLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -184,14 +190,16 @@ export const StyleTagDiv = styled.div`
     color: #333333;
   }
 `;
-export const OuterItemDiv = styled.div`
+export const OuterItemUl = styled.ul`
   width: 340px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  margin: 0;
 `;
-export const OuterTagDiv = styled.div`
+export const OuterTagLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -206,14 +214,16 @@ export const OuterTagDiv = styled.div`
     color: #333333;
   }
 `;
-export const TopDiv = styled.div`
+export const TopUl = styled.ul`
   width: 340px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  margin: 0;
 `;
-export const TopTagDiv = styled.div`
+export const TopTagLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -244,14 +254,16 @@ export const LongTagDiv = styled.div`
     color: #333333;
   }
 `;
-export const BottomDiv = styled.div`
+export const BottomUl = styled.ul`
   width: 270px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  margin: 0;
 `;
-export const BottomTagDiv = styled.div`
+export const BottomTagLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -267,7 +279,16 @@ export const BottomTagDiv = styled.div`
     color: #333333;
   }
 `;
-export const OnePieceDiv = styled.div`
+export const EtcUl = styled.ul`
+  width: 270px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+`;
+export const EtcLi = styled.li`
   width: 60px;
   height: 24px;
   line-height: 24px;
@@ -289,7 +310,7 @@ export const SubmitButton = styled.button`
   font-size: 14px;
   color: #b2b2b2;
   border: none;
-  margin-top: 397px;
+  margin-left: 400px;
 `;
 
 export const ThumbnailDiv = styled.div`

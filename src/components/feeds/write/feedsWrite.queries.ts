@@ -46,3 +46,25 @@ export const M_UPDATE_FEED = gql`
     }
   }
 `;
+
+export const Q_FETCH_FEED = gql`
+  query fetchFeed($feedId: String!) {
+    fetchFeed(feedId: $feedId) {
+      id
+      detail
+      top
+      bottom
+      outer
+      etc
+      feedTag {
+        tagName
+      }
+      feedImg {
+        imgURL
+      }
+      region {
+        id
+      }
+    }
+  }
+`;

@@ -329,9 +329,11 @@ export const EtcTags__Li = styled.li`
 `;
 
 export const Feeds__Div = styled.div`
-  width: 965px;
+  width: 100rem;
+  height: 996px;
   display: flex;
   flex-wrap: wrap;
+  overflow: auto;
 `;
 
 export const Aaa = styled(Masonry)`

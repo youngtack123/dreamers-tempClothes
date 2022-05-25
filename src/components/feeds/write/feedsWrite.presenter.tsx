@@ -129,69 +129,70 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
                   );
                 })} */}
               {props.isEdit ? (
-                <s.RegionDiv>
+                <s.RegionUl>
                   {props.regionCategory.map((el) => (
-                    <s.RegionTagDiv key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
+                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
                       {el}
-                    </s.RegionTagDiv>
+                    </s.RegionTagLi>
                   ))}
-                </s.RegionDiv>
+                </s.RegionUl>
               ) : (
-                <s.RegionDiv>
+                <s.RegionUl>
                   {props.regionCategory.map((el) => (
-                    <s.RegionTagDiv key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
+                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
                       {el}
-                    </s.RegionTagDiv>
+                    </s.RegionTagLi>
                   ))}
-                </s.RegionDiv>
+                </s.RegionUl>
               )}
 
               <s.ItemLabel>스타일</s.ItemLabel>
-              <s.StyleDiv>
+              <s.StyleUl>
                 {props.tagCategory[0].tagItem.map((el) => (
-                  <s.StyleTagDiv onClick={() => props.onClickTag(el)} key={uuidv4()} myTag={props.myTag.includes(el)}>
+                  <s.StyleTagLi onClick={() => props.onClickTag(el)} key={uuidv4()} myTag={props.myTag.includes(el)}>
                     {el}
-                  </s.StyleTagDiv>
+                  </s.StyleTagLi>
                 ))}
-              </s.StyleDiv>
+              </s.StyleUl>
 
               <s.ItemLabel>아우터</s.ItemLabel>
-              <s.OuterItemDiv>
+              <s.OuterItemUl>
                 {props.tagCategory[1].tagItem.map((el) => (
-                  <s.OuterTagDiv onClick={() => props.onClickTag(el)} key={uuidv4()} myTag={props.myTag.includes(el)}>
+                  <s.OuterTagLi onClick={() => props.onClickTag(el)} key={uuidv4()} myTag={props.myTag.includes(el)}>
                     {el}
-                  </s.OuterTagDiv>
+                  </s.OuterTagLi>
                 ))}
-              </s.OuterItemDiv>
+              </s.OuterItemUl>
 
               <s.ItemLabel>상의</s.ItemLabel>
-              <s.TopDiv>
+              <s.TopUl>
                 {props.tagCategory[2].tagItem.map((el) => (
-                  <s.TopTagDiv key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
+                  <s.TopTagLi key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
                     {el}
-                  </s.TopTagDiv>
+                  </s.TopTagLi>
                 ))}
-              </s.TopDiv>
+              </s.TopUl>
 
               <s.ItemLabel>하의</s.ItemLabel>
-              <s.BottomDiv>
+              <s.BottomUl>
                 {props.tagCategory[3].tagItem.map((el) => (
-                  <s.BottomTagDiv key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
+                  <s.BottomTagLi key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
                     {el}
-                  </s.BottomTagDiv>
+                  </s.BottomTagLi>
                 ))}
-              </s.BottomDiv>
+              </s.BottomUl>
 
               <s.ItemLabel>기타</s.ItemLabel>
-              {props.tagCategory[4].tagItem.map((el) => (
-                <s.OnePieceDiv key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
-                  {el}
-                </s.OnePieceDiv>
-              ))}
+              <s.EtcUl>
+                {props.tagCategory[4].tagItem.map((el) => (
+                  <s.EtcLi key={uuidv4()} onClick={() => props.onClickTag(el)} myTag={props.myTag.includes(el)}>
+                    {el}
+                  </s.EtcLi>
+                ))}
+              </s.EtcUl>
             </s.TagsDiv>
-
-            <s.SubmitButton>{props.isEdit ? "수정" : "등록"}</s.SubmitButton>
           </s.RightBottomDiv>
+          <s.SubmitButton>{props.isEdit ? "수정" : "등록"}</s.SubmitButton>
         </s.RightDiv>
       </s.Form>
     </s.WrapperDiv>

@@ -2,11 +2,32 @@ import OotdFeed from "../commonFeed/coomonFeed.container";
 // import { withAuth } from "../hoc/withAuth";
 import * as Ootd from "./Ootd.styles";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../common/store";
+import { aaa, accessTokenState } from "../common/store";
+import FeedDetail from "../feeds/detail/feedDetail.container";
+import Modal from "../common/commonModal";
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import InfiniteScroll from "react-infinite-scroller";
+import Link from "next/link";
 
 const OotdUI = (props) => {
+  const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
   // console.log("???", accessToken);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    console.log("열려라");
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  // const onClickMoveToDetail = () => {
+  //   router.push(`/feeds/${router.query.feedId}`);
+  // };
 
   const breakpointColumnsObj = {
     default: 4,
@@ -14,7 +35,6 @@ const OotdUI = (props) => {
     760: 2,
     600: 1,
   };
-  console.log("렌더링");
 
   const date = new Date();
 
@@ -135,21 +155,23 @@ const OotdUI = (props) => {
 
         {/* 게시물 페칭 */}
         <Ootd.Feeds__Div>
-          <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-            {props.data?.fetchFeeds.feeds.map((el, idx) => (
-              <div key={idx}>
-                <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} id={el.id} onClick={() => props.onClickLike} />
-              </div>
-            ))}
-          </Ootd.Aaa>
-
-          {/* {new Array(20).fill(1).map((el, idx) => (
-            <div key={idx}>
-              <OotdFeed myTag={props.myTag} myRegion={props.myRegion} />
-            </div>
-          ))} */}
+          <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
+            <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+              {props.data?.fetchFeeds.feeds.map((el, idx) => (
+                <div key={idx}>
+                  {/* <Link href={`/feeds/${el.id}`} passHref> */}
+                  <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} id={el.id} />
+                  {/* </Link> */}
+                </div>
+              ))}
+            </Ootd.Aaa>
+          </InfiniteScroll>
         </Ootd.Feeds__Div>
       </Ootd.Container_Body__Div>
+
+      {/* <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">
+        <FeedDetail ootdFeedId={router.query.feedId}></FeedDetail>
+      </Modal> */}
 
       {/* </s.Container_Body__Div> */}
     </Ootd.Container__Div>
