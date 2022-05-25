@@ -8,17 +8,16 @@ const Modal = (props) => {
       {open ? (
         <section>
           <header>
-            {header}
             <button className="close" onClick={close}>
               &times;
             </button>
           </header>
           <main>{props.children}</main>
-          <footer>
+          {/* <footer>
             <button className="close" onClick={close}>
               close
             </button>
-          </footer>
+          </footer> */}
         </section>
       ) : null}
     </div>

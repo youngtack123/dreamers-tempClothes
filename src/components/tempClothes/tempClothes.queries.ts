@@ -19,3 +19,16 @@ export const Q_FETCH_USER = gql`
     }
   }
 `;
+export const Q_FETCH_FEED_TAGS = gql`
+  query fetchFeedTags($count: Float!) {
+    fetchFeedTags(count: $count) {
+      tagName
+      feed {
+        id
+        feedImg {
+          imgURL
+        }
+      }
+    }
+  }
+`;

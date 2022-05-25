@@ -61,7 +61,8 @@ li {
 }
 .modal > section {
   margin: 0 auto;
-  border-radius: 0.3rem;
+  border-radius: 10px;
+  border: 1px solid #999;
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
@@ -69,14 +70,14 @@ li {
 }
 .modal > section > header {
   position: relative;
-  padding: 16px 64px 16px 16px;
+  /* padding: 16px 64px 16px 16px; */
   background-color: #f1f1f1;
   font-weight: 700;
 }
 .modal > section > header button {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 2px;
+  right: 0px;
   width: 30px;
   font-size: 21px;
   font-weight: 700;
@@ -85,7 +86,7 @@ li {
   background-color: transparent;
 }
 .modal > section > main {
-  padding: 16px;
+  /* padding: 16px; */
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
 }

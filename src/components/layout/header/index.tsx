@@ -1,29 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "@emotion/styled";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { useEffect } from "react";
-import { accessTokenState } from "../../common/store/index";
+import { markAssetError } from "next/dist/client/route-loader";
+
 const HeaderWrapperDiv = styled.div`
   background-color: white;
   width: 100%;
   z-index: 9999;
-  height: 8rem;
   border-bottom: 1px solid #bebebe;
 `;
 
 const HeaderContentDiv = styled.div`
-  font-size: 1.8rem;
+  height: 15rem;
   display: flex;
-  justify-content: flex-end;
-  height: 8rem;
-  align-items: center;
+  justify-content: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 3.5rem;
+  margin-left: 15.1rem;
+`;
+const TodayClothesDiv = styled.div`
+  position: relative;
+  /* font-weight: 600; */
+  font-size: 1.8rem;
+  cursor: pointer;
 `;
 
 const HeaderContentOOTDDiv = styled.div`
-  margin-left: 9.2rem;
-  margin-right: 8.5rem;
+  position: relative;
+  margin-left: 5.1rem;
+  margin-right: 9.8rem;
+  /* font-weight: 600; */
+  font-size: 1.8rem;
+  cursor: pointer;
+`;
+const MainLogoImg = styled.img`
+  width: 9.3rem;
+  height: 7.8rem;
+  cursor: pointer;
+`;
+const HiUserDiv = styled.div`
+  font-size: 1.2rem;
+  margin-left: 9.8rem;
+`;
+const UserNameSpan = styled.span`
+  font-weight: 600;
+  font-size: 1.4rem;
+`;
+const ItemImg = styled.img`
+  width: 3rem;
+  height: 3rem;
+  margin-left: 2.7rem;
+  cursor: pointer;
 `;
 
 const LOGOUT = gql`
@@ -31,16 +60,24 @@ const LOGOUT = gql`
     logout
   }
 `;
+const FETCH_USER = gql`
+  query {
+    fetchUser {
+      nickname
+    }
+  }
+`;
 
 const Header = () => {
   const [m_logout] = useMutation(LOGOUT);
+  const { data } = useQuery(FETCH_USER);
   const router = useRouter();
 
   const logout = async () => {
     try {
       router.push("/");
       const logoutResult = await m_logout();
-      console.log("logoutResult", logoutResult);
+      // console.log("logoutResult", logoutResult);
       alert("로그아웃 성공!");
       localStorage.clear();
       location.reload();
@@ -58,14 +95,20 @@ const Header = () => {
   const moveToMyPage = () => {
     router.push("/mypage");
   };
+  const goBacktoLanding = () => {
+    router.push("/");
+  };
 
   return (
     <HeaderWrapperDiv>
       <HeaderContentDiv>
-        <div onClick={moveToTodayCloth}>오늘衣</div>
-        <HeaderContentOOTDDiv onClick={moveToOOTD}>#OOTD</HeaderContentOOTDDiv>
-        <img src="../images/user.png" width="40px" height="40px" style={{ marginRight: "17.2rem " }} onClick={moveToMyPage}></img>
-        <div onClick={logout}>로그아웃</div>
+        <TodayClothesDiv onClick={moveToTodayCloth}>오늘衣</TodayClothesDiv>
+        <HeaderContentOOTDDiv onClick={moveToOOTD}>OOTD</HeaderContentOOTDDiv>
+        <MainLogoImg src="/images/mainlogo.png" onClick={goBacktoLanding}></MainLogoImg>
+        <HiUserDiv>
+          기온에 맞는 옷을 입고 싶은 <UserNameSpan>{data?.fetchUser.nickname}</UserNameSpan> 님, 환영합니다!
+        </HiUserDiv>
+        <ItemImg src="/images/headerUser.png" />
       </HeaderContentDiv>
     </HeaderWrapperDiv>
   );

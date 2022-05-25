@@ -12,10 +12,6 @@ const NestedCommentListUI = (props: INestedCommentListUIProps) => {
           x
         </s.DeleteCommentDiv>
       </s.CommentListDiv>
-
-      {/* <s.BottomDiv>
-        <s.DeleteCommentDiv>삭제하기</s.DeleteCommentDiv>
-      </s.BottomDiv> */}
     </s.WrapperDiv>
   );
 };

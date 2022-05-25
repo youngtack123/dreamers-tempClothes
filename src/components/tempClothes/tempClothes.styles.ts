@@ -147,7 +147,7 @@ export const RightLookBookDiv = styled.div`
 `;
 export const LookBookItemImg = styled.img`
   width: 230px;
-  box-shadow: inset 3px -17px 11px 26px rgba(0, 0, 0, 0.25);
+  height: 300px;
   border-radius: 1rem;
   margin-right: 3.2rem;
   margin-bottom: 3rem;

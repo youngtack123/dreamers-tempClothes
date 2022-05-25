@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NestedCommentList from "../../feedsNestedComment/list/NestedCommentList.container";
 import NestedCommentWrite from "../../feedsNestedComment/write/NestedCommentWrite.container";
+import FeedsCommentWrite from "../write/FeedsCommentWrite.container";
 import * as s from "./FeedsCommentList.styles";
 import { IFeedsCommentListUIProps } from "./FeedsCommentList.types";
 

@@ -6,11 +6,11 @@ export const WrapperDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid #c4c4c4;
+  /* border-bottom: 1px solid #c4c4c4;
   border-left: 1px solid #c4c4c4;
   border-right: 1px solid #c4c4c4;
   border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px; */
 `;
 export const DetailWrapperDiv = styled.div`
   width: 455px;

@@ -14,6 +14,13 @@ const FeedsCommentList = () => {
     },
   });
 
+  const comment = [];
+  data?.fetchComments.comments.map((el) => {
+    if (el.pComment === null) {
+      return comment.push(el);
+    }
+  });
+
   const onDeleteComment = async (event) => {
     try {
       await deleteComment({
@@ -38,32 +45,28 @@ const FeedsCommentList = () => {
 
     fetchMore({
       variables: {
-        page: Math.ceil(data?.fetchComments.length / 10) + 1,
+        page: Math.ceil(data?.fetchComments.comments.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchComments) return { fetchComments: [...prev.fetchComments] };
+        if (!fetchMoreResult?.fetchComments.comments) return { fetchComments: [...prev.fetchComments.comments] };
 
         return {
-          fetchComments: [...prev.fetchComments, ...fetchMoreResult.fetchComments],
+          fetchComments: [...prev.fetchComments.comments, ...fetchMoreResult.fetchComments.comments],
         };
       },
     });
   };
 
-  const comment = [];
-  data?.fetchComments.map((el) => {
-    if (el.pComment === null) {
-      return comment.push(el);
-    }
-  });
-
   return (
-    <div>
-      {/* <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}></InfiniteScroll> */}
-      {comment.map((el) => (
-        <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} />
-      ))}
-    </div>
+    <>
+      <div style={{ height: "306px", overflow: "auto" }}>
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true} useWindow={false}>
+          {comment.map((el) => (
+            <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} />
+          ))}
+        </InfiniteScroll>
+      </div>
+    </>
   );
 };
 

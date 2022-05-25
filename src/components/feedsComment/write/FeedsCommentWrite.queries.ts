@@ -21,13 +21,15 @@ export const Q_FETCH_USER = gql`
 export const Q_FETCH_COMMENTS = gql`
   query fetchComments($page: Float, $feedId: String!) {
     fetchComments(page: $page, feedId: $feedId) {
-      id
-      commentDetail
-      user {
-        nickname
-      }
-      pComment {
+      comments {
         id
+        commentDetail
+        user {
+          nickname
+        }
+        pComment {
+          id
+        }
       }
     }
   }

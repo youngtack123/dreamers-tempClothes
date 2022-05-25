@@ -1,10 +1,12 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { Q_FETCH_SUB_COMMENTS } from "../../feedsNestedComment/write/NestedCommentWrite.queries";
 import FeedsCommentWriteUI from "./FeedsCommentWrite.presenter";
 import { M_CREATE_COMMENT, Q_FETCH_COMMENTS } from "./FeedsCommentWrite.queries";
 import { IWriteComment } from "./FeedsCommentWrite.types";
 
-const FeedsCommentWrite = () => {
+const FeedsCommentWrite = (props) => {
   const [createComment] = useMutation(M_CREATE_COMMENT);
 
   const { register, handleSubmit, setValue } = useForm({
@@ -15,7 +17,7 @@ const FeedsCommentWrite = () => {
     const { comment } = data;
 
     try {
-      await createComment({
+      const result = await createComment({
         variables: {
           createCommentInput: {
             commentDetail: comment,

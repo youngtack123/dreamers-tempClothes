@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
 const FooterWrapperDiv = styled.div`
   width: 100%;
@@ -18,28 +19,47 @@ const FooterHeadUl = styled.ul`
 `;
 
 const FooterHeadLi = styled.li`
-  font-size: 1.6rem;
-  line-height: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
 `;
 
-const FooterLi = styled.li`
-  font-size: 1.3rem;
+const MenuLi = styled.li`
+  font-size: 1.2rem;
   font-weight: 500;
-  line-height: 1.6rem;
+  margin-top: 1.1rem;
+  cursor: pointer;
+  :hover {
+    opacity: 0.6;
+  }
+`;
+
+const FooterLi = styled.li`
+  font-size: 1.2rem;
+  font-weight: 500;
   margin-top: 1.1rem;
 `;
 
 const Footer = () => {
+  const router = useRouter();
+
+  const MoveToTempClothes = () => {
+    router.push("/tempClothes");
+  };
+  const MoveToOOTD = () => {
+    router.push("/ootd");
+  };
+  const MoveToMypage = () => {
+    router.push("/mypage");
+  };
+
   return (
     <FooterWrapperDiv>
-      <img src="../images/logo.png"></img>
       <FooterUlFlexDiv>
         <FooterHeadUl>
           <FooterHeadLi>Menu</FooterHeadLi>
-          <FooterLi>오늘衣</FooterLi>
-          <FooterLi>OOTD</FooterLi>
-          <FooterLi>마이 페이지</FooterLi>
+          <MenuLi onClick={MoveToTempClothes}>오늘衣</MenuLi>
+          <MenuLi onClick={MoveToOOTD}>OOTD</MenuLi>
+          <MenuLi onClick={MoveToMypage}>마이 페이지</MenuLi>
         </FooterHeadUl>
         <FooterHeadUl>
           <FooterHeadLi>Made by</FooterHeadLi>
