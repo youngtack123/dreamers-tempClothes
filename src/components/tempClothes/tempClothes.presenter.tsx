@@ -1,12 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Modal from "../common/commonModal";
 import FeedDetail from "../feeds/detail/feedDetail.container";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import * as s from "./tempClothes.styles";
 import { ITempClothesUIProps } from "./tempClothes.types";
-
-// const arr = Array.from(Array(33), (_, index) => index + 1);
 
 const today = () => {
   let now = new Date();
@@ -24,7 +22,7 @@ const AmPm = () => {
   let now = new Date();
   let hours = now.getHours();
 
-  if (hours > 12) {
+  if (hours >= 12) {
     return "오후";
   } else {
     return "오전";
@@ -32,20 +30,23 @@ const AmPm = () => {
 };
 
 const TempClothesUI = (props: ITempClothesUIProps) => {
+  const router = useRouter();
+  const [tagFeed, setTagFeed] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [showImage, setShowImage] = useState("");
+  const [whichModal, setWhichModal] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
-    props.setWhichModal(false);
+    setWhichModal(false);
   };
 
-  // const onClickImage = (event) => {
-  //   setShowImage(event.target.value);
-  // };
+  const selectId = (id: string) => {
+    setWhichModal(true);
+    setTagFeed(id);
+  };
 
   return (
     <s.WrapperDiv>
@@ -71,41 +72,37 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
 
         <s.TagDiv>
           <s.PageDiv>지금衣</s.PageDiv>
-          <s.RecommendTop>{`# ${props.tagData?.fetchFeedTags[0].tagName}`}</s.RecommendTop>
-          <s.RecommendTop>{`# ${props.tagData?.fetchFeedTags[1].tagName}`}</s.RecommendTop>
+          {props.tagData?.fetchFeedTags[0].tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[0].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
+          {props.tagData?.fetchFeedTags[1].tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[1].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
         </s.TagDiv>
       </s.LeftTempDiv>
 
       {/* 사진들 뿌리는 부분 */}
       <s.RightLookBookDiv>
-        {/* {arr.map((_, index) => (
-          <s.LookBookItemImg key={index} src="/images/example.png" />
-        ))} */}
-        {props.feed?.map((el: any) => {
-          return el.map((el: any, idx: number) => {
+        {props.tagData?.fetchFeedTags.map((el) => {
+          return el.feed.map((el, index) => {
             return (
-              <div
-                key={idx}
+              <s.LookBookItemImg
+                key={index}
                 onClick={() => {
-                  props.selectId(el.id), openModal();
+                  selectId(el.id), openModal();
                 }}
-              >
-                <s.LookBookItemImg src={`https://storage.googleapis.com/${el[0]}`} />
-              </div>
+                src={`https://storage.googleapis.com/${el.feedImg[0]?.imgURL}`}
+              />
             );
           });
         })}
       </s.RightLookBookDiv>
 
       <s.WriteButton onClick={openModal}>+</s.WriteButton>
-      {!props.whichModal && (
-        <Modal open={modalOpen} close={closeModal} header="게시물 등록">
+      {!whichModal && (
+        <Modal open={modalOpen} close={closeModal}>
           <FeedsWrite />
         </Modal>
       )}
-      {props.whichModal && (
+      {whichModal && (
         <Modal open={modalOpen} close={closeModal}>
-          <FeedDetail tagFeed={props.tagFeed} />
+          <FeedDetail tagFeed={tagFeed} />
         </Modal>
       )}
     </s.WrapperDiv>

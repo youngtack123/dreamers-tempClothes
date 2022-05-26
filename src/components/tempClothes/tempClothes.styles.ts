@@ -180,3 +180,18 @@ export const WriteButton = styled.button`
   bottom: 50px;
   right: 355px;
 `;
+
+export const Aaa = styled.div`
+  width: 230px;
+  height: 300px;
+  border-radius: 1rem;
+  margin-right: 3.2rem;
+  margin-bottom: 3rem;
+`;
+export const Bbb = styled.div`
+  width: 230px;
+  height: 300px;
+  border-radius: 1rem;
+  margin-right: 3.2rem;
+  margin-bottom: 3rem;
+`;
