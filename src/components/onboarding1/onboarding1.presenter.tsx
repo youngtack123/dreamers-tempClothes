@@ -21,8 +21,8 @@ export default function Onboarding1UI() {
       <s.ItemWrapperDiv>
         <s.QuestionDiv>성별을 알려주세요!</s.QuestionDiv>
         <s.ButtonDiv>
-          <s.ManButton>남성</s.ManButton>
           <s.ManButton>여성</s.ManButton>
+          <s.ManButton>남성</s.ManButton>
         </s.ButtonDiv>
 
         <s.AreYouUserDiv>
@@ -31,8 +31,8 @@ export default function Onboarding1UI() {
         </s.AreYouUserDiv>
 
         <s.PrevNextDiv>
-          <s.PrevButton onClick={onMoveToLanding}>{`<`}</s.PrevButton>
-          <s.NextButton onClick={onMoveToOnboarding2}>{`>`}</s.NextButton>
+          <s.PrevImg src="/images/leftarrow.png" onClick={onMoveToLanding} />
+          <s.NextImg src="/images/rightarrow.png" onClick={onMoveToOnboarding2} />
         </s.PrevNextDiv>
       </s.ItemWrapperDiv>
     </s.WrapperDiv>

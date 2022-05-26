@@ -31,16 +31,23 @@ export default function Onboarding3UI() {
           <s.RegionDiv clickTag={clickTag} onClick={onClickTag}>
             서울
           </s.RegionDiv>
-          <s.RegionDiv>경기도</s.RegionDiv>
-          <s.RegionDiv>강원도</s.RegionDiv>
+          <s.RegionDiv>경기</s.RegionDiv>
+          <s.RegionDiv>강원</s.RegionDiv>
         </s.StyleDiv>
 
         <s.RestDiv>
-          <s.RegionDiv>충청도</s.RegionDiv>
-          <s.RegionDiv>경상도</s.RegionDiv>
-          <s.RegionDiv>전라도</s.RegionDiv>
+          <s.RegionDiv>충북</s.RegionDiv>
+          <s.RegionDiv>충남</s.RegionDiv>
+          <s.RegionDiv>경북</s.RegionDiv>
         </s.RestDiv>
-        <s.JejuRegionDiv>제주도</s.JejuRegionDiv>
+
+        <s.RestDiv>
+          <s.RegionDiv>경남</s.RegionDiv>
+          <s.RegionDiv>전북</s.RegionDiv>
+          <s.RegionDiv>전남</s.RegionDiv>
+        </s.RestDiv>
+
+        <s.JejuRegionDiv>제주</s.JejuRegionDiv>
 
         <s.AreYouUserDiv>
           <s.AlreadyUserDiv>이미 회원이신가요?</s.AlreadyUserDiv>
@@ -48,8 +55,8 @@ export default function Onboarding3UI() {
         </s.AreYouUserDiv>
 
         <s.PrevNextDiv>
-          <s.PrevButton onClick={onMoveToOnboarding2}>{`<`}</s.PrevButton>
-          <s.NextButton onClick={onMoveToTempClothes}>{`>`}</s.NextButton>
+          <s.PrevImg src="/images/leftarrow.png" onClick={onMoveToOnboarding2} />
+          <s.NextImg src="/images/rightarrow.png" onClick={onMoveToTempClothes} />
         </s.PrevNextDiv>
       </s.ItemWrapperDiv>
     </s.WrapperDiv>

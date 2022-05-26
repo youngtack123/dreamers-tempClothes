@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const WrapperDiv = styled.div`
-  height: 102.4rem;
+  height: 93.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,77 +9,80 @@ export const WrapperDiv = styled.div`
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.26) 52.07%, rgba(183, 229, 118, 0.34) 100%);
 `;
 export const ItemWrapperDiv = styled.div`
-  width: 65rem;
-  height: 65rem;
+  width: 50rem;
+  height: 53.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #bebebe;
+  box-shadow: 6px 9px 16px -1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
 export const QuestionDiv = styled.div`
   font-size: 1.9rem;
-  margin-top: 13.3rem;
-  margin-bottom: 6rem;
+  margin-top: 9.5rem;
+  margin-bottom: 4rem;
 `;
 export const StyleDiv = styled.div`
-  width: 53rem;
+  width: 28rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3.3rem;
+  margin-bottom: 2rem;
 `;
 export const RegionDiv = styled.div`
-  width: 16rem;
-  height: 5.5rem;
-  line-height: 5.5rem;
-  font-size: 2rem;
+  width: 8rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.6rem;
+  border-radius: 30px;
   border: 1px solid #bebebe;
   text-align: center;
-  border-radius: 10px;
   :hover {
-    background-color: #eeeeee;
+    border: 1px solid #ffdd87;
+    background-color: #fff2b2;
   }
   cursor: pointer;
   background-color: ${(props) => (props.clickTag ? "#eeeeee" : "#fffffff")};
 `;
 export const RestDiv = styled.div`
-  width: 53rem;
+  width: 28rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3.3rem;
+  margin-bottom: 2rem;
 `;
 export const JejuRegionDiv = styled.div`
-  width: 16rem;
-  height: 5.5rem;
-  line-height: 5.5rem;
-  font-size: 2rem;
+  width: 8rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.6rem;
+  border-radius: 30px;
   border: 1px solid #bebebe;
   text-align: center;
-  border-radius: 10px;
   :hover {
-    background-color: #eeeeee;
+    border: 1px solid #ffdd87;
+    background-color: #fff2b2;
   }
-  margin-right: 37rem;
-  margin-bottom: 10.7rem;
+  margin-right: 20rem;
+  margin-bottom: 4.1rem;
   cursor: pointer;
 `;
 export const AreYouUserDiv = styled.div`
-  width: 26.9rem;
+  width: 19.2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 4.6rem;
 `;
 export const AlreadyUserDiv = styled.div`
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: #7e7272;
 `;
 export const GoToLoginDiv = styled.div`
-  font-size: 1.6rem;
+  font-size: 1rem;
   text-decoration: underline;
   cursor: pointer;
   :hover {
@@ -87,34 +90,26 @@ export const GoToLoginDiv = styled.div`
   }
 `;
 export const PrevNextDiv = styled.div`
-  width: 53.2rem;
+  width: 38.4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 `;
-export const PrevButton = styled.button`
-  width: 4rem;
-  height: 4rem;
+export const PrevImg = styled.img`
+  width: 1.68rem;
+  height: 1.68rem;
   background-color: white;
   font-size: 2rem;
   color: #bebebe;
-  border: 1px solid #bebebe;
-  border-radius: 50%;
-  :hover {
-    background-color: #eeeeee;
-  }
+  cursor: pointer;
 `;
-export const NextButton = styled.button`
-  width: 4rem;
-  height: 4rem;
+export const NextImg = styled.img`
+  width: 1.68rem;
+  height: 1.68rem;
   background-color: white;
   font-size: 2rem;
   color: #bebebe;
-  border: 1px solid #bebebe;
-  border-radius: 50%;
-  :hover {
-    background-color: #eeeeee;
-  }
+  cursor: pointer;
 `;

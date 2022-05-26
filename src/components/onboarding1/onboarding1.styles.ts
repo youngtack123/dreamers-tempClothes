@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const WrapperDiv = styled.div`
-  height: 102.4rem;
+  height: 93.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,51 +9,53 @@ export const WrapperDiv = styled.div`
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.26) 52.07%, rgba(183, 229, 118, 0.34) 100%);
 `;
 export const ItemWrapperDiv = styled.div`
-  width: 65rem;
-  height: 65rem;
+  width: 50rem;
+  height: 53.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #bebebe;
+  box-shadow: 6px 9px 16px -1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
 export const QuestionDiv = styled.div`
   font-size: 1.9rem;
-  margin-top: 16.7rem;
-  margin-bottom: 7.9rem;
+  margin-top: 9.5rem;
+  margin-bottom: 4rem;
 `;
 export const ButtonDiv = styled.div`
-  width: 35rem;
+  width: 18rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 23.6rem;
+  margin-bottom: 22.1rem;
 `;
 export const ManButton = styled.button`
-  width: 16rem;
-  height: 5.5rem;
-  line-height: 5.5rem;
-  font-size: 2rem;
+  width: 8rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.6rem;
   background-color: white;
+  border-radius: 30px;
   border: 1px solid #bebebe;
-  border-radius: 10px;
   :hover {
-    background-color: #ffea86;
+    border: 1px solid #ffdd87;
+    background-color: #fff2b2;
   }
 `;
 export const AreYouUserDiv = styled.div`
-  width: 26.9rem;
+  width: 19.2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 4.6rem;
 `;
 export const AlreadyUserDiv = styled.div`
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: #7e7272;
 `;
 export const GoToLoginDiv = styled.div`
-  font-size: 1.6rem;
+  font-size: 1rem;
   text-decoration: underline;
   cursor: pointer;
   :hover {
@@ -61,34 +63,26 @@ export const GoToLoginDiv = styled.div`
   }
 `;
 export const PrevNextDiv = styled.div`
-  width: 53.2rem;
+  width: 38.4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 `;
-export const PrevButton = styled.button`
-  width: 4rem;
-  height: 4rem;
+export const PrevImg = styled.img`
+  width: 1.68rem;
+  height: 1.68rem;
   background-color: white;
   font-size: 2rem;
   color: #bebebe;
-  border: 1px solid #bebebe;
-  border-radius: 50%;
-  :hover {
-    background-color: #ffea86;
-  }
+  cursor: pointer;
 `;
-export const NextButton = styled.button`
-  width: 4rem;
-  height: 4rem;
+export const NextImg = styled.img`
+  width: 1.68rem;
+  height: 1.68rem;
   background-color: white;
   font-size: 2rem;
   color: #bebebe;
-  border: 1px solid #bebebe;
-  border-radius: 50%;
-  :hover {
-    background-color: #ffea86;
-  }
+  cursor: pointer;
 `;

@@ -19,7 +19,7 @@ export default function Onboarding2UI() {
   return (
     <s.WrapperDiv>
       <s.ItemWrapperDiv>
-        <s.QuestionDiv>평소에 즐겨 입는 스타일을 알려주세요!</s.QuestionDiv>
+        <s.QuestionDiv>즐겨 입는 스타일을 알려주세요!</s.QuestionDiv>
 
         <s.StyleDiv>
           <s.WhichStyleDiv>캐주얼</s.WhichStyleDiv>
@@ -38,8 +38,8 @@ export default function Onboarding2UI() {
         </s.AreYouUserDiv>
 
         <s.PrevNextDiv>
-          <s.PrevButton onClick={onMoveToOnboarding1}>{`<`}</s.PrevButton>
-          <s.NextButton onClick={onMoveToOnboarding3}>{`>`}</s.NextButton>
+          <s.PrevImg src="/images/leftarrow.png" onClick={onMoveToOnboarding1} />
+          <s.NextImg src="/images/rightarrow.png" onClick={onMoveToOnboarding3} />
         </s.PrevNextDiv>
       </s.ItemWrapperDiv>
     </s.WrapperDiv>

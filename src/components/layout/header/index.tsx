@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { markAssetError } from "next/dist/client/route-loader";
+import { Menu, Dropdown, Space } from "antd";
 
 const HeaderWrapperDiv = styled.div`
   background-color: white;
@@ -12,12 +12,12 @@ const HeaderWrapperDiv = styled.div`
 `;
 
 const HeaderContentDiv = styled.div`
-  height: 15rem;
+  height: 13.3rem;
   display: flex;
   justify-content: row;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 3.5rem;
+  padding-bottom: 2.1rem;
   margin-left: 15.1rem;
 `;
 const TodayClothesDiv = styled.div`
