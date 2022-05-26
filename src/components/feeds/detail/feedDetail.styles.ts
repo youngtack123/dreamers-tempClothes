@@ -124,6 +124,9 @@ export const ClothesBox__Div = styled.div`
 `;
 
 export const ClothesInfo__Div = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 240px;
   height: 40px;
   padding: 12px 10px 13px;
@@ -134,15 +137,33 @@ export const ClothesInfo__Div = styled.div`
 
 export const ClothesDetail__Span = styled.div`
   font-size: 14px;
+  margin-left: 7px;
 `;
 
-export const OuterIcon__SVG = styled.div``;
+export const OuterIcon__SVG = styled.div`
+  width: 18px;
+  height: 18px;
+  background-image: url("/images/coat.png");
+`;
 
-export const TopIcon__SVG = styled.div``;
+export const TopIcon__SVG = styled.div`
+  width: 16px;
+  height: 16px;
+  background-image: url("/images/top.png");
+`;
 
-export const BottomIcon__SVG = styled.div``;
+export const BottomIcon__SVG = styled.div`
+  width: 11px;
+  height: 16px;
+  background-image: url("/images/pants.png");
+  margin-left: 3px;
+`;
 
-export const ETCIcon__SVG = styled.div``;
+export const ETCIcon__SVG = styled.div`
+  width: 13px;
+  height: 20px;
+  background-image: url("/images/dress.png");
+`;
 
 export const Wrapper_Right__Div = styled.div`
   width: 455px;
@@ -193,6 +214,7 @@ export const IconBox__Div = styled.div`
   height: 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 // export const LikeIcon__SVG = styled(LikeIcon)`
@@ -284,7 +306,8 @@ export const CommentBox__Div = styled.div`
   // padding: 15px;
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
+  justify-content: space-between;
+  align-items: center;
   border: 1px solid #bebebe;
   border-radius: 5px;
 `;
@@ -300,9 +323,10 @@ export const CommentDetail__Div = styled.div`
 
 export const CommentCreate__Div = styled.div`
   width: 430px;
-  height: 49px;
-  // padding: 12px 15px 0 25px;
+  height: 64px;
+  //padding: 12px 15px 0 25px;
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #bebebe;
+  padding-top: 12px;
 `;

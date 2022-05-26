@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import OotdUI from "./Ootd.presenter";
-import { Q_FETCH_FEEDS } from "./Ootd.queries";
+import { Q_FETCH_FEEDS, Q_FETCH_USER, Q_GET_WEATHER } from "./Ootd.queries";
 import { regionCategory, tagCategory } from "../common/store";
 import { useRouter } from "next/router";
 
@@ -30,6 +30,14 @@ const OotdPage = () => {
       regionId: myRegion,
     },
   });
+
+  const { data: userData } = useQuery(Q_FETCH_USER);
+
+  const { data: tempData } = useQuery(Q_GET_WEATHER, {
+    variables: { regionName: String(userData?.fetchUser.region.id) },
+  });
+
+  console.log(tempData);
 
   // 지역 선택하기
   const onClickRegion = (e) => {
@@ -86,6 +94,7 @@ const OotdPage = () => {
       isSelected={isSelected}
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
+      tempData={tempData}
     />
   );
 };

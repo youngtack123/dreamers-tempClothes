@@ -44,12 +44,10 @@ export const FeedImageBox__Div = styled.div`
 `;
 
 export const FeedImage__Img = styled.img`
-  /* width: 230px;
-  height: 300px; */
-  width: 100%;
+  width: 228px;
   height: 100%;
   object-fit: cover;
-  border: 0;
+  border: hidden;
 `;
 
 export const HoverIcon__Div = styled.div`

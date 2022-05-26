@@ -4,9 +4,11 @@ import Masonry from "react-masonry-css";
 export const Container__Div = styled.div`
   display: flex;
   width: 1200px;
+  min-height: 815px;
   height: auto;
   position: relative;
   margin: 0 auto;
+  padding-top: 25px;
 `;
 
 export const Container_head__Div = styled.div`
@@ -14,32 +16,20 @@ export const Container_head__Div = styled.div`
   width: 120rem;
   height: 80px;
   justify-content: flex-start;
-  // width: 100%;
-  // justify-content: flex-start;
 `;
 
 export const Container_Side__Div = styled.div`
   display: flex;
   flex-direction: column;
-  // position: relative;
   width: 230px;
   position: fixed;
-
-  /* position: fixed;
-  z-index: 1;
-  left: 50px;
-  top: 0; */
 `;
 
 export const Container_Body__Div = styled.div`
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
-  // margin-left: 210px;
-  // padding-left: 150px;
   flex-wrap: wrap;
   margin-left: 300px;
-
   width: 965px;
 `;
 
@@ -53,20 +43,7 @@ export const TodayInfo__Div = styled.div`
   justify-content: space-between;
   margin-bottom: 26px;
   margin-right: 20px;
-  border: 1px solid #bebebe;
-  /* position: fixed;
-  left: 0; */
-
-  /* width: 20.3rem;
-  height: 8rem;
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 2.4rem;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2.6rem;
-  margin-right: 2rem;
-  border: 0.1rem solid #bebebe; */
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 `;
 
 export const Date__Div = styled.div`
@@ -74,36 +51,23 @@ export const Date__Div = styled.div`
   height: 32px;
   display: flex;
   justify-content: space-between;
-  /* width: 6.6rem;
-  height: 3.2rem;
-  display: flex;
-  justify-content: space-between; */
 `;
 
 export const Month__Span = styled.span`
   font-weight: 600;
   font-size: 26px;
   color: rgba(51, 51, 51, 0.7);
-
-  /* font-weight: 600;
-  font-size: 2.6rem;
-  color: rgba(51, 51, 51, 0.7); */
 `;
 
 export const Day__Span = styled.span`
   font-weight: 600;
   font-size: 26px;
-  /* font-weight: 600;
-  font-size: 2.6rem; */
 `;
 
 export const Temp__Span = styled.span`
   font-weight: 600;
   font-size: 26px;
   color: #b7e576;
-  /* font-weight: 600;
-  font-size: 2.6rem;
-  color: #b7e576; */
 `;
 
 export const MyTag__Div = styled.div`
@@ -115,15 +79,6 @@ export const MyTag__Div = styled.div`
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 26px;
-
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  height: 8rem;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 2.6rem; */
 `;
 
 export const TagSelect__Div = styled.div`
@@ -142,14 +97,6 @@ export const TagSeletedUnit__Span = styled.span`
   font-weight: 400;
   margin-right: 7px;
   margin-bottom: 5px;
-
-  /* background: #fff2b2;
-  border-radius: 5rem;
-  padding: 0.3rem 0.6rem;
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: 400;
-  margin-right: 0.7rem; */
 `;
 
 export const TagWrapper__Div = styled.div`
@@ -159,49 +106,34 @@ export const TagWrapper__Div = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* padding: 13px 14px 15px 83px; */
   border: 1px solid #bebebe;
   border-radius: 10px;
   background-color: #fff;
   margin-right: 15px;
-  /* position: fixed;
-  left: 0;
-  top: 180px; */
-
-  /* width: 20.3rem;
-  height: 73rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border: 0.1rem solid #bebebe;
-  border-radius: 1rem;
-  background-color: #fff;
-  margin-right: 1.5rem;  */
 `;
 
 export const TagWrapper_Head__Div = styled.div`
-  width: 20.3rem;
-  height: 3.8rem;
-  padding-top: 1rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 0.1rem solid #bebebe;
+  width: 203px;
+  height: 38px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #bebebe;
 `;
 
 export const Tag__Span = styled.span`
-  font-size: 1.8rem;
+  font-size: 18px;
   font-weight: 500;
-  padding-left: 1.5rem;
+  padding-left: 15px;
 `;
 
 export const TagBox__Div = styled.div`
-  width: 17.5rem;
-  height: 9.7rem;
-  border-bottom: 0.1rem solid #bebebe;
+  width: 175px;
+  height: 97px;
+  border-bottom: 1px solid #bebebe;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0.9rem 1.4rem 1.6rem 1.5rem;
+  padding: 9px 14px 16px 15px;
   &:last-child {
     border-bottom: none;
   }
@@ -209,34 +141,32 @@ export const TagBox__Div = styled.div`
 
 export const TagCategory__Span = styled.span`
   font-weight: 600;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+  font-size: 14px;
+  margin-bottom: 1px;
 `;
 
 export const RegionList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
-
-  // margin-left: 0.3rem;
 `;
 
 export const RegionTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.8rem;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-bottom: 8px;
   font-weight: ${(props) => (props.regionSelected ? 700 : 400)};
+  cursor: pointer;
 `;
 
 export const StyleList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
-  justify-content: space-b;
   flex-wrap: wrap;
   margin-left: 0.3rem;
   padding: 0;
@@ -248,84 +178,84 @@ export const StyleTags__Li = styled.li`
   margin-bottom: 8px;
   list-style: none;
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  cursor: pointer;
 `;
 
 export const OuterList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 0.3rem;
+  margin-left: 3px;
   padding: 0;
   cursor: pointer;
 `;
 
 export const OuterTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 1.3rem;
-  margin-bottom: 0.8rem;
+  font-size: 12px;
+  margin-right: 13px;
+  margin-bottom: 8px;
   list-style: none;
   cursor: pointer;
-  :hover {
-    color: #601098;
-    text-decoration: underline;
-  }
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
 `;
 
 export const TopTagsList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 0.3rem;
+  margin-left: 3px;
   padding: 0;
 `;
 
 export const TopTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 0.8rem;
-  margin-bottom: 0.8rem;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
   list-style: none;
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  cursor: pointer;
 `;
 
 export const BottomList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 0.3rem;
+  margin-left: 3px;
   padding: 0;
 `;
 
 export const BottomTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 0.8rem;
-  margin-bottom: 0.3rem;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-bottom: 3px;
   list-style: none;
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  cursor: pointer;
 `;
 
 export const EtcList__Ul = styled.ul`
-  width: 14.6rem;
-  height: 4.4rem;
+  width: 146px;
+  height: 44px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 0.3rem;
+  margin-left: 3px;
   padding: 0;
 `;
 
 export const EtcTags__Li = styled.li`
-  font-size: 1.2rem;
-  margin-right: 0.8rem;
-  margin-bottom: 0.8rem;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
   list-style: none;
   font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  cursor: pointer;
 `;
 
 export const Feeds__Div = styled.div`

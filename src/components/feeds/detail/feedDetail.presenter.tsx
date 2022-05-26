@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Detail from "./feedDetail.styles";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
-import DMIcon from "../../../../public/images/dm.svg";
+import DMIcon from "../../../../public/images/talk.svg";
 import MoreIcon from "../../../../public/images/more.svg";
 import { useMutation, useQuery } from "@apollo/client";
 import { M_DELETE_FEED } from "./feedDetail.queries";
@@ -57,25 +57,22 @@ function FeedDetailUI(props) {
     slidesToScroll: 1,
   };
 
-  const aaa = props.data?.fetchFeed.feedImg.map((el) => el.imgURL);
-
-  console.log("aaa", aaa);
-  console.log(props.data?.fetchFeed.feedImg[0].imgURL);
+  console.log(props.isLike);
 
   return (
     <Detail.Wrapper__Div>
       <Detail.Wrapper_Left__Div>
-        {props.showPhoto !== [] ? (
+        {/* {props.showPhoto ? (
           <Detail.PhotoBoxDiv>
             {props.showPhoto.map((el, idx) => (
               <Detail.ShowImg key={idx} src={`https://storage.googleapis.com/${el}`} />
             ))}
           </Detail.PhotoBoxDiv>
-        ) : (
-          <Detail.PhotoBoxDiv>
-            <Detail.ShowImg src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0].imgURL}`} />
-          </Detail.PhotoBoxDiv>
-        )}
+        ) : ( */}
+        <Detail.PhotoBoxDiv>
+          <Detail.ShowImg src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0].imgURL}`} />
+        </Detail.PhotoBoxDiv>
+        {/* )} */}
 
         <Detail.ImageBox__Div>
           <Detail.Slick {...settings}>
@@ -90,31 +87,23 @@ function FeedDetailUI(props) {
 
         <Detail.ClothesBox__Div>
           <Detail.ClothesInfo__Div>
-            <Detail.ClothesDetail__Span>
-              <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
-              {props.data?.fetchFeed.outer}
-            </Detail.ClothesDetail__Span>
+            <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
+            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.outer}</Detail.ClothesDetail__Span>
           </Detail.ClothesInfo__Div>
 
           <Detail.ClothesInfo__Div>
-            <Detail.ClothesDetail__Span>
-              <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
-              {props.data?.fetchFeed.top}
-            </Detail.ClothesDetail__Span>
+            <Detail.TopIcon__SVG></Detail.TopIcon__SVG>
+            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.top}</Detail.ClothesDetail__Span>
           </Detail.ClothesInfo__Div>
 
           <Detail.ClothesInfo__Div>
-            <Detail.ClothesDetail__Span>
-              <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
-              {props.data?.fetchFeed.bottom}
-            </Detail.ClothesDetail__Span>
+            <Detail.BottomIcon__SVG></Detail.BottomIcon__SVG>
+            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.bottom}</Detail.ClothesDetail__Span>
           </Detail.ClothesInfo__Div>
 
           <Detail.ClothesInfo__Div>
-            <Detail.ClothesDetail__Span>
-              <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
-              {props.data?.fetchFeed.etc}
-            </Detail.ClothesDetail__Span>
+            <Detail.ETCIcon__SVG></Detail.ETCIcon__SVG>
+            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.etc}</Detail.ClothesDetail__Span>
           </Detail.ClothesInfo__Div>
         </Detail.ClothesBox__Div>
       </Detail.Wrapper_Left__Div>
@@ -125,8 +114,12 @@ function FeedDetailUI(props) {
             <Detail.UserIconImg__Div></Detail.UserIconImg__Div>
             <Detail.UserId__Div>{props.data?.fetchFeed.user.nickname}</Detail.UserId__Div>
             <Detail.IconBox__Div>
-              <DMIcon width="18" height="15" fill="#bebebe" />
-              <LikeIcon width="18" height="16" stroke="#bebebe" />
+              <DMIcon width="18" height="17.5" stroke="#bebebe" />
+              {props.isLike ? (
+                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} width="18" height="16" fill="#F14848" stroke="#F14848" />
+              ) : (
+                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} width="18" height="16" stroke="#bebebe" />
+              )}
             </Detail.IconBox__Div>
           </Detail.FeedDetail_Top__Div>
 
