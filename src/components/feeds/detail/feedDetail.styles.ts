@@ -32,19 +32,16 @@ export const PhotoBoxDiv = styled.div`
   align-items: center;
   width: 509px;
   height: 455px;
-  background: #eeeeee;
+  /* background: #eeeeee; */
   border-radius: 10px;
   margin-bottom: 25px;
-  position: relative;
+  // position: relative;
+  overflow: hidden;
 `;
 
 export const ShowImg = styled.img`
-  width: 340px;
-  height: 330px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 2;
+  width: 100%;
+  //height: 330px;
   border-radius: 10px;
 `;
 
@@ -95,6 +92,7 @@ export const Slick = styled(Slider)`
 
 export const MomDiv = styled.div`
   position: relative;
+  overflow: hidden;
 `;
 export const ChildDiv = styled.div`
   position: absolute;
@@ -104,7 +102,11 @@ export const ChildDiv = styled.div`
 `;
 
 export const ImageDetail__Img = styled.img`
-  width: 100%;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 10px;
 `;
 
 export const ImageThum__Div = styled.div`
@@ -214,33 +216,34 @@ export const Content__Div = styled.div`
 export const ContentDetail__P = styled.p`
   width: 100%;
   font-size: 13px;
+  padding-top: 5px;
   padding-left: 5px;
   margin: 5px 0;
 `;
 
 export const FeedDetail_Bottom__Div = styled.div`
   width: 430px;
-  height: 30px;
+  height: auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   padding-right: 5px;
   position: relative;
 `;
 
 export const Tag__Div = styled.div`
   width: 400px;
-  height: 30px;
+  height: auto;
   padding-top: 15px;
   display: flex;
   justify-content: flex-start;
-
+  flex-wrap: wrap;
   padding-left: 5px;
 `;
 
 export const TagUnit__Span = styled.span`
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
 export const SettingBox__Div = styled.div`
@@ -278,16 +281,16 @@ export const Delete__Span = styled.span`
 export const CommentBox__Div = styled.div`
   width: 455px;
   height: 370px;
-  padding: 15px;
+  // padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   border: 1px solid #bebebe;
   border-radius: 5px;
 `;
 
 export const CommentDetail__Div = styled.div`
-  width: 430px;
+  width: 100%;
   height: 291px;
   display: flex;
   flex-direction: column;
@@ -298,22 +301,8 @@ export const CommentDetail__Div = styled.div`
 export const CommentCreate__Div = styled.div`
   width: 430px;
   height: 49px;
-  padding: 12px 15px 0 25px;
+  // padding: 12px 15px 0 25px;
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #bebebe;
-`;
-
-export const CommentInput__Input = styled.input`
-  width: 359px;
-  height: 37px;
-  background: #eeeeee;
-  border-radius: 30px;
-  padding: 11px 16px;
-  border: none;
-`;
-
-export const CommentSubmitBtn__Button = styled.button`
-  width: 14px;
-  height: 20px;
 `;

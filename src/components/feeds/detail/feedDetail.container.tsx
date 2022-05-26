@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FeedDetailUI from "./feedDetail.presenter";
 import { M_DELETE_FEED, Q_FETCH_FEED } from "./feedDetail.queries";
 
@@ -22,9 +22,19 @@ function FeedDetail(props) {
   //   router.push(`/feeds/${event.currentTarget.id}/edit`);
   // };
 
+  const [showPhoto, setShowPhoto] = useState<String[]>([]);
+
+  const onClickPhoto = (photo: any) => {
+    setShowPhoto([photo]);
+  };
+
+  console.log("show", showPhoto);
+
+  const IDforFetch = myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "";
+
   return (
     <>
-      <FeedDetailUI data={data} />
+      <FeedDetailUI data={data} onClickPhoto={onClickPhoto} showPhoto={showPhoto} IDforFetch={IDforFetch} />
     </>
   );
 }

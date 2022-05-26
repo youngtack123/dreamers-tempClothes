@@ -21,14 +21,14 @@ const FeedsCommentWrite = (props) => {
         variables: {
           createCommentInput: {
             commentDetail: comment,
-            feedId: "cac09a67-e251-48a3-a0e7-5ba89268792e",
+            feedId: props.IDforFetch,
             // feedId: String(router.query.feedId),
           },
         },
         refetchQueries: [
           {
             query: Q_FETCH_COMMENTS,
-            variables: { feedId: "cac09a67-e251-48a3-a0e7-5ba89268792e" },
+            variables: { feedId: props.IDforFetch },
           },
         ],
       });

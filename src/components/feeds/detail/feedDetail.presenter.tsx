@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "../../common/commonModal";
 import FeedsWrite from "../write/feedsWrite.container";
+import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container";
+import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
 
 function FeedDetailUI(props) {
   const router = useRouter();
@@ -34,7 +36,7 @@ function FeedDetailUI(props) {
         variables: { feedId: String(e.target.id) },
       });
       alert("게시물이 삭제되었습니다");
-      router.push("/");
+      router.push("/ootd");
     } catch (error) {
       alert(error.message);
     }
@@ -55,29 +57,36 @@ function FeedDetailUI(props) {
     slidesToScroll: 1,
   };
 
+  const aaa = props.data?.fetchFeed.feedImg.map((el) => el.imgURL);
+
+  console.log("aaa", aaa);
+  console.log(props.data?.fetchFeed.feedImg[0].imgURL);
+
   return (
     <Detail.Wrapper__Div>
       <Detail.Wrapper_Left__Div>
-        <Detail.PhotoBoxDiv>
-          {props.data?.fetchFeed.feedImg.map((item: any, index: number) => (
-            <div key={uuidv4()}>{<Detail.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
-          ))}
-        </Detail.PhotoBoxDiv>
+        {props.showPhoto !== [] ? (
+          <Detail.PhotoBoxDiv>
+            {props.showPhoto.map((el, idx) => (
+              <Detail.ShowImg key={idx} src={`https://storage.googleapis.com/${el}`} />
+            ))}
+          </Detail.PhotoBoxDiv>
+        ) : (
+          <Detail.PhotoBoxDiv>
+            <Detail.ShowImg src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0].imgURL}`} />
+          </Detail.PhotoBoxDiv>
+        )}
 
         <Detail.ImageBox__Div>
           <Detail.Slick {...settings}>
-            {props.data?.fetchFeed.feedImg.map((el, idx) => {
-              return (
-                <Detail.MomDiv key={uuidv4()}>
-                  <Detail.ImageDetail__Img src={`https://storage.googleapis.com/${el}`} />
-                </Detail.MomDiv>
-              );
-            })}
+            {props.data?.fetchFeed.feedImg.map((el) => (
+              <Detail.MomDiv key={uuidv4()}>
+                <Detail.ImageDetail__Img src={`https://storage.googleapis.com/${el.imgURL}`} onClick={() => props.onClickPhoto(el.imgURL)} />
+              </Detail.MomDiv>
+            ))}
           </Detail.Slick>
           {/* <Detail.ImageDetail__Img src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0]?.imgURL}` || ""} /> */}
         </Detail.ImageBox__Div>
-
-        <Detail.ImageThum__Div></Detail.ImageThum__Div>
 
         <Detail.ClothesBox__Div>
           <Detail.ClothesInfo__Div>
@@ -132,7 +141,7 @@ function FeedDetailUI(props) {
                 <Detail.TagUnit__Span key={idx}>#{el.tagName}</Detail.TagUnit__Span>
               ))}
             </Detail.Tag__Div>
-            <MoreIcon onClick={() => toggleMenu()} style={{ cursor: "pointer" }} />
+            <MoreIcon onClick={() => toggleMenu()} style={{ cursor: "pointer", paddingTop: "10px" }} />
             {isOpen ? (
               <Detail.SettingBox__Div>
                 <Detail.Edit__Span id={props.data?.fetchFeed.id} onClick={onClickMoveToEdit}>
@@ -149,11 +158,12 @@ function FeedDetailUI(props) {
         </Detail.FeedDetailBox__Div>
 
         <Detail.CommentBox__Div>
-          <Detail.CommentDetail__Div></Detail.CommentDetail__Div>
+          <Detail.CommentDetail__Div>
+            <FeedsCommentList IDforFetch={props.IDforFetch} />
+          </Detail.CommentDetail__Div>
 
           <Detail.CommentCreate__Div>
-            <Detail.CommentInput__Input placeholder="댓글을 작성을 기다리고 있어요!" />
-            <Detail.CommentSubmitBtn__Button>등록</Detail.CommentSubmitBtn__Button>
+            <FeedsCommentWrite IDforFetch={props.IDforFetch} />
           </Detail.CommentCreate__Div>
         </Detail.CommentBox__Div>
       </Detail.Wrapper_Right__Div>
