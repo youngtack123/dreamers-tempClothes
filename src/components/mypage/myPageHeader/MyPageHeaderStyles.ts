@@ -1,61 +1,32 @@
 import styled from "@emotion/styled";
 
-export const MyPageHeaderWrapper = styled.div`
+export const MyPageHeaderWrapperDiv = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 5rem;
+  justify-content: space-around;
 `;
 
-export const MyPageHeaderProfileDiv = styled.div`
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 2.2rem;
-  border: 1px solid #bebebe;
-`;
-
-export const MyPageHeaderProfileDataDiv = styled.div`
+export const MyPageHeaderContentDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 8rem;
-  margin-right: 7.4rem;
 `;
 
-export const MyPageHeaderDataTagFlexDiv = styled.div`
-  display: flex;
-  flex-direction: column;
+export const MyPageHeaderProFileImg = styled.img`
+  margin-top: 2.5rem;
 `;
 
-export const MyPageHeaderListDiv = styled.div`
-  height: 16rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 8.3rem;
+export const MyPageHeaderUserNameP = styled.p`
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 20px;
+  color: #000000;
 `;
 
-export const MyPageButtonUl = styled.ul`
-  padding: 0px;
-`;
-export const MyLookBookDiv = styled.div`
-  height: 16.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-right: 8.3rem;
-`;
-export const MyPageHeaderTagDiv = styled.div`
-  width: 14rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+export const MyPageHeaderButtonCountP = styled.p`
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
 `;
 
 export const MypageHeaderDataTagDiv = styled.div`
@@ -69,102 +40,81 @@ export const MypageHeaderDataTagDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 1rem;
 `;
-export const DivideLine1 = styled.div`
-  width: 1px;
-  height: 20rem;
-  border: 1px solid #bebebe;
-  margin-right: 8.1rem;
-`;
-export const DivideLine2 = styled.div`
-  width: 1px;
-  height: 20rem;
-  border: 1px solid #bebebe;
-  margin-right: 8.4rem;
+
+export const MyPageHeaderDataTagFlexDiv = styled.div`
+  display: flex;
 `;
 
 export const MyPageHeaderWeatherDiv = styled.div`
-  width: 33.4rem;
-  height: 24.6rem;
-  display: flex;
-  justify-content: center;
+  width: 25.5rem;
+  height: 17rem;
+  background: #ffffff;
+  box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  border: 1px solid #bebebe;
-`;
-
-export const MyPageHeaderWeatherFlexDiv = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  margin-top: 2.5rem;
+`;
+export const MyPageHeaderWeatherDivFake = styled.div`
+  width: 25.5rem;
+  height: 17rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.5rem;
 `;
 
-export const MyPageHeaderWeatherWrapperDiv = styled.div`
-  margin-top: 3.9rem;
+export const MyPageHeaderSunnyImg = styled.img`
+  width: 6.7rem;
+  height: 6.7rem;
+  margin-right: 2rem;
 `;
 
-export const MyPageHeaderWeatherP = styled.p`
-  font-weight: 800;
-  font-size: 2.6rem;
-  color: #b7e576;
+export const MyPageHeaderFrontDateSpan = styled.span`
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 42px;
+  color: rgba(51, 51, 51, 0.7);
+`;
+
+export const MyPageHeaderAfterDateSpan = styled.span`
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 42px;
+`;
+
+export const MyPageWeatherTempertureDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+export const MyPageWeatherFirstDiv = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 1rem;
-  margin-bottom: 2rem;
-  margin-left: 1.3rem;
-`;
-export const FontSizeHeaderTitleP = styled.span`
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin: 0rem;
-  margin-bottom: 7rem;
-`;
-export const CurrentPointDiv = styled.div`
-  font-size: 1.4rem;
-  margin: 0px;
-  margin-bottom: 2.5rem;
-`;
-//font size HeaderList
-export const FontSizeHeaderListSpan = styled.span`
-  font-size: 1.4rem;
-  cursor: pointer;
-  margin: 0rem;
+  margin-bottom: 4rem;
 `;
 
-export const ButtonListCountSpan = styled.span`
-  font-weight: 600;
-  margin-left: 1rem;
-  font-size: 1.4rem;
+export const MyPageWeatherDoubleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 23rem;
+  justify-content: space-around;
 `;
 
-export const FontSizeHeaderListLastSpan = styled.span`
-  margin-bottom: 4.7rem;
-  font-size: 1.4rem;
-  cursor: pointer;
-  margin: 0rem;
+export const MyPageWeatherTemp = styled.span`
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 25px;
+  color: #b7e576;
+  margin-left: 2.1rem;
 `;
 
-export const MyPlageHeaderListUl = styled.ul`
-  margin: 0px;
-`;
-
-export const MyPageHeaderButtonListLi = styled.li`
-  margin-bottom: 2.5rem;
-`;
-
-export const MyPageHeaderListLi = styled.li`
-  margin-bottom: 2rem;
-`;
-//font size Temperture
-export const FontSizeTempertureP = styled.p`
-  font-size: 4rem;
-  font-weight: 700;
-  margin: 0rem;
-`;
-
-export const MyLookBookP = styled.p`
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin: 0rem;
-`;
-export const UserImg = styled.img`
-  width: 9.6rem;
-  height: 9.6rem;
+export const MyPageWrapperSelectDiv = styled.div`
+  display: flex;
 `;

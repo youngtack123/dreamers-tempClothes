@@ -1,25 +1,14 @@
 import styled from "@emotion/styled";
 
-export const RealMyPageFeedWrapper = styled.div`
+export const MyPageFeedWrapperDiv = styled.div`
   display: flex;
-  justify-content: center;
-`;
-
-export const MyPageFeedWrapper = styled.div`
-  margin-top: 2.4rem;
-  width: 114.8rem;
-  border: 1px solid #bebebe;
-  border-radius: 10px;
-  padding-top: 2.9rem;
-  padding-left: 8.4rem;
-  display: flex;
-  justify-content: center;
-  width: 114.8rem;
+  flex-direction: column;
 `;
 
 export const MyPageFeedLookBooxDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 //mypage font Feed
@@ -29,5 +18,12 @@ export const MyPageFeedHeadP = styled.div`
 `;
 
 export const MypageFeedImage = styled.img`
-  border-radius: 30px;
+  width: 210px;
+  height: 300px;
+  border-radius: 10px;
+  margin: 1.5rem;
+`;
+
+export const MyPageWrapperSelectDiv = styled.div`
+  display: flex;
 `;

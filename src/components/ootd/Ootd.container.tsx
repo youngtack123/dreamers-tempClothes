@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import OotdUI from "./Ootd.presenter";
 import { Q_FETCH_FEEDS } from "./Ootd.queries";
@@ -57,21 +57,21 @@ const OotdPage = () => {
   //   router.push(`/feeds/${event.target?.id}`);
   // };
 
-  const onLoadMore = () => {
-    if (!data) return;
-    fetchMore({
-      variables: {
-        page: Math.ceil(data.fetchFeeds.length / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchFeeds) return { fetchFeeds: [...prev.fetchFeeds] };
-
-        return {
-          fetchFeeds: [...prev.fetchFeeds, ...fetchMoreResult.fetchFeeds],
-        };
-      },
-    });
-  };
+  // const onLoadMore = () => {
+  //   if (!data) return;
+  //   fetchMore({
+  //     variables: {
+  //       page: Math.ceil(data.fetchFeeds.length / 10) + 1,
+  //     },
+  //     updateQuery: (prev, { fetchMoreResult }) => {
+  //       if (!fetchMoreResult?.fetchFeeds) return { fetchFeeds: [...prev.fetchFeeds] };
+  //       console.log(...prev.fetchFeeds);
+  //       return {
+  //         fetchFeeds: [...prev.fetchFeeds, ...fetchMoreResult.fetchFeeds],
+  //       };
+  //     },
+  //   });
+  // };
 
   return (
     <OotdUI
@@ -86,7 +86,6 @@ const OotdPage = () => {
       isSelected={isSelected}
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
-      onLoadMore={onLoadMore}
     />
   );
 };

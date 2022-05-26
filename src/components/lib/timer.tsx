@@ -1,7 +1,14 @@
+import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { timerState } from "../common/store";
 
+const TimerP = styled.p`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #b7e576;
+`;
 const Timer = () => {
   const [minutes, setMinutes] = useState(3);
   const [seconds, setSeconds] = useState(0);
@@ -31,9 +38,7 @@ const Timer = () => {
   return (
     <div>
       <div>
-        <h2>
-          {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-        </h2>
+        <TimerP>{`(${minutes}:${seconds < 10 ? `0${seconds}` : seconds})`}</TimerP>
       </div>
     </div>
   );
