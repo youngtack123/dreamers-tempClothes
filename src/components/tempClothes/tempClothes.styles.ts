@@ -195,3 +195,16 @@ export const Bbb = styled.div`
   margin-right: 3.2rem;
   margin-bottom: 3rem;
 `;
+export const ScrollButton = styled.button`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  position: fixed;
+  top: 75rem;
+  right: 35.5rem;
+  background-color: #b7e576;
+  color: #fff;
+  cursor: pointer;
+`;
+export const UpArrowImg = styled.img``;

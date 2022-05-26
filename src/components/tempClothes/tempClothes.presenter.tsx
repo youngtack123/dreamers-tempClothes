@@ -48,6 +48,10 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
     setTagFeed(id);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <s.WrapperDiv>
       {/* 현재 시간, 기온, 추천 옷차림 태그 부분 */}
@@ -93,6 +97,10 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
           });
         })}
       </s.RightLookBookDiv>
+
+      <s.ScrollButton onClick={scrollToTop}>
+        <s.UpArrowImg src="/images/uparrow.png" />
+      </s.ScrollButton>
 
       <s.WriteButton onClick={openModal}>+</s.WriteButton>
       {!whichModal && (
