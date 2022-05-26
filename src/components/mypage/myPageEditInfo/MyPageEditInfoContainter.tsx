@@ -4,6 +4,7 @@ import MyPageEditInfoPresenter from "./MyPageEditInfoPresenter";
 import { CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./MyPageEditInfoQuries";
 import { useRecoilState } from "recoil";
 import { timerState } from "../../common/store";
+import { useRouter } from "next/router";
 
 const MyPageEditInfoContainter = () => {
   const [inputs, setInputs] = useState({
@@ -14,6 +15,7 @@ const MyPageEditInfoContainter = () => {
     region: "",
     style: "",
   });
+  const router = useRouter();
   const [m_updateUser] = useMutation(UPDATE_USER);
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
@@ -62,6 +64,7 @@ const MyPageEditInfoContainter = () => {
       });
       console.log("updateUserResult", updateUserResult);
       alert("정상적으로 회원 정보가 수정되었습니다!");
+      router.push("/mypage");
     } catch (error) {
       alert(error.message);
     }

@@ -13,30 +13,25 @@ const MyPageFeedPresenter = (props) => {
     setModalOpen(false);
   };
   return (
-    <S.RealMyPageFeedWrapper>
-      <S.MyPageFeedWrapper>
-        <div>
-          <S.MyPageFeedHeadP>나衣 룩북</S.MyPageFeedHeadP>
-          <S.MyPageFeedLookBooxDiv>
-            {fetchMyFeed?.fetchMyFeeds.feeds.map((el, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={() => {
-                    selectId(el.id), openModal();
-                  }}
-                >
-                  <S.MypageFeedImage src={`https://storage.googleapis.com/${el.feedImg[0].imgURL}`} alt="mypageImage" key={index} width={242} height={362}></S.MypageFeedImage>
-                </div>
-              );
-            })}
-          </S.MyPageFeedLookBooxDiv>
-        </div>
-      </S.MyPageFeedWrapper>
+    <S.MyPageFeedWrapperDiv>
+      <S.MyPageFeedLookBooxDiv>
+        {fetchMyFeed?.fetchMyFeeds.feeds.map((el, index) => {
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                selectId(el.id), openModal();
+              }}
+            >
+              <S.MypageFeedImage src={`https://storage.googleapis.com/${el.feedImg[0]?.imgURL}`} alt="mypageImage" key={index} width={242} height={362}></S.MypageFeedImage>
+            </div>
+          );
+        })}
+      </S.MyPageFeedLookBooxDiv>
       <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">
         <FeedDetail myPageFeedId={myPageFeedId}></FeedDetail>
       </Modal>
-    </S.RealMyPageFeedWrapper>
+    </S.MyPageFeedWrapperDiv>
   );
 };
 

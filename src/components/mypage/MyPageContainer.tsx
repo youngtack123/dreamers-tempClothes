@@ -1,9 +1,17 @@
-import { gql, useQuery } from "@apollo/client";
-import React from "react";
+import React, { useRef } from "react";
+import { useRecoilState } from "recoil";
+import { selectMyPageList } from "../common/store";
 import MyPagePresenter from "./MyPagePresenter";
 
 const MyPageContainer = () => {
-  return <MyPagePresenter></MyPagePresenter>;
+  const [, setSelectMyPageList] = useRecoilState(selectMyPageList);
+  const selectMyPageRef = useRef([]);
+  const onClickMyPageList = (index: number) => {
+    // console.log(selectMyPageRef.current);
+    setSelectMyPageList(selectMyPageRef.current[index].innerText);
+  };
+
+  return <MyPagePresenter onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef}></MyPagePresenter>;
 };
 
 export default MyPageContainer;

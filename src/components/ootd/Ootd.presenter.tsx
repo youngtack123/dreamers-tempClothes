@@ -154,19 +154,16 @@ const OotdUI = (props) => {
         </Ootd.MyTag__Div>
 
         {/* 게시물 페칭 */}
-        <Ootd.Feeds__Div>
-          <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
-            <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-              {props.data?.fetchFeeds.feeds.map((el, idx) => (
-                <div key={idx}>
-                  {/* <Link href={`/feeds/${el.id}`} passHref> */}
-                  <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} id={el.id} />
-                  {/* </Link> */}
-                </div>
-              ))}
-            </Ootd.Aaa>
-          </InfiniteScroll>
-        </Ootd.Feeds__Div>
+
+        <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+          {props.data?.fetchFeeds.feeds.map((el, idx) => (
+            <div key={idx}>
+              {/* <Link href={`/feeds/${el.id}`} passHref> */}
+              <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} isSelected={props.isSelected} id={el.id} />
+              {/* </Link> */}
+            </div>
+          ))}
+        </Ootd.Aaa>
       </Ootd.Container_Body__Div>
 
       {/* <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">

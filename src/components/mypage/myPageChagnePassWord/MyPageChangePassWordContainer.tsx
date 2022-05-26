@@ -6,7 +6,7 @@ import { UPDATE_PASSWORD } from "./MyPageChangePassWordQuries";
 const MyPageChangePassWordContainer = () => {
   const [inputs, setInputs] = useState({
     originPassword: "",
-    changePassword: "",
+    changePassword: " ",
     passwordOk: "",
   });
   const [m_changePassword] = useMutation(UPDATE_PASSWORD);
