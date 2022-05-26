@@ -30,3 +30,9 @@ export const M_DELETE_FEED = gql`
     deleteFeed(feedId: $feedId)
   }
 `;
+
+export const M_TOGGLE_LIKE_FEED = gql`
+  mutation toggleLikeFeed($feedId: String!) {
+    toggleLikeFeed(feedId: $feedId)
+  }
+`;

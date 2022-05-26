@@ -50,7 +50,7 @@ const OotdUI = (props) => {
             <Ootd.Day__Span>{Day}</Ootd.Day__Span>
           </Ootd.Date__Div>
 
-          <Ootd.Temp__Span>22°C</Ootd.Temp__Span>
+          <Ootd.Temp__Span>{Math.round(props.tempData?.getWeather.temp) || `-`}°C</Ootd.Temp__Span>
         </Ootd.TodayInfo__Div>
 
         <Ootd.TagWrapper__Div>
