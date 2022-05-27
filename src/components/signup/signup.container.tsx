@@ -5,7 +5,7 @@ import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
 import { useRecoilState } from "recoil";
-import { timerState } from "../common/store";
+import { authState, timerState } from "../common/store";
 
 const FETCH_USER = gql`
   query {
@@ -36,7 +36,7 @@ export default function Signup() {
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
   const [m_updateUser] = useMutation(UPDATE_USER);
-  const [authOk, setAuthFalse] = useState(false);
+  const [authOk, setAuthFalse] = useRecoilState(authState);
   const [, setSendAuthNumber] = useRecoilState(timerState);
   const { data: socialLoginData } = useQuery(FETCH_USER);
 
@@ -204,7 +204,6 @@ export default function Signup() {
       overLapNic={overLapNic}
       inputs={inputs}
       createPhoneAuth={createPhoneAuth}
-      authOk={authOk}
       confirmAuthNumber={confirmAuthNumber}
       noAuthSignUp={noAuthSignUp}
       socialLoginData={socialLoginData}

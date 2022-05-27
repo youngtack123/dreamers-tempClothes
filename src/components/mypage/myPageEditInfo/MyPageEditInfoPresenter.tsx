@@ -33,7 +33,7 @@ const MyPageEditInfoPresenter = (props) => {
             <Timer></Timer>
           </S.MyPageAuthOkTimerDiv>
         )}
-        {authOk && "인증이 완료되었습니다!"}
+        {authOk && <S.MyPageAuthOkTimerDiv>{<S.MyPageAuthOkTimerP>인증이 완료되었습니다!</S.MyPageAuthOkTimerP>}</S.MyPageAuthOkTimerDiv>}
         <S.MyPageEditInfoInputFlexDiv style={{ marginBottom: "0px" }}>
           <S.MyPageEditInfoInputsP style={{ marginBottom: "7rem" }}>지역</S.MyPageEditInfoInputsP>
           <div>
