@@ -10,6 +10,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import InfiniteScroll from "react-infinite-scroller";
 import Link from "next/link";
+import FeedsWrite from "../feeds/write/feedsWrite.container";
 
 const OotdUI = (props) => {
   const router = useRouter();
@@ -23,6 +24,10 @@ const OotdUI = (props) => {
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // const onClickMoveToDetail = () => {
@@ -171,6 +176,15 @@ const OotdUI = (props) => {
       </Modal> */}
 
       {/* </s.Container_Body__Div> */}
+      <Ootd.ScrollButton onClick={scrollToTop}>
+        <Ootd.UpArrowImg src="/images/uparrow.png" />
+      </Ootd.ScrollButton>
+
+      <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
+
+      <Modal open={modalOpen} close={closeModal}>
+        <FeedsWrite />
+      </Modal>
     </Ootd.Container__Div>
   );
 };

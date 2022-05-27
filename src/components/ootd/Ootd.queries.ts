@@ -19,6 +19,9 @@ export const Q_FETCH_FEEDS = gql`
         feedImg {
           imgURL
         }
+        region {
+          id
+        }
       }
     }
   }

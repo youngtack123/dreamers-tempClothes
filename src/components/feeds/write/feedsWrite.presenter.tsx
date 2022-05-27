@@ -35,6 +35,8 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
     slidesToScroll: 1,
   };
 
+  console.log(props.tagFetch);
+
   return (
     <s.WrapperDiv>
       {/* 사진, 옷 정보 섹션 */}
@@ -132,6 +134,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
                 <s.RegionUl>
                   {props.regionCategory.map((el) => (
                     <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
+                      {/* regionId={props.regionId === el} : 페치 불들어노는 시험용 */}
                       {el}
                     </s.RegionTagLi>
                   ))}

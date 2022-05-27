@@ -11,11 +11,17 @@ const FeedsWrite = (props) => {
 
   const [myTag, setMyTag] = useState<String[]>([]);
   const [myRegion, setMyRegion] = useState<String>("");
-  const [editRegion, setEditRegion] = useState(props.fetchData?.fetchFeed.region.id);
-  console.log(editRegion);
+  const [editRegion, setEditRegion] = useState("");
 
   const aaa = props.fetchData?.fetchFeed.region.id;
   console.log("페치 region", props.fetchData?.fetchFeed.region.id);
+  useEffect(() => {
+    setEditRegion(props.fetchData?.fetchFeed.region.id);
+    console.log(editRegion);
+  }, []);
+
+  console.log("aaa", props.regionId);
+
   // setEditRegion(props.fetchData?.fetchFeed.region.id);
   // console.log(editRegion);
   //console.log(regionSelected);
@@ -111,6 +117,7 @@ const FeedsWrite = (props) => {
           },
         },
       });
+      router.push("/ootd");
       console.log(feedResult);
     } catch (error) {
       alert(error.message);
@@ -140,8 +147,7 @@ const FeedsWrite = (props) => {
         },
       });
       alert("피드가 수정되었습니다");
-      console.log(result);
-      router.push(`/feeds/${router.query.feedId}`);
+      router.push(`/ootd`);
     } catch (error) {
       alert(error.message);
     }
@@ -175,6 +181,8 @@ const FeedsWrite = (props) => {
       // 해보는 중
       myRegion={myRegion}
       myTag={myTag}
+      regionId={props.regionId}
+      tagFetch={props.tagFetch}
     />
   );
 };

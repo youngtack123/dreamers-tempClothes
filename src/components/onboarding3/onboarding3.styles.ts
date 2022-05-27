@@ -37,14 +37,14 @@ export const RegionDiv = styled.div`
   line-height: 4rem;
   font-size: 1.6rem;
   border-radius: 30px;
-  border: 1px solid #bebebe;
   text-align: center;
   :hover {
     border: 1px solid #ffdd87;
     background-color: #fff2b2;
   }
   cursor: pointer;
-  background-color: ${(props) => (props.clickTag ? "#eeeeee" : "#fffffff")};
+  background-color: ${(props) => (props.clickTag === props.id ? "#fff2b2" : "#fff")};
+  border: ${(props) => (props.clickTag === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
 `;
 export const RestDiv = styled.div`
   width: 28rem;

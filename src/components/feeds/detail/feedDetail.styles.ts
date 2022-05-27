@@ -281,7 +281,7 @@ export const SettingBox__Div = styled.div`
   font-size: 12px;
   position: absolute;
   right: 0;
-  bottom: 20px;
+  bottom: 50px;
 `;
 
 export const Edit__Span = styled.span`
