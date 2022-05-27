@@ -81,7 +81,7 @@ const OotdFeed = (props) => {
         <feed.BottomBottom__Div>
           {props.el.outer ? (
             <feed.ClothInfo__Div>
-              <feed.ClothIcon__Div></feed.ClothIcon__Div>
+              <feed.OuterIcon__SVG></feed.OuterIcon__SVG>
               <feed.ClothName__Span>{props.el?.outer}</feed.ClothName__Span>
             </feed.ClothInfo__Div>
           ) : (
@@ -90,7 +90,7 @@ const OotdFeed = (props) => {
 
           {props.el.top ? (
             <feed.ClothInfo__Div>
-              <feed.ClothIcon__Div></feed.ClothIcon__Div>
+              <feed.TopIcon__SVG></feed.TopIcon__SVG>
               <feed.ClothName__Span>{props.el?.top}</feed.ClothName__Span>
             </feed.ClothInfo__Div>
           ) : (
@@ -99,7 +99,7 @@ const OotdFeed = (props) => {
 
           {props.el.bottom ? (
             <feed.ClothInfo__Div>
-              <feed.ClothIcon__Div></feed.ClothIcon__Div>
+              <feed.BottomIcon__SVG></feed.BottomIcon__SVG>
               <feed.ClothName__Span>{props.el?.bottom}</feed.ClothName__Span>
             </feed.ClothInfo__Div>
           ) : (
@@ -108,7 +108,7 @@ const OotdFeed = (props) => {
 
           {props.el.etc ? (
             <feed.ClothInfo__Div>
-              <feed.ClothIcon__Div></feed.ClothIcon__Div>
+              <feed.ETCIcon__SVG></feed.ETCIcon__SVG>
               <feed.ClothName__Span>{props.el?.etc}</feed.ClothName__Span>
             </feed.ClothInfo__Div>
           ) : (

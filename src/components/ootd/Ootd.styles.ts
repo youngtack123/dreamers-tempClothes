@@ -29,7 +29,7 @@ export const Container_Body__Div = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin-left: 300px;
+  margin-left: 230px;
   width: 965px;
 `;
 
@@ -297,4 +297,40 @@ export const Aaa = styled(Masonry)`
     margin-right: 10px;
     background-color: #fff;
   }
+`;
+
+export const ScrollButton = styled.button`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  position: fixed;
+  bottom: 130px;
+  right: 180px;
+  background-color: #b7e576;
+  color: #fff;
+  cursor: pointer;
+  z-index: 9999;
+`;
+export const UpArrowImg = styled.img``;
+
+export const WriteButton = styled.button`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #b7e576;
+  border: none;
+  font-weight: 400;
+  font-size: 40px;
+  color: white;
+  // margin-top: 850px;
+  position: fixed;
+  /* margin-left: 1120px; */
+  cursor: pointer;
+  :hover {
+    background-color: #ffea86;
+  }
+  bottom: 50px;
+  right: 180px;
+  z-index: 9999;
 `;

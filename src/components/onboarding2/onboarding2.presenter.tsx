@@ -1,8 +1,15 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import * as s from "./onboarding2.styles";
 
 export default function Onboarding2UI() {
   const router = useRouter();
+
+  const [isSelected, setIsSelected] = useState<String>("");
+
+  const onClickSelect = (e) => {
+    setIsSelected(e.target.innerText);
+  };
 
   const onMoveToLogin = () => {
     router.push("/login");
@@ -22,14 +29,24 @@ export default function Onboarding2UI() {
         <s.QuestionDiv>즐겨 입는 스타일을 알려주세요!</s.QuestionDiv>
 
         <s.StyleDiv>
-          <s.WhichStyleDiv>캐주얼</s.WhichStyleDiv>
-          <s.WhichStyleDiv>스트릿</s.WhichStyleDiv>
-          <s.WhichStyleDiv>트레이닝</s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"캐주얼"} onClick={onClickSelect} isSelected={isSelected}>
+            캐주얼
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"스트릿"} onClick={onClickSelect} isSelected={isSelected}>
+            스트릿
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"트레이닝"} onClick={onClickSelect} isSelected={isSelected}>
+            트레이닝
+          </s.WhichStyleDiv>
         </s.StyleDiv>
 
         <s.RestDiv>
-          <s.WhichStyleDiv>포멀</s.WhichStyleDiv>
-          <s.WhichStyleDiv>세미포멀</s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"포멀"} onClick={onClickSelect} isSelected={isSelected}>
+            포멀
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"세미포멀"} onClick={onClickSelect} isSelected={isSelected}>
+            세미포멀
+          </s.WhichStyleDiv>
         </s.RestDiv>
 
         <s.AreYouUserDiv>

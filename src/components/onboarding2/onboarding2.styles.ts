@@ -36,13 +36,14 @@ export const WhichStyleDiv = styled.div`
   height: 4rem;
   line-height: 4rem;
   font-size: 1.6rem;
-  border: 1px solid #bebebe;
   text-align: center;
   border-radius: 3rem;
   :hover {
     border: 1px solid #ffdd87;
     background-color: #fff2b2;
   }
+  background-color: ${(props) => (props.isSelected === props.id ? "#fff2b2" : "#fff")};
+  border: ${(props) => (props.isSelected === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
 `;
 export const RestDiv = styled.div`
   width: 18.1rem;

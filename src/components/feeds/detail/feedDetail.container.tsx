@@ -32,10 +32,10 @@ function FeedDetail(props) {
     }
   };
 
-  const [showPhoto, setShowPhoto] = useState<String[]>([]);
+  const [showPhoto, setShowPhoto] = useState<String>("");
 
   const onClickPhoto = (photo: any) => {
-    setShowPhoto([photo]);
+    setShowPhoto(photo);
   };
 
   console.log("show", showPhoto);

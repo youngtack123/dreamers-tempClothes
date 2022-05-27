@@ -35,9 +35,9 @@ export const ManButton = styled.button`
   height: 4rem;
   line-height: 4rem;
   font-size: 1.6rem;
-  background-color: white;
+  background-color: ${(props) => (props.isSelected === props.value ? "#fff2b2;" : "#fff")};
   border-radius: 30px;
-  border: 1px solid #bebebe;
+  border: ${(props) => (props.isSelected === props.value ? "1px solid #ffdd87" : "1px solid #bebebe")};
   :hover {
     border: 1px solid #ffdd87;
     background-color: #fff2b2;

@@ -153,10 +153,36 @@ export const ClothIcon__Div = styled.div`
   margin-right: 10px;
 `;
 
+export const OuterIcon__SVG = styled.div`
+  width: 18px;
+  height: 18px;
+  background-image: url("/images/coat.png");
+`;
+
+export const TopIcon__SVG = styled.div`
+  width: 16px;
+  height: 16px;
+  background-image: url("/images/top.png");
+`;
+
+export const BottomIcon__SVG = styled.div`
+  width: 11px;
+  height: 16px;
+  background-image: url("/images/pants.png");
+  margin-left: 3px;
+`;
+
+export const ETCIcon__SVG = styled.div`
+  width: 13px;
+  height: 20px;
+  background-image: url("/images/dress.png");
+`;
+
 export const ClothName__Span = styled.span`
   width: 170px;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-left: 5px;
 `;

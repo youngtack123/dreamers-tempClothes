@@ -62,17 +62,15 @@ function FeedDetailUI(props) {
   return (
     <Detail.Wrapper__Div>
       <Detail.Wrapper_Left__Div>
-        {/* {props.showPhoto ? (
+        {props.showPhoto ? (
           <Detail.PhotoBoxDiv>
-            {props.showPhoto.map((el, idx) => (
-              <Detail.ShowImg key={idx} src={`https://storage.googleapis.com/${el}`} />
-            ))}
+            <Detail.ShowImg src={`https://storage.googleapis.com/${props.showPhoto}`} />
           </Detail.PhotoBoxDiv>
-        ) : ( */}
-        <Detail.PhotoBoxDiv>
-          <Detail.ShowImg src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0].imgURL}`} />
-        </Detail.PhotoBoxDiv>
-        {/* )} */}
+        ) : (
+          <Detail.PhotoBoxDiv>
+            <Detail.ShowImg src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0].imgURL}`} />
+          </Detail.PhotoBoxDiv>
+        )}
 
         <Detail.ImageBox__Div>
           <Detail.Slick {...settings}>

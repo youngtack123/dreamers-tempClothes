@@ -7,7 +7,7 @@ export const WrapperDiv = styled.div`
   display: flex;
   flex-direction: row;
   padding: 20px 29px 15px 44px;
-  border: 1px solid #bebebe;
+  // border: 1px solid #bebebe;
   border-radius: 10px;
   margin: 0 auto;
 `;
@@ -157,9 +157,9 @@ export const RegionTagLi = styled.li`
   font-size: 13px;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myRegion ? "#fff2b2" : "#ddd")};
+  background: ${(props) => (props.myRegion || props.regionId ? "#fff2b2" : "#ddd")};
   /* background: ${(props) => (props.aaa ? "#fff2b2" : "#ddd")}; */
-  color: ${(props) => (props.myRegion ? "#333" : "#fff")};
+  color: ${(props) => (props.myRegion || props.regionId ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -183,8 +183,8 @@ export const StyleTagLi = styled.li`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.myTag ? "#333" : "#fff")};
+  background: ${(props) => (props.myTag || props.tagFetch ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag || props.tagFetch ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
