@@ -1,54 +1,85 @@
 import { io } from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import useUpdateEffect from "../../src/components/common/customHook/useUpdateEffect";
+
+const CHATLOG = gql`
+  query fetchLogs($opponentNickname: String!) {
+    fetchLogs(opponentNickname: $opponentNickname) {
+      id
+      room
+    }
+  }
+`;
+
+const FETCH_USER = gql`
+  query {
+    fetchUser {
+      id
+      email
+      phone
+      gender
+      style
+      nickname
+      userImgURL
+      button
+      region {
+        id
+        lat
+        lon
+      }
+      deletedAt
+    }
+  }
+`;
 
 const Chat = () => {
   const [message, setMessage] = useState();
   const [nickName, setNickName] = useState("");
   const [room, setRoom] = useState("");
   const [socket, setSocket] = useState("");
+  const [data, setData] = useState();
+  const [receive, setReceive] = useState();
 
   const [anotherMessage, setAnotherMessage] = useState(null);
   const [receiveMessage, setReceiveMessage] = useState([]);
   const [mySendMessage, setMySendMessage] = useState(null);
 
   const [messageArr, setMessageArr] = useState([]);
+  const [dataLoding, setDataLoding] = useState(false);
+  const [socketState, setSoketState] = useState(false);
   const messageDiv = useRef(null);
 
+  const { data: fetchUser } = useQuery(FETCH_USER);
+
   useEffect(() => {
-    const socket = io("http://localhost:3000/chat");
+    const socket = io("https://team01.leo3179.shop/chat", { transports: ["websocket"], upgrade: false });
     const nickname = prompt("닉네임을 알려주세요.");
     const room = prompt("입장할 방의 코드를 적어주세요.");
     if (!(nickname && room)) {
       alert("다시 입력해주세요.");
       window.location.reload();
     }
-    socket.emit("message", nickname, room);
+    socket.emit("message", nickname, room, message);
+
     socket.on("connect", () => {
+      console.log("bbbbbb");
       /* 누군가 채팅침 */
       socket.on(room, (data) => {
-        console.log("data:", data);
-        // setOtherSendMessage([...myOtherSendMessage, data]);
-        const e = React.createElement("div", { className: "test" }, `${data[0]} : ${data[1]}`);
-        setReceiveMessage([...receiveMessage, e]);
+        console.log("누군가가 채팅침", data);
+        setData(data);
       });
+      console.log("cccc");
       /* 누군가 입장 */
       socket.on("receive" + room, (receive) => {
-        console.log("receive", receive);
-        // setReceive([...Receive, receive]);
-        const e = React.createElement("div", { className: "test" }, `${receive}`);
-        console.log(e);
-        // messageDiv.current.append(e);
-        setReceiveMessage([...receiveMessage, e]);
+        console.log("누군가가 입장했어", receive);
+        setReceive(receive);
       });
+      console.log("dddd");
     });
-    setNickName(nickName);
     setRoom(room);
     setSocket(socket);
   }, []);
-
-  useEffect(() => {
-    console.log(receiveMessage);
-  }, [receiveMessage]);
 
   const messageHandler = (e: any) => {
     setMessage(e.target.value);
@@ -57,10 +88,7 @@ const Chat = () => {
   function msg_send() {
     /* 메시지 전송 */
     console.log("전송?");
-    // setMySendMessage([...mySendMessage, message]);
     socket.emit("send", room, nickName, message);
-    const e = React.createElement("div", { className: "test" }, `나:${message}`);
-    setReceiveMessage([...receiveMessage, e]);
   }
   return (
     <div>
