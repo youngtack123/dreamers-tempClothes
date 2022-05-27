@@ -2,6 +2,7 @@ export interface INestedCommentWriteProps {
   mention: string;
   el: any;
   setIsNested: any;
+  IDforFetch: string;
 }
 export interface INestedCommentWriteUIProps {
   mention: string;

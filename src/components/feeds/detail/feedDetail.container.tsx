@@ -38,8 +38,6 @@ function FeedDetail(props) {
     setShowPhoto(photo);
   };
 
-  console.log("show", showPhoto);
-
   const IDforFetch = myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "";
 
   return (

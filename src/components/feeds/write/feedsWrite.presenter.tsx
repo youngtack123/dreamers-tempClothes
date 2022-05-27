@@ -22,8 +22,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
   // }, []);
   // console.log("use out", aaa);
 
-  console.log("프레젠터", bbb);
-
   const showMaxCnt = 4;
   const arr = Array.from(new Array(3));
 
@@ -34,8 +32,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
-
-  console.log(props.tagFetch);
 
   return (
     <s.WrapperDiv>
@@ -61,7 +57,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
           <s.SlickDiv>
             <s.Slick {...settings}>
               {props.imageUrl.map((el: any, index: any) => {
-                console.log(el);
                 return (
                   <s.MomDiv key={uuidv4()}>
                     <s.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />

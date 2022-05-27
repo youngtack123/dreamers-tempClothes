@@ -13,18 +13,26 @@ const MyPageHeaderPresenter = (props: any) => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  useEffect(() => {
-    checkWeatherDetail();
-  }, [weahterData?.getWeather.uvi]);
+  // useEffect(() => {
+  //   checkWeatherDetail();
+  // }, [weahterData?.getWeather.uvi]);
 
-  const checkWeatherDetail = () => {
-    if (weahterData?.getWeather.uvi >= 0 && weahterData?.getWeather.uvi <= 30) {
-      setWeatherDetail("좋음");
-    } else if (weahterData?.getWeather.uvi >= 31 && weahterData?.getWeather.uvi <= 80) {
-      setWeatherDetail("보통");
-    } else if (weahterData?.getWeather.uvi >= 81) {
-      setWeatherDetail("나쁨");
-    }
+  // const checkWeatherDetail = () => {
+  //   if (weahterData?.getWeather.uvi >= 0 && weahterData?.getWeather.uvi <= 30) {
+  //     setWeatherDetail("좋음");
+  //   } else if (weahterData?.getWeather.uvi >= 31 && weahterData?.getWeather.uvi <= 80) {
+  //     setWeatherDetail("보통");
+  //   } else if (weahterData?.getWeather.uvi >= 81) {
+  //     setWeatherDetail("나쁨");
+  //   }
+  // };
+
+  const getDate = () => {
+    const newDate = new Date();
+    const tmp = newDate.getMonth() + 1;
+    const mm = tmp.toString().padStart(2, "0");
+    const dd = newDate.getDate().toString().padStart(2, "0");
+    return `${mm} ${dd}`;
   };
 
   return (
@@ -41,17 +49,20 @@ const MyPageHeaderPresenter = (props: any) => {
       </S.MyPageHeaderContentDiv>
       <S.MyPageHeaderWeatherDiv>
         <S.MyPageWeatherFirstDiv>
-          <S.MyPageHeaderSunnyImg src="../images/🦆 _Weather Sunny_.png" alt="weatherSunny"></S.MyPageHeaderSunnyImg>
-          <S.MyPageHeaderFrontDateSpan>05</S.MyPageHeaderFrontDateSpan>
-          <S.MyPageHeaderAfterDateSpan>06</S.MyPageHeaderAfterDateSpan>
+          {weahterData?.getWeather.weatherIcon === "01d" || weahterData?.getWeather.weatherIcon === "01n" ? (
+            <S.MyPageHeaderSunnyImg src="../images/🦆 _Weather Sunny_.png" alt="weatherSunny" />
+          ) : (
+            <S.MyPageHeaderSunnyImg src={`http://openweathermap.org/img/wn/${weahterData?.getWeather.weatherIcon}@2x.png`} alt="weatherSunny" />
+          )}
+          <S.MyPageHeaderFrontDateSpan>{getDate()}</S.MyPageHeaderFrontDateSpan>
         </S.MyPageWeatherFirstDiv>
         <S.MyPageWeatherTempertureDiv>
           <S.MyPageWeatherDoubleDiv>
-            <img src="../images/🦆 _Temperature_.png"></img>
+            <S.ThermometerImg src="../images/🦆 _Temperature_.png" />
             <S.MyPageWeatherTemp>{`${Math.round(weahterData?.getWeather.temp)}°C`}</S.MyPageWeatherTemp>
           </S.MyPageWeatherDoubleDiv>
           <S.MyPageWeatherDoubleDiv>
-            <img src="../images/🦆 _umbrella with rain drops_.png"></img>
+            <S.RainImg src="../images/🦆 _umbrella with rain drops_.png" />
             <S.MyPageWeatherTemp>{`${weahterData?.getWeather.rainAmount}%`}</S.MyPageWeatherTemp>
           </S.MyPageWeatherDoubleDiv>
         </S.MyPageWeatherTempertureDiv>

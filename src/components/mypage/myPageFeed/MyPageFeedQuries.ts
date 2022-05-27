@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_MY_FEED = gql`
-  query fetchMyFeeds($page: Float, $count: Float) {
-    fetchMyFeeds(page: $page, count: $count) {
+  query fetchMyFeeds($page: Int) {
+    fetchMyFeeds(page: $page) {
       feeds {
         id
         detail

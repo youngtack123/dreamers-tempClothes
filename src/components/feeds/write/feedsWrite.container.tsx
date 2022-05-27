@@ -5,6 +5,7 @@ import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "
 import { regionCategory, selectMyRegion, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { checkValidationImage } from "./image.validation";
 
 const FeedsWrite = (props) => {
   const router = useRouter();
@@ -14,13 +15,9 @@ const FeedsWrite = (props) => {
   const [editRegion, setEditRegion] = useState("");
 
   const aaa = props.fetchData?.fetchFeed.region.id;
-  console.log("페치 region", props.fetchData?.fetchFeed.region.id);
   useEffect(() => {
     setEditRegion(props.fetchData?.fetchFeed.region.id);
-    console.log(editRegion);
   }, []);
-
-  console.log("aaa", props.regionId);
 
   // setEditRegion(props.fetchData?.fetchFeed.region.id);
   // console.log(editRegion);
@@ -74,6 +71,10 @@ const FeedsWrite = (props) => {
 
   const onChangeImgUrls = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
+
+    const isValid = checkValidationImage(file);
+    if (!isValid) return;
+
     let temp = [];
     try {
       const result = await uploadFeedImgs({
@@ -118,7 +119,6 @@ const FeedsWrite = (props) => {
         },
       });
       router.push("/ootd");
-      console.log(feedResult);
     } catch (error) {
       alert(error.message);
     }

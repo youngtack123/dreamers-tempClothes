@@ -30,10 +30,11 @@ const AmPm = () => {
 };
 
 const TempClothesUI = (props: ITempClothesUIProps) => {
-  const router = useRouter();
   const [tagFeed, setTagFeed] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(false);
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -51,6 +52,16 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 1000) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    });
+  }
 
   return (
     <s.WrapperDiv>
@@ -98,10 +109,11 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
         })}
       </s.RightLookBookDiv>
 
-      <s.ScrollButton onClick={scrollToTop}>
-        <s.UpArrowImg src="/images/uparrow.png" />
-      </s.ScrollButton>
-
+      {isVisible && (
+        <s.ScrollButton onClick={scrollToTop}>
+          <s.UpArrowImg src="/images/uparrow.png" />
+        </s.ScrollButton>
+      )}
       <s.WriteButton onClick={openModal}>+</s.WriteButton>
       {!whichModal && (
         <Modal open={modalOpen} close={closeModal}>

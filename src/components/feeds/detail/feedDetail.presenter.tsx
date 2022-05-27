@@ -11,10 +11,13 @@ import Modal from "../../common/commonModal";
 import FeedsWrite from "../write/feedsWrite.container";
 import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container";
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
+import { useRecoilState } from "recoil";
+import { ClickedUser } from "../../common/store";
 
 function FeedDetailUI(props) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [otherUser, setOtherUser] = useRecoilState(ClickedUser);
 
   const toggleMenu = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -27,6 +30,11 @@ function FeedDetailUI(props) {
   // const closeModal = () => {
   //   setModalOpen(false);
   // };
+
+  const selectNickname = (nickname: string) => {
+    setOtherUser(nickname);
+    router.push("/otherUser");
+  };
 
   const [deleteFeed] = useMutation(M_DELETE_FEED);
 
@@ -56,8 +64,6 @@ function FeedDetailUI(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
-
-  console.log(props.isLike);
 
   return (
     <Detail.Wrapper__Div>
@@ -110,7 +116,13 @@ function FeedDetailUI(props) {
         <Detail.FeedDetailBox__Div>
           <Detail.FeedDetail_Top__Div>
             <Detail.UserIconImg__Div></Detail.UserIconImg__Div>
-            <Detail.UserId__Div>{props.data?.fetchFeed.user.nickname}</Detail.UserId__Div>
+            <Detail.UserId__Div
+              onClick={() => {
+                selectNickname(props.data?.fetchFeed.user.nickname);
+              }}
+            >
+              {props.data?.fetchFeed.user.nickname}
+            </Detail.UserId__Div>
             <Detail.IconBox__Div>
               <DMIcon width="18" height="17.5" stroke="#bebebe" />
               {props.isLike ? (

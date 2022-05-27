@@ -65,7 +65,7 @@ const FeedsCommentList = (props) => {
       <div style={{ height: "603", overflow: "auto" }}>
         <InfiniteScroll pageStart={0} onLoadMore={onLoadMore} hasMore={true} useWindow={false}>
           {comment.map((el) => (
-            <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} />
+            <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} IDforFetch={props.IDforFetch} />
           ))}
         </InfiniteScroll>
       </div>

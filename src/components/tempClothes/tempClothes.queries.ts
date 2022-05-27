@@ -20,7 +20,7 @@ export const Q_FETCH_USER = gql`
   }
 `;
 export const Q_FETCH_FEED_TAGS = gql`
-  query fetchFeedTags($count: Float!) {
+  query fetchFeedTags($count: Int!) {
     fetchFeedTags(count: $count) {
       tagName
       feed {

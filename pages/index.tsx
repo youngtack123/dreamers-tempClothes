@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { css, keyframes } from "@emotion/react";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 const MainWrapperDiv = styled.div`
   height: 204rem;
@@ -75,6 +76,7 @@ const BottomDiv = styled.div`
 
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.26) 52.07%, rgba(183, 229, 118, 0.34) 100%);
 `;
+
 const LoginDiv = styled.div`
   position: absolute;
   top: 176.2rem;
@@ -111,6 +113,8 @@ const LookAroundDiv = styled.div`
 
 export default function Home() {
   const router = useRouter();
+  const boxRef = useRef(null);
+  const yellowball = useRef(null);
 
   const onMoveToLogin = () => {
     router.push("/login");
@@ -120,13 +124,27 @@ export default function Home() {
     router.push("/onboarding1");
   };
 
+  const scrollToBottom = () => {
+    window.scrollTo({ top: 1200, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    gsap.fromTo(boxRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 3 });
+  }, []);
+
+  useEffect(() => {
+    gsap.from(yellowball.current, { duration: 1, autoAlpha: 5, y: 30, repeat: 100, yoyo: true });
+  }, []);
+
   return (
     <MainWrapperDiv>
       <WrapperDiv />
       <MiddleDiv />
-      <RemarkDiv>기온에맞는옷을입고싶은 &nbsp;날</RemarkDiv>
+      <RemarkDiv className="box" ref={boxRef}>
+        기온에맞는옷을입고싶은 &nbsp;날
+      </RemarkDiv>
       <CircleDiv />
-      <SecondCircleDiv />
+      <SecondCircleDiv ref={yellowball} onClick={scrollToBottom} />
       <MainLogoImg src="/images/mainlogo.png" />
       <BottomDiv />
       <LoginDiv onClick={onMoveToLogin}>로그인</LoginDiv>

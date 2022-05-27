@@ -13,7 +13,7 @@ export const WrapperDiv = styled.div`
   border-bottom-right-radius: 5px; */
 `;
 export const DetailWrapperDiv = styled.div`
-  width: 455px;
+  width: 450px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

@@ -170,7 +170,6 @@ export const WriteButton = styled.button`
   font-weight: 400;
   font-size: 40px;
   color: white;
-  margin-top: 850px;
   position: fixed;
   /* margin-left: 1120px; */
   cursor: pointer;
@@ -181,28 +180,14 @@ export const WriteButton = styled.button`
   right: 355px;
 `;
 
-export const Aaa = styled.div`
-  width: 230px;
-  height: 300px;
-  border-radius: 1rem;
-  margin-right: 3.2rem;
-  margin-bottom: 3rem;
-`;
-export const Bbb = styled.div`
-  width: 230px;
-  height: 300px;
-  border-radius: 1rem;
-  margin-right: 3.2rem;
-  margin-bottom: 3rem;
-`;
 export const ScrollButton = styled.button`
   width: 70px;
   height: 70px;
   border-radius: 50%;
   border: none;
   position: fixed;
-  top: 75rem;
-  right: 35.5rem;
+  top: 730px;
+  right: 355px;
   background-color: #b7e576;
   color: #fff;
   cursor: pointer;
