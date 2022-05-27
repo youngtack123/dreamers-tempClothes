@@ -2,13 +2,14 @@ import { useRouter } from "next/router";
 import Timer from "../lib/timer";
 import * as s from "./signup.styles";
 import { useRecoilState } from "recoil";
-import { timerState } from "../common/store";
+import { authState, timerState } from "../common/store";
 import { useEffect } from "react";
 
 export default function SignupUI(props: any) {
-  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, authOk, noAuthSignUp, socialLoginData, updateUserFunc } = props;
+  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, noAuthSignUp, socialLoginData, updateUserFunc } = props;
   const [sendAuthNumber] = useRecoilState(timerState);
   const router = useRouter();
+  const [authOk] = useRecoilState(authState);
   const onMoveToLogin = () => {
     router.push("/login");
   };
@@ -68,8 +69,7 @@ export default function SignupUI(props: any) {
           <s.ItemInputDiv>
             <s.ItemNameDiv>휴대폰</s.ItemNameDiv>
             <s.ItemInput name="phone" onChange={handleSignUpInputs} placeholder="전화번호를 입력해 주세요" />
-            <s.VerifyButton onClick={createPhoneAuth}>인증번호 전송</s.VerifyButton>
-            {sendAuthNumber && <Timer></Timer>}
+            <s.VerifyButton onClick={createPhoneAuth}>인증하기</s.VerifyButton>
           </s.ItemInputDiv>
           <s.ErrorTextP>{!inputs.phone && "핸드폰 번호를 입력해주세요!"}</s.ErrorTextP>
         </div>
@@ -77,10 +77,16 @@ export default function SignupUI(props: any) {
           <s.VerifyDiv>
             <s.ItemNameDiv>인증번호</s.ItemNameDiv>
             <s.ItemInput />
-            <s.SendVerifiButton onClick={confirmAuthNumber}>인증하기</s.SendVerifiButton>
+            <s.SendVerifiButton onClick={confirmAuthNumber}>인증확인</s.SendVerifiButton>
           </s.VerifyDiv>
           <s.ErrorTextAuthP>{!inputs.authNumber && "인증 번호를 입력해주세요!"}</s.ErrorTextAuthP>
-          {authOk && "인증이 완료되었습니다!"}
+          {sendAuthNumber && (
+            <s.MyPageAuthOkTimerDiv>
+              <s.MyPageAuthOkTimerP>{`받으신 인증 번호를 입력해주세요`}</s.MyPageAuthOkTimerP>
+              <Timer></Timer>
+            </s.MyPageAuthOkTimerDiv>
+          )}
+          {authOk && <s.MyPageAuthOkTimerDiv>{<s.MyPageAuthOkTimerP>인증이 완료되었습니다!</s.MyPageAuthOkTimerP>}</s.MyPageAuthOkTimerDiv>}
         </div>
       </s.InputWrapperDiv>
       {/* 태그 부분 */}

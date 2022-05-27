@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { timerState } from "../common/store";
+import { authState, timerState } from "../common/store";
 
 const TimerP = styled.p`
   font-weight: 500;
@@ -13,6 +13,7 @@ const Timer = () => {
   const [minutes, setMinutes] = useState(3);
   const [seconds, setSeconds] = useState(0);
   const [, setSendAuthNumber] = useRecoilState(timerState);
+  const [, setAuthState] = useRecoilState(authState);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -30,6 +31,7 @@ const Timer = () => {
       if (minutes === 0 && seconds === 0) {
         alert("다시 한번 재인증해 주세요!");
         setSendAuthNumber(false);
+        setAuthState(false);
       }
     }, 1000);
     return () => clearInterval(countdown);

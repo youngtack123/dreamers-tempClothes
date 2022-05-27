@@ -94,6 +94,7 @@ const MyPageEditInfoContainter = () => {
       console.log("authNumberResult", authNumberResult);
       alert("정상적으로 인증이 완료되었습니다!");
       setAuthFalse(true);
+      setSendAuthNumber(false);
     } catch (error) {
       alert(error.message);
     }

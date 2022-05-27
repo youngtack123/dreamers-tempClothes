@@ -63,3 +63,9 @@ export const timerState = atom({
   key: v1(),
   default: false,
 });
+
+//---------회원가입 인증-----------//
+export const authState = atom({
+  key: v1(),
+  default: false,
+});

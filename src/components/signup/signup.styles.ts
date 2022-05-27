@@ -264,3 +264,15 @@ export const ErrorTextAuthP = styled.p`
   margin-top: 1rem;
   margin-bottom: 2rem;
 `;
+
+export const MyPageAuthOkTimerDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const MyPageAuthOkTimerP = styled.p`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #b7e576;
+`;
