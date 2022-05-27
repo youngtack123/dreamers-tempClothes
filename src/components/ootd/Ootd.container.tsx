@@ -19,25 +19,26 @@ const OotdPage = () => {
 
   const router = useRouter();
 
-  const [myTag, setMyTag] = useState(["청바지"]);
+  const [myTag, setMyTag] = useState(["캐주얼"]);
   const [myRegion, setMyRegion] = useState("서울");
-  const [isSelected, setIsSelected] = useState(["청바지"]);
+  const [isSelected, setIsSelected] = useState(["캐주얼"]);
   const [regionSelected, setRegionSelected] = useState("서울");
+  const [feedPage, setFeedPage] = useState(1);
 
-  const { data, fetchMore } = useQuery(Q_FETCH_FEEDS, {
+  const { data, fetchMore, refetch } = useQuery(Q_FETCH_FEEDS, {
     variables: {
       feedTags: myTag,
       regionId: myRegion,
     },
   });
 
+  // console.log(data?.fetchFeeds.feeds);
+
   const { data: userData } = useQuery(Q_FETCH_USER);
 
   const { data: tempData } = useQuery(Q_GET_WEATHER, {
     variables: { regionName: String(userData?.fetchUser.region.id) },
   });
-
-  console.log(tempData);
 
   // 지역 선택하기
   const onClickRegion = (e) => {
@@ -65,20 +66,83 @@ const OotdPage = () => {
   //   router.push(`/feeds/${event.target?.id}`);
   // };
 
-  // const onLoadMore = () => {
+  const [feedList, setFeedList] = useState([]);
+
+  const [lastFeed, setLastFeed] = useState(null);
+  // const [target, setTarget] = useState(null);
+
+  const getFeedList = () => {
+    setFeedList(data);
+    console.log(feedList);
+  };
+
+  // const onIntersect: IntersectionObserverCallback = (entries, observer) => {
+  //   entries.forEach((entry) => {
+  //     if (entry.isIntersecting) {
+  //       setPage((prev) => prev + 1);
+  //       observer.unobserve(entry.target);
+  //     }
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   console.log(page);
+  //   getFeedList();
+  // }, [page]);
+
+  // useEffect(() => {
+  //   let observer: IntersectionObserver;
+  //   if (lastFeed) {
+  //     observer = new IntersectionObserver(onIntersect, { threshold: 0.5 });
+  //     observer.observe(data.fetchFeeds.feed);
+  //   }
+  //   return () => observer && observer.disconnect();
+  // }, [lastFeed]);
+
+  // const observer = new IntersectionObserver( entries, {threshold: 1})
+
+  const onLoadMore = () => {
+    if (!data) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchFeeds.feeds) return { feeds: [...prev.fetchFeeds.feeds] };
+        console.log(...prev.fetchFeeds.feeds);
+        return {
+          feeds: [...prev.fetchFeeds.feeds, ...fetchMoreResult.fetchFeeds.feeds],
+        };
+      },
+    });
+  };
+  console.log(Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1);
+  // onLoadMore();
+
+  // const [page, setPage] = useState(1);
+  // const onClickNextPage = () => {
+  //   setPage((prev) => prev + 1);
+  //   console.log("aaa", data);
   //   if (!data) return;
   //   fetchMore({
   //     variables: {
-  //       page: Math.ceil(data.fetchFeeds.length / 10) + 1,
+  //       page: page,
   //     },
   //     updateQuery: (prev, { fetchMoreResult }) => {
-  //       if (!fetchMoreResult?.fetchFeeds) return { fetchFeeds: [...prev.fetchFeeds] };
-  //       console.log(...prev.fetchFeeds);
+  //       if (!fetchMoreResult?.fetchFeeds.feeds) return { feeds: [...prev.fetchFeeds.feeds] };
+  //       // console.log(...prev.fetchFeeds?.feeds);
   //       return {
-  //         fetchFeeds: [...prev.fetchFeeds, ...fetchMoreResult.fetchFeeds],
+  //         feeds: [...prev.fetchFeeds.feeds, ...fetchMoreResult.fetchFeeds.feeds],
   //       };
   //     },
   //   });
+
+  //   // refetch({ page: page });
+  //   console.log("눌림");
+  // };
+
+  // const onClickPage = (event) => {
+  //   refetch({ page: Number(event.target.id) });
   // };
 
   return (
@@ -95,6 +159,8 @@ const OotdPage = () => {
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
       tempData={tempData}
+      // onClickNextPage={onClickNextPage}
+      onLoadMore={onLoadMore}
     />
   );
 };

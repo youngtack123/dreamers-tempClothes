@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const Q_FETCH_FEEDS = gql`
-  query fetchFeeds($feedTags: [String!], $regionId: String!, $page: Float) {
+  query fetchFeeds($feedTags: [String!], $regionId: String!, $page: Int) {
     fetchFeeds(feedTags: $feedTags, regionId: $regionId, page: $page) {
       feeds {
         id
