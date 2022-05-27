@@ -270,7 +270,7 @@ export const Aaa = styled(Masonry)`
   display: flex;
   // flex-wrap: wrap;
   justify-content: space-between;
-  z-index: 9999;
+  z-index: 99;
 
   .my-masonry-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
