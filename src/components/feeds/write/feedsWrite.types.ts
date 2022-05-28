@@ -10,3 +10,22 @@ export interface IFeedsWriteUIProps {
   showPhoto: any;
   editRegion: string;
 }
+
+export interface IFormProps {
+  detail: string;
+  top: string;
+  bottom: string;
+  outer: string;
+  etc: string;
+}
+
+export interface IUpdateFeedInput {
+  detail?: string;
+  regionId?: any;
+  feedTags?: any;
+  outer?: string;
+  top?: string;
+  bottom?: string;
+  etc?: string;
+  imgURLs?: any;
+}

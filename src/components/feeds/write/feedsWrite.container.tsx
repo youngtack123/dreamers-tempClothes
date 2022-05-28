@@ -2,10 +2,13 @@ import { useMutation, useQuery } from "@apollo/client";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
 import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
-import { regionCategory, selectMyRegion, tagCategory } from "../../common/store";
+import { regionCategory, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { checkValidationImage } from "./image.validation";
+import { IFormProps, IUpdateFeedInput } from "./feedsWrite.types";
+import { Modal } from "antd";
+import "antd/dist/antd.css";
 
 const FeedsWrite = (props) => {
   const router = useRouter();
@@ -19,29 +22,9 @@ const FeedsWrite = (props) => {
     setEditRegion(props.fetchData?.fetchFeed.region.id);
   }, []);
 
-  // setEditRegion(props.fetchData?.fetchFeed.region.id);
-  // console.log(editRegion);
-  //console.log(regionSelected);
-  // const [regionSelected, setRegionSelected] = useRecoilState<String>(selectMyRegion);
-
-  // setEditRegion(props.fetchData?.fetchFeed.region.id);
-
-  // useEffect(() => {
-  //   setEditRegion(props.feedData?.fetchData.region.id);
-  //   console.log("use", editRegion);
-  // }, [editRegion]);
-
   const { register, handleSubmit, formState } = useForm({
     mode: "onChange",
   });
-
-  // useEffect(() => {
-  //   if (props.fetchData?.fetchFeed.region.id) {
-  //     setRegionSelected(props.fetchData?.fetchFeed.region.id);
-  //   }
-  // }, [regionSelected]);
-
-  // console.log(tagSelected);
 
   const [createFeed] = useMutation(M_CREATE_FEED);
   const [updateFeed] = useMutation(M_UPDATE_FEED);
@@ -60,6 +43,7 @@ const FeedsWrite = (props) => {
     setMyTag([...myTag, e]);
   };
 
+  // 이미지 업로드
   const fileRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string | any>([]);
   const [showPhoto, setShowPhoto] = useState([]);
@@ -68,7 +52,6 @@ const FeedsWrite = (props) => {
   const onClickImage = () => {
     fileRef.current?.click();
   };
-
   const onChangeImgUrls = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
 
@@ -102,7 +85,7 @@ const FeedsWrite = (props) => {
   };
 
   /////// 피드 등록 버튼
-  const onClickSubmit = async (data) => {
+  const onClickSubmit = async (data: IFormProps) => {
     try {
       const feedResult = await createFeed({
         variables: {
@@ -118,19 +101,21 @@ const FeedsWrite = (props) => {
           },
         },
       });
-      router.push("/ootd");
+      router.replace("/ootd");
+      location.reload();
+      Modal.success({ content: "피드가 등록되었습니다" });
     } catch (error) {
       alert(error.message);
     }
   };
 
   // 피드 수정 버튼
-  const onClickUpdate = async (data) => {
+  const onClickUpdate = async (data: IFormProps) => {
     const currentImgFiles = JSON.stringify(imageUrl);
     const fetchImgFiles = JSON.stringify(props.fetchData.fetchFeed.feedImg.imgURL);
     const isChangedImgFiles = currentImgFiles !== fetchImgFiles;
 
-    const updateFeedInput = {};
+    const updateFeedInput: IUpdateFeedInput = {};
     if (data.detail) updateFeedInput.detail = data.detail;
     if (myRegion) updateFeedInput.regionId = myRegion;
     if (myTag) updateFeedInput.feedTags = myTag;
@@ -146,7 +131,7 @@ const FeedsWrite = (props) => {
           feedId: String(router.query.feedId),
         },
       });
-      alert("피드가 수정되었습니다");
+      Modal.success({ content: "피드가 수정되었습니다" });
       router.push(`/ootd`);
     } catch (error) {
       alert(error.message);
@@ -183,6 +168,10 @@ const FeedsWrite = (props) => {
       myTag={myTag}
       regionId={props.regionId}
       tagFetch={props.tagFetch}
+      // 폼 버튼 활성화
+      formState={formState}
+      // 모달
+      openModal={props.openModal}
     />
   );
 };
