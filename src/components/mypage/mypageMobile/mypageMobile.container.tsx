@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { useRecoilState } from "recoil";
-import { selectMyPageList } from "../common/store";
-import MyPagePresenter from "./MyPagePresenter";
+import { selectMyPageList } from "../../common/store";
+import MypageMobileUI from "./mypageMobile.presenter";
 
-const MyPageContainer = () => {
+const MypageMobile = () => {
   const [, setSelectMyPageList] = useRecoilState(selectMyPageList);
   const selectMyPageRef = useRef([]);
 
@@ -11,7 +11,7 @@ const MyPageContainer = () => {
     setSelectMyPageList(selectMyPageRef.current[index].innerText);
   };
 
-  return <MyPagePresenter onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef} />;
+  return <MypageMobileUI onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef} />;
 };
 
-export default MyPageContainer;
+export default MypageMobile;

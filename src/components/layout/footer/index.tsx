@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 const FooterWrapperDiv = styled.div`
   background: #eeeeee;
+  margin-top: 10rem;
 `;
 const FooterUlFlexDiv = styled.div`
   height: 20rem;

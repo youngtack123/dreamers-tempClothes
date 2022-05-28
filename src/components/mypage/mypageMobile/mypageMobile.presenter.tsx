@@ -1,15 +1,12 @@
-import React from "react";
-import MyPageFeedContainer from "./myPageFeed/MyPageFeedContainer";
-import MyPageHeaderContainer from "./myPageHeader/MyPageHeaderContainer";
-import * as S from "./MyPageStlyes";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { selectMyPageList } from "../common/store/index";
-import MyPageEditInfoContainter from "./myPageEditInfo/MyPageEditInfoContainter";
-import MyPageChangePassWordContainer from "./myPageChagnePassWord/MyPageChangePassWordContainer";
-import Payment from "../common/commonModal/payment";
-import Modal from "../common/commonModal";
-import { useState } from "react";
-const MyPagePresenter = (props) => {
+import Modal from "../../common/commonModal";
+import Payment from "../../common/commonModal/payment";
+import { selectMyPageList } from "../../common/store";
+import * as S from "./mypageMobile.styles";
+import MypageMobileHeader from "./mypageMobileHeader/mypageMobileHeader.container";
+
+const MypageMobileUI = (props) => {
   const [selectMyPageListData] = useRecoilState(selectMyPageList);
   const { onClickMyPageList, selectMyPageRef } = props;
 
@@ -20,10 +17,11 @@ const MyPagePresenter = (props) => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
   return (
     <div>
       <div>
-        <MyPageHeaderContainer />
+        <MypageMobileHeader />
       </div>
       <S.MyPageWrapperDiv>
         <S.MenuDiv>
@@ -42,9 +40,9 @@ const MyPagePresenter = (props) => {
           </S.MenuUl>
         </S.MenuDiv>
         <S.MyPageContendWrapperDiv>
-          {selectMyPageListData === "나衣 룩북" && <MyPageFeedContainer />}
-          {selectMyPageListData === "개인정보 수정" && <MyPageEditInfoContainter />}
-          {selectMyPageListData === "비밀번호 변경" && <MyPageChangePassWordContainer />}
+          {selectMyPageListData === "나衣 룩북"}
+          {selectMyPageListData === "개인정보 수정"}
+          {selectMyPageListData === "비밀번호 변경"}
         </S.MyPageContendWrapperDiv>
         <Modal open={modalOpen} close={closeModal} header="단추 충전">
           <Payment setModalOpen={setModalOpen}></Payment>
@@ -54,4 +52,4 @@ const MyPagePresenter = (props) => {
   );
 };
 
-export default MyPagePresenter;
+export default MypageMobileUI;

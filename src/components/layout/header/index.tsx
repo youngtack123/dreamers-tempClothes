@@ -117,11 +117,10 @@ const Header = () => {
   const logout = async () => {
     try {
       router.push("/");
-      const logoutResult = await m_logout();
-      // console.log("logoutResult", logoutResult);
-      alert("로그아웃 성공!");
+      await m_logout();
       localStorage.clear();
       location.reload();
+      router.push("/");
     } catch (error) {
       alert(error.message);
     }

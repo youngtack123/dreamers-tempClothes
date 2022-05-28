@@ -5,6 +5,7 @@ import { CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./MyPageEdi
 import { useRecoilState } from "recoil";
 import { timerState } from "../../common/store";
 import { useRouter } from "next/router";
+import { CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC } from "../../signup/signup.quries";
 
 const MyPageEditInfoContainter = () => {
   const [inputs, setInputs] = useState({
@@ -18,6 +19,8 @@ const MyPageEditInfoContainter = () => {
   const router = useRouter();
   const [m_updateUser] = useMutation(UPDATE_USER);
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
+  const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
+  const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
   const [authOk, setAuthFalse] = useState(false);
   const [, setSendAuthNumber] = useRecoilState(timerState);
@@ -100,6 +103,34 @@ const MyPageEditInfoContainter = () => {
     }
   };
 
+  const overLapId = async () => {
+    try {
+      const overLapIdResult = await m_overLapEmail({
+        variables: {
+          email: inputs.email,
+        },
+      });
+      console.log("중복 ID 결과값:", overLapIdResult);
+      alert("사용가능한 Email 입니다!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const overLapNic = async () => {
+    try {
+      const overLapNicResult = await m_overLapNic({
+        variables: {
+          nickname: inputs.nickname,
+        },
+      });
+      console.log("중복 닉네임 결과값:", overLapNicResult);
+      alert("사용 가능한 닉네임 입니다!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <MyPageEditInfoPresenter
       handleInfo={handleInfo}
@@ -107,7 +138,10 @@ const MyPageEditInfoContainter = () => {
       updateUserEditInfo={updateUserEditInfo}
       createPhoneAuth={createPhoneAuth}
       confirmAuthNumber={confirmAuthNumber}
+      overLapId={overLapId}
+      overLapNic={overLapNic}
       authOk={authOk}
+      inputs={inputs}
     ></MyPageEditInfoPresenter>
   );
 };
