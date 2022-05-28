@@ -19,15 +19,14 @@ const OotdPage = () => {
 
   const router = useRouter();
 
-  const [myTag, setMyTag] = useState(["캐주얼"]);
+  const [myTag, setMyTag] = useState<String[]>([]);
   const [myRegion, setMyRegion] = useState("서울");
-  const [isSelected, setIsSelected] = useState(["캐주얼"]);
+  const [tagSelected, setTagSelected] = useState<String[]>([]);
   const [regionSelected, setRegionSelected] = useState("서울");
   const [feedPage, setFeedPage] = useState(1);
 
   const { data, fetchMore, refetch } = useQuery(Q_FETCH_FEEDS, {
     variables: {
-      feedTags: myTag,
       regionId: myRegion,
     },
   });
@@ -52,14 +51,14 @@ const OotdPage = () => {
       return;
     }
     setMyTag([...myTag, e]);
-    setIsSelected([...isSelected, e]);
+    setTagSelected([...tagSelected, e]);
   };
 
   // 태그 지우기
   const onClickRemoveTag = (e) => {
     const newMyTag = myTag.filter((tagEl) => tagEl !== e);
     setMyTag(newMyTag);
-    setIsSelected(newMyTag);
+    setTagSelected(newMyTag);
   };
 
   // const onClickMoveToDetail = () => (event) => {
@@ -155,7 +154,7 @@ const OotdPage = () => {
       myRegion={myRegion}
       myTag={myTag}
       data={data}
-      isSelected={isSelected}
+      tagSelected={tagSelected}
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
       tempData={tempData}

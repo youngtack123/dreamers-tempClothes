@@ -83,9 +83,11 @@ const OotdFeed = (props) => {
 
       <feed.FeedBottom__Div>
         <feed.BottomTop__Div>
-          <feed.SelectedTag__Span>#{props.myRegion}</feed.SelectedTag__Span>
+          <feed.SelectedTag__Span myRegion={props.myRegion}>#{props.myRegion}</feed.SelectedTag__Span>
           {props.el.feedTag.map((el, idx) => (
-            <feed.SelectedTag__Span key={idx}>#{el.tagName}</feed.SelectedTag__Span>
+            <feed.SelectedTag__Span key={idx} tagSelected={props.tagSelected.includes(el.tagName)}>
+              #{el.tagName}
+            </feed.SelectedTag__Span>
           ))}
         </feed.BottomTop__Div>
 
