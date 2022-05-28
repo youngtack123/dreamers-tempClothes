@@ -9,6 +9,7 @@ export const Container__Div = styled.div`
   position: relative;
   margin: 0 auto;
   padding-top: 25px;
+  font-family: Pretendard;
 `;
 
 export const Container_head__Div = styled.div`
@@ -311,7 +312,7 @@ export const ScrollButton = styled.button`
   background-color: #b7e576;
   color: #fff;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 99;
 `;
 export const UpArrowImg = styled.img``;
 
@@ -333,5 +334,5 @@ export const WriteButton = styled.button`
   }
   bottom: 50px;
   right: 180px;
-  z-index: 9999;
+  z-index: 99;
 `;

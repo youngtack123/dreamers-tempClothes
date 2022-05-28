@@ -190,7 +190,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
               </s.EtcUl>
             </s.TagsDiv>
           </s.RightBottomDiv>
-          <s.SubmitButton isValid={props.formState.isValid} onClick={props.openModal}>
+          <s.SubmitButton isActive={props.isActive} onClick={props.openModal}>
             {props.isEdit ? "수정" : "등록"}
           </s.SubmitButton>
         </s.RightDiv>
