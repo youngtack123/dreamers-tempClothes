@@ -13,7 +13,6 @@ export const Wrapper__Div = styled.div`
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #c4c4c4;
   border-radius: 10px;
   margin: 0 auto; ;
 `;
@@ -207,6 +206,7 @@ export const UserId__Div = styled.div`
   font-size: 13px;
   font-weight: 700;
   padding-left: 3px;
+  cursor: pointer;
 `;
 
 export const IconBox__Div = styled.div`

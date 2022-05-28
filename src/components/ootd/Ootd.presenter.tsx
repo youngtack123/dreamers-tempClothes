@@ -2,7 +2,7 @@ import OotdFeed from "../commonFeed/coomonFeed.container";
 // import { withAuth } from "../hoc/withAuth";
 import * as Ootd from "./Ootd.styles";
 import { useRecoilState } from "recoil";
-import { aaa, accessTokenState } from "../common/store";
+import { accessTokenState } from "../common/store";
 import FeedDetail from "../feeds/detail/feedDetail.container";
 import Modal from "../common/commonModal";
 import { useEffect, useRef, useState } from "react";

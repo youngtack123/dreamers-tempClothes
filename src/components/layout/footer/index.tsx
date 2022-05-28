@@ -3,19 +3,18 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
 const FooterWrapperDiv = styled.div`
-  width: 100%;
-  height: 20rem;
-  background: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #eeeeee;
 `;
 const FooterUlFlexDiv = styled.div`
+  height: 20rem;
   display: flex;
-  margin-left: 18.7rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3.1rem;
 `;
 const FooterHeadUl = styled.ul`
-  margin-right: 13.8rem;
+  margin-right: 11.8rem;
 `;
 
 const FooterHeadLi = styled.li`
@@ -38,6 +37,18 @@ const FooterLi = styled.li`
   font-weight: 500;
   margin-top: 1.1rem;
 `;
+const MainLogoImg = styled.img`
+  width: 9.3rem;
+  height: 7.8rem;
+  margin-right: 19.5rem;
+`;
+
+const Copyright1Div = styled.div`
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #bebebe;
+  padding-top: 10rem;
+`;
 
 const Footer = () => {
   const router = useRouter();
@@ -55,6 +66,7 @@ const Footer = () => {
   return (
     <FooterWrapperDiv>
       <FooterUlFlexDiv>
+        <MainLogoImg src="/images/mainlogo.png" />
         <FooterHeadUl>
           <FooterHeadLi>Menu</FooterHeadLi>
           <MenuLi onClick={MoveToTempClothes}>오늘衣</MenuLi>
@@ -70,6 +82,8 @@ const Footer = () => {
           <FooterLi>010-1234-5678</FooterLi>
           <FooterLi>abc@abc.com</FooterLi>
         </FooterHeadUl>
+
+        <Copyright1Div>Copyright 2022. Dreamers. All rights reserved.</Copyright1Div>
       </FooterUlFlexDiv>
     </FooterWrapperDiv>
   );

@@ -22,6 +22,7 @@ export const UserName__Span = styled.span`
   font-weight: 700;
   font-size: 13px;
   line-height: 17px;
+  cursor: pointer;
 `;
 
 export const FeedBody__Div = styled.div`

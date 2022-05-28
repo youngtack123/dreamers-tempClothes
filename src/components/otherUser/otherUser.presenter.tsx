@@ -23,8 +23,6 @@ const OtherUserUI = (props: any) => {
     return `${mm} ${dd}`;
   };
 
-  console.log("weahterData", weahterData);
-
   return (
     <div>
       <div>

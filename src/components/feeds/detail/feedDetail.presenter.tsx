@@ -12,12 +12,10 @@ import FeedsWrite from "../write/feedsWrite.container";
 import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container";
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
 import { useRecoilState } from "recoil";
-import { ClickedUser } from "../../common/store";
 
 function FeedDetailUI(props) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [otherUser, setOtherUser] = useRecoilState(ClickedUser);
 
   const toggleMenu = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -32,7 +30,7 @@ function FeedDetailUI(props) {
   // };
 
   const selectNickname = (nickname: string) => {
-    setOtherUser(nickname);
+    localStorage.setItem("nickname", nickname);
     router.push("/otherUser");
   };
 

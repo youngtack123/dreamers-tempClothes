@@ -47,12 +47,23 @@ const OotdFeed = (props) => {
     router.push(`/feeds/${e.currentTarget.id}`);
   };
 
+  const selectNickname = (nickname: string) => {
+    localStorage.setItem("nickname", nickname);
+    router.push("/otherUser");
+  };
+
   return (
     // <FeedWrapper__Div>
     <>
       <feed.FeedTop__Div>
         <feed.UserIcon__Div></feed.UserIcon__Div>
-        <feed.UserName__Span>{props.el.user.nickname}</feed.UserName__Span>
+        <feed.UserName__Span
+          onClick={() => {
+            selectNickname(props.el.user.nickname);
+          }}
+        >
+          {props.el.user.nickname}
+        </feed.UserName__Span>
       </feed.FeedTop__Div>
 
       {/* /feeds/[feedId]?feedId=${props.el.id} */}
