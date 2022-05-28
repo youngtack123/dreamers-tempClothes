@@ -11,6 +11,8 @@ import { checkValidationImage } from "./image.validation";
 import { IFormProps, IUpdateFeedInput } from "./feedsWrite.types";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FeedsWrite = (props) => {
   const router = useRouter();
@@ -18,6 +20,7 @@ const FeedsWrite = (props) => {
   const [myTag, setMyTag] = useState<String[]>([]);
   const [myRegion, setMyRegion] = useState<String>("");
   const [editRegion, setEditRegion] = useState("");
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const aaa = props.fetchData?.fetchFeed.region.id;
   useEffect(() => {
@@ -86,14 +89,36 @@ const FeedsWrite = (props) => {
     setShowPhoto([photo]);
   };
 
+  // 등록 버튼 활성화
+  useEffect(() => {
+    const active = () => {
+      if (myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    };
+    active();
+  }, [myTag, imageUrl, myRegion]);
+
   /////// 피드 등록 버튼
   const onClickSubmit = async (data: IFormProps) => {
-    if (myTag === []) {
-      Modal.error({ content: "태그를 선택해주세요" });
+    if (myTag.length === 0) {
+      toast.info("태그를 선택하세요", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+    } else if (imageUrl.length === 0) {
+      toast.info("사진을 올려주세요", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
     }
     // if (!myRegion) { alert("지역 선택해주세요")}
     // if (!imageUrl) { alert("태그를 선택해주세요")}
-    if (myTag !== [] && imageUrl !== []) {
+    if (myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) {
       try {
         const feedResult = await createFeed({
           variables: {
@@ -109,9 +134,15 @@ const FeedsWrite = (props) => {
             },
           },
         });
-        router.replace("/ootd");
-        location.reload();
-        Modal.success({ content: "피드가 등록되었습니다" });
+        toast.success("피드가 등록되었습니다", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
+        setTimeout(() => {
+          router.replace("/ootd");
+          location.reload();
+        }, 1600);
       } catch (error) {
         alert(error.message);
       }
@@ -148,40 +179,45 @@ const FeedsWrite = (props) => {
   };
 
   return (
-    <FeedsWriteUI
-      onClickImage={onClickImage}
-      onChangeImgUrls={onChangeImgUrls}
-      onClickDelete={onClickDelete}
-      onClickPhoto={onClickPhoto}
-      fileRef={fileRef}
-      imageUrl={imageUrl}
-      showPhoto={showPhoto}
-      // 피드 등록 함수
-      onClickRegion={onClickRegion}
-      onClickTag={onClickTag}
-      onClickSubmit={onClickSubmit}
-      register={register}
-      handleSubmit={handleSubmit}
-      // 지역, 태그
-      regionCategory={regionCategory}
-      tagCategory={tagCategory}
-      // 수정
-      isEdit={props.isEdit}
-      fetchData={props.fetchData}
-      onClickUpdate={onClickUpdate}
-      // 수정 태그
-      editRegion={editRegion}
-      aaa={aaa}
-      // 해보는 중
-      myRegion={myRegion}
-      myTag={myTag}
-      regionId={props.regionId}
-      tagFetch={props.tagFetch}
-      // 폼 버튼 활성화
-      formState={formState}
-      // 모달
-      openModal={props.openModal}
-    />
+    <>
+      <FeedsWriteUI
+        onClickImage={onClickImage}
+        onChangeImgUrls={onChangeImgUrls}
+        onClickDelete={onClickDelete}
+        onClickPhoto={onClickPhoto}
+        fileRef={fileRef}
+        imageUrl={imageUrl}
+        showPhoto={showPhoto}
+        // 피드 등록 함수
+        onClickRegion={onClickRegion}
+        onClickTag={onClickTag}
+        onClickSubmit={onClickSubmit}
+        register={register}
+        handleSubmit={handleSubmit}
+        // 지역, 태그
+        regionCategory={regionCategory}
+        tagCategory={tagCategory}
+        // 수정
+        isEdit={props.isEdit}
+        fetchData={props.fetchData}
+        onClickUpdate={onClickUpdate}
+        // 수정 태그
+        editRegion={editRegion}
+        aaa={aaa}
+        // 해보는 중
+        myRegion={myRegion}
+        myTag={myTag}
+        regionId={props.regionId}
+        tagFetch={props.tagFetch}
+        // 폼 버튼 활성화
+        formState={formState}
+        // 모달
+        openModal={props.openModal}
+        // 버튼 활성화
+        isActive={isActive}
+      />
+      <ToastContainer />
+    </>
   );
 };
 

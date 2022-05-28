@@ -11,8 +11,17 @@ import { useRouter } from "next/router";
 import InfiniteScroll from "react-infinite-scroller";
 import Link from "next/link";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
+import { useMediaQuery } from "react-responsive";
+import MFeedsWrite from "../feeds/forMobile/mFeedsWrite.container";
 
 const OotdUI = (props) => {
+  const isPc = useMediaQuery({
+    query: "(min-width:768px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
   // console.log("???", accessToken);
@@ -186,7 +195,9 @@ const OotdUI = (props) => {
         <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
 
         <Modal open={modalOpen} close={closeModal}>
-          <FeedsWrite />
+          {isPc && <FeedsWrite />}
+          {isMobile && <MFeedsWrite />}
+          {/* <MFeedsWrite /> */}
         </Modal>
       </Ootd.Container__Div>
     </>

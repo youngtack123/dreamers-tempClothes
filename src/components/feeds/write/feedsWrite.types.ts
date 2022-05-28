@@ -17,6 +17,7 @@ export interface IFormProps {
   bottom: string;
   outer: string;
   etc: string;
+  imgURLs: string;
 }
 
 export interface IUpdateFeedInput {
