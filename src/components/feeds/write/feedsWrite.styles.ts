@@ -305,7 +305,8 @@ export const EtcLi = styled.li`
 export const SubmitButton = styled.button`
   width: 70px;
   height: 40px;
-  background: #eeeeee;
+  // background: #eeeeee;
+  background: ${(props) => (props.isValid ? "#eee" : "yellow")};
   border-radius: 7px;
   font-size: 14px;
   color: #b2b2b2;
