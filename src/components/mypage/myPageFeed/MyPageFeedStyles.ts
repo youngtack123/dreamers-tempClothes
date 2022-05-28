@@ -22,6 +22,7 @@ export const MypageFeedImage = styled.img`
   height: 300px;
   border-radius: 10px;
   margin: 1.5rem;
+  cursor: pointer;
 `;
 
 export const MyPageWrapperSelectDiv = styled.div`

@@ -42,6 +42,7 @@ export const ManButton = styled.button`
     border: 1px solid #ffdd87;
     background-color: #fff2b2;
   }
+  cursor: pointer;
 `;
 export const AreYouUserDiv = styled.div`
   width: 19.2rem;

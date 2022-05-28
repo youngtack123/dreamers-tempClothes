@@ -51,7 +51,7 @@ const Chat = () => {
   const { data: fetchUser } = useQuery(FETCH_USER);
   const { data, refetch } = useQuery(CHATLOG, {
     variables: {
-      opponentNickname: "범기",
+      opponentNickname: fetchUser?.fetchUser.nickname,
     },
   });
 
@@ -75,10 +75,12 @@ const Chat = () => {
         /* 누군가 채팅침 */
         socket.on(room, (data) => {
           console.log("누군가가 채팅침", data);
+          refetch();
         });
         /* 누군가 입장 */
         socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
+          refetch();
         });
       });
       setRoom(room);
