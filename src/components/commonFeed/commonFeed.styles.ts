@@ -70,6 +70,7 @@ export const LikeHeart = styled(Emptyheart)`
   fill: #f14848;
   height: 18px;
   width: 17px;
+  cursor: pointer;
   /* position: absolute;
   bottom: 10px;
   left: 10px; */
@@ -81,6 +82,7 @@ export const UnLikeHeart = styled(Emptyheart)`
   stroke-width: 1px;
   height: 15px;
   width: 17px;
+  cursor: pointer;
   /* position: absolute;
   bottom: 20px;
   left: 20px; */
@@ -90,6 +92,7 @@ export const Dm = styled(DMIcon)`
   fill: #fff;
   height: 14px;
   width: 16px;
+  cursor: pointer;
   /* position: absolute;
   bottom: 10px;
   right: 10px; */
@@ -108,7 +111,8 @@ export const BottomTop__Div = styled.div`
 `;
 
 export const SelectedTag__Span = styled.span`
-  background: #fff2b2;
+  background: ${(props) => (props.tagSelected || props.myRegion ? "#fff2b2" : "#dddddd")};
+  border: ${(props) => (props.tagSelected || props.myRegion ? "1px solid #ffdd87" : "")};
   border-radius: 50px;
   margin-right: 10px;
   margin-bottom: 10px;

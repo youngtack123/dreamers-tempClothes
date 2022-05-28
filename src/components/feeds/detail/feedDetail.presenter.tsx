@@ -122,11 +122,11 @@ function FeedDetailUI(props) {
               {props.data?.fetchFeed.user.nickname}
             </Detail.UserId__Div>
             <Detail.IconBox__Div>
-              <DMIcon width="18" height="17.5" stroke="#bebebe" />
+              <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
               {props.isLike ? (
-                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} width="18" height="16" fill="#F14848" stroke="#F14848" />
+                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
               ) : (
-                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} width="18" height="16" stroke="#bebebe" />
+                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
               )}
             </Detail.IconBox__Div>
           </Detail.FeedDetail_Top__Div>
@@ -142,9 +142,9 @@ function FeedDetailUI(props) {
                 <Detail.TagUnit__Span key={idx}>#{el.tagName}</Detail.TagUnit__Span>
               ))}
             </Detail.Tag__Div>
-            <MoreIcon onClick={() => toggleMenu()} style={{ cursor: "pointer", paddingTop: "10px" }} />
+            <MoreIcon onClick={() => toggleMenu()} style={{ position: "relative", cursor: "pointer", paddingTop: "10px" }} />
             {isOpen ? (
-              <Detail.SettingBox__Div>
+              <Detail.SettingBox__Div isOpen={isOpen}>
                 <Detail.Edit__Span id={props.data?.fetchFeed.id} onClick={onClickMoveToEdit}>
                   수정
                 </Detail.Edit__Span>

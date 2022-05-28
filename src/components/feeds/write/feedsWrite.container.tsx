@@ -4,6 +4,8 @@ import FeedsWriteUI from "./feedsWrite.presenter";
 import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
 import { regionCategory, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useRouter } from "next/router";
 import { checkValidationImage } from "./image.validation";
 import { IFormProps, IUpdateFeedInput } from "./feedsWrite.types";
@@ -86,26 +88,33 @@ const FeedsWrite = (props) => {
 
   /////// 피드 등록 버튼
   const onClickSubmit = async (data: IFormProps) => {
-    try {
-      const feedResult = await createFeed({
-        variables: {
-          createFeedInput: {
-            detail: data.detail,
-            regionId: myRegion,
-            feedTags: myTag,
-            imgURLs: imageUrl,
-            top: data.top,
-            bottom: data.bottom,
-            outer: data.outer,
-            etc: data.etc,
+    if (myTag === []) {
+      Modal.error({ content: "태그를 선택해주세요" });
+    }
+    // if (!myRegion) { alert("지역 선택해주세요")}
+    // if (!imageUrl) { alert("태그를 선택해주세요")}
+    if (myTag !== [] && imageUrl !== []) {
+      try {
+        const feedResult = await createFeed({
+          variables: {
+            createFeedInput: {
+              detail: data.detail,
+              regionId: myRegion,
+              feedTags: myTag,
+              imgURLs: imageUrl,
+              top: data.top,
+              bottom: data.bottom,
+              outer: data.outer,
+              etc: data.etc,
+            },
           },
-        },
-      });
-      router.replace("/ootd");
-      location.reload();
-      Modal.success({ content: "피드가 등록되었습니다" });
-    } catch (error) {
-      alert(error.message);
+        });
+        router.replace("/ootd");
+        location.reload();
+        Modal.success({ content: "피드가 등록되었습니다" });
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 

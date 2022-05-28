@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/dm.svg";
 import Slider from "react-slick";
+import { keyframes } from "@emotion/react";
 
 export const Body = styled.body`
   background-color: transparent;
@@ -268,6 +269,25 @@ export const TagUnit__Span = styled.span`
   margin-right: 5px;
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+    0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
+// 수정 삭제 토글 버튼
 export const SettingBox__Div = styled.div`
   width: 43px;
   height: 60px;
@@ -281,7 +301,9 @@ export const SettingBox__Div = styled.div`
   font-size: 12px;
   position: absolute;
   right: 0;
-  bottom: 50px;
+  top: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: ${(props) => (props.isOpen ? fadeIn : fadeOut)} 0.2s ease-out;
 `;
 
 export const Edit__Span = styled.span`

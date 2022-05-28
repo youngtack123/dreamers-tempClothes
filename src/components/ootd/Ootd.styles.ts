@@ -89,6 +89,7 @@ export const TagSelect__Div = styled.div`
 `;
 
 export const TagSeletedUnit__Span = styled.span`
+  border: 1px solid #ffdd87;
   background: #fff2b2;
   border-radius: 50px;
   padding: 3px 6px;
@@ -101,7 +102,7 @@ export const TagSeletedUnit__Span = styled.span`
 
 export const TagWrapper__Div = styled.div`
   width: 203px;
-  height: 730px;
+  height: 630px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -177,7 +178,7 @@ export const StyleTags__Li = styled.li`
   margin-right: 13px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -198,7 +199,7 @@ export const OuterTags__Li = styled.li`
   margin-bottom: 8px;
   list-style: none;
   cursor: pointer;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
 `;
 
 export const TopTagsList__Ul = styled.ul`
@@ -216,7 +217,7 @@ export const TopTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -235,7 +236,7 @@ export const BottomTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 3px;
   list-style: none;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -254,7 +255,7 @@ export const EtcTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.isSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
