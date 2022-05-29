@@ -12,6 +12,7 @@ import FeedsWrite from "../write/feedsWrite.container";
 import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container";
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
 import { useRecoilState } from "recoil";
+import { toast } from "react-toastify";
 
 function FeedDetailUI(props) {
   const router = useRouter();
@@ -41,7 +42,9 @@ function FeedDetailUI(props) {
       await deleteFeed({
         variables: { feedId: String(e.target.id) },
       });
-      alert("게시물이 삭제되었습니다");
+      toast.success("피드 삭제 완료!", {
+        icon: "😊",
+      });
       router.push("/ootd");
     } catch (error) {
       alert(error.message);

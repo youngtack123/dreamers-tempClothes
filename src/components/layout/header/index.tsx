@@ -10,6 +10,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
+import { toast } from "react-toastify";
 
 const HeaderWrapperDiv = styled.div`
   background-color: white;
@@ -122,7 +123,9 @@ const Header = () => {
       location.reload();
       router.push("/");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

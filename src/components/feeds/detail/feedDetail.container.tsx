@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import FeedDetailUI from "./feedDetail.presenter";
 import { M_DELETE_FEED, M_TOGGLE_LIKE_FEED, Q_FETCH_FEED } from "./feedDetail.queries";
 
@@ -28,7 +29,9 @@ function FeedDetail(props) {
       });
       setIsLike(!isLike);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

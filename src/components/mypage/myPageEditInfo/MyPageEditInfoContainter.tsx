@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { timerState } from "../../common/store";
 import { useRouter } from "next/router";
 import { CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC } from "../../signup/signup.quries";
+import { toast } from "react-toastify";
 
 const MyPageEditInfoContainter = () => {
   const [inputs, setInputs] = useState({
@@ -66,10 +67,14 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("updateUserResult", updateUserResult);
-      alert("정상적으로 회원 정보가 수정되었습니다!");
+      toast.success("회원정보 수정 완료!", {
+        icon: "😊",
+      });
       router.push("/mypage");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -80,9 +85,13 @@ const MyPageEditInfoContainter = () => {
           phone: inputs.phone,
         },
       });
-      alert("인증 번호가 발송 되었습니다!");
+      toast.success("인증번호 발송 완료!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
     setSendAuthNumber(true);
   };
@@ -95,11 +104,15 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("authNumberResult", authNumberResult);
-      alert("정상적으로 인증이 완료되었습니다!");
+      toast.success("인증 완료!", {
+        icon: "😊",
+      });
       setAuthFalse(true);
       setSendAuthNumber(false);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -111,9 +124,13 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("중복 ID 결과값:", overLapIdResult);
-      alert("사용가능한 Email 입니다!");
+      toast.success("사용 가능한 이메일이에요!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -125,9 +142,13 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("중복 닉네임 결과값:", overLapNicResult);
-      alert("사용 가능한 닉네임 입니다!");
+      toast.success("사용 가능한 닉네임이에요!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

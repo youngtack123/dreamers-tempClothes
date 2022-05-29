@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
 
@@ -29,7 +30,9 @@ const Timer = () => {
         }
       }
       if (minutes === 0 && seconds === 0) {
-        alert("다시 한번 재인증해 주세요!");
+        toast.error("인증을 다시 해주세요!", {
+          icon: "🤔",
+        });
         setSendAuthNumber(false);
         setAuthState(false);
       }

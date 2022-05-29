@@ -11,6 +11,7 @@ import { IFormProps, IUpdateFeedInput } from "../write/feedsWrite.types";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
 import MFeedsWriteUI from "./mFeedsWrite.presenter";
+import { toast } from "react-toastify";
 
 const MFeedsWrite = (props) => {
   const router = useRouter();
@@ -126,9 +127,13 @@ const MFeedsWrite = (props) => {
         });
         router.replace("/ootd");
         location.reload();
-        Modal.success({ content: "피드가 등록되었습니다" });
+        toast.success("피드 등록 성공!", {
+          icon: "😊",
+        });
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message, {
+          icon: "🤔",
+        });
       }
     }
   };
@@ -155,10 +160,14 @@ const MFeedsWrite = (props) => {
           feedId: String(router.query.feedId),
         },
       });
-      Modal.success({ content: "피드가 수정되었습니다" });
+      toast.success("피드 수정 성공!", {
+        icon: "😊",
+      });
       router.push(`/ootd`);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Fillheart from "../../../public/images/fillheart.svg";
-import Emptyheart from "../../../public/images/emptyheart.svg";
-import DMIcon from "../../../public/images/dm.svg";
+import Fillheart from "../../../../public/images/fillheart.svg";
+import Emptyheart from "../../../../public/images/emptyheart.svg";
+import DMIcon from "../../../../public/images/dm.svg";
 
 export const FeedTop__Div = styled.div`
   display: flex;

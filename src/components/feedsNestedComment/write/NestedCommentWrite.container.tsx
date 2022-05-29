@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { M_CREATE_COMMENT } from "../../feedsComment/write/FeedsCommentWrite.queries";
 import NestedCommentWriteUI from "./NestedCommentWrite.presenter";
 import { Q_FETCH_SUB_COMMENTS } from "./NestedCommentWrite.queries";
@@ -36,11 +37,12 @@ const NestedCommentWrite = (props: INestedCommentWriteProps) => {
           },
         ],
       });
-      alert(`${props.mention}님에 대한 답글등록이 완료되었습니다!`);
       setValue("comment", "");
       props.setIsNested(false);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

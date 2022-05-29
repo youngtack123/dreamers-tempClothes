@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
+import { toast } from "react-toastify";
 import { M_DELETE_COMMENT } from "../../feedsComment/list/FeedsCommentList.queries";
 import { Q_FETCH_SUB_COMMENTS } from "../write/NestedCommentWrite.queries";
 import NestedCommentListUI from "./NestedCommentList.presenter";
@@ -27,9 +28,11 @@ const NestedCommentList = (props: INestedCommentListProps) => {
           },
         ],
       });
-      alert("대댓글이 삭제되었습니다!");
+      // alert("대댓글이 삭제되었습니다!");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

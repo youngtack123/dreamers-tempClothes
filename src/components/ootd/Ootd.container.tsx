@@ -28,6 +28,7 @@ const OotdPage = () => {
   const { data, fetchMore, refetch } = useQuery(Q_FETCH_FEEDS, {
     variables: {
       regionId: myRegion,
+      page: feedPage,
     },
   });
 
@@ -100,11 +101,17 @@ const OotdPage = () => {
 
   // const observer = new IntersectionObserver( entries, {threshold: 1})
 
+  useEffect(() => {
+    setFeedPage(Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1);
+  }, []);
+
   const onLoadMore = () => {
+    console.log(feedPage);
     if (!data) return;
     fetchMore({
       variables: {
-        page: Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1,
+        page: feedPage,
+        // page: Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult?.fetchFeeds.feeds) return { feeds: [...prev.fetchFeeds.feeds] };
@@ -115,7 +122,6 @@ const OotdPage = () => {
       },
     });
   };
-  console.log(Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1);
   // onLoadMore();
 
   // const [page, setPage] = useState(1);

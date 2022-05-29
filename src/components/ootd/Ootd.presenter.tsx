@@ -1,4 +1,4 @@
-import OotdFeed from "../commonFeed/coomonFeed.container";
+import OotdFeed from "../common/commonFeed/coomonFeed.container";
 // import { withAuth } from "../hoc/withAuth";
 import * as Ootd from "./Ootd.styles";
 import { useRecoilState } from "recoil";
@@ -169,17 +169,17 @@ const OotdUI = (props) => {
           </Ootd.MyTag__Div>
 
           {/* 게시물 페칭 */}
-          <div style={{ height: "900px", overflow: "auto" }}>
-            <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
-              <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-                {props.data?.fetchFeeds.feeds.map((el, idx) => (
-                  <div key={idx}>
-                    <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
-                  </div>
-                ))}
-              </Ootd.Aaa>
-            </InfiniteScroll>
-          </div>
+          {/* <div style={{ height: "900px", overflow: "auto" }}> */}
+          <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}>
+            <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+              {props.data?.fetchFeeds.feeds.map((el, idx) => (
+                <div key={idx}>
+                  <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
+                </div>
+              ))}
+            </Ootd.Aaa>
+          </InfiniteScroll>
+          {/* </div> */}
           {/* <div onClick={props.onClickNextPage}> end </div> */}
         </Ootd.Container_Body__Div>
 

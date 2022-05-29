@@ -3,11 +3,12 @@ import * as feed from "./commonFeed.styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
 // import Modal from "../common/commonModal";
-import FeedDetail from "../feeds/detail/feedDetail.container";
+import FeedDetail from "../../feeds/detail/feedDetail.container";
 import Link from "next/link";
-import Modal from "../common/commonModal";
+import Modal from "../commonModal";
 import { useRecoilState } from "recoil";
-import { aaa } from "../common/store";
+import { aaa } from "../store";
+import { toast } from "react-toastify";
 
 const M_TOGGLE_LIKE_FEED = gql`
   mutation toggleLikeFeed($feedId: String!) {
@@ -39,7 +40,9 @@ const OotdFeed = (props) => {
       });
       setIsLike(!isLike);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../common/store/index";
 import useUpdateEffect from "../common/customHook/useUpdateEffect";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const router = useRouter();
@@ -35,11 +36,15 @@ export default function Login() {
       });
       setAccessToken(loginResult?.data?.login);
       console.log(loginResult?.data?.login);
-      alert("로그인이 성공!");
+      toast.success("로그인 성공!", {
+        icon: "😊",
+      });
       router.push("/tempClothes");
     } catch (error) {
       console.log(error.message);
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
