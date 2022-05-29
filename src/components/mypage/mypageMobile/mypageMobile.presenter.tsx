@@ -4,6 +4,9 @@ import Modal from "../../common/commonModal";
 import Payment from "../../common/commonModal/payment";
 import { selectMyPageList } from "../../common/store";
 import * as S from "./mypageMobile.styles";
+import MypageMobileChangePW from "./mypageMobileChangePw/mypageMobileChangePw.container";
+import MypageMobileEditInfo from "./mypageMobileEditInfo/mypageMobileEditInfo.container";
+import MypageMobileFeed from "./mypageMobileFeed/mypageMobileFeed.container";
 import MypageMobileHeader from "./mypageMobileHeader/mypageMobileHeader.container";
 
 const MypageMobileUI = (props) => {
@@ -40,9 +43,9 @@ const MypageMobileUI = (props) => {
           </S.MenuUl>
         </S.MenuDiv>
         <S.MyPageContendWrapperDiv>
-          {selectMyPageListData === "나衣 룩북"}
-          {selectMyPageListData === "개인정보 수정"}
-          {selectMyPageListData === "비밀번호 변경"}
+          {selectMyPageListData === "나衣 룩북" && <MypageMobileFeed />}
+          {selectMyPageListData === "개인정보 수정" && <MypageMobileEditInfo />}
+          {selectMyPageListData === "비밀번호 변경" && <MypageMobileChangePW />}
         </S.MyPageContendWrapperDiv>
         <Modal open={modalOpen} close={closeModal} header="단추 충전">
           <Payment setModalOpen={setModalOpen}></Payment>

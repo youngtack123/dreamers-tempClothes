@@ -13,8 +13,6 @@ const MypageMobileHeaderUI = (props) => {
 
   return (
     <S.MyPageHeaderWrapperDiv>
-      {/* <S.MyPageHeaderWeatherDivFake></S.MyPageHeaderWeatherDivFake> */}
-
       <S.MyPageHeaderContentDiv>
         <S.MyPageHeaderProFileImg src="/images/user.png" alt="profileImg" />
         <S.MyPageHeaderUserNameP>{fetchUserData?.fetchUser.nickname}</S.MyPageHeaderUserNameP>

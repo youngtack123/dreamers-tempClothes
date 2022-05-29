@@ -20,6 +20,7 @@ const PaymentH1 = styled.h1`
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;
+  margin-top: 41px;
   margin-right: 17.1rem;
   margin-left: 17.1rem;
 `;
@@ -31,14 +32,18 @@ const PaymentWrapperDiv = styled.div`
 `;
 
 const PaymentButtonDiv = styled.div`
+  height: 30px;
+  line-height: 30px;
   background: rgba(238, 238, 238, 0.5);
-  border-radius: 10px;
+  border-radius: 20px;
+  padding: 0px 15px;
+  margin-bottom: 30px;
+  font-size: 16px;
 `;
 
 const PaymenetSpan = styled.span`
   font-weight: 400;
   font-size: 16px;
-  line-height: 20px;
   margin: 4px, 9px;
 `;
 
@@ -48,13 +53,14 @@ const PaymentButtonLineDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 30px;
 `;
 
 const PaymentListSpan = styled.span`
   font-weight: 400;
   font-size: 14px;
-  line-height: 17px;
   margin-bottom: 1rem;
+  padding-left: 10px;
 `;
 
 const PaymentListButton = styled.button`
@@ -63,6 +69,8 @@ const PaymentListButton = styled.button`
   background: #fff2b2;
   border-radius: 7px;
   margin-bottom: 1rem;
+  margin-right: 10px;
+  text-align: center;
 `;
 
 const PaymentColumnDiv = styled.div`
@@ -71,7 +79,7 @@ const PaymentColumnDiv = styled.div`
   justify-content: space-between;
   width: 70%;
   border-bottom: 1px solid #eeeeee;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 const FETCH_USER = gql`
   query {
@@ -165,8 +173,9 @@ const Payment = (props) => {
       <Script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></Script>
       <PaymentH1>단추를 꿰어주세요</PaymentH1>
       <PaymentButtonDiv>
-        <PaymenetSpan>{`보유한 단추 ${data?.fetchUser.button}개`}</PaymenetSpan>
+        보유한 단추&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: "800" }}>{data?.fetchUser.button}</span>개
       </PaymentButtonDiv>
+
       <PaymentButtonLineDiv>
         <PaymentColumnDiv>
           <PaymentListSpan>단추 10개</PaymentListSpan>
