@@ -9,6 +9,7 @@ import Modal from "../commonModal";
 import { useRecoilState } from "recoil";
 import { aaa } from "../store";
 import { toast } from "react-toastify";
+import Chat from "../../../../pages/chat";
 
 const M_TOGGLE_LIKE_FEED = gql`
   mutation toggleLikeFeed($feedId: String!) {
@@ -23,14 +24,20 @@ const OotdFeed = (props) => {
   const [isLike, setIsLike] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [chatModalOpen, setChatModalOpen] = useState(false);
   const openModal = () => {
-    console.log("열려라");
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
   };
 
+  const openChatModal = () => {
+    setChatModalOpen(true);
+  };
+  const closeChatModal = () => {
+    setChatModalOpen(false);
+  };
   const onClickLike = (e) => {
     try {
       toggleLikeFeed({
@@ -80,7 +87,7 @@ const OotdFeed = (props) => {
         <feed.HoverIcon__Div>
           {isLike ? <feed.LikeHeart id={props.el.id} onClick={onClickLike} /> : <feed.UnLikeHeart id={props.el.id} onClick={onClickLike} />}
           {/* {toggleLikeFeed ? <LikeHeart /> : <UnLikeHeart />} */}
-          <feed.Dm />
+          <feed.Dm onClick={openChatModal}></feed.Dm>
         </feed.HoverIcon__Div>
       </feed.FeedBody__Div>
 
@@ -135,6 +142,10 @@ const OotdFeed = (props) => {
 
       <Modal open={modalOpen} close={closeModal} header="피드 디테일">
         <FeedDetail ootdFeedId={props.el.id} />
+      </Modal>
+
+      <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
+        <Chat closeChatModal={closeChatModal}></Chat>
       </Modal>
     </>
     // </FeedWrapper__Div>
