@@ -116,7 +116,7 @@ export const SelectedTag__Span = styled.span`
   border-radius: 50px;
   margin-right: 10px;
   margin-bottom: 10px;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
   padding: 2px 6px;
 `;
