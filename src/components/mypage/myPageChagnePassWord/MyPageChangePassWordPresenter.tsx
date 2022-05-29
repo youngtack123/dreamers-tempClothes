@@ -3,7 +3,7 @@ import * as S from "./MyPageChangePassWordStyle";
 const MyPageChangePassWordPresenter = (props) => {
   const { changePasswordFunc, handlePassword, inputs } = props;
   return (
-    <S.RealMyPageChangePassWordWrapper>
+    <S.MyPageChangePassWordWrapper>
       <S.MyPageChangePassWordInputDiv>
         <S.MyPageChangePassWordInputFlexDiv>
           <S.MyPageChangePassWordInputsP>현재 비밀번호</S.MyPageChangePassWordInputsP>
@@ -25,7 +25,7 @@ const MyPageChangePassWordPresenter = (props) => {
           <S.MyPageChangePassWordOkButton>저장</S.MyPageChangePassWordOkButton>
         )}
       </S.MyPageChangePassWordButtonDiv>
-    </S.RealMyPageChangePassWordWrapper>
+    </S.MyPageChangePassWordWrapper>
   );
 };
 

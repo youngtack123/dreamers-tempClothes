@@ -4,10 +4,9 @@ import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
 
-const TimerP = styled.p`
+const TimerSpan = styled.span`
   font-weight: 500;
-  font-size: 1.1rem;
-  line-height: 1, 1rem;
+  font-size: 12px;
   color: #e57676;
 `;
 const Timer = () => {
@@ -40,13 +39,7 @@ const Timer = () => {
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
-  return (
-    <div>
-      <div>
-        <TimerP>{`(${minutes}:${seconds < 10 ? `0${seconds}` : seconds})`}</TimerP>
-      </div>
-    </div>
-  );
+  return <TimerSpan>{`(${minutes}:${seconds < 10 ? `0${seconds}` : seconds})`}</TimerSpan>;
 };
 
 export default Timer;

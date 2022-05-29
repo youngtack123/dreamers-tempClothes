@@ -1,33 +1,24 @@
 import styled from "@emotion/styled";
 
-export const RealMyPageChangePassWordWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-`;
-
 export const MyPageChangePassWordWrapper = styled.div`
-  margin-top: 2.4rem;
-  width: 114.8rem;
-  border: 1px solid #bebebe;
-  border-radius: 10px;
-  padding-top: 2.9rem;
   display: flex;
-  width: 114.8rem;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+  height: 577px;
 `;
 
 export const MyPageChangePassWordInputDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
 `;
 
 export const MyPageChangePassWordInputFlexDiv = styled.div`
-  width: 286px;
+  width: 336px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -43,8 +34,8 @@ export const MyPageChangePassWordP = styled.p`
 
 //비밀번호 변경 안에 input
 export const MyPageChangePassWordInputs = styled.input`
-  width: 200px;
-  height: 35px;
+  width: 250px;
+  height: 40px;
   border: 1px solid #bebebe;
   border-radius: 30px;
   :focus {
@@ -56,7 +47,7 @@ export const MyPageChangePassWordInputs = styled.input`
 //비밀번호 변경 안에 입력 값
 export const MyPageChangePassWordInputsP = styled.p`
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
 `;
 
 export const MyPageChangePassWordButtonDiv = styled.div`

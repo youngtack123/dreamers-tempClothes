@@ -26,7 +26,7 @@ export const MyPageEditInfoInputDiv = styled.div`
 `;
 
 export const MyPageEditInfoInputFlexDiv = styled.div`
-  width: 344px;
+  width: 394px;
   display: flex;
   margin-bottom: 24px;
   justify-content: space-between;
@@ -41,8 +41,8 @@ export const MyPageEditInfoP = styled.p`
 
 //개인 정보 수정 안에 input
 export const MyPageEditInfoInputs = styled.input`
-  width: 200px;
-  height: 35px;
+  width: 250px;
+  height: 40px;
   :focus {
     outline: 1px solid #b7e576;
   }
@@ -52,8 +52,8 @@ export const MyPageEditInfoInputs = styled.input`
 `;
 
 export const MyPageEditInfoShortInputs = styled.input`
-  width: 200px;
-  height: 35px;
+  width: 250px;
+  height: 40px;
   :focus {
     outline: 1px solid #b7e576;
   }
@@ -65,7 +65,7 @@ export const MyPageEditInfoShortInputs = styled.input`
 //개인정보 수정 안에 입력 값
 export const MyPageEditInfoInputsP = styled.p`
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 14px;
   color: #333333;
   margin: 0;
 `;
@@ -73,7 +73,7 @@ export const MyPageEditInfoInputsP = styled.p`
 //개인정보 수정 안에 인증번호 전송과 인증하기
 export const MyPageEditButton = styled.button`
   width: 70px;
-  height: 35px;
+  height: 40px;
   font-size: 1.3rem;
   background: #eeeeee;
   border-radius: 30px;
@@ -83,7 +83,7 @@ export const MyPageEditButton = styled.button`
 
 export const MyPageAuthOkButton = styled.button`
   width: 70px;
-  height: 35px;
+  height: 40px;
   font-size: 1.3rem;
   background: #ffea86;
   border: 1px solid #ffdd87;
@@ -93,8 +93,8 @@ export const MyPageAuthOkButton = styled.button`
 
 //개인정보 수정 안에 태그
 export const MyPageEditTag = styled.div`
-  width: 50px;
-  height: 20px;
+  width: 55px;
+  height: 30px;
   border: none;
   background: #eee;
 
@@ -102,7 +102,7 @@ export const MyPageEditTag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
 `;
 
@@ -122,25 +122,27 @@ export const MyPageAuthNumberP = styled.p`
 `;
 
 export const MyPageAuthOkTimerDiv = styled.div`
+  width: 250px;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
-export const MyPageAuthOkTimerP = styled.p`
+export const MyPageAuthOkTimerSpan = styled.span`
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 12px;
   color: #44bd48;
 `;
 export const ErrorDiv = styled.div`
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 12px;
   color: #e57676;
 `;
 export const CheckButton = styled.button`
   width: 80px;
-  height: 35px;
+  height: 40px;
   line-height: 35px;
   font-weight: 500;
   font-size: 12px;
@@ -151,23 +153,26 @@ export const CheckButton = styled.button`
   cursor: pointer;
 `;
 export const VerifyNumberDiv = styled.div`
-  width: 361px;
+  width: 401px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-right: 10px;
-  margin-bottom: 26px;
+  margin-bottom: 10px;
 `;
+
 export const StyleDiv = styled.div`
-  width: 344px;
+  width: 394px;
   display: flex;
   margin-bottom: 24px;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  margin-left: 1px;
+  margin-top: 10px;
 `;
 export const RegionTopDiv = styled.div`
-  width: 354px;
+  width: 394px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -176,7 +181,7 @@ export const RegionTopDiv = styled.div`
 `;
 
 export const RegionBottomDiv = styled.div`
-  width: 354px;
+  width: 394px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
