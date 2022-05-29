@@ -11,8 +11,9 @@ import { checkValidationImage } from "./image.validation";
 import { IFormProps, IUpdateFeedInput } from "./feedsWrite.types";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
-import { ToastContainer, toast } from "react-toastify";
+import { Flip, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CustomToastContainer } from "../../common/toast";
 
 const FeedsWrite = (props) => {
   const router = useRouter();
@@ -74,7 +75,9 @@ const FeedsWrite = (props) => {
       temp = [...result?.data?.uploadFeedImgs].reverse();
       setShowPhoto((prev) => [...prev, ...temp]);
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -104,20 +107,14 @@ const FeedsWrite = (props) => {
   /////// 피드 등록 버튼
   const onClickSubmit = async (data: IFormProps) => {
     if (myTag.length === 0) {
-      toast.info("태그를 선택하세요", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-        hideProgressBar: true,
+      toast.warning("태그가 없어요!", {
+        icon: "🥺",
       });
     } else if (imageUrl.length === 0) {
-      toast.info("사진을 올려주세요", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-        hideProgressBar: true,
+      toast.warning("사진이 없어요!", {
+        icon: "🥺",
       });
     }
-    // if (!myRegion) { alert("지역 선택해주세요")}
-    // if (!imageUrl) { alert("태그를 선택해주세요")}
     if (myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) {
       try {
         const feedResult = await createFeed({
@@ -134,17 +131,17 @@ const FeedsWrite = (props) => {
             },
           },
         });
-        toast.success("피드가 등록되었습니다", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-          hideProgressBar: true,
+        toast.success("피드 등록 성공!", {
+          icon: "😊",
         });
         setTimeout(() => {
           router.replace("/ootd");
           location.reload();
         }, 1600);
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message, {
+          icon: "🤔",
+        });
       }
     }
   };
@@ -171,10 +168,14 @@ const FeedsWrite = (props) => {
           feedId: String(router.query.feedId),
         },
       });
-      Modal.success({ content: "피드가 수정되었습니다" });
+      toast.success("피드 수정 성공!", {
+        icon: "😊",
+      });
       router.push(`/ootd`);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -216,7 +217,6 @@ const FeedsWrite = (props) => {
         // 버튼 활성화
         isActive={isActive}
       />
-      <ToastContainer />
     </>
   );
 };
