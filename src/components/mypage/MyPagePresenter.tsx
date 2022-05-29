@@ -20,6 +20,7 @@ const MyPagePresenter = (props) => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
   return (
     <div>
       <div>

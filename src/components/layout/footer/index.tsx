@@ -3,8 +3,11 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
 const FooterWrapperDiv = styled.div`
+  width: 100%;
   background: #eeeeee;
   margin-top: 10rem;
+  /* position: absolute;
+  bottom: 0; */
 `;
 const FooterUlFlexDiv = styled.div`
   height: 20rem;

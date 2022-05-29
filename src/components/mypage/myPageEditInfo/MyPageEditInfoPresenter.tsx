@@ -36,7 +36,7 @@ const MyPageEditInfoPresenter = (props) => {
             <Timer></Timer>
           </S.MyPageAuthOkTimerDiv>
         )}
-        {authOk && <S.MyPageAuthOkTimerDiv>{<S.MyPageAuthOkTimerP>인증이 완료되었습니다!</S.MyPageAuthOkTimerP>}</S.MyPageAuthOkTimerDiv>}
+        {authOk && <S.MyPageAuthOkTimerDiv>{<S.MyPageAuthOkTimerSpan>인증이 완료되었습니다!</S.MyPageAuthOkTimerSpan>}</S.MyPageAuthOkTimerDiv>}
 
         <S.StyleDiv>
           <S.MyPageEditInfoInputsP>스타일</S.MyPageEditInfoInputsP>

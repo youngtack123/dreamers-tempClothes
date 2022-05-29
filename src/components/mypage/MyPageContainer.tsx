@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { selectMyPageList } from "../common/store";
 import MyPagePresenter from "./MyPagePresenter";

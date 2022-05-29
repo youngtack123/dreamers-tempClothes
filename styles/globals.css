@@ -9,13 +9,40 @@ html {
   font-family: Pretendard, SUIT;
 }
 @font-face {
-  font-family: "Noto Serif KR", serif;
-  src: url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
+  font-family: Pretendard;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../public/font/Pretendard-Regular.woff");
 }
 @font-face {
   font-family: Pretendard;
-  src: url("../public/font/PretendardVariable.ttf");
+  font-weight: 500;
+  font-display: swap;
+  src: url("../public/font/Pretendard-Medium.woff");
 }
+@font-face {
+  font-family: Pretendard;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../public/font/Pretendard-SemiBold.woff");
+}
+@font-face {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../public/font/Pretendard-Bold.woff");
+}
+@font-face {
+  font-family: Pretendard;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../public/font/Pretendard-ExtraBold.woff");
+}
+@font-face {
+  font-family: "Noto Serif KR", serif;
+  src: url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
+}
+
 @font-face {
   font-family: SUIT;
   src: url("../public/font/SUIT-Variable.ttf");
