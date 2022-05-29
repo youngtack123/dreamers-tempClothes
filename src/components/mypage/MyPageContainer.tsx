@@ -6,12 +6,12 @@ import MyPagePresenter from "./MyPagePresenter";
 const MyPageContainer = () => {
   const [, setSelectMyPageList] = useRecoilState(selectMyPageList);
   const selectMyPageRef = useRef([]);
+
   const onClickMyPageList = (index: number) => {
-    // console.log(selectMyPageRef.current);
     setSelectMyPageList(selectMyPageRef.current[index].innerText);
   };
 
-  return <MyPagePresenter onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef}></MyPagePresenter>;
+  return <MyPagePresenter onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef} />;
 };
 
 export default MyPageContainer;

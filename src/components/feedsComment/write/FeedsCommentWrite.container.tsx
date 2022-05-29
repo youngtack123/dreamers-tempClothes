@@ -1,5 +1,6 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { Q_FETCH_SUB_COMMENTS } from "../../feedsNestedComment/write/NestedCommentWrite.queries";
 import FeedsCommentWriteUI from "./FeedsCommentWrite.presenter";
@@ -32,10 +33,12 @@ const FeedsCommentWrite = (props) => {
           },
         ],
       });
-      alert("댓글 등록이 완료되었습니다!");
+      // alert("댓글 등록이 완료되었습니다!");
       setValue("comment", "");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

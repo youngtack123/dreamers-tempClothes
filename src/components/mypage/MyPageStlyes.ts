@@ -40,4 +40,5 @@ export const Menuli = styled.li`
   border-radius: 10px;
   text-align: center;
   border: none 10px;
+  cursor: pointer;
 `;

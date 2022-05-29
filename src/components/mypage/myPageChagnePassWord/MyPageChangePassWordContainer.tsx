@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import MyPageChangePassWordPresenter from "./MyPageChangePassWordPresenter";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PASSWORD } from "./MyPageChangePassWordQuries";
+import { toast } from "react-toastify";
 
 const MyPageChangePassWordContainer = () => {
   const [inputs, setInputs] = useState({
     originPassword: "",
-    changePassword: " ",
+    changePassword: "",
     passwordOk: "",
   });
   const [m_changePassword] = useMutation(UPDATE_PASSWORD);
@@ -22,19 +23,29 @@ const MyPageChangePassWordContainer = () => {
   const changePasswordFunc = async () => {
     if (inputs.passwordOk === inputs.changePassword) {
       try {
-        const changePasswordResult = await m_changePassword({
+        await m_changePassword({
           variables: {
             originPassword: String(inputs.originPassword),
             updatePassword: String(inputs.changePassword),
           },
         });
-        console.log("비밀번호 변경", changePasswordResult);
-        alert("정상적으로 비밀번호가 변경되었습니다!");
+        toast.success("비밀번호 변경 완료!", {
+          icon: "😊",
+        });
+        setInputs({
+          originPassword: "",
+          changePassword: "",
+          passwordOk: "",
+        });
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message, {
+          icon: "🤔",
+        });
       }
     } else if (inputs.passwordOk !== inputs.changePassword) {
-      alert("비밀번호가 동일하지 않습니다!");
+      toast.warning("비밀번호를 다시 확인해주세요", {
+        icon: "🥺",
+      });
     }
   };
 

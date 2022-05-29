@@ -2,6 +2,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import Script from "next/script";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { amountState } from "../store";
 
@@ -135,14 +136,23 @@ const Payment = (props) => {
                 },
               ],
             });
-            alert("정상적으로 결제가 완료되었습니다!");
+            toast.success("결제 성공!", {
+              icon: "😊",
+            });
             setModalOpen(false);
             console.log("결제성공!", buyPointResult);
           } catch (error: any) {
-            alert(error.message);
+            toast.error(error.message, {
+              icon: "🤔",
+            });
           }
         } else {
-          alert("결제에 실패하였습니다. 다시 시도해 주세요");
+          toast.error("결제가 실패했어요!", {
+            icon: "🤔",
+          });
+          toast.error("다시 시도해주세요", {
+            icon: "🤔",
+          });
           setModalOpen(false);
         }
       }

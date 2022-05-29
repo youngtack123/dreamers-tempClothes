@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Slider from "react-slick";
 
 export const WrapperDiv = styled.div`
-  width: 966px;
+  width: 850px;
   /* width: 100%; */
   display: flex;
   flex-direction: row;
@@ -82,6 +82,7 @@ export const InfoInput = styled.input`
 //                     내용, 태그 섹션
 // ======================================================
 export const RightDiv = styled.div`
+  width: 360px;
   display: flex;
   flex-direction: column;
 `;
@@ -91,7 +92,7 @@ export const ContentsLabel = styled.label`
   margin-bottom: 10px;
 `;
 export const ContentsTextArea = styled.textarea`
-  width: 486px;
+  width: 340px;
   height: 330px;
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid #bebebe;
@@ -158,8 +159,8 @@ export const RegionTagLi = styled.li`
   border-radius: 50px;
   margin-bottom: 14px;
   background: ${(props) => (props.myRegion || props.regionId ? "#fff2b2" : "#ddd")};
-  /* background: ${(props) => (props.aaa ? "#fff2b2" : "#ddd")}; */
   color: ${(props) => (props.myRegion || props.regionId ? "#333" : "#fff")};
+  // border: ${(props) => (props.myRegion || props.regionId ? "1px solid #FFDD87" : "none")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -238,6 +239,9 @@ export const TopTagLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  :nth-child(2) {
+    font-size: 10px;
+  }
 `;
 export const LongTagDiv = styled.div`
   width: 60px;
@@ -305,12 +309,13 @@ export const EtcLi = styled.li`
 export const SubmitButton = styled.button`
   width: 70px;
   height: 40px;
-  background: #eeeeee;
-  border-radius: 7px;
+  // background: #eeeeee;
+  background: ${(props) => (props.isActive ? "#FFEA86" : "#eee")};
+  border-radius: 30px;
   font-size: 14px;
-  color: #b2b2b2;
-  border: none;
-  margin-left: 400px;
+  color: ${(props) => (props.isActive ? "#333" : "#b2b2b2")};
+  border: ${(props) => (props.isActive ? "1px solid #FFDD87" : "none")};
+  margin-left: 278px;
 `;
 
 export const ThumbnailDiv = styled.div`

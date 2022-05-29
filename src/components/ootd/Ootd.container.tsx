@@ -19,16 +19,16 @@ const OotdPage = () => {
 
   const router = useRouter();
 
-  const [myTag, setMyTag] = useState(["캐주얼"]);
+  const [myTag, setMyTag] = useState<String[]>([]);
   const [myRegion, setMyRegion] = useState("서울");
-  const [isSelected, setIsSelected] = useState(["캐주얼"]);
+  const [tagSelected, setTagSelected] = useState<String[]>([]);
   const [regionSelected, setRegionSelected] = useState("서울");
   const [feedPage, setFeedPage] = useState(1);
 
   const { data, fetchMore, refetch } = useQuery(Q_FETCH_FEEDS, {
     variables: {
-      feedTags: myTag,
       regionId: myRegion,
+      page: feedPage,
     },
   });
 
@@ -52,14 +52,14 @@ const OotdPage = () => {
       return;
     }
     setMyTag([...myTag, e]);
-    setIsSelected([...isSelected, e]);
+    setTagSelected([...tagSelected, e]);
   };
 
   // 태그 지우기
   const onClickRemoveTag = (e) => {
     const newMyTag = myTag.filter((tagEl) => tagEl !== e);
     setMyTag(newMyTag);
-    setIsSelected(newMyTag);
+    setTagSelected(newMyTag);
   };
 
   // const onClickMoveToDetail = () => (event) => {
@@ -101,11 +101,17 @@ const OotdPage = () => {
 
   // const observer = new IntersectionObserver( entries, {threshold: 1})
 
+  useEffect(() => {
+    setFeedPage(Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1);
+  }, []);
+
   const onLoadMore = () => {
+    console.log(feedPage);
     if (!data) return;
     fetchMore({
       variables: {
-        page: Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1,
+        page: feedPage,
+        // page: Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult?.fetchFeeds.feeds) return { feeds: [...prev.fetchFeeds.feeds] };
@@ -116,7 +122,6 @@ const OotdPage = () => {
       },
     });
   };
-  console.log(Math.ceil(data?.fetchFeeds.feeds.length / 10) + 1);
   // onLoadMore();
 
   // const [page, setPage] = useState(1);
@@ -155,7 +160,7 @@ const OotdPage = () => {
       myRegion={myRegion}
       myTag={myTag}
       data={data}
-      isSelected={isSelected}
+      tagSelected={tagSelected}
       regionSelected={regionSelected}
       // onClickMoveToDetail={onClickMoveToDetail}
       tempData={tempData}

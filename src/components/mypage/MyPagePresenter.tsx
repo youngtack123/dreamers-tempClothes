@@ -23,7 +23,7 @@ const MyPagePresenter = (props) => {
   return (
     <div>
       <div>
-        <MyPageHeaderContainer></MyPageHeaderContainer>
+        <MyPageHeaderContainer />
       </div>
       <S.MyPageWrapperDiv>
         <S.MenuDiv>

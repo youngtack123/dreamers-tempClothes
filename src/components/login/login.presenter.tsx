@@ -15,7 +15,7 @@ export default function LoginUI(props: any) {
 
       <s.InputWrapperDiv>
         <s.ItemInputDiv>
-          <s.ItemNameDiv>아이디</s.ItemNameDiv>
+          <s.ItemNameDiv>이메일</s.ItemNameDiv>
           <s.ItemInput name="email" onChange={handleLoginInputs} />
         </s.ItemInputDiv>
         <s.PasswordInputDiv>

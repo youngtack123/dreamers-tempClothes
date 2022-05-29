@@ -42,6 +42,7 @@ export const WhichStyleDiv = styled.div`
     border: 1px solid #ffdd87;
     background-color: #fff2b2;
   }
+  cursor: pointer;
   background-color: ${(props) => (props.isSelected === props.id ? "#fff2b2" : "#fff")};
   border: ${(props) => (props.isSelected === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
 `;

@@ -13,19 +13,6 @@ const MyPageHeaderPresenter = (props: any) => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  // useEffect(() => {
-  //   checkWeatherDetail();
-  // }, [weahterData?.getWeather.uvi]);
-
-  // const checkWeatherDetail = () => {
-  //   if (weahterData?.getWeather.uvi >= 0 && weahterData?.getWeather.uvi <= 30) {
-  //     setWeatherDetail("좋음");
-  //   } else if (weahterData?.getWeather.uvi >= 31 && weahterData?.getWeather.uvi <= 80) {
-  //     setWeatherDetail("보통");
-  //   } else if (weahterData?.getWeather.uvi >= 81) {
-  //     setWeatherDetail("나쁨");
-  //   }
-  // };
 
   const getDate = () => {
     const newDate = new Date();

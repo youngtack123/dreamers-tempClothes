@@ -69,9 +69,3 @@ export const authState = atom({
   key: v1(),
   default: false,
 });
-
-//--------- 클릭한 유저 닉네임 값 -----------//
-export const ClickedUser = atom({
-  key: v1(),
-  default: "",
-});

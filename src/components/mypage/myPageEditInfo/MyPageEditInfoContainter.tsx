@@ -5,6 +5,8 @@ import { CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./MyPageEdi
 import { useRecoilState } from "recoil";
 import { timerState } from "../../common/store";
 import { useRouter } from "next/router";
+import { CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC } from "../../signup/signup.quries";
+import { toast } from "react-toastify";
 
 const MyPageEditInfoContainter = () => {
   const [inputs, setInputs] = useState({
@@ -18,6 +20,8 @@ const MyPageEditInfoContainter = () => {
   const router = useRouter();
   const [m_updateUser] = useMutation(UPDATE_USER);
   const [m_authNumber] = useMutation(CONFIRM_AUTH_NUMBER);
+  const [m_overLapEmail] = useMutation(CONFIRM_OVERLAP_EMAIL);
+  const [m_overLapNic] = useMutation(CONFIRM_OVERLAP_NIC);
   const [m_phoneAuth] = useMutation(CREATE_PHONE_AUTH);
   const [authOk, setAuthFalse] = useState(false);
   const [, setSendAuthNumber] = useRecoilState(timerState);
@@ -63,10 +67,14 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("updateUserResult", updateUserResult);
-      alert("정상적으로 회원 정보가 수정되었습니다!");
+      toast.success("회원정보 수정 완료!", {
+        icon: "😊",
+      });
       router.push("/mypage");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -77,9 +85,13 @@ const MyPageEditInfoContainter = () => {
           phone: inputs.phone,
         },
       });
-      alert("인증 번호가 발송 되었습니다!");
+      toast.success("인증번호 발송 완료!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
     setSendAuthNumber(true);
   };
@@ -92,11 +104,51 @@ const MyPageEditInfoContainter = () => {
         },
       });
       console.log("authNumberResult", authNumberResult);
-      alert("정상적으로 인증이 완료되었습니다!");
+      toast.success("인증 완료!", {
+        icon: "😊",
+      });
       setAuthFalse(true);
       setSendAuthNumber(false);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
+    }
+  };
+
+  const overLapId = async () => {
+    try {
+      const overLapIdResult = await m_overLapEmail({
+        variables: {
+          email: inputs.email,
+        },
+      });
+      console.log("중복 ID 결과값:", overLapIdResult);
+      toast.success("사용 가능한 이메일이에요!", {
+        icon: "😊",
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        icon: "🤔",
+      });
+    }
+  };
+
+  const overLapNic = async () => {
+    try {
+      const overLapNicResult = await m_overLapNic({
+        variables: {
+          nickname: inputs.nickname,
+        },
+      });
+      console.log("중복 닉네임 결과값:", overLapNicResult);
+      toast.success("사용 가능한 닉네임이에요!", {
+        icon: "😊",
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -107,7 +159,10 @@ const MyPageEditInfoContainter = () => {
       updateUserEditInfo={updateUserEditInfo}
       createPhoneAuth={createPhoneAuth}
       confirmAuthNumber={confirmAuthNumber}
+      overLapId={overLapId}
+      overLapNic={overLapNic}
       authOk={authOk}
+      inputs={inputs}
     ></MyPageEditInfoPresenter>
   );
 };

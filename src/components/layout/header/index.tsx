@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
+import { toast } from "react-toastify";
 
 const HeaderWrapperDiv = styled.div`
   background-color: white;
@@ -80,8 +81,8 @@ const Header = () => {
   const { data } = useQuery(FETCH_USER);
   const router = useRouter();
 
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -105,8 +106,8 @@ const Header = () => {
   }
 
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -117,13 +118,14 @@ const Header = () => {
   const logout = async () => {
     try {
       router.push("/");
-      const logoutResult = await m_logout();
-      // console.log("logoutResult", logoutResult);
-      alert("로그아웃 성공!");
+      await m_logout();
       localStorage.clear();
       location.reload();
+      router.push("/");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

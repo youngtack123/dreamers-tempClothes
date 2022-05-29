@@ -9,7 +9,6 @@ const MainWrapperDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 `;
 const WrapperDiv = styled.div`
   position: absolute;
@@ -60,6 +59,7 @@ const SecondCircleDiv = styled.div`
   top: 114.5rem;
   background: #fff2b2;
   border-radius: 10rem;
+  cursor: pointer;
 `;
 const MainLogoImg = styled.img`
   position: absolute;
@@ -85,7 +85,6 @@ const LoginDiv = styled.div`
   font-style: normal;
   font-weight: 500;
   font-size: 1.8rem;
-  margin-left: 0.8rem;
 
   color: rgba(0, 0, 0, 0.6);
 

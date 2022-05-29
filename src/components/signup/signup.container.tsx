@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
+import { toast } from "react-toastify";
 
 const FETCH_USER = gql`
   query {
@@ -76,10 +77,14 @@ export default function Signup() {
         },
       });
       console.log("회원가입 결과", signUpResult);
-      alert("회원가입이 완료 되었습니다!");
+      toast.success("회원 가입 성공!", {
+        icon: "😊",
+      });
       router.push("/login");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
       console.log(error.message);
     }
   };
@@ -97,10 +102,14 @@ export default function Signup() {
           },
         },
       });
-      alert("정상적으로 회원가입이 완료되었습니다!");
+      toast.success("회원 가입 성공!", {
+        icon: "😊",
+      });
       router.push("/login");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -112,9 +121,13 @@ export default function Signup() {
         },
       });
       console.log("중복 ID 결과값:", overLapIdResult);
-      alert("사용가능한 Email 입니다!");
+      toast.success("사용 가능한 이메일이에요!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -126,9 +139,13 @@ export default function Signup() {
         },
       });
       console.log("중복 닉네임 결과값:", overLapNicResult);
-      alert("사용 가능한 닉네임 입니다!");
+      toast.success("사용 가능한 닉네임이에요!", {
+        icon: "😊",
+      });
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -141,10 +158,14 @@ export default function Signup() {
       });
 
       console.log(createPhoneAuthResult);
-      alert("인증 번호가 발송 되었습니다!");
+      toast.success("인증번호 발송 완료!", {
+        icon: "😊",
+      });
       setSendAuthNumber(true);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -156,11 +177,15 @@ export default function Signup() {
         },
       });
       console.log("authNumberResult", authNumberResult);
-      alert("정상적으로 인증이 완료되었습니다!");
+      toast.success("인증 완료!", {
+        icon: "😊",
+      });
       setSendAuthNumber(false);
       setAuthFalse(true);
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 
@@ -188,7 +213,9 @@ export default function Signup() {
   };
 
   const noAuthSignUp = () => {
-    alert("인증을 정상적으로 하지 않았습니다!");
+    toast.error("인증이 완료되지 않았습니다!", {
+      icon: "🤔",
+    });
   };
 
   useEffect(() => {

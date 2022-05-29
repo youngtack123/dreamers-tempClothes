@@ -3,6 +3,7 @@ import { Q_FETCH_COMMENTS } from "../write/FeedsCommentWrite.queries";
 import FeedsCommentListUI from "./FeedsCommentList.presenter";
 import { M_DELETE_COMMENT } from "./FeedsCommentList.queries";
 import InfiniteScroll from "react-infinite-scroller";
+import { toast } from "react-toastify";
 
 const FeedsCommentList = (props) => {
   const [deleteComment] = useMutation(M_DELETE_COMMENT);
@@ -35,9 +36,11 @@ const FeedsCommentList = (props) => {
           },
         ],
       });
-      alert("댓글이 삭제되었습니다!");
+      // alert("댓글이 삭제되었습니다!");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, {
+        icon: "🤔",
+      });
     }
   };
 

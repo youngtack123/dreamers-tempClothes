@@ -2,15 +2,23 @@ html {
   width: 100%;
   min-width: 100%;
   min-height: 100%;
-  height: 100%;
   line-height: 1.15;
   font-size: 62.5%;
   margin: 0;
   color: #333;
+  font-family: Pretendard, SUIT;
 }
 @font-face {
   font-family: "Noto Serif KR", serif;
   src: url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap");
+}
+@font-face {
+  font-family: Pretendard;
+  src: url("../public/font/PretendardVariable.ttf");
+}
+@font-face {
+  font-family: SUIT;
+  src: url("../public/font/SUIT-Variable.ttf");
 }
 @media all and (max-width: 768px) {
   html {
@@ -25,7 +33,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: SUIT, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Pretendard, SUIT, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -51,8 +59,10 @@ li {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 999;
   background-color: rgba(0, 0, 0, 0.6);
+  max-height: 100%;
+  overflow-y: auto;
 }
 .modal button {
   outline: none;
@@ -67,6 +77,7 @@ li {
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
   overflow: hidden;
+  overflow-y: auto;
 }
 .modal > section > header {
   position: relative;

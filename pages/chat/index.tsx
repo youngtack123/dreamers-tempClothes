@@ -118,6 +118,7 @@ const Chat = () => {
         /* 누군가 입장 */
         socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
+          refetch();
         });
       });
       setRoom(room);
