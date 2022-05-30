@@ -6,15 +6,36 @@ import { authState, timerState } from "../common/store";
 import { useEffect, useState } from "react";
 
 export default function SignupUI(props: any) {
-  const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, noAuthSignUp, socialLoginData, updateUserFunc } = props;
+  const {
+    handleSignUpInputs,
+    signUpFunc,
+    onClickEventTag,
+    overLapId,
+    overLapNic,
+    inputs,
+    createPhoneAuth,
+    confirmAuthNumber,
+    onClickTagGender,
+    socialLoginData,
+    updateUserFunc,
+    clickGender,
+    onClickTagStyle,
+    clickStyle,
+    onClickRegionTop,
+    clickRegionTop,
+    onClickRegionBottom,
+    clickRegionBottom,
+  } = props;
   const [sendAuthNumber] = useRecoilState(timerState);
   const router = useRouter();
   const [authOk] = useRecoilState(authState);
-  const [tab, setTab] = useState("curr");
   const onMoveToLogin = () => {
     router.push("/login");
   };
-  console.log("socialLoginData", socialLoginData);
+  const [genderData, setGenderData] = useState(["남성", "여성"]);
+  const [styleData, setStyleData] = useState(["캐주얼", "스트릿", "트레이닝", "포멀", "세미포멀"]);
+  const [regionTopData, setRegionTopData] = useState(["서울", "경기", "강원", "충북", "충남"]);
+  const [regionBottomData, setRegionBottomData] = useState(["경북", "경남", "전북", "전남", "제주"]);
 
   return (
     <s.Body>
@@ -78,7 +99,7 @@ export default function SignupUI(props: any) {
           <div>
             <s.VerifyDiv>
               <s.ItemNameDiv>인증번호</s.ItemNameDiv>
-              <s.ItemInput placeholder="인증번호를 입력하세요." />
+              <s.ItemInput name="authNumber" placeholder="인증번호를 입력하세요." onChange={handleSignUpInputs}></s.ItemInput>
               <s.SendVerifiButton onClick={confirmAuthNumber}>인증확인</s.SendVerifiButton>
             </s.VerifyDiv>
             <s.ErrorTextAuthP>{!inputs.authNumber && "인증 번호를 입력해주세요!"}</s.ErrorTextAuthP>
@@ -95,78 +116,130 @@ export default function SignupUI(props: any) {
         <s.TagsDiv>
           <s.GenderTagWrapperDiv>
             <s.GenderDiv>성별</s.GenderDiv>
-            <s.TagItemDiv id="gender" onClick={onClickEventTag} className={`tag ${tab === "curr" ? "active" : ""}`}>
-              남성
-            </s.TagItemDiv>
-            <s.TagItemDiv id="gender" onClick={onClickEventTag}>
-              여성
-            </s.TagItemDiv>
+            {genderData.map((el, index) => {
+              if (el === clickGender) {
+                return (
+                  <s.TagItemDiv
+                    id="gender"
+                    onClick={() => {
+                      onClickEventTag(), onClickTagGender(el);
+                    }}
+                    key={index}
+                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              } else if (el !== clickGender) {
+                return (
+                  <s.TagItemDiv
+                    id="gender"
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickTagGender(el);
+                    }}
+                    key={index}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              }
+            })}
           </s.GenderTagWrapperDiv>
           <s.StyleTagWrapperDiv>
             <s.GenderDiv>스타일</s.GenderDiv>
-            <s.TagItemDiv>
-              <s.StyleSpan onClick={onClickEventTag} id="style">
-                캐주얼
-              </s.StyleSpan>
-            </s.TagItemDiv>
-            <s.TagItemDiv>
-              <s.StyleSpan onClick={onClickEventTag} id="style">
-                스트릿
-              </s.StyleSpan>
-            </s.TagItemDiv>
-            <s.TagItemDiv>
-              <s.StyleSpan onClick={onClickEventTag} id="style">
-                트레이닝
-              </s.StyleSpan>
-            </s.TagItemDiv>
-            <s.TagItemDiv>
-              <s.StyleSpan onClick={onClickEventTag} id="style">
-                포멀
-              </s.StyleSpan>
-            </s.TagItemDiv>
-            <s.TagItemDiv>
-              <s.StyleSpan onClick={onClickEventTag} id="style">
-                세미포멀
-              </s.StyleSpan>
-            </s.TagItemDiv>
+            {styleData.map((el, index) => {
+              if (clickStyle === el) {
+                return (
+                  <s.TagItemDiv
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickTagStyle(el);
+                    }}
+                    key={index}
+                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              } else {
+                return (
+                  <s.TagItemDiv key={index}>
+                    <s.StyleSpan
+                      onClick={(event) => {
+                        onClickEventTag(event), onClickTagStyle(el);
+                      }}
+                      id="style"
+                      key={index}
+                    >
+                      {el}
+                    </s.StyleSpan>
+                  </s.TagItemDiv>
+                );
+              }
+            })}
           </s.StyleTagWrapperDiv>
 
           <s.RegionTagWrapperDiv>
             <s.GenderDiv>거주지역</s.GenderDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              서울
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              경기
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              강원
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              충북
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              충남
-            </s.TagItemDiv>
+            {regionTopData.map((el, index) => {
+              if (el === clickRegionTop) {
+                return (
+                  <s.TagItemDiv
+                    id="region"
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickRegionTop(el);
+                    }}
+                    key={index}
+                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              } else {
+                return (
+                  <s.TagItemDiv
+                    id="region"
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickRegionTop(el);
+                    }}
+                    key={index}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              }
+            })}
           </s.RegionTagWrapperDiv>
 
           <s.RegionTagBottomLineDiv>
             <s.GenderDiv style={{ color: "white" }}>거주지역</s.GenderDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              경북
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              경남
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              전북
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              전남
-            </s.TagItemDiv>
-            <s.TagItemDiv id="region" onClick={onClickEventTag}>
-              제주
-            </s.TagItemDiv>
+            {regionBottomData.map((el, index) => {
+              if (el === clickRegionBottom) {
+                return (
+                  <s.TagItemDiv
+                    id="region"
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickRegionBottom(el);
+                    }}
+                    key={index}
+                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              } else {
+                return (
+                  <s.TagItemDiv
+                    id="region"
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickRegionBottom(el);
+                    }}
+                    key={index}
+                  >
+                    {el}
+                  </s.TagItemDiv>
+                );
+              }
+            })}
           </s.RegionTagBottomLineDiv>
         </s.TagsDiv>
 

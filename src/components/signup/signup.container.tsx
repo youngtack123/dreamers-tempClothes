@@ -52,7 +52,10 @@ export default function Signup() {
     style: " ",
     region: " ",
   });
-
+  const [clickGender, setClickGender] = useState("");
+  const [clickStyle, setClickStyle] = useState("");
+  const [clickRegionTop, setClickRegionTop] = useState("");
+  const [clickRegionBottom, setRegionBottom] = useState("");
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
     setInputs({
@@ -177,25 +180,25 @@ export default function Signup() {
 
   const confirmAuthNumber = async () => {
     if (inputs.authNumber.length !== 6) {
-      alert("인증번호가 맞지 않습니다!");
+      alert("인증번호 형식이 올바르지 않습니다!");
       return;
     }
-    try {
-      const authNumberResult = await m_authNumber({
-        variables: {
-          authNumber: inputs.authNumber,
-        },
+    const authNumberResult = await m_authNumber({
+      variables: {
+        authNumber: inputs.authNumber,
+      },
+    });
+
+    if (authNumberResult?.data.confirmAuthNumber === "인증번호를 다시 확인해 주세요.") {
+      toast.error("인증번호를 다시 확인해 주세요.", {
+        icon: "🤔",
       });
-      console.log("authNumberResult", authNumberResult);
+    } else {
       toast.success("인증 완료!", {
         icon: "😊",
       });
       setSendAuthNumber(false);
       setAuthFalse(true);
-    } catch (error) {
-      toast.error(error.message, {
-        icon: "🤔",
-      });
     }
   };
 
@@ -222,6 +225,22 @@ export default function Signup() {
     }
   };
 
+  const onClickTagGender = (id) => {
+    setClickGender(id);
+  };
+
+  const onClickTagStyle = (id) => {
+    setClickStyle(id);
+  };
+
+  const onClickRegionTop = (id) => {
+    setClickRegionTop(id);
+  };
+
+  const onClickRegionBottom = (id) => {
+    setRegionBottom(id);
+  };
+
   const noAuthSignUp = () => {
     toast.error("인증이 완료되지 않았습니다!", {
       icon: "🤔",
@@ -231,7 +250,6 @@ export default function Signup() {
   useEffect(() => {
     console.log(inputs);
   }, [inputs]);
-
   return (
     <SignupUI
       handleSignUpInputs={handleSignUpInputs}
@@ -245,6 +263,14 @@ export default function Signup() {
       noAuthSignUp={noAuthSignUp}
       socialLoginData={socialLoginData}
       updateUserFunc={updateUserFunc}
+      onClickTagGender={onClickTagGender}
+      onClickTagStyle={onClickTagStyle}
+      clickGender={clickGender}
+      clickStyle={clickStyle}
+      onClickRegionTop={onClickRegionTop}
+      clickRegionTop={clickRegionTop}
+      onClickRegionBottom={onClickRegionBottom}
+      clickRegionBottom={clickRegionBottom}
     />
   );
 }
