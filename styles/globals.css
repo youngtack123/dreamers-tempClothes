@@ -10,6 +10,12 @@ html {
 }
 @font-face {
   font-family: Pretendard;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../public/font/Pretendard-ExtraLight.woff");
+}
+@font-face {
+  font-family: Pretendard;
   font-weight: 400;
   font-display: swap;
   src: url("../public/font/Pretendard-Regular.woff");
@@ -47,6 +53,13 @@ html {
   font-family: SUIT;
   src: url("../public/font/SUIT-Variable.ttf");
 }
+@font-face {
+  font-family: SUIT;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../public/font/SUIT-ExtraLight.ttf");
+}
+
 @media all and (max-width: 768px) {
   html {
     font-size: 50%;
