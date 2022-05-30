@@ -7,7 +7,7 @@ export const Container__Div = styled.div`
   min-height: 815px;
   height: auto;
   position: relative;
-  margin: 10px auto;
+  margin: 0 auto;
   padding-top: 25px;
   font-family: Pretendard;
 `;
@@ -36,20 +36,19 @@ export const Container_Body__Div = styled.div`
 
 export const TodayInfo__Div = styled.div`
   width: 203px;
-  height: 80px;
+  height: 100px;
   background: #ffffff;
   border-radius: 10px;
   padding: 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 26px;
   margin-right: 20px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 `;
 
 export const Date__Div = styled.div`
-  width: 66px;
-  height: 32px;
   display: flex;
   justify-content: space-between;
 `;
@@ -93,7 +92,7 @@ export const TagSeletedUnit__Span = styled.span`
   border: 1px solid #ffdd87;
   background: #fff2b2;
   border-radius: 50px;
-  padding: 3px 6px;
+  padding: 2px 6px;
   text-align: center;
   font-size: 14px;
   font-weight: 400;
@@ -117,7 +116,7 @@ export const TagWrapper__Div = styled.div`
 export const TagWrapper_Head__Div = styled.div`
   width: 203px;
   height: 38px;
-  padding-top: 10px;
+  padding-top: 7px;
   padding-bottom: 12px;
   border-bottom: 1px solid #bebebe;
 `;
@@ -161,7 +160,7 @@ export const RegionTags__Li = styled.li`
   font-size: 12px;
   margin-right: 5px;
   margin-bottom: 8px;
-  font-weight: ${(props) => (props.regionSelected ? 700 : 400)};
+  font-weight: ${(props) => (props.regionSelect ? 700 : 400)};
   cursor: pointer;
 `;
 

@@ -46,12 +46,11 @@ function FeedUpdatePage() {
   // console.log(fetchData.fetchFeed.region.id);
   const regionId = fetchData?.fetchFeed.region.id;
   const tagFetch = fetchData?.fetchFeed.feedTag.map((el) => el.tagName);
-
-  console.log(tagFetch);
+  const fetchImg = fetchData?.fetchFeed.feedImg.map((el) => el.imgURL);
 
   return (
     // <Modal open={modalOpen} close={() => router.push(`/ootd`)} header="게시글 상세정보">
-    <FeedsWrite isEdit={true} fetchData={fetchData} regionId={regionId} tagFetch={tagFetch} />
+    <FeedsWrite isEdit={true} fetchData={fetchData} regionId={regionId} tagFetch={tagFetch} fetchImg={fetchImg} />
     // </Modal>
   );
 }

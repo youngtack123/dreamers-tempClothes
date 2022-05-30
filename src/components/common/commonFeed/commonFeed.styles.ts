@@ -3,6 +3,14 @@ import Fillheart from "../../../../public/images/fillheart.svg";
 import Emptyheart from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/dm.svg";
 
+interface ISelectRegionSpanProps {
+  myRegion: boolean;
+}
+
+interface ISelectTagSpanProps {
+  tagSelected: boolean;
+}
+
 export const FeedTop__Div = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -110,9 +118,9 @@ export const BottomTop__Div = styled.div`
   justify-content: flex-start;
 `;
 
-export const SelectedTag__Span = styled.span`
-  background: ${(props) => (props.tagSelected || props.myRegion ? "#fff2b2" : "#dddddd")};
-  border: ${(props) => (props.tagSelected || props.myRegion ? "1px solid #ffdd87" : "")};
+export const SelectedRegion__Span = styled.span`
+  background: ${(props: ISelectRegionSpanProps) => (props.myRegion ? "#fff2b2" : "#dddddd")};
+  border: ${(props) => (props.myRegion ? "1px solid #ffdd87" : "")};
   border-radius: 50px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -121,12 +129,13 @@ export const SelectedTag__Span = styled.span`
   padding: 2px 6px;
 `;
 
-export const NoSelectedTag__Span = styled.span`
-  background: #dddddd;
+export const SelectedTag__Span = styled.span`
+  background: ${(props: ISelectTagSpanProps) => (props.tagSelected ? "#fff2b2" : "#dddddd")};
+  border: ${(props) => (props.tagSelected ? "1px solid #ffdd87" : "")};
   border-radius: 50px;
   margin-right: 10px;
   margin-bottom: 10px;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
   padding: 2px 6px;
 `;

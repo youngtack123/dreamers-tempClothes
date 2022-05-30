@@ -7,9 +7,11 @@ import FeedDetail from "../../feeds/detail/feedDetail.container";
 import Link from "next/link";
 import Modal from "../commonModal";
 import { useRecoilState } from "recoil";
-import { aaa } from "../store";
 import { toast } from "react-toastify";
 import Chat from "../../../../pages/chat";
+import LikeIcon from "../../../../public/images/emptyheart.svg";
+import DMIcon from "../../../../public/images/talk.svg";
+import Modal2 from "../commonModal2";
 
 const M_TOGGLE_LIKE_FEED = gql`
   mutation toggleLikeFeed($feedId: String!) {
@@ -78,22 +80,24 @@ const OotdFeed = (props) => {
 
       {/* /feeds/[feedId]?feedId=${props.el.id} */}
       <feed.FeedBody__Div>
-        {/* <Link href={`/?feedId=${props.el.id}`} as={`/go/${props.el.id}`}> */}
         <feed.FeedImageBox__Div id={props.el.id} onClick={openModal}>
           <feed.FeedImage__Img src={`https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` ? `https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` : ""} />
         </feed.FeedImageBox__Div>
         {/* </Link> */}
 
         <feed.HoverIcon__Div>
-          {isLike ? <feed.LikeHeart id={props.el.id} onClick={onClickLike} /> : <feed.UnLikeHeart id={props.el.id} onClick={onClickLike} />}
-          {/* {toggleLikeFeed ? <LikeHeart /> : <UnLikeHeart />} */}
-          <feed.Dm onClick={openChatModal}></feed.Dm>
+          {isLike ? (
+            <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
+          ) : (
+            <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
+          )}
+          <DMIcon onClick={openChatModal} style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
         </feed.HoverIcon__Div>
       </feed.FeedBody__Div>
 
       <feed.FeedBottom__Div>
         <feed.BottomTop__Div>
-          <feed.SelectedTag__Span myRegion={props.myRegion}>#{props.myRegion}</feed.SelectedTag__Span>
+          <feed.SelectedRegion__Span myRegion={props.myRegion}>#{props.myRegion}</feed.SelectedRegion__Span>
           {props.el.feedTag.map((el, idx) => (
             <feed.SelectedTag__Span key={idx} tagSelected={props.tagSelected.includes(el.tagName)}>
               #{el.tagName}
@@ -140,9 +144,9 @@ const OotdFeed = (props) => {
         </feed.BottomBottom__Div>
       </feed.FeedBottom__Div>
 
-      <Modal open={modalOpen} close={closeModal} header="피드 디테일">
+      <Modal2 open={modalOpen} close={closeModal} header="피드 디테일">
         <FeedDetail ootdFeedId={props.el.id} />
-      </Modal>
+      </Modal2>
 
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
         <Chat closeChatModal={closeChatModal} another={props.el.user.nickname}></Chat>

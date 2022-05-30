@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 import Slider from "react-slick";
+import { IFeedsWriteProps, IRegionTagLiProps, IStyleTagLi, ISubmitButtonProps } from "./feedsWrite.types";
 
 export const WrapperDiv = styled.div`
-  width: 850px;
-  /* width: 100%; */
+  width: 85rem;
   display: flex;
   flex-direction: row;
   padding: 20px 29px 15px 44px;
-  // border: 1px solid #bebebe;
   border-radius: 10px;
   margin: 0 auto;
 `;
@@ -40,6 +39,7 @@ export const PhotoBoxDiv = styled.div`
   border-radius: 10px;
   margin-bottom: 25px;
   position: relative;
+  overflow: hidden;
 `;
 export const PhotoClickImg = styled.img`
   width: 36px;
@@ -92,7 +92,7 @@ export const ContentsLabel = styled.label`
   margin-bottom: 10px;
 `;
 export const ContentsTextArea = styled.textarea`
-  width: 340px;
+  width: 34rem;
   height: 330px;
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid #bebebe;
@@ -158,9 +158,8 @@ export const RegionTagLi = styled.li`
   font-size: 13px;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myRegion || props.regionId ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.myRegion || props.regionId ? "#333" : "#fff")};
-  // border: ${(props) => (props.myRegion || props.regionId ? "1px solid #FFDD87" : "none")};
+  background: ${(props: IRegionTagLiProps) => (props.isRegionMatched ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.isRegionMatched ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -184,8 +183,8 @@ export const StyleTagLi = styled.li`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myTag || props.tagFetch ? "#fff2b2" : "#ddd")};
-  color: ${(props) => (props.myTag || props.tagFetch ? "#333" : "#fff")};
+  background: ${(props: IStyleTagLi) => (props.myTag ? "#fff2b2" : "#ddd")};
+  color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
     color: #333333;
@@ -208,7 +207,7 @@ export const OuterTagLi = styled.li`
   font-size: 12px;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  background: ${(props: IStyleTagLi) => (props.myTag ? "#fff2b2" : "#ddd")};
   color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
@@ -233,7 +232,7 @@ export const TopTagLi = styled.li`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  background: ${(props: IStyleTagLi) => (props.myTag ? "#fff2b2" : "#ddd")};
   color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
@@ -276,7 +275,7 @@ export const BottomTagLi = styled.li`
   background: #dddddd;
   border-radius: 50px;
   margin-bottom: 14px;
-  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  background: ${(props: IStyleTagLi) => (props.myTag ? "#fff2b2" : "#ddd")};
   color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
@@ -299,7 +298,7 @@ export const EtcLi = styled.li`
   text-align: center;
   font-size: 12px;
   border-radius: 50px;
-  background: ${(props) => (props.myTag ? "#fff2b2" : "#ddd")};
+  background: ${(props: IStyleTagLi) => (props.myTag ? "#fff2b2" : "#ddd")};
   color: ${(props) => (props.myTag ? "#333" : "#fff")};
   :hover {
     background-color: #fff2b2;
@@ -310,11 +309,11 @@ export const SubmitButton = styled.button`
   width: 70px;
   height: 40px;
   // background: #eeeeee;
-  background: ${(props) => (props.isActive ? "#FFEA86" : "#eee")};
+  background: ${(props: ISubmitButtonProps) => (props.isActive ? "#FFEA86" : "#eee")};
   border-radius: 30px;
   font-size: 14px;
-  color: ${(props) => (props.isActive ? "#333" : "#b2b2b2")};
-  border: ${(props) => (props.isActive ? "1px solid #FFDD87" : "none")};
+  color: ${(props: ISubmitButtonProps) => (props.isActive ? "#333" : "#b2b2b2")};
+  border: ${(props: ISubmitButtonProps) => (props.isActive ? "1px solid #FFDD87" : "none")};
   margin-left: 278px;
 `;
 
@@ -374,7 +373,6 @@ export const ChildDiv = styled.div`
 `;
 export const ShowImg = styled.img`
   width: 340px;
-  height: 330px;
   position: absolute;
   top: 0px;
   left: 0px;
