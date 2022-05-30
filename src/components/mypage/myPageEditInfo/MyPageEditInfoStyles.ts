@@ -178,6 +178,7 @@ export const RegionTopDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  margin-right: 10px;
 `;
 
 export const RegionBottomDiv = styled.div`
@@ -187,4 +188,5 @@ export const RegionBottomDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 46px;
+  margin-right: 10px;
 `;

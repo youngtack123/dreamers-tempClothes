@@ -16,8 +16,6 @@ export default function Onboarding1UI(props) {
     router.push("/");
   };
 
-  console.log(props.isSelected);
-
   return (
     <s.WrapperDiv>
       <s.ItemWrapperDiv>

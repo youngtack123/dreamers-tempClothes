@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 
+interface OnBoarding1 {
+  isSelected: any;
+  value: any;
+}
+
 export const WrapperDiv = styled.div`
   height: 93.5rem;
   display: flex;
@@ -35,9 +40,9 @@ export const ManButton = styled.button`
   height: 4rem;
   line-height: 4rem;
   font-size: 1.6rem;
-  background-color: ${(props) => (props.isSelected === props.value ? "#fff2b2;" : "#fff")};
+  background-color: ${(props: OnBoarding1) => (props.isSelected === props.value ? "#fff2b2;" : "#fff")};
   border-radius: 30px;
-  border: ${(props) => (props.isSelected === props.value ? "1px solid #ffdd87" : "1px solid #bebebe")};
+  border: ${(props: OnBoarding1) => (props.isSelected === props.value ? "1px solid #ffdd87" : "1px solid #bebebe")};
   :hover {
     border: 1px solid #ffdd87;
     background-color: #fff2b2;

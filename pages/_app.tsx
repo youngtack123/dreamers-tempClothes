@@ -5,6 +5,7 @@ import LayOut from "../src/components/layout";
 import { CustomToastContainer } from "../src/components/common/toast";
 import "react-toastify/dist/ReactToastify.css";
 import { Flip } from "react-toastify";
+
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>

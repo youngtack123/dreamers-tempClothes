@@ -238,7 +238,7 @@ const Header = () => {
   };
 
   const moveToSignup = () => {
-    router.push("Signup");
+    router.push("/signup");
   };
 
   return (
