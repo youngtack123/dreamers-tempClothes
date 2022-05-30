@@ -1,84 +1,136 @@
 import styled from "@emotion/styled";
 
-export const MyPageHeaderWrapper = styled.div`
+export const MyPageHeaderWrapperDiv = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-top: 5rem;
-`;
-
-export const MyPageHeaderProfileDiv = styled.div`
-  width: 79.2rem;
-  height: 24.6rem;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-around;
   align-items: center;
-  margin-right: 2.2rem;
-  border: 1px solid #bebebe;
-`;
-
-export const MyPageHeaderProfileDataDiv = styled.div`
-  display: flex;
-
-  justify-content: center;
+  background-color: rgba(238, 238, 238, 0.46);
+  height: 375px;
+  margin-bottom: 50px;
 `;
 
 export const MyPageHeaderDataTagFlexDiv = styled.div`
   display: flex;
-
-  flex-direction: column;
-`;
-
-export const MyPageHeaderListDiv = styled.div`
-  border-right: 1px solid #bebebe;
-`;
-
-export const FontSizeHeaderLastDiv = styled.div``;
-
-export const MypageHeaderDataTagDiv = styled.div`
-  background-color: #b7e576;
-  width: 8rem;
-  height: 3rem;
-  color: white;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const MyPageHeaderWeatherDiv = styled.div`
-  width: 33.4rem;
-  height: 24.6rem;
+  width: 62rem;
+  height: 9.5rem;
+  background: #ffffff;
+  box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
   display: flex;
-  justify-content: center;
-
-  border-radius: 10px;
-  border: 1px solid #bebebe;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 50px;
 `;
 
-export const MyPageHeaderWeatherFlexDiv = styled.div`
+export const MyPageHeaderSunnyImg = styled.img`
+  width: 8.5rem;
+  height: 8.5rem;
+  margin-right: 1.3rem;
+`;
+
+export const MyPageHeaderDateDiv = styled.div`
+  width: 80px;
   display: flex;
+`;
+
+export const MyPageHeaderMonthSpan = styled.span`
+  font-weight: 700;
+  font-size: 3.4rem;
+  color: rgba(51, 51, 51, 0.7);
+`;
+
+export const MyPageHeaderDaySpan = styled.span`
+  font-weight: 700;
+  font-size: 3.4rem;
+  color: #333;
+`;
+
+export const MyPageHeaderAfterDateSpan = styled.span`
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 42px;
+`;
+
+export const MyPageWeatherTempertureDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const MyPageWeatherFirstDiv = styled.div`
+  width: 166px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
-export const MyPageHeaderWeatherP = styled.p`
-  font-weight: 800;
-  font-size: 2.6rem;
-  color: #b7e576;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  margin-left: 1.3rem;
-`;
-//font size HeaderList
-export const FontSizeHeaderListP = styled.p`
-  font-size: 1.4rem;
-  margin-bottom: 2rem;
-  margin-right: 2.7rem;
+export const MyPageWeatherDoubleDiv = styled.div`
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
 
-//font size Temperture
-export const FontSizeTempertureP = styled.p`
-  font-size: 4rem;
-  font-weight: 700;
-  margin: 0px;
+export const MyPageWeatherTemp = styled.span`
+  font-weight: 800;
+  font-size: 28px;
+  color: #b7e576;
+`;
+
+export const MyPageWrapperSelectDiv = styled.div`
+  display: flex;
+`;
+export const ThermometerImg = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+export const RainImg = styled.img`
+  width: 28px;
+  height: 28px;
+`;
+
+export const MyPageHeaderContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 206px;
+`;
+
+export const MyPageHeaderProFileImg = styled.img`
+  width: 80px;
+  margin-top: 2.5rem;
+`;
+
+export const MyPageHeaderUserNameSpan = styled.span`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+`;
+
+export const MyPageHeaderButtonCountSpan = styled.span`
+  display: inline-block;
+  padding: 2px 10px;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: #ececec;
+  border-radius: 20px;
+`;
+
+export const MypageHeaderDataTagDiv = styled.div`
+  background-color: #b7e576;
+  width: 60px;
+  height: 25px;
+  line-height: 2.5rem;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
 `;

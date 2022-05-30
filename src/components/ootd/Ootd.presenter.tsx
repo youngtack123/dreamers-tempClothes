@@ -1,110 +1,205 @@
-import OotdFeed from "../commonFeed";
-import * as s from "./Ootd.styles";
+import OotdFeed from "../common/commonFeed/coomonFeed.container";
+// import { withAuth } from "../hoc/withAuth";
+import * as Ootd from "./Ootd.styles";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../common/store";
+import FeedDetail from "../feeds/detail/feedDetail.container";
+import Modal from "../common/commonModal";
+import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import InfiniteScroll from "react-infinite-scroller";
+import Link from "next/link";
+import FeedsWrite from "../feeds/write/feedsWrite.container";
+import { useMediaQuery } from "react-responsive";
+import MFeedsWrite from "../feeds/forMobile/mFeedsWrite.container";
+import { IOotdUIProps } from "./Ootd.types";
+import Modal2 from "../common/commonModal2";
 
-const OotdUI = () => {
+const OotdUI = (props: IOotdUIProps) => {
+  const isPc = useMediaQuery({
+    query: "(min-width:825px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width:824px)",
+  });
+
+  const router = useRouter();
+  const [accessToken] = useRecoilState(accessTokenState);
+  const [isVisible, setIsVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // masonry layout breakpoints
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    760: 2,
+    600: 1,
+  };
+
+  // 날짜 계산 함수
+  const date = new Date();
+  const Month = String(date.getMonth() + 1).padStart(2, "0");
+  const Day = String(date.getDate()).padStart(2, "0");
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 1000) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    });
+  }
+
   return (
-    <s.Container__Div>
-      <s.Container_head__Div>
-        <s.TodayInfo__Div>
-          <s.Date__Div>
-            <s.Month__Span>05</s.Month__Span>
-            <s.Day__Span>06</s.Day__Span>
-          </s.Date__Div>
+    <>
+      <Ootd.Container__Div>
+        <div>
+          <Ootd.Container_Side__Div>
+            <Ootd.TodayInfo__Div>
+              <Ootd.Date__Div>
+                <Ootd.Month__Span>{Month}</Ootd.Month__Span>
+                <Ootd.Day__Span>{Day}</Ootd.Day__Span>
+              </Ootd.Date__Div>
 
-          <s.Temp__Span>22°C</s.Temp__Span>
-        </s.TodayInfo__Div>
+              <Ootd.Temp__Span>{Math.round(props.tempData?.getWeather.temp) || `-`}°C</Ootd.Temp__Span>
+            </Ootd.TodayInfo__Div>
 
-        <s.TagSeleted__Div>
-          태그
-          <s.TagSeletedBack__Span>#전라</s.TagSeletedBack__Span>
-        </s.TagSeleted__Div>
-      </s.Container_head__Div>
+            <Ootd.TagWrapper__Div>
+              <Ootd.TagWrapper_Head__Div>
+                <Ootd.Tag__Span>태그</Ootd.Tag__Span>
+              </Ootd.TagWrapper_Head__Div>
 
-      <s.Container_Body__Div>
-        <s.TagWrapper__Div>
-          <s.TagWrapper_Head__Div>
-            <s.Tag__Span>태그</s.Tag__Span>
-          </s.TagWrapper_Head__Div>
+              {/* 사이드바 */}
+              <Ootd.TagBox__Div>
+                {/* 지역 */}
+                <Ootd.TagCategory__Span>지역</Ootd.TagCategory__Span>
+                <Ootd.RegionList__Ul>
+                  {props.regionCategory.map((el, idx) => (
+                    <Ootd.RegionTags__Li key={idx} id={idx} onClick={() => props.onClickRegion(el)} regionSelect={props.regionSelected === el}>
+                      {el}
+                    </Ootd.RegionTags__Li>
+                  ))}
+                </Ootd.RegionList__Ul>
+              </Ootd.TagBox__Div>
 
-          {/* 지역 */}
-          <s.TagBox__Div>
-            <s.TagCategory__Span>지역</s.TagCategory__Span>
-            <s.RegionTagsBox__Div>
-              <s.RegionTags__Span>서울</s.RegionTags__Span>
-              <s.RegionTags__Span>경기</s.RegionTags__Span>
-              <s.RegionTags__Span>강원</s.RegionTags__Span>
-              <s.RegionTags__Span>충청</s.RegionTags__Span>
-              <s.RegionTags__Span>경상</s.RegionTags__Span>
-              <s.RegionTags__Span>전라</s.RegionTags__Span>
-              <s.RegionTags__Span>제주</s.RegionTags__Span>
-            </s.RegionTagsBox__Div>
-          </s.TagBox__Div>
+              {/* 스타일 */}
+              <Ootd.TagBox__Div>
+                <Ootd.TagCategory__Span>스타일</Ootd.TagCategory__Span>
+                <Ootd.StyleList__Ul>
+                  {props.tagCategory[0].tagItem.map((el, idx) => (
+                    <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                      {el}
+                    </Ootd.StyleTags__Li>
+                  ))}
+                </Ootd.StyleList__Ul>
+              </Ootd.TagBox__Div>
 
-          {/* 스타일 */}
-          <s.TagBox__Div>
-            <s.TagCategory__Span>스타일</s.TagCategory__Span>
-            <s.StyleTagsBox__Div>
-              <s.StyleTags__Span>캐주얼</s.StyleTags__Span>
-              <s.StyleTags__Span>스트릿</s.StyleTags__Span>
-              <s.StyleTags__Span>트레이닝</s.StyleTags__Span>
-              <s.StyleTags__Span>포멀</s.StyleTags__Span>
-              <s.StyleTags__Span>세미포멀</s.StyleTags__Span>
-            </s.StyleTagsBox__Div>
-          </s.TagBox__Div>
+              {/* 아우터 */}
+              <Ootd.TagBox__Div>
+                <Ootd.TagCategory__Span>아우터</Ootd.TagCategory__Span>
+                <Ootd.OuterList__Ul>
+                  {props.tagCategory[1].tagItem.map((el, idx) => (
+                    <Ootd.OuterTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                      {el}
+                    </Ootd.OuterTags__Li>
+                  ))}
+                </Ootd.OuterList__Ul>
+              </Ootd.TagBox__Div>
 
-          {/* 아우터 */}
-          <s.TagBox__Div>
-            <s.TagCategory__Span>아우터</s.TagCategory__Span>
-            <s.OuterTagsBox__Div>
-              <s.OuterTags__Span>트랙자켓</s.OuterTags__Span>
-              <s.OuterTags__Span>플리스</s.OuterTags__Span>
-              <s.OuterTags__Span>자켓</s.OuterTags__Span>
-              <s.OuterTags__Span>점퍼</s.OuterTags__Span>
-              <s.OuterTags__Span>코트</s.OuterTags__Span>
-            </s.OuterTagsBox__Div>
-          </s.TagBox__Div>
+              {/* 상의 */}
+              <Ootd.TagBox__Div>
+                <Ootd.TagCategory__Span>상의</Ootd.TagCategory__Span>
+                <Ootd.TopTagsList__Ul>
+                  {props.tagCategory[2].tagItem.map((el, idx) => (
+                    <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                      {el}
+                    </Ootd.StyleTags__Li>
+                  ))}
+                </Ootd.TopTagsList__Ul>
+              </Ootd.TagBox__Div>
 
-          {/* 상의 */}
-          <s.TagBox__Div>
-            <s.TagCategory__Span>상의</s.TagCategory__Span>
-            <s.TopTagsBox__Div>
-              <s.TopTags__Span>티셔츠</s.TopTags__Span>
-              <s.TopTags__Span>셔츠/블라우스</s.TopTags__Span>
-              <s.TopTags__Span>니트</s.TopTags__Span>
-              <s.TopTags__Span>맨투맨</s.TopTags__Span>
-              <s.TopTags__Span>후드</s.TopTags__Span>
-            </s.TopTagsBox__Div>
-          </s.TagBox__Div>
+              {/* 하의 */}
+              <Ootd.TagBox__Div>
+                <Ootd.TagCategory__Span>하의</Ootd.TagCategory__Span>
+                <Ootd.BottomList__Ul>
+                  {props.tagCategory[3].tagItem.map((el, idx) => (
+                    <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                      {el}
+                    </Ootd.StyleTags__Li>
+                  ))}
+                </Ootd.BottomList__Ul>
+              </Ootd.TagBox__Div>
 
-          {/* 하의 */}
-          <s.TagBox__Div>
-            <s.TagCategory__Span>하의</s.TagCategory__Span>
-            <s.BottomTagsBox__Div>
-              <s.BottomTags__Span>청바지</s.BottomTags__Span>
-              <s.BottomTags__Span>슬랙스</s.BottomTags__Span>
-              <s.BottomTags__Span>반바지</s.BottomTags__Span>
-              <s.BottomTags__Span>스커트</s.BottomTags__Span>
-            </s.BottomTagsBox__Div>
-          </s.TagBox__Div>
+              {/* 기타 */}
+              <Ootd.TagBox__Div>
+                <Ootd.TagCategory__Span>기타</Ootd.TagCategory__Span>
+                <Ootd.EtcList__Ul>
+                  {props.tagCategory[4].tagItem.map((el, idx) => (
+                    <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                      {el}
+                    </Ootd.StyleTags__Li>
+                  ))}
+                </Ootd.EtcList__Ul>
+              </Ootd.TagBox__Div>
+            </Ootd.TagWrapper__Div>
+          </Ootd.Container_Side__Div>
+        </div>
 
-          {/* 기타 */}
-          <s.TagBox__Div style={{ borderBottom: "none" }}>
-            <s.TagCategory__Span>기타</s.TagCategory__Span>
-            <s.EtcTagsBox__Div>
-              <s.EtcTags__Span>원피스</s.EtcTags__Span>
-            </s.EtcTagsBox__Div>
-          </s.TagBox__Div>
-        </s.TagWrapper__Div>
+        <Ootd.Container_Body__Div>
+          {/* 선택한 태그 뿌리기*/}
+          <Ootd.MyTag__Div>
+            나衣 태그
+            <Ootd.TagSelect__Div>
+              <Ootd.TagSeletedUnit__Span>#{props.myRegion}</Ootd.TagSeletedUnit__Span>
 
-        <s.Feeds__Div>
-          {new Array(20).fill(1).map((el, idx) => (
-            <div key={idx}>
-              <OotdFeed />
-            </div>
-          ))}
-        </s.Feeds__Div>
-      </s.Container_Body__Div>
-    </s.Container__Div>
+              {props.myTag.map((el, idx) => (
+                <Ootd.TagSeletedUnit__Span key={idx} onClick={() => props.onClickRemoveTag(el)}>
+                  #{el}
+                </Ootd.TagSeletedUnit__Span>
+              ))}
+            </Ootd.TagSelect__Div>
+          </Ootd.MyTag__Div>
+
+          {/* 게시물 페칭 */}
+
+          <Ootd.MasonryLayout breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+            {props.data?.fetchFeeds.feeds.map((el, idx) => (
+              <div key={idx}>
+                <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
+              </div>
+            ))}
+          </Ootd.MasonryLayout>
+        </Ootd.Container_Body__Div>
+
+        {isVisible && (
+          <Ootd.ScrollButton onClick={scrollToTop}>
+            <Ootd.UpArrowImg src="/images/uparrow.png" />
+          </Ootd.ScrollButton>
+        )}
+        <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
+
+        <Modal2 open={modalOpen} close={closeModal}>
+          {isPc && <FeedsWrite closeModal={closeModal} />}
+          {isMobile && (
+            <Modal open={modalOpen} close={closeModal}>
+              <MFeedsWrite closeModal={closeModal} />
+            </Modal>
+          )}
+        </Modal2>
+      </Ootd.Container__Div>
+    </>
   );
 };
 

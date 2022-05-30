@@ -1,48 +1,64 @@
-import { useRouter } from "next/router"
-import * as s from "./onboarding2.styles"
+import { useRouter } from "next/router";
+import { useState } from "react";
+import * as s from "./onboarding2.styles";
 
 export default function Onboarding2UI() {
+  const router = useRouter();
 
-    const router = useRouter()
+  const [isSelected, setIsSelected] = useState<String>("");
 
-    const onMoveToLogin = () => {
-        router.push("/login")
-    }
+  const onClickSelect = (e) => {
+    setIsSelected(e.target.innerText);
+  };
 
-    const onMoveToOnboarding3 = () => {
-        router.push("/onboarding3")
-    }
+  const onMoveToLogin = () => {
+    router.push("/login");
+  };
 
-    const onMoveToOnboarding1 = () => {
-        router.push("/onboarding1")
-    }
+  const onMoveToOnboarding3 = () => {
+    router.push("/onboarding3");
+  };
 
-    return(
-        <s.WrapperDiv>
-            
-            <s.QuestionDiv>평소에 어떤 스타일을 즐겨 입으시나요?</s.QuestionDiv>
-            
-                <s.StyleDiv>
-                    <s.WhichStyleDiv>캐주얼</s.WhichStyleDiv>
-                    <s.WhichStyleDiv>스트릿</s.WhichStyleDiv>
-                    <s.WhichStyleDiv>트레이닝</s.WhichStyleDiv>
-                </s.StyleDiv>
-            
-                <s.RestDiv>
-                    <s.WhichStyleDiv>포멀</s.WhichStyleDiv>
-                    <s.WhichStyleDiv>세미포멀</s.WhichStyleDiv>
-                </s.RestDiv>
+  const onMoveToOnboarding1 = () => {
+    router.push("/onboarding1");
+  };
 
-            <s.PrevNextDiv>
-                <s.PrevButton onClick={onMoveToOnboarding1}>{`<`}</s.PrevButton>
-                <s.NextButton onClick={onMoveToOnboarding3}>{`>`}</s.NextButton>
-            </s.PrevNextDiv>
-            
-            <s.AreYouUserDiv>
-                <s.AlreadyUserDiv>이미 회원이신가요?</s.AlreadyUserDiv>
-                <s.GoToLoginDiv onClick={onMoveToLogin}>로그인 하러가기</s.GoToLoginDiv>
-            </s.AreYouUserDiv>
+  return (
+    <s.WrapperDiv>
+      <s.ItemWrapperDiv>
+        <s.QuestionDiv>즐겨 입는 스타일을 알려주세요!</s.QuestionDiv>
 
-        </s.WrapperDiv>
-    )
+        <s.StyleDiv>
+          <s.WhichStyleDiv id={"캐주얼"} onClick={onClickSelect} isSelected={isSelected}>
+            캐주얼
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"스트릿"} onClick={onClickSelect} isSelected={isSelected}>
+            스트릿
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"트레이닝"} onClick={onClickSelect} isSelected={isSelected}>
+            트레이닝
+          </s.WhichStyleDiv>
+        </s.StyleDiv>
+
+        <s.RestDiv>
+          <s.WhichStyleDiv id={"포멀"} onClick={onClickSelect} isSelected={isSelected}>
+            포멀
+          </s.WhichStyleDiv>
+          <s.WhichStyleDiv id={"세미포멀"} onClick={onClickSelect} isSelected={isSelected}>
+            세미포멀
+          </s.WhichStyleDiv>
+        </s.RestDiv>
+
+        <s.AreYouUserDiv>
+          <s.AlreadyUserDiv>이미 회원이신가요?</s.AlreadyUserDiv>
+          <s.GoToLoginDiv onClick={onMoveToLogin}>로그인 하러가기</s.GoToLoginDiv>
+        </s.AreYouUserDiv>
+
+        <s.PrevNextDiv>
+          <s.PrevImg src="/images/leftarrow.png" onClick={onMoveToOnboarding1} />
+          <s.NextImg src="/images/rightarrow.png" onClick={onMoveToOnboarding3} />
+        </s.PrevNextDiv>
+      </s.ItemWrapperDiv>
+    </s.WrapperDiv>
+  );
 }
