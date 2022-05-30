@@ -220,9 +220,9 @@ export const SignupButton = styled.button`
   width: 8rem;
   height: 3rem;
   line-height: 3rem;
-  background-color: #eeeeee;
+  background: #fff2b2;
   font-size: 1.4rem;
-  color: #bdbdbd;
+  color: #333;
   border: none;
   border-radius: 3rem;
   margin-bottom: 4.1rem;
@@ -325,6 +325,14 @@ export const MyPageAuthOkTimerP = styled.p`
   font-size: 1.1rem;
   line-height: 1.1rem;
   color: #44bd48;
+  margin: 0;
+`;
+
+export const SignUpAuthOkTimerP = styled.p`
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  color: #e57676;
   margin: 0;
 `;
 export const MyPageAuthOkP = styled.p`
