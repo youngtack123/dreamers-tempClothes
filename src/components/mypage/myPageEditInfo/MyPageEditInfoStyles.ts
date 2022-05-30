@@ -125,7 +125,7 @@ export const MyPageAuthOkTimerDiv = styled.div`
   width: 250px;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 export const MyPageAuthOkTimerSpan = styled.span`
