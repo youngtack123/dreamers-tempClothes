@@ -52,6 +52,7 @@ export const tagCategory = [
     tagItem: ["원피스"],
   },
 ];
+
 //--------------결제--------------//
 export const amountState = atom({
   key: v1(),
