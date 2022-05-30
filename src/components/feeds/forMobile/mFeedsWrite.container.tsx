@@ -3,17 +3,15 @@ import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "../write/feedsWrite.queries";
 import { regionCategory, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useRouter } from "next/router";
 import { checkValidationImage } from "../write/image.validation";
-import { IFormProps, IUpdateFeedInput } from "../write/feedsWrite.types";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
 import MFeedsWriteUI from "./mFeedsWrite.presenter";
 import { toast } from "react-toastify";
+import { IFormValue, IMFeedsWriteProps, IUpdateFeedInput } from "./mfeedsWrite.types";
 
-const MFeedsWrite = (props) => {
+const MFeedsWrite = (props: IMFeedsWriteProps) => {
   const router = useRouter();
 
   const [myTag, setMyTag] = useState<String[]>([]);
@@ -101,7 +99,7 @@ const MFeedsWrite = (props) => {
   }, [myTag, imageUrl, myRegion]);
 
   /////// 피드 등록 버튼
-  const onClickSubmit = async (data: IFormProps) => {
+  const onClickSubmit = async (data: IFormValue) => {
     if (myTag.length === 0) {
       Modal.error({ content: "태그를 선택하세요" });
     } else if (imageUrl.length === 0) {
@@ -139,11 +137,7 @@ const MFeedsWrite = (props) => {
   };
 
   // 피드 수정 버튼
-  const onClickUpdate = async (data: IFormProps) => {
-    const currentImgFiles = JSON.stringify(imageUrl);
-    const fetchImgFiles = JSON.stringify(props.fetchData.fetchFeed.feedImg.imgURL);
-    const isChangedImgFiles = currentImgFiles !== fetchImgFiles;
-
+  const onClickUpdate = async (data: IFormValue) => {
     const updateFeedInput: IUpdateFeedInput = {};
     if (data.detail) updateFeedInput.detail = data.detail;
     if (myRegion) updateFeedInput.regionId = myRegion;
@@ -152,7 +146,7 @@ const MFeedsWrite = (props) => {
     if (data.top) updateFeedInput.top = data.top;
     if (data.bottom) updateFeedInput.bottom = data.bottom;
     if (data.etc) updateFeedInput.etc = data.etc;
-    if (isChangedImgFiles) updateFeedInput.imgURLs = imageUrl;
+    if (imageUrl) updateFeedInput.imgURLs = imageUrl;
     try {
       const result = await updateFeed({
         variables: {

@@ -24,14 +24,6 @@ function FeedDetailUI(props) {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
-
   const selectNickname = (nickname: string) => {
     localStorage.setItem("nickname", nickname);
     router.push("/otherUser");
@@ -69,11 +61,8 @@ function FeedDetailUI(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
-
   // 툴팁 좋아요 개수
   const likeCount = props.data?.fetchFeed.likeCount;
-
-  console.log(props.feedLike?.fetchFeedLike);
 
   return (
     <Detail.Wrapper__Div>
@@ -96,36 +85,43 @@ function FeedDetailUI(props) {
               </Detail.MomDiv>
             ))}
           </Detail.Slick>
-          {/* <Detail.ImageDetail__Img src={`https://storage.googleapis.com/${props.data?.fetchFeed.feedImg[0]?.imgURL}` || ""} /> */}
         </Detail.ImageBox__Div>
 
         <Detail.ClothesBox__Div>
-          <Detail.ClothesInfo__Div>
-            <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
-            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.outer}</Detail.ClothesDetail__Span>
-          </Detail.ClothesInfo__Div>
+          {props.data?.fetchFeed.outer && (
+            <Detail.ClothesInfo__Div>
+              <Detail.OuterIcon__SVG></Detail.OuterIcon__SVG>
+              <Detail.ClothesDetail__Span>{props.data?.fetchFeed.outer}</Detail.ClothesDetail__Span>
+            </Detail.ClothesInfo__Div>
+          )}
 
-          <Detail.ClothesInfo__Div>
-            <Detail.TopIcon__SVG></Detail.TopIcon__SVG>
-            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.top}</Detail.ClothesDetail__Span>
-          </Detail.ClothesInfo__Div>
+          {props.data?.fetchFeed.top && (
+            <Detail.ClothesInfo__Div>
+              <Detail.TopIcon__SVG></Detail.TopIcon__SVG>
+              <Detail.ClothesDetail__Span>{props.data?.fetchFeed.top}</Detail.ClothesDetail__Span>
+            </Detail.ClothesInfo__Div>
+          )}
 
-          <Detail.ClothesInfo__Div>
-            <Detail.BottomIcon__SVG></Detail.BottomIcon__SVG>
-            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.bottom}</Detail.ClothesDetail__Span>
-          </Detail.ClothesInfo__Div>
+          {props.data?.fetchFeed.bottom && (
+            <Detail.ClothesInfo__Div>
+              <Detail.BottomIcon__SVG></Detail.BottomIcon__SVG>
+              <Detail.ClothesDetail__Span>{props.data?.fetchFeed.bottom}</Detail.ClothesDetail__Span>
+            </Detail.ClothesInfo__Div>
+          )}
 
-          <Detail.ClothesInfo__Div>
-            <Detail.ETCIcon__SVG></Detail.ETCIcon__SVG>
-            <Detail.ClothesDetail__Span>{props.data?.fetchFeed.etc}</Detail.ClothesDetail__Span>
-          </Detail.ClothesInfo__Div>
+          {props.data?.fetchFeed.etc && (
+            <Detail.ClothesInfo__Div>
+              <Detail.ETCIcon__SVG></Detail.ETCIcon__SVG>
+              <Detail.ClothesDetail__Span>{props.data?.fetchFeed.etc}</Detail.ClothesDetail__Span>
+            </Detail.ClothesInfo__Div>
+          )}
         </Detail.ClothesBox__Div>
       </Detail.Wrapper_Left__Div>
 
       <Detail.Wrapper_Right__Div>
         <Detail.FeedDetailBox__Div>
           <Detail.FeedDetail_Top__Div>
-            <Detail.UserIconImg__Div></Detail.UserIconImg__Div>
+            <Detail.UserIcon__Img src="/images/user.png" />
             <Detail.UserId__Div
               onClick={() => {
                 selectNickname(props.data?.fetchFeed.user.nickname);
@@ -135,18 +131,13 @@ function FeedDetailUI(props) {
             </Detail.UserId__Div>
 
             <Detail.IconBox__Div>
-              <IconButton>
-                <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
-              </IconButton>
-              <LightTooltip title={likeCount}>
-                <IconButton>
-                  {props.isLike ? (
-                    <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
-                  ) : (
-                    <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
-                  )}
-                </IconButton>
-              </LightTooltip>
+              <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
+
+              {props.isLike ? (
+                <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
+              ) : (
+                <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
+              )}
             </Detail.IconBox__Div>
           </Detail.FeedDetail_Top__Div>
 

@@ -17,6 +17,13 @@ function FeedDetail(props) {
     },
   });
 
+  // 피드 좋아요
+  const { data: feedLike } = useQuery(Q_FETCH_FEED_LIKE, {
+    variables: {
+      feedId: myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "",
+    },
+  });
+
   // 페치 유저
   const { data: userData } = useQuery(Q_FETCH_USER);
 
@@ -44,18 +51,6 @@ function FeedDetail(props) {
       });
     }
   };
-
-  // 피드 좋아요
-  const { data: feedLike } = useQuery(Q_FETCH_FEED_LIKE, {
-    variables: {
-      feedId: myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "",
-    },
-  });
-  // 로그인한 유저 정보 일치
-  // const [isMatched, setIsMatched] = useState(false);
-  // const userMatched = data?.fetchFeed.feedLike?.user?.id === userData?.fetchUser.id;
-  // console.log(data?.fetchFeed.feedLike.user?.id);
-  // console.log(userData?.fetchUser.id);
 
   const [showPhoto, setShowPhoto] = useState<string>("");
 

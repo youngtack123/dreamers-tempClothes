@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent } from "react";
 import { FormState, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
-export interface IFeedsWriteProps {
+export interface IMFeedsWriteProps {
   onClickRegion?: (e: any) => void;
   onClickTag?: (e: any) => void;
   isEdit?: boolean;
@@ -10,9 +10,10 @@ export interface IFeedsWriteProps {
   tagFetch?: any;
   fetchImg?: any;
   closeModal?: () => void;
+  openModal?: () => void;
 }
 
-export interface IFeedsWriteUIProps {
+export interface IMFeedsWriteUIProps {
   onClickImage: () => void;
   onChangeImgUrls: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickDelete: (deleteIndex: any) => void;
