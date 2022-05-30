@@ -145,7 +145,7 @@ const OotdFeed = (props) => {
       </Modal>
 
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
-        <Chat closeChatModal={closeChatModal}></Chat>
+        <Chat closeChatModal={closeChatModal} another={props.el.user.nickname}></Chat>
       </Modal>
     </>
     // </FeedWrapper__Div>
