@@ -7,7 +7,7 @@ export const Container__Div = styled.div`
   min-height: 815px;
   height: auto;
   position: relative;
-  margin: 0 auto;
+  margin: 10px auto;
   padding-top: 25px;
   font-family: Pretendard;
 `;
@@ -103,7 +103,7 @@ export const TagSeletedUnit__Span = styled.span`
 
 export const TagWrapper__Div = styled.div`
   width: 203px;
-  height: 630px;
+  height: 590px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -144,7 +144,7 @@ export const TagBox__Div = styled.div`
 export const TagCategory__Span = styled.span`
   font-weight: 600;
   font-size: 14px;
-  margin-bottom: 1px;
+  margin-bottom: 5px;
 `;
 
 export const RegionList__Ul = styled.ul`

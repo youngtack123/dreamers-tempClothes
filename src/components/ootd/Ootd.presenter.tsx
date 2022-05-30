@@ -73,8 +73,9 @@ const OotdUI = (props) => {
               <Ootd.Tag__Span>태그</Ootd.Tag__Span>
             </Ootd.TagWrapper_Head__Div>
 
-            {/* 지역 */}
-            <Ootd.TagBox__Div>
+            {/* 사이드바 */}
+            <Ootd.TagBox__Div id="sideBar">
+              {/* 지역 */}
               <Ootd.TagCategory__Span>지역</Ootd.TagCategory__Span>
               <Ootd.RegionList__Ul>
                 {props.regionCategory.map((el, idx) => (
@@ -199,6 +200,7 @@ const OotdUI = (props) => {
           {isMobile && <MFeedsWrite />}
           {/* <MFeedsWrite /> */}
         </Modal>
+        <div id="end"></div>
       </Ootd.Container__Div>
     </>
   );
