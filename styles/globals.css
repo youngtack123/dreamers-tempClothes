@@ -176,6 +176,91 @@ li {
   }
 }
 
+/* 모달 2 */
+.modal2 {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.6);
+  max-height: 100%;
+  overflow-y: auto;
+}
+.modal2 button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+}
+.modal2 > section {
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid #999;
+  background-color: #fff;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-show 0.3s;
+  overflow-y: auto;
+}
+.modal2 > section > header {
+  /* padding: 16px 64px 16px 16px; */
+  position: fixed;
+  background-color: #f1f1f1;
+  font-weight: 700;
+}
+.modal2 > section > header button {
+  position: fixed;
+  top: 248px;
+  right: 700px;
+  width: 30px;
+  font-size: 21px;
+  font-weight: 700;
+  text-align: center;
+  margin-right: 1rem;
+  background-color: #fff;
+}
+.modal2 > section > main {
+  /* padding: 16px; */
+  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+}
+.modal2 > section > footer {
+  padding: 12px 16px;
+  text-align: right;
+}
+.modal2 > section > footer button {
+  padding: 6px 12px;
+  color: #fff;
+  background-color: #6c757d;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.modal2.openModal {
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal2-bg-show 0.3s;
+}
+@keyframes modal2-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal2-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .tag.active {
   background-color: #505bf0;
   color: #fff;

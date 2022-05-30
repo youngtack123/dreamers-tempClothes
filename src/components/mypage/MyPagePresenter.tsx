@@ -9,6 +9,7 @@ import MyPageChangePassWordContainer from "./myPageChagnePassWord/MyPageChangePa
 import Payment from "../common/commonModal/payment";
 import Modal from "../common/commonModal";
 import { useState } from "react";
+import Modal2 from "../common/commonModal2";
 const MyPagePresenter = (props) => {
   const [selectMyPageListData] = useRecoilState(selectMyPageList);
   const { onClickMyPageList, selectMyPageRef } = props;
@@ -47,9 +48,12 @@ const MyPagePresenter = (props) => {
           {selectMyPageListData === "개인정보 수정" && <MyPageEditInfoContainter />}
           {selectMyPageListData === "비밀번호 변경" && <MyPageChangePassWordContainer />}
         </S.MyPageContendWrapperDiv>
-        <Modal open={modalOpen} close={closeModal} header="단추 충전">
+        {/* <Modal open={modalOpen} close={closeModal} header="단추 충전">
           <Payment setModalOpen={setModalOpen}></Payment>
-        </Modal>
+        </Modal> */}
+        <Modal2 open={modalOpen} close={closeModal} header="단추 충전">
+          <Payment setModalOpen={setModalOpen}></Payment>
+        </Modal2>
       </S.MyPageWrapperDiv>
     </div>
   );

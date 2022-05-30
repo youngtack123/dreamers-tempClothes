@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { gsap } from "gsap";
 
 const Body = styled.div`
   width: 100%;
@@ -88,6 +89,10 @@ const Wrapper2 = styled.div`
   background: #fff2b2;
   margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SubTitleEng1 = styled.span`
@@ -227,6 +232,10 @@ const Login = styled.span`
   font-size: 2rem;
   line-height: 2.5rem;
   color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  :hover {
+    opacity: 0.6;
+  }
 `;
 
 const Looking = styled.span`
@@ -239,10 +248,41 @@ const Looking = styled.span`
   font-size: 2rem;
   line-height: 2.5rem;
   color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  :hover {
+    opacity: 0.6;
+  }
+`;
+const DownArrowImg = styled.img`
+  position: absolute;
+  width: 4.7rem;
+  height: 3rem;
+  top: 88rem;
+  cursor: pointer;
 `;
 
 function Landing() {
   const router = useRouter();
+  const downArrow1 = useRef(null);
+  const downArrow2 = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible2, setIsVisible2] = useState(true);
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      if (window.scrollY > 1300) {
+        setIsVisible2(false);
+      } else {
+        setIsVisible2(true);
+      }
+    });
+  }
 
   const onClickMoveToLogin = () => {
     router.push("/login");
@@ -251,6 +291,20 @@ function Landing() {
   const onClickMoveToOnboarding = () => {
     router.push("/onboarding1");
   };
+
+  const scrollToMiddle = () => {
+    window.scrollTo({ top: 1030, behavior: "smooth" });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: 2050, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    gsap.from(downArrow1.current, { duration: 1, autoAlpha: 5, y: 20, repeat: 100, yoyo: true });
+    gsap.from(downArrow2.current, { duration: 1, autoAlpha: 5, y: 20, repeat: 100, yoyo: true });
+  }, []);
+
   return (
     <Body>
       <Wrapper1>
@@ -260,6 +314,7 @@ function Landing() {
         <DecoBar></DecoBar>
         <TitleEng1>For your perfect </TitleEng1>
         <TitleEng2>excursion</TitleEng2>
+        {isVisible && <DownArrowImg ref={downArrow1} src="/images/downArrow.png" onClick={scrollToMiddle} />}
       </Wrapper1>
       <Wrapper2>
         <SubTitleEng1>match clothes</SubTitleEng1>
@@ -269,6 +324,7 @@ function Landing() {
         <SubTitleEng2>with temp</SubTitleEng2>
         <SmallLogo2 src="/images/landui.svg" />
         <SubTitleKo>당신의 완벽한 날씨를 위해</SubTitleKo>
+        {isVisible2 && <DownArrowImg ref={downArrow2} src="/images/downArrow.png" onClick={scrollToBottom} />}
       </Wrapper2>
       <Wrapper3>
         <LineBox></LineBox>
