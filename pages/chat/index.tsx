@@ -126,7 +126,6 @@ const SubmitButton = styled.button`
 const ChatInputDiv = styled.div`
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
 `;
 
 const Chat = (props) => {

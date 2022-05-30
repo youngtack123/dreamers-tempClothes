@@ -3,13 +3,14 @@ import Timer from "../lib/timer";
 import * as s from "./signup.styles";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignupUI(props: any) {
   const { handleSignUpInputs, signUpFunc, onClickEventTag, overLapId, overLapNic, inputs, createPhoneAuth, confirmAuthNumber, noAuthSignUp, socialLoginData, updateUserFunc } = props;
   const [sendAuthNumber] = useRecoilState(timerState);
   const router = useRouter();
   const [authOk] = useRecoilState(authState);
+  const [tab, setTab] = useState("curr");
   const onMoveToLogin = () => {
     router.push("/login");
   };
@@ -94,7 +95,7 @@ export default function SignupUI(props: any) {
         <s.TagsDiv>
           <s.GenderTagWrapperDiv>
             <s.GenderDiv>성별</s.GenderDiv>
-            <s.TagItemDiv id="gender" onClick={onClickEventTag}>
+            <s.TagItemDiv id="gender" onClick={onClickEventTag} className={`tag ${tab === "curr" ? "active" : ""}`}>
               남성
             </s.TagItemDiv>
             <s.TagItemDiv id="gender" onClick={onClickEventTag}>

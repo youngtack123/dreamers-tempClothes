@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { selectMyPageList } from "../common/store";
+import { withAuth } from "../hoc/withAuth";
 import MyPagePresenter from "./MyPagePresenter";
 
 const MyPageContainer = () => {
@@ -14,4 +15,4 @@ const MyPageContainer = () => {
   return <MyPagePresenter onClickMyPageList={onClickMyPageList} selectMyPageRef={selectMyPageRef} />;
 };
 
-export default MyPageContainer;
+export default withAuth(MyPageContainer);

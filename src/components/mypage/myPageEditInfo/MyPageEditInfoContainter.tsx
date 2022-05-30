@@ -88,15 +88,19 @@ const MyPageEditInfoContainter = () => {
       toast.success("인증번호 발송 완료!", {
         icon: "😊",
       });
+      setSendAuthNumber(true);
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
       });
     }
-    setSendAuthNumber(true);
   };
 
   const confirmAuthNumber = async () => {
+    if (inputs.authNumber.length !== 6) {
+      alert("인증번호를 다시 입력해 주세요!");
+      return;
+    }
     try {
       const authNumberResult = await m_authNumber({
         variables: {

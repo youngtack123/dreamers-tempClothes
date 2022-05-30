@@ -19,7 +19,7 @@ const MyPageChangePassWordPresenter = (props) => {
         </S.MyPageChangePassWordInputFlexDiv>
       </S.MyPageChangePassWordInputDiv>
       <S.MyPageChangePassWordButtonDiv>
-        {inputs.changePassword === inputs.passwordOk ? (
+        {inputs.changePassword === inputs.passwordOk && inputs.passwordOk !== "" && inputs.changePassword !== "" ? (
           <S.PWChangeOKButton onClick={changePasswordFunc}>저장</S.PWChangeOKButton>
         ) : (
           <S.MyPageChangePassWordOkButton>저장</S.MyPageChangePassWordOkButton>

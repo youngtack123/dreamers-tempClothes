@@ -5,6 +5,7 @@ import OotdUI from "./Ootd.presenter";
 import { Q_FETCH_FEEDS, Q_FETCH_USER, Q_GET_WEATHER } from "./Ootd.queries";
 import { regionCategory, tagCategory } from "../common/store";
 import { useRouter } from "next/router";
+import { withAuth } from "../hoc/withAuth";
 
 const OotdPage = () => {
   // const isPc = useMediaQuery({
@@ -170,4 +171,4 @@ const OotdPage = () => {
   );
 };
 
-export default OotdPage;
+export default withAuth(OotdPage);

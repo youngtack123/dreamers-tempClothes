@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { withAuth } from "../hoc/withAuth";
 import TempClothesUI from "./tempClothes.presenter";
 import { Q_FETCH_FEED_TAGS, Q_FETCH_USER, Q_GET_WEATHER } from "./tempClothes.queries";
 
@@ -17,4 +18,4 @@ const TempClothes = () => {
   return <TempClothesUI weatherData={weatherData} userData={userData} tagData={tagData} />;
 };
 
-export default TempClothes;
+export default withAuth(TempClothes);
