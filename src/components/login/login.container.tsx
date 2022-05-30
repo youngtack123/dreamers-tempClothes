@@ -35,13 +35,11 @@ export default function Login() {
         },
       });
       setAccessToken(loginResult?.data?.login);
-      console.log(loginResult?.data?.login);
       toast.success("로그인 성공!", {
         icon: "😊",
       });
       router.push("/tempClothes");
     } catch (error) {
-      console.log(error.message);
       toast.error(error.message, {
         icon: "🤔",
       });

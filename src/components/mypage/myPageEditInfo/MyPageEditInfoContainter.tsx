@@ -26,9 +26,7 @@ const MyPageEditInfoContainter = () => {
   const [authOk, setAuthFalse] = useState(false);
   const [, setSendAuthNumber] = useRecoilState(timerState);
 
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
+  useEffect(() => {}, [inputs]);
   const handleInfo = (e: any) => {
     const { name, value } = e.target;
     setInputs({
@@ -55,7 +53,7 @@ const MyPageEditInfoContainter = () => {
 
   const updateUserEditInfo = async () => {
     try {
-      const updateUserResult = await m_updateUser({
+      await m_updateUser({
         variables: {
           updateUserInput: {
             email: inputs.email,
@@ -66,7 +64,6 @@ const MyPageEditInfoContainter = () => {
           },
         },
       });
-      console.log("updateUserResult", updateUserResult);
       toast.success("회원정보 수정 완료!", {
         icon: "😊",
       });
@@ -80,7 +77,7 @@ const MyPageEditInfoContainter = () => {
 
   const createPhoneAuth = async () => {
     try {
-      const createPhoneAuthResult = await m_phoneAuth({
+      await m_phoneAuth({
         variables: {
           phone: inputs.phone,
         },
@@ -102,12 +99,11 @@ const MyPageEditInfoContainter = () => {
       return;
     }
     try {
-      const authNumberResult = await m_authNumber({
+      await m_authNumber({
         variables: {
           authNumber: inputs.authNumber,
         },
       });
-      console.log("authNumberResult", authNumberResult);
       toast.success("인증 완료!", {
         icon: "😊",
       });
@@ -122,12 +118,11 @@ const MyPageEditInfoContainter = () => {
 
   const overLapId = async () => {
     try {
-      const overLapIdResult = await m_overLapEmail({
+      await m_overLapEmail({
         variables: {
           email: inputs.email,
         },
       });
-      console.log("중복 ID 결과값:", overLapIdResult);
       toast.success("사용 가능한 이메일이에요!", {
         icon: "😊",
       });
@@ -140,12 +135,11 @@ const MyPageEditInfoContainter = () => {
 
   const overLapNic = async () => {
     try {
-      const overLapNicResult = await m_overLapNic({
+      await m_overLapNic({
         variables: {
           nickname: inputs.nickname,
         },
       });
-      console.log("중복 닉네임 결과값:", overLapNicResult);
       toast.success("사용 가능한 닉네임이에요!", {
         icon: "😊",
       });

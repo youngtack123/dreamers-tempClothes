@@ -36,15 +36,12 @@ const FeedsCommentList = (props) => {
           },
         ],
       });
-      // alert("댓글이 삭제되었습니다!");
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
       });
     }
   };
-
-  // console.log(props.IDforFetch);
 
   const onLoadMore = () => {
     if (!data) return;

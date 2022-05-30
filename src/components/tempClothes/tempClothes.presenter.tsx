@@ -1,8 +1,10 @@
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../common/commonModal";
 import FeedDetail from "../feeds/detail/feedDetail.container";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
+import { Q_GET_WEATHER } from "./tempClothes.queries";
 import * as s from "./tempClothes.styles";
 import { ITempClothesUIProps } from "./tempClothes.types";
 
@@ -34,7 +36,13 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(false);
 
+  const [nonMember, setNonMember] = useState("");
+
   const [isVisible, setIsVisible] = useState(false);
+
+  const { data: nonMemberWeatherData } = useQuery(Q_GET_WEATHER, {
+    variables: { regionName: String(nonMember) },
+  });
 
   const openModal = () => {
     setModalOpen(true);
@@ -63,6 +71,10 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
     });
   }
 
+  useEffect(() => {
+    setNonMember(localStorage.getItem("onboarding3"));
+  }, []);
+
   return (
     <s.WrapperDiv>
       {/* 현재 시간, 기온, 추천 옷차림 태그 부분 */}
@@ -76,11 +88,11 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
         <s.MiddleDiv>
           <s.RegionDiv>
             <s.TodayDiv>지금 지역</s.TodayDiv>
-            <s.SelectedRegionDiv>{props.userData?.fetchUser.region.id}</s.SelectedRegionDiv>
+            <s.SelectedRegionDiv>{props.userData?.fetchUser.region.id || nonMember}</s.SelectedRegionDiv>
           </s.RegionDiv>
           <s.TodayTempDiv>
             <s.TodayDiv>지금 기온</s.TodayDiv>
-            <s.TempNumDiv>{Math.round(props.weatherData?.getWeather.temp) || 0}</s.TempNumDiv>
+            <s.TempNumDiv>{Math.round(props.weatherData?.getWeather.temp) || Math.round(nonMemberWeatherData?.getWeather.temp) || 0}</s.TempNumDiv>
             <s.DegreeDiv>°C</s.DegreeDiv>
           </s.TodayTempDiv>
         </s.MiddleDiv>

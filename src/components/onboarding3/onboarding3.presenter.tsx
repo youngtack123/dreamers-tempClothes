@@ -20,6 +20,7 @@ export default function Onboarding3UI() {
 
   const onClickTag = (e) => {
     setClickTag(e.target.innerText);
+    localStorage.setItem("onboarding3", e.target.innerText);
   };
 
   return (

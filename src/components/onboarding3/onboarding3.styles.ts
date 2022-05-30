@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 
+interface Onboarding3Props {
+  clickTag: any;
+  id: any;
+}
+
 export const WrapperDiv = styled.div`
   height: 93.5rem;
   display: flex;
@@ -43,8 +48,8 @@ export const RegionDiv = styled.div`
     background-color: #fff2b2;
   }
   cursor: pointer;
-  background-color: ${(props) => (props.clickTag === props.id ? "#fff2b2" : "#fff")};
-  border: ${(props) => (props.clickTag === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
+  background-color: ${(props: Onboarding3Props) => (props.clickTag === props.id ? "#fff2b2" : "#fff")};
+  border: ${(props: Onboarding3Props) => (props.clickTag === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
 `;
 export const RestDiv = styled.div`
   width: 28rem;
@@ -60,8 +65,9 @@ export const JejuRegionDiv = styled.div`
   line-height: 4rem;
   font-size: 1.6rem;
   border-radius: 30px;
-  border: 1px solid #bebebe;
   text-align: center;
+  background-color: ${(props: Onboarding3Props) => (props.clickTag === props.id ? "#fff2b2" : "#fff")};
+  border: ${(props: Onboarding3Props) => (props.clickTag === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
   :hover {
     border: 1px solid #ffdd87;
     background-color: #fff2b2;

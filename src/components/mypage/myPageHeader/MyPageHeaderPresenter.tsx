@@ -6,13 +6,6 @@ import Payment from "../../common/commonModal/payment";
 const MyPageHeaderPresenter = (props: any) => {
   const { onClickMyPageList, fetchUserData, weahterData } = props;
   const [modalOpen, setModalOpen] = useState(false);
-  const [weatherDetail, setWeatherDetail] = useState("");
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
   const getDate = () => {
     const newDate = new Date();
@@ -69,7 +62,7 @@ const MyPageHeaderPresenter = (props: any) => {
       <S.MyPageHeaderContentDiv>
         <S.MyPageHeaderProFileImg src="/images/user.png" alt="profileImg" />
         <S.MyPageHeaderUserNameSpan>{fetchUserData?.fetchUser.nickname}</S.MyPageHeaderUserNameSpan>
-        <S.MyPageHeaderButtonCountSpan>{fetchUserData?.fetchUser.button ? `단추 ${fetchUserData?.fetchUser.button} 개` : "-개"}</S.MyPageHeaderButtonCountSpan>
+        <S.MyPageHeaderButtonCountSpan>{fetchUserData?.fetchUser.button ? `단추 ${fetchUserData?.fetchUser.button} 개` : "0개"}</S.MyPageHeaderButtonCountSpan>
         <S.MyPageHeaderDataTagFlexDiv>
           <S.MypageHeaderDataTagDiv>{fetchUserData?.fetchUser.region.id ? `#${fetchUserData?.fetchUser.region.id}` : "-"}</S.MypageHeaderDataTagDiv>
           <S.MypageHeaderDataTagDiv style={{ marginRight: "0px" }}>{fetchUserData?.fetchUser.style ? `#${fetchUserData?.fetchUser.style}` : "-"}</S.MypageHeaderDataTagDiv>

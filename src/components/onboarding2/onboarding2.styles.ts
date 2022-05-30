@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 
+interface Onboarding2Props {
+  isSelected: any;
+  id: any;
+}
+
 export const WrapperDiv = styled.div`
   height: 93.5rem;
   display: flex;
@@ -43,8 +48,8 @@ export const WhichStyleDiv = styled.div`
     background-color: #fff2b2;
   }
   cursor: pointer;
-  background-color: ${(props) => (props.isSelected === props.id ? "#fff2b2" : "#fff")};
-  border: ${(props) => (props.isSelected === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
+  background-color: ${(props: Onboarding2Props) => (props.isSelected === props.id ? "#fff2b2" : "#fff")};
+  border: ${(props: Onboarding2Props) => (props.isSelected === props.id ? "1px solid #ffdd87" : "1px solid #bebebe")};
 `;
 export const RestDiv = styled.div`
   width: 18.1rem;

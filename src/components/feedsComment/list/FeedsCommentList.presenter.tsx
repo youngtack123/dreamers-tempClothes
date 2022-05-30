@@ -1,33 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import NestedCommentList from "../../feedsNestedComment/list/NestedCommentList.container";
 import NestedCommentWrite from "../../feedsNestedComment/write/NestedCommentWrite.container";
-import FeedsCommentWrite from "../write/FeedsCommentWrite.container";
 import * as s from "./FeedsCommentList.styles";
 import { IFeedsCommentListUIProps } from "./FeedsCommentList.types";
 
 const FeedsCommentListUI = (props: IFeedsCommentListUIProps) => {
   const [isNested, setIsNested] = useState(false);
   const [mention, setMention] = useState("");
-  // const scrollRef = useRef();
 
   // 대댓글 멘션 기능
-  const onWriteMention = (nickname) => () => {
+  const onWriteMention = (nickname: string) => () => {
     const at = "@";
-    setMention(at.concat(nickname));
+    const space = " ";
+    setMention(at.concat(nickname).concat(space));
     setIsNested(true);
   };
-
-  // const scrollToBottom = useCallback(() => {
-  //   if (isNested) {
-  //     // 스크롤 내리기
-  //     scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-  //   }
-  // }, [isNested]);
-
-  // useEffect(() => {
-  //   onWriteMention(props.el?.user.nickname);
-  //   scrollToBottom();
-  // }, [isNested]);
 
   return (
     <>

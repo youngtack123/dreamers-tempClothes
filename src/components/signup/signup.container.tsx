@@ -1,6 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
@@ -67,7 +66,7 @@ export default function Signup() {
   const signUpFunc = async () => {
     if (authOk) {
       try {
-        const signUpResult = await m_createUser({
+        await m_createUser({
           variables: {
             createUserInput: {
               regionId: inputs.region,
@@ -80,7 +79,6 @@ export default function Signup() {
             },
           },
         });
-        console.log("회원가입 결과", signUpResult);
         toast.success("회원 가입 성공!", {
           icon: "😊",
         });
@@ -89,7 +87,6 @@ export default function Signup() {
         toast.error(error.message, {
           icon: "🤔",
         });
-        console.log(error.message);
       }
     } else if (!authOk) {
       toast.error("인증 절차를 진행해 주세요!", {
@@ -100,7 +97,7 @@ export default function Signup() {
 
   const updateUserFunc = async () => {
     try {
-      const updateUserFuncResult = await m_updateUser({
+      await m_updateUser({
         variables: {
           updateUserInput: {
             regionId: inputs.region,
@@ -124,12 +121,11 @@ export default function Signup() {
 
   const overLapId = async () => {
     try {
-      const overLapIdResult = await m_overLapEmail({
+      await m_overLapEmail({
         variables: {
           email: inputs.email,
         },
       });
-      console.log("중복 ID 결과값:", overLapIdResult);
       toast.success("사용 가능한 이메일이에요!", {
         icon: "😊",
       });
@@ -142,12 +138,11 @@ export default function Signup() {
 
   const overLapNic = async () => {
     try {
-      const overLapNicResult = await m_overLapNic({
+      await m_overLapNic({
         variables: {
           nickname: inputs.nickname,
         },
       });
-      console.log("중복 닉네임 결과값:", overLapNicResult);
       toast.success("사용 가능한 닉네임이에요!", {
         icon: "😊",
       });
@@ -160,13 +155,12 @@ export default function Signup() {
 
   const createPhoneAuth = async () => {
     try {
-      const createPhoneAuthResult = await m_phoneAuth({
+      await m_phoneAuth({
         variables: {
           phone: inputs.phone,
         },
       });
 
-      console.log(createPhoneAuthResult);
       toast.success("인증번호 발송 완료!", {
         icon: "😊",
       });
@@ -246,10 +240,6 @@ export default function Signup() {
       icon: "🤔",
     });
   };
-
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
   return (
     <SignupUI
       handleSignUpInputs={handleSignUpInputs}

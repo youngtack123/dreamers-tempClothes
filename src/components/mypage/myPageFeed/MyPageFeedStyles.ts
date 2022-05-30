@@ -28,3 +28,22 @@ export const MypageFeedImage = styled.img`
 export const MyPageWrapperSelectDiv = styled.div`
   display: flex;
 `;
+
+export const NoImageDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const NoImgaeImg = styled.img`
+  width: 36px;
+  height: 36px;
+  margin-top: 80px;
+  margin-bottom: 59px;
+`;
+export const NoImageTextDiv = styled.div`
+  font-weight: 500;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 120px;
+`;

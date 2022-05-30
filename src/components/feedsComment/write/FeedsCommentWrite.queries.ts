@@ -19,7 +19,7 @@ export const Q_FETCH_USER = gql`
   }
 `;
 export const Q_FETCH_COMMENTS = gql`
-  query fetchComments($page: Float, $feedId: String!) {
+  query fetchComments($page: Int, $feedId: String!) {
     fetchComments(page: $page, feedId: $feedId) {
       comments {
         id

@@ -257,6 +257,7 @@ export const ErrorTextEmailP = styled.p`
   padding-left: 5.5rem;
   padding-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 `;
 
 export const ErrorTextP = styled.p`
@@ -267,6 +268,7 @@ export const ErrorTextP = styled.p`
   padding-right: 15rem;
   padding-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 `;
 
 export const ErrorTextPassWordP = styled.p`
@@ -277,6 +279,7 @@ export const ErrorTextPassWordP = styled.p`
   padding-left: 6.5rem;
   padding-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 `;
 
 export const ErrorTextPassWordOkP = styled.p`
@@ -287,6 +290,7 @@ export const ErrorTextPassWordOkP = styled.p`
   padding-left: 9rem;
   padding-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 `;
 export const ErrorTextPhoneP = styled.p`
   display: flex;
@@ -296,6 +300,7 @@ export const ErrorTextPhoneP = styled.p`
   padding-left: 5.5rem;
   padding-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1rem;
 `;
 
 export const ErrorTextAuthP = styled.p`
@@ -305,6 +310,9 @@ export const ErrorTextAuthP = styled.p`
   margin: 0rem;
   padding-right: 15rem;
   margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-left: 6.5rem;
+  padding-top: 0.5rem;
 `;
 
 export const MyPageAuthOkTimerDiv = styled.div`

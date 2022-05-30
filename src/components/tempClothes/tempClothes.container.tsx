@@ -18,4 +18,4 @@ const TempClothes = () => {
   return <TempClothesUI weatherData={weatherData} userData={userData} tagData={tagData} />;
 };
 
-export default withAuth(TempClothes);
+export default TempClothes;

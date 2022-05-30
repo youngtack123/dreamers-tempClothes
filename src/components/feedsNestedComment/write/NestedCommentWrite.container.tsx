@@ -14,8 +14,6 @@ const NestedCommentWrite = (props: INestedCommentWriteProps) => {
     mode: "onChange",
   });
 
-  console.log("props.IDforFetch", props.IDforFetch);
-
   const onWriteNestedComment = async (data: IWriteNestedComment) => {
     const { comment } = data;
 
@@ -25,8 +23,6 @@ const NestedCommentWrite = (props: INestedCommentWriteProps) => {
           createCommentInput: {
             pCommentId: props.el,
             commentDetail: comment,
-            // feedId: "cac09a67-e251-48a3-a0e7-5ba89268792e",
-            // feedId: String(router.query.feedId),
             feedId: props.IDforFetch,
           },
         },

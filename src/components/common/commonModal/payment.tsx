@@ -109,7 +109,6 @@ const Payment = (props) => {
   const { setModalOpen } = props;
   const [createButton] = useMutation(CREATE_BUTTON);
   const { data } = useQuery(FETCH_USER);
-  console.log(data);
 
   const requestPay = (amount) => {
     const IMP = window.IMP;
@@ -148,7 +147,6 @@ const Payment = (props) => {
               icon: "😊",
             });
             setModalOpen(false);
-            console.log("결제성공!", buyPointResult);
           } catch (error: any) {
             toast.error(error.message, {
               icon: "🤔",
