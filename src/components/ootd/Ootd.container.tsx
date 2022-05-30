@@ -8,16 +8,6 @@ import { useRouter } from "next/router";
 import { withAuth } from "../hoc/withAuth";
 
 const OotdPage = () => {
-  // const isPc = useMediaQuery({
-  //   query: "(min-width : 1200px) and (max-width : 1920px)",
-  // });
-  // const isTablet = useMediaQuery({
-  //   query: "(min-width:768px) and (max-width:1199px)",
-  // });
-  // const isMobile = useMediaQuery({
-  //   query: "(max-width:767px)",
-  // });
-
   const router = useRouter();
 
   const [myTag, setMyTag] = useState<string[]>([]);

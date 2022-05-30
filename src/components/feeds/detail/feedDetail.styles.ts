@@ -10,9 +10,9 @@ export const Body = styled.body`
 `;
 
 export const Wrapper__Div = styled.div`
-  width: 1020px;
-  height: 700px;
-  padding: 20px;
+  width: 102rem;
+  height: 70rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
@@ -20,8 +20,8 @@ export const Wrapper__Div = styled.div`
 `;
 
 export const Wrapper_Left__Div = styled.div`
-  width: 509px;
-  height: 660px;
+  width: 50.9rem;
+  height: 66rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,18 +31,15 @@ export const PhotoBoxDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 509px;
-  height: 455px;
-  /* background: #eeeeee; */
-  border-radius: 10px;
-  margin-bottom: 25px;
-  // position: relative;
+  width: 50.9rem;
+  height: 45.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
   overflow: hidden;
 `;
 
 export const ShowImg = styled.img`
   width: 100%;
-  //height: 330px;
   border-radius: 10px;
 `;
 
@@ -51,18 +48,12 @@ export const ImageBox__Div = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  /* width: 509px;
-  height: 455px;
-  overflow: hidden;
-  border: 1px solid #bebebe;
-  border-radius: 10px; */
 `;
 
 export const Slick = styled(Slider)`
-  width: 300px;
-  height: 65px;
+  width: 30rem;
+  height: 6.5rem;
   margin-bottom: 25px;
-  /* margin-left: 10px; */
   .slick-slider /*슬라이드 틀 조정*/ {
     display: inline-block;
   }
@@ -103,21 +94,21 @@ export const ChildDiv = styled.div`
 `;
 
 export const ImageDetail__Img = styled.img`
-  width: 65px;
-  height: 65px;
+  width: 6.5rem;
+  height: 6.5rem;
   object-fit: cover;
   cursor: pointer;
   border-radius: 10px;
 `;
 
 export const ImageThum__Div = styled.div`
-  width: 326px;
-  height: 74px;
+  width: 32.6rem;
+  height: 7.4rem;
 `;
 
 export const ClothesBox__Div = styled.div`
-  width: 509px;
-  height: 91px;
+  width: 50.9rem;
+  height: 9.1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -128,47 +119,47 @@ export const ClothesInfo__Div = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 240px;
-  height: 40px;
-  padding: 12px 10px 13px;
+  width: 24rem;
+  height: 4rem;
+  padding: 1.2rem 1rem 1.3rem;
   background: #ffffff;
   border: 1px solid #bebebe;
   border-radius: 10px;
 `;
 
 export const ClothesDetail__Span = styled.div`
-  font-size: 14px;
-  margin-left: 7px;
+  font-size: 1.4rem;
+  margin-left: 0.7rem;
 `;
 
 export const OuterIcon__SVG = styled.div`
-  width: 18px;
-  height: 18px;
+  width: 1.8rem;
+  height: 1.8rem;
   background-image: url("/images/coat.png");
 `;
 
 export const TopIcon__SVG = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url("/images/top.png");
 `;
 
 export const BottomIcon__SVG = styled.div`
-  width: 11px;
-  height: 16px;
+  width: 1.1rem;
+  height: 1.6rem;
   background-image: url("/images/pants.png");
-  margin-left: 3px;
+  margin-left: 0.3rem;
 `;
 
 export const ETCIcon__SVG = styled.div`
-  width: 13px;
-  height: 20px;
+  width: 1.3rem;
+  height: 2rem;
   background-image: url("/images/dress.png");
 `;
 
 export const Wrapper_Right__Div = styled.div`
-  width: 455px;
-  height: 660px;
+  width: 45.5rem;
+  height: 66rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -176,8 +167,8 @@ export const Wrapper_Right__Div = styled.div`
 
 export const FeedDetailBox__Div = styled.div`
   width: 100%;
-  height: 270px;
-  padding: 10px 13px 15px 12px;
+  height: 27rem;
+  padding: 1rem 1.3rem 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -186,34 +177,34 @@ export const FeedDetailBox__Div = styled.div`
 `;
 
 export const FeedDetail_Top__Div = styled.div`
-  width: 430px;
-  height: 50px;
+  width: 43rem;
+  height: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 0.5rem;
   border-bottom: 1px solid #bebebe;
 `;
 
 // 나중에 이미지로 수정하기
-export const UserIconImg__Div = styled.div`
-  width: 30px;
-  height: 30px;
+export const UserIcon__Img = styled.img`
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   background-color: #bebebe;
 `;
 
 export const UserId__Div = styled.div`
-  width: 332px;
-  font-size: 13px;
+  width: 33.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  padding-left: 3px;
+  padding-left: 0.3rem;
   cursor: pointer;
 `;
 
 export const IconBox__Div = styled.div`
-  width: 56px;
-  height: 16px;
+  width: 5.6rem;
+  height: 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,52 +212,51 @@ export const IconBox__Div = styled.div`
 `;
 
 export const LikeCount__Span = styled.span`
-  padding: 2px 10px;
+  padding: 0.2rem 1rem;
   background-color: #fff2b2;
   border-radius: 30px;
-  font-size: 12px;
+  font-size: 1.2rem;
   position: absolute;
   top: -30px;
   right: -6px;
 `;
 
 export const Content__Div = styled.div`
-  width: 430px;
-  height: 155px;
+  width: 43rem;
+  height: 15.5rem;
   border-bottom: 1px solid #bebebe;
 `;
 
 export const ContentDetail__P = styled.p`
-  width: 100%;
-  font-size: 13px;
-  padding-top: 5px;
-  padding-left: 5px;
-  margin: 5px 0;
+  font-size: 1.3rem;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  margin: 0.5rem 0;
 `;
 
 export const FeedDetail_Bottom__Div = styled.div`
-  width: 430px;
+  width: 43rem;
   height: auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding-right: 5px;
+  padding-right: 0.5rem;
   position: relative;
 `;
 
 export const Tag__Div = styled.div`
-  width: 400px;
+  width: 40rem;
   height: auto;
-  padding-top: 15px;
+  padding-top: 1.5rem;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding-left: 5px;
+  padding-left: 0.5rem;
 `;
 
 export const TagUnit__Span = styled.span`
-  font-size: 12px;
-  margin-right: 5px;
+  font-size: 1.2px;
+  margin-right: 0.5rem;
 `;
 
 const fadeIn = keyframes`
@@ -289,8 +279,8 @@ const fadeOut = keyframes`
 
 // 수정 삭제 토글 버튼
 export const SettingBox__Div = styled.div`
-  width: 43px;
-  height: 60px;
+  width: 4.3rem;
+  height: 6rem;
   background: #ffffff;
   border: 1px solid #bebebe;
   border-radius: 5px;
@@ -298,10 +288,10 @@ export const SettingBox__Div = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: 12px;
+  font-size: 1.2rem;
   position: absolute;
   right: 0;
-  top: 30px;
+  top: 3rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   animation: ${(props: IFeedDetailButtonProps) => (props.isOpen ? fadeIn : fadeOut)} 0.2s ease-out;
 `;
@@ -323,9 +313,8 @@ export const Delete__Span = styled.span`
 `;
 
 export const CommentBox__Div = styled.div`
-  width: 455px;
-  height: 370px;
-  // padding: 15px;
+  width: 45.5rem;
+  height: 37rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -335,20 +324,18 @@ export const CommentBox__Div = styled.div`
 `;
 
 export const CommentDetail__Div = styled.div`
-  width: 100%;
+  width: 45.5rem;
   height: 291px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* gap: 1; */
 `;
 
 export const CommentCreate__Div = styled.div`
-  width: 430px;
-  height: 64px;
-  //padding: 12px 15px 0 25px;
+  width: 43rem;
+  height: 6.4rem;
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #bebebe;
-  padding-top: 12px;
+  padding-top: 1.2rem;
 `;

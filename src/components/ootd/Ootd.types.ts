@@ -14,5 +14,4 @@ export interface IOotdUIProps {
   data: any;
   tagSelected: string[];
   regionSelected: string;
-  closeModal: () => void;
 }

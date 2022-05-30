@@ -18,7 +18,7 @@ export const FeedTop__Div = styled.div`
   padding: 10px;
 `;
 
-export const UserIcon__Div = styled.div`
+export const UserIcon__Img = styled.img`
   width: 25px;
   height: 25px;
   border-radius: 50%;

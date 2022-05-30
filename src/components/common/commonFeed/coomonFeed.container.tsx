@@ -55,20 +55,15 @@ const OotdFeed = (props) => {
     }
   };
 
-  const onClickMoveToDetail = (e) => {
-    router.push(`/feeds/${e.currentTarget.id}`);
-  };
-
   const selectNickname = (nickname: string) => {
     localStorage.setItem("nickname", nickname);
     router.push("/otherUser");
   };
 
   return (
-    // <FeedWrapper__Div>
     <>
       <feed.FeedTop__Div>
-        <feed.UserIcon__Div></feed.UserIcon__Div>
+        <feed.UserIcon__Img src="/images/user.png" />
         <feed.UserName__Span
           onClick={() => {
             selectNickname(props.el.user.nickname);
@@ -83,15 +78,14 @@ const OotdFeed = (props) => {
         <feed.FeedImageBox__Div id={props.el.id} onClick={openModal}>
           <feed.FeedImage__Img src={`https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` ? `https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` : ""} />
         </feed.FeedImageBox__Div>
-        {/* </Link> */}
 
         <feed.HoverIcon__Div>
           {isLike ? (
             <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
           ) : (
-            <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
+            <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#fff" />
           )}
-          <DMIcon onClick={openChatModal} style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
+          <DMIcon onClick={openChatModal} style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#fff" />
         </feed.HoverIcon__Div>
       </feed.FeedBody__Div>
 
@@ -152,7 +146,6 @@ const OotdFeed = (props) => {
         <Chat closeChatModal={closeChatModal} another={props.el.user.nickname}></Chat>
       </Modal>
     </>
-    // </FeedWrapper__Div>
   );
 };
 

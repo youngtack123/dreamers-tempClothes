@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
 import Masonry from "react-masonry-css";
 
+interface ITagSelectProps {
+  regionSelect?: boolean;
+  tagSelected?: boolean;
+}
+
 export const Container__Div = styled.div`
   display: flex;
   width: 1200px;
-  min-height: 815px;
+  // min-height: 815px;
   height: auto;
   position: relative;
   margin: 0 auto;
@@ -23,14 +28,14 @@ export const Container_Side__Div = styled.div`
   display: flex;
   flex-direction: column;
   width: 230px;
-  position: fixed;
+  position: sticky;
+  top: 0px;
 `;
 
 export const Container_Body__Div = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin-left: 230px;
   width: 965px;
 `;
 
@@ -160,7 +165,7 @@ export const RegionTags__Li = styled.li`
   font-size: 12px;
   margin-right: 5px;
   margin-bottom: 8px;
-  font-weight: ${(props) => (props.regionSelect ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.regionSelect ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -178,7 +183,7 @@ export const StyleTags__Li = styled.li`
   margin-right: 13px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -199,7 +204,7 @@ export const OuterTags__Li = styled.li`
   margin-bottom: 8px;
   list-style: none;
   cursor: pointer;
-  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.tagSelected ? 700 : 400)};
 `;
 
 export const TopTagsList__Ul = styled.ul`
@@ -217,7 +222,7 @@ export const TopTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -236,7 +241,7 @@ export const BottomTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 3px;
   list-style: none;
-  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -255,7 +260,7 @@ export const EtcTags__Li = styled.li`
   margin-right: 8px;
   margin-bottom: 8px;
   list-style: none;
-  font-weight: ${(props) => (props.tagSelected ? 700 : 400)};
+  font-weight: ${(props: ITagSelectProps) => (props.tagSelected ? 700 : 400)};
   cursor: pointer;
 `;
 
@@ -267,21 +272,19 @@ export const Feeds__Div = styled.div`
   overflow: auto;
 `;
 
-export const Aaa = styled(Masonry)`
+export const MasonryLayout = styled(Masonry)`
   display: flex;
-  // flex-wrap: wrap;
   justify-content: space-between;
-  z-index: 99;
 
   .my-masonry-grid {
-    display: -webkit-box; /* Not needed if autoprefixing */
-    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    margin-left: -30px; /* gutter size offset */
+    margin-left: -30px;
     width: 100%;
   }
   .my-masonry-grid_column {
-    padding-left: 10px; /* gutter size */
+    padding-left: 10px;
     background-clip: padding-box;
   }
 
@@ -311,7 +314,7 @@ export const ScrollButton = styled.button`
   background-color: #b7e576;
   color: #fff;
   cursor: pointer;
-  z-index: 99;
+  z-index: 98;
 `;
 export const UpArrowImg = styled.img``;
 
@@ -324,9 +327,7 @@ export const WriteButton = styled.button`
   font-weight: 400;
   font-size: 40px;
   color: white;
-  // margin-top: 850px;
   position: fixed;
-  /* margin-left: 1120px; */
   cursor: pointer;
   :hover {
     background-color: #ffea86;

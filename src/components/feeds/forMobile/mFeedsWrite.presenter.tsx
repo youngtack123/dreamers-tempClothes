@@ -20,33 +20,79 @@ const MFeedsWriteUI = (props) => {
     <mWrite.WrapperDiv>
       <mWrite.Form>
         <mWrite.PhotoLabel>사진</mWrite.PhotoLabel>
+        {props.isEdit ? (
+          <>
+            {/* 피드 수정 */}
+            {props.showPhoto ? (
+              <mWrite.PhotoBoxDiv onClick={props.onClickImage}>
+                <mWrite.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+                {props.showPhoto.map((item: any, index: number) => (
+                  <div key={uuidv4()}>{<mWrite.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
+                ))}
+              </mWrite.PhotoBoxDiv>
+            ) : (
+              <mWrite.PhotoBoxDiv>
+                <mWrite.ShowImg src={`https://storage.googleapis.com/${props.fetchData?.fetchFeed.feedImg[0].imgURL}`} />
+              </mWrite.PhotoBoxDiv>
+            )}
+            <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
 
-        {props.showPhoto ? (
-          <mWrite.PhotoBoxDiv onClick={props.onClickImage}>
-            <mWrite.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
-            {props.showPhoto.map((item: any, index: number) => (
-              <div key={uuidv4()}>{<mWrite.ShowImg key={index} src={`https://storage.googleapimWrite.com/${item}`} />}</div>
-            ))}
-          </mWrite.PhotoBoxDiv>
+            {props.imageUrl.length !== 0 ? (
+              <mWrite.SlickDiv>
+                <mWrite.Slick {...settings}>
+                  {props.imageUrl.map((el: any, index: any) => {
+                    return (
+                      <mWrite.MomDiv key={uuidv4()}>
+                        <mWrite.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+                        <mWrite.ChildDiv onClick={() => props.onClickDelete(index)}>x</mWrite.ChildDiv>
+                      </mWrite.MomDiv>
+                    );
+                  })}
+                </mWrite.Slick>
+              </mWrite.SlickDiv>
+            ) : (
+              <mWrite.SlickDiv>
+                <mWrite.Slick {...settings}>
+                  {props.fetchData?.fetchFeed.feedImg.map((el, index) => (
+                    <mWrite.MomDiv key={uuidv4()}>
+                      <mWrite.PhotoImg src={`https://storage.googleapis.com/${el.imgURL}`} onClick={() => props.onClickPhoto(el.imgURL)} />
+                      <mWrite.ChildDiv onClick={() => props.onClickDelete(index)}>x</mWrite.ChildDiv>
+                    </mWrite.MomDiv>
+                  ))}
+                </mWrite.Slick>
+              </mWrite.SlickDiv>
+            )}
+          </>
         ) : (
-          <mWrite.PhotoBoxDiv onClick={props.onClickImage}>
-            <mWrite.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
-          </mWrite.PhotoBoxDiv>
-        )}
-        <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
+          <>
+            {props.showPhoto ? (
+              <mWrite.PhotoBoxDiv onClick={props.onClickImage}>
+                <mWrite.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+                {props.showPhoto.map((item: any, index: number) => (
+                  <div key={uuidv4()}>{<mWrite.ShowImg key={index} src={`https://storage.googleapimWrite.com/${item}`} />}</div>
+                ))}
+              </mWrite.PhotoBoxDiv>
+            ) : (
+              <mWrite.PhotoBoxDiv onClick={props.onClickImage}>
+                <mWrite.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+              </mWrite.PhotoBoxDiv>
+            )}
+            <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
 
-        <mWrite.SlickDiv>
-          <mWrite.Slick>
-            {props.imageUrl.map((el: any, index: any) => {
-              return (
-                <mWrite.MomDiv key={uuidv4()}>
-                  <mWrite.PhotoImg src={`https://storage.googleapimWrite.com/${el}`} onClick={() => props.onClickPhoto(el)} />
-                  <mWrite.ChildDiv onClick={() => props.onClickDelete(index)}>x</mWrite.ChildDiv>
-                </mWrite.MomDiv>
-              );
-            })}
-          </mWrite.Slick>
-        </mWrite.SlickDiv>
+            <mWrite.SlickDiv>
+              <mWrite.Slick>
+                {props.imageUrl.map((el: any, index: any) => {
+                  return (
+                    <mWrite.MomDiv key={uuidv4()}>
+                      <mWrite.PhotoImg src={`https://storage.googleapimWrite.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+                      <mWrite.ChildDiv onClick={() => props.onClickDelete(index)}>x</mWrite.ChildDiv>
+                    </mWrite.MomDiv>
+                  );
+                })}
+              </mWrite.Slick>
+            </mWrite.SlickDiv>
+          </>
+        )}
 
         <mWrite.ContentsLabel>내용</mWrite.ContentsLabel>
         <mWrite.ContentsTextArea type="text" {...props.register("detail")} defaultValue={props.fetchData?.fetchFeed.detail} placeholder="내용을 입력해주세요" />
@@ -137,9 +183,7 @@ const MFeedsWriteUI = (props) => {
           <mWrite.InfoInput type="text" {...props.register("etc")} defaultValue={props.fetchData?.fetchFeed.etc} placeholder="기타 상품 정보를 입력해주세요" />
         </mWrite.ItemDiv>
 
-        <mWrite.SubmitButton isActive={props.isActive} onClick={props.openModal}>
-          {props.isEdit ? "수정" : "등록"}
-        </mWrite.SubmitButton>
+        <mWrite.SubmitButton isActive={props.isActive}>{props.isEdit ? "수정" : "등록"}</mWrite.SubmitButton>
       </mWrite.Form>
     </mWrite.WrapperDiv>
   );

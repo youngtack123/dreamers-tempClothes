@@ -20,9 +20,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
     slidesToScroll: 1,
   };
 
-  console.log(props.fetchData?.fetchFeed.feedImg);
-  console.log(props.imageUrl);
-
   return (
     <s.WrapperDiv>
       {/* 사진, 옷 정보 섹션 */}
@@ -126,7 +123,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
         {/* 내용, 태그 섹션 */}
         <s.RightDiv>
           <s.ContentsLabel>내용</s.ContentsLabel>
-          <s.ContentsTextArea type="text" {...props.register("detail")} defaultValue={props.fetchData?.fetchFeed.detail} placeholder="내용을 입력해주세요" />
+          <s.ContentsTextArea {...props.register("detail")} defaultValue={props.fetchData?.fetchFeed.detail} placeholder="내용을 입력해주세요" />
 
           <s.RightBottomDiv>
             <s.TagsDiv>
