@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { breakpoints } from "../src/components/common/breakPoint";
 
 const Body = styled.div`
   width: 100%;
@@ -19,9 +18,6 @@ const Wrapper1 = styled.div`
   align-items: center;
   margin: 0 auto;
   position: relative;
-  @media ${breakpoints.tablet} {
-    width: 860px;
-  }
 `;
 
 const MainImg = styled.img`
