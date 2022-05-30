@@ -105,7 +105,7 @@ export default function SignupUI(props: any) {
             <s.ErrorTextAuthP>{!inputs.authNumber && "인증 번호를 입력해주세요!"}</s.ErrorTextAuthP>
             {sendAuthNumber && (
               <s.MyPageAuthOkTimerDiv>
-                <s.MyPageAuthOkTimerP>{`받으신 인증 번호를 입력해주세요`}</s.MyPageAuthOkTimerP>
+                <s.SignUpAuthOkTimerP>{`받으신 인증 번호를 입력해주세요`}</s.SignUpAuthOkTimerP>
                 <Timer></Timer>
               </s.MyPageAuthOkTimerDiv>
             )}
