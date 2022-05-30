@@ -184,10 +184,8 @@ li {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9999;
   background-color: rgba(0, 0, 0, 0.6);
-  max-height: 100%;
-  overflow-y: auto;
 }
 .modal2 button {
   outline: none;
@@ -201,24 +199,24 @@ li {
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
-  overflow-y: auto;
+  overflow: hidden;
 }
 .modal2 > section > header {
+  position: relative;
   /* padding: 16px 64px 16px 16px; */
-  position: fixed;
   background-color: #f1f1f1;
   font-weight: 700;
 }
 .modal2 > section > header button {
-  position: fixed;
-  top: 248px;
-  right: 700px;
+  position: absolute;
+  top: 2px;
+  right: 0px;
   width: 30px;
   font-size: 21px;
   font-weight: 700;
   text-align: center;
-  margin-right: 1rem;
-  background-color: #fff;
+  color: #999;
+  background-color: transparent;
 }
 .modal2 > section > main {
   /* padding: 16px; */
