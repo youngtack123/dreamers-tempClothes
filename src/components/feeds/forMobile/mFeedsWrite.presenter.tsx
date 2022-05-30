@@ -119,7 +119,7 @@ const MFeedsWriteUI = (props) => {
           </mWrite.EtcUl>
         </mWrite.TagsDiv>
 
-        {/* <mWrite.ClothesInfoLabel>옷 정보</mWrite.ClothesInfoLabel>
+        <mWrite.ClothesInfoLabel>옷 정보</mWrite.ClothesInfoLabel>
         <mWrite.ItemDiv>
           <mWrite.OuterDiv>아우터</mWrite.OuterDiv>
           <mWrite.InfoInput type="text" {...props.register("outer")} defaultValue={props.fetchData?.fetchFeed.outer} placeholder="아우터 상품 정보를 입력해주세요" />
@@ -135,7 +135,7 @@ const MFeedsWriteUI = (props) => {
         <mWrite.ItemDiv>
           <mWrite.OuterDiv>기타</mWrite.OuterDiv>
           <mWrite.InfoInput type="text" {...props.register("etc")} defaultValue={props.fetchData?.fetchFeed.etc} placeholder="기타 상품 정보를 입력해주세요" />
-        </mWrite.ItemDiv> */}
+        </mWrite.ItemDiv>
 
         <mWrite.SubmitButton isActive={props.isActive} onClick={props.openModal}>
           {props.isEdit ? "수정" : "등록"}

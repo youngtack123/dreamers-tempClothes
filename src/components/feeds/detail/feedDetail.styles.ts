@@ -3,6 +3,7 @@ import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/dm.svg";
 import Slider from "react-slick";
 import { keyframes } from "@emotion/react";
+import { IFeedDetailButtonProps } from "./feedDetail.types";
 
 export const Body = styled.body`
   background-color: transparent;
@@ -211,24 +212,23 @@ export const UserId__Div = styled.div`
 `;
 
 export const IconBox__Div = styled.div`
-  width: 46px;
+  width: 56px;
   height: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
-// export const LikeIcon__SVG = styled(LikeIcon)`
-//   width: 18px;
-//   height: 16px;
-//   stroke: #bebebe;
-// `;
-
-// export const DMIcon__SVG = styled(DMIcon)`
-//   width: 18px;
-//   height: 15px;
-//   fill: #bebebe;
-// `;
+export const LikeCount__Span = styled.span`
+  padding: 2px 10px;
+  background-color: #fff2b2;
+  border-radius: 30px;
+  font-size: 12px;
+  position: absolute;
+  top: -30px;
+  right: -6px;
+`;
 
 export const Content__Div = styled.div`
   width: 430px;
@@ -303,7 +303,7 @@ export const SettingBox__Div = styled.div`
   right: 0;
   top: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  animation: ${(props) => (props.isOpen ? fadeIn : fadeOut)} 0.2s ease-out;
+  animation: ${(props: IFeedDetailButtonProps) => (props.isOpen ? fadeIn : fadeOut)} 0.2s ease-out;
 `;
 
 export const Edit__Span = styled.span`

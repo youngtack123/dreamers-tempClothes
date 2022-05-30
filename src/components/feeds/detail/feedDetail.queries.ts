@@ -21,7 +21,23 @@ export const Q_FETCH_FEED = gql`
       region {
         id
       }
+      likeCount
     }
+  }
+`;
+
+export const Q_FETCH_USER = gql`
+  query {
+    fetchUser {
+      id
+      nickname
+    }
+  }
+`;
+
+export const Q_FETCH_FEED_LIKE = gql`
+  query fetchFeedLike($feedId: String!) {
+    fetchFeedLike(feedId: $feedId)
   }
 `;
 

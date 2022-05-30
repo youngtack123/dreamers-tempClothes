@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
 import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
 import { regionCategory, tagCategory } from "../../common/store";
@@ -8,14 +8,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import { checkValidationImage } from "./image.validation";
-import { IFormProps, IUpdateFeedInput } from "./feedsWrite.types";
+import { IFeedsWriteProps, IFormValue, IUpdateFeedInput } from "./feedsWrite.types";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
 import { Flip, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToastContainer } from "../../common/toast";
 
-const FeedsWrite = (props) => {
+const FeedsWrite = (props: IFeedsWriteProps) => {
   const router = useRouter();
 
   const [myTag, setMyTag] = useState<String[]>([]);
@@ -23,24 +23,19 @@ const FeedsWrite = (props) => {
   const [editRegion, setEditRegion] = useState("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const aaa = props.fetchData?.fetchFeed.region.id;
-  useEffect(() => {
-    setEditRegion(props.fetchData?.fetchFeed.region.id);
-  }, []);
-
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState } = useForm<IFormValue>({
     mode: "onChange",
   });
 
   const [createFeed] = useMutation(M_CREATE_FEED);
   const [updateFeed] = useMutation(M_UPDATE_FEED);
 
-  const onClickRegion = (e) => {
+  const onClickRegion = (e: any) => {
     setMyRegion(e);
   };
 
   // 태그 선택하기
-  const onClickTag = (e) => {
+  const onClickTag = (e: any) => {
     if (myTag.includes(e)) {
       const newMyTag = myTag.filter((tagEl) => tagEl !== e);
       setMyTag(newMyTag);
@@ -105,7 +100,7 @@ const FeedsWrite = (props) => {
   }, [myTag, imageUrl, myRegion]);
 
   /////// 피드 등록 버튼
-  const onClickSubmit = async (data: IFormProps) => {
+  const onClickSubmit = async (data: IFormValue) => {
     if (myTag.length === 0) {
       toast.warning("태그가 없어요!", {
         icon: "🥺",
@@ -134,10 +129,7 @@ const FeedsWrite = (props) => {
         toast.success("피드 등록 성공!", {
           icon: "😊",
         });
-        setTimeout(() => {
-          router.replace("/ootd");
-          location.reload();
-        }, 1600);
+        props.closeModal();
       } catch (error) {
         toast.error(error.message, {
           icon: "🤔",
@@ -147,11 +139,7 @@ const FeedsWrite = (props) => {
   };
 
   // 피드 수정 버튼
-  const onClickUpdate = async (data: IFormProps) => {
-    const currentImgFiles = JSON.stringify(imageUrl);
-    const fetchImgFiles = JSON.stringify(props.fetchData.fetchFeed.feedImg.imgURL);
-    const isChangedImgFiles = currentImgFiles !== fetchImgFiles;
-
+  const onClickUpdate = async (data: IFormValue) => {
     const updateFeedInput: IUpdateFeedInput = {};
     if (data.detail) updateFeedInput.detail = data.detail;
     if (myRegion) updateFeedInput.regionId = myRegion;
@@ -160,7 +148,8 @@ const FeedsWrite = (props) => {
     if (data.top) updateFeedInput.top = data.top;
     if (data.bottom) updateFeedInput.bottom = data.bottom;
     if (data.etc) updateFeedInput.etc = data.etc;
-    if (isChangedImgFiles) updateFeedInput.imgURLs = imageUrl;
+    if (imageUrl) updateFeedInput.imgURLs = imageUrl;
+
     try {
       const result = await updateFeed({
         variables: {
@@ -204,7 +193,6 @@ const FeedsWrite = (props) => {
         onClickUpdate={onClickUpdate}
         // 수정 태그
         editRegion={editRegion}
-        aaa={aaa}
         // 해보는 중
         myRegion={myRegion}
         myTag={myTag}
@@ -212,10 +200,10 @@ const FeedsWrite = (props) => {
         tagFetch={props.tagFetch}
         // 폼 버튼 활성화
         formState={formState}
-        // 모달
-        openModal={props.openModal}
         // 버튼 활성화
         isActive={isActive}
+        // 이미지 페치
+        fetchImg={props.fetchImg}
       />
     </>
   );

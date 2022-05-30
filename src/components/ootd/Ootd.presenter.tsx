@@ -13,8 +13,10 @@ import Link from "next/link";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { useMediaQuery } from "react-responsive";
 import MFeedsWrite from "../feeds/forMobile/mFeedsWrite.container";
+import { IOotdUIProps } from "./Ootd.types";
+import Modal2 from "../common/commonModal2";
 
-const OotdUI = (props) => {
+const OotdUI = (props: IOotdUIProps) => {
   const isPc = useMediaQuery({
     query: "(min-width:768px)",
   });
@@ -24,11 +26,9 @@ const OotdUI = (props) => {
 
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
-  // console.log("???", accessToken);
-
+  const [isVisible, setIsVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
-    console.log("열려라");
     setModalOpen(true);
   };
   const closeModal = () => {
@@ -39,10 +39,7 @@ const OotdUI = (props) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // const onClickMoveToDetail = () => {
-  //   router.push(`/feeds/${router.query.feedId}`);
-  // };
-
+  // masonry layout breakpoints
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
@@ -50,10 +47,20 @@ const OotdUI = (props) => {
     600: 1,
   };
 
+  // 날짜 계산 함수
   const date = new Date();
-
   const Month = String(date.getMonth() + 1).padStart(2, "0");
   const Day = String(date.getDate()).padStart(2, "0");
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 1000) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    });
+  }
 
   return (
     <>
@@ -79,7 +86,7 @@ const OotdUI = (props) => {
               <Ootd.TagCategory__Span>지역</Ootd.TagCategory__Span>
               <Ootd.RegionList__Ul>
                 {props.regionCategory.map((el, idx) => (
-                  <Ootd.RegionTags__Li key={idx} id={idx} onClick={() => props.onClickRegion(el)} regionSelected={props.regionSelected === el}>
+                  <Ootd.RegionTags__Li key={idx} id={idx} onClick={() => props.onClickRegion(el)} regionSelect={props.regionSelected === el}>
                     {el}
                   </Ootd.RegionTags__Li>
                 ))}
@@ -91,7 +98,7 @@ const OotdUI = (props) => {
               <Ootd.TagCategory__Span>스타일</Ootd.TagCategory__Span>
               <Ootd.StyleList__Ul>
                 {props.tagCategory[0].tagItem.map((el, idx) => (
-                  <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelected={props.tagSelected.includes(el)}>
+                  <Ootd.StyleTags__Li key={idx} onClick={() => props.onClickTag(el)} tagSelect={props.tagSelected.includes(el)}>
                     {el}
                   </Ootd.StyleTags__Li>
                 ))}
@@ -160,47 +167,36 @@ const OotdUI = (props) => {
                   #{el}
                 </Ootd.TagSeletedUnit__Span>
               ))}
-              {/* {props.myAllTags.map((el, idx) => (
-              <Ootd.TagSeletedUnit__Span key={idx}>
-                {el}
-              </Ootd.TagSeletedUnit__Span>
-            ))} */}
-              {/* <s.TagSeletedUnit__Span>#맨투맨</s.TagSeletedUnit__Span> */}
             </Ootd.TagSelect__Div>
           </Ootd.MyTag__Div>
 
           {/* 게시물 페칭 */}
-          {/* <div style={{ height: "900px", overflow: "auto" }}> */}
-          <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}>
-            <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-              {props.data?.fetchFeeds.feeds.map((el, idx) => (
-                <div key={idx}>
-                  <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
-                </div>
-              ))}
-            </Ootd.Aaa>
-          </InfiniteScroll>
-          {/* </div> */}
-          {/* <div onClick={props.onClickNextPage}> end </div> */}
+
+          <Ootd.Aaa breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+            {props.data?.fetchFeeds.feeds.map((el, idx) => (
+              <div key={idx}>
+                <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
+              </div>
+            ))}
+          </Ootd.Aaa>
         </Ootd.Container_Body__Div>
 
-        {/* <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">
-        <FeedDetail ootdFeedId={router.query.feedId}></FeedDetail>
-      </Modal> */}
-
-        {/* </s.Container_Body__Div> */}
-        <Ootd.ScrollButton onClick={scrollToTop}>
-          <Ootd.UpArrowImg src="/images/uparrow.png" />
-        </Ootd.ScrollButton>
-
+        {isVisible && (
+          <Ootd.ScrollButton onClick={scrollToTop}>
+            <Ootd.UpArrowImg src="/images/uparrow.png" />
+          </Ootd.ScrollButton>
+        )}
         <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
 
-        <Modal open={modalOpen} close={closeModal}>
-          {isPc && <FeedsWrite />}
-          {isMobile && <MFeedsWrite />}
+        <Modal2 open={modalOpen} close={closeModal}>
+          {isPc && <FeedsWrite closeModal={closeModal} />}
+          {isMobile && (
+            <Modal open={modalOpen} close={closeModal}>
+              <MFeedsWrite closeModal={closeModal} />
+            </Modal>
+          )}
           {/* <MFeedsWrite /> */}
-        </Modal>
-        <div id="end"></div>
+        </Modal2>
       </Ootd.Container__Div>
     </>
   );

@@ -9,19 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 
 const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
-  // console.log(props.fetchData?.fetchFeed.feedTag);
-  // console.log(props.fetchData?.fetchFeed.region.id);
-  // console.log(props.regionSelected);
-
-  const bbb = props.fetchData?.fetchFeed.region.id;
-  const [aaa, setAAA] = useState([props.fetchData?.fetchFeed.region.id]);
-  // setAAA(props.fetchData?.fetchFeed.region.id);
-  // useEffect(() => {
-  //   setAAA(bbb);
-  //   console.log("use in", aaa);
-  // }, []);
-  // console.log("use out", aaa);
-
   const showMaxCnt = 4;
   const arr = Array.from(new Array(3));
 
@@ -33,39 +20,89 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
     slidesToScroll: 1,
   };
 
+  console.log(props.fetchData?.fetchFeed.feedImg);
+  console.log(props.imageUrl);
+
   return (
     <s.WrapperDiv>
       {/* 사진, 옷 정보 섹션 */}
       <s.Form onSubmit={props.isEdit ? props.handleSubmit(props.onClickUpdate) : props.handleSubmit(props.onClickSubmit)}>
         <s.LeftDiv>
           <s.PhotoLabel>사진</s.PhotoLabel>
+          {props.isEdit ? (
+            <>
+              {/* 피드 수정 */}
+              {props.showPhoto ? (
+                <s.PhotoBoxDiv onClick={props.onClickImage}>
+                  <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+                  {props.showPhoto.map((item: any, index: number) => (
+                    <div key={uuidv4()}>{<s.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
+                  ))}
+                </s.PhotoBoxDiv>
+              ) : (
+                <s.PhotoBoxDiv>
+                  <s.ShowImg src={`https://storage.googleapis.com/${props.fetchData?.fetchFeed.feedImg[0].imgURL}`} />
+                </s.PhotoBoxDiv>
+              )}
+              <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
 
-          {props.showPhoto ? (
-            <s.PhotoBoxDiv onClick={props.onClickImage}>
-              <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
-              {props.showPhoto.map((item: any, index: number) => (
-                <div key={uuidv4()}>{<s.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
-              ))}
-            </s.PhotoBoxDiv>
+              {props.imageUrl.length !== 0 ? (
+                <s.SlickDiv>
+                  <s.Slick {...settings}>
+                    {props.imageUrl.map((el: any, index: any) => {
+                      return (
+                        <s.MomDiv key={uuidv4()}>
+                          <s.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+                          <s.ChildDiv onClick={() => props.onClickDelete(index)}>x</s.ChildDiv>
+                        </s.MomDiv>
+                      );
+                    })}
+                  </s.Slick>
+                </s.SlickDiv>
+              ) : (
+                <s.SlickDiv>
+                  <s.Slick {...settings}>
+                    {props.fetchData?.fetchFeed.feedImg.map((el, index) => (
+                      <s.MomDiv key={uuidv4()}>
+                        <s.PhotoImg src={`https://storage.googleapis.com/${el.imgURL}`} onClick={() => props.onClickPhoto(el.imgURL)} />
+                        <s.ChildDiv onClick={() => props.onClickDelete(index)}>x</s.ChildDiv>
+                      </s.MomDiv>
+                    ))}
+                  </s.Slick>
+                </s.SlickDiv>
+              )}
+            </>
           ) : (
-            <s.PhotoBoxDiv onClick={props.onClickImage}>
-              <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
-            </s.PhotoBoxDiv>
-          )}
-          <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
+            <>
+              {/* 피드 작성 */}
+              {props.showPhoto ? (
+                <s.PhotoBoxDiv onClick={props.onClickImage}>
+                  <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+                  {props.showPhoto.map((item: any, index: number) => (
+                    <div key={uuidv4()}>{<s.ShowImg key={index} src={`https://storage.googleapis.com/${item}`} />}</div>
+                  ))}
+                </s.PhotoBoxDiv>
+              ) : (
+                <s.PhotoBoxDiv onClick={props.onClickImage}>
+                  <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
+                </s.PhotoBoxDiv>
+              )}
+              <input style={{ display: "none" }} type="file" multiple onChange={props.onChangeImgUrls} ref={props.fileRef} />
 
-          <s.SlickDiv>
-            <s.Slick {...settings}>
-              {props.imageUrl.map((el: any, index: any) => {
-                return (
-                  <s.MomDiv key={uuidv4()}>
-                    <s.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
-                    <s.ChildDiv onClick={() => props.onClickDelete(index)}>x</s.ChildDiv>
-                  </s.MomDiv>
-                );
-              })}
-            </s.Slick>
-          </s.SlickDiv>
+              <s.SlickDiv>
+                <s.Slick {...settings}>
+                  {props.imageUrl.map((el: any, index: any) => {
+                    return (
+                      <s.MomDiv key={uuidv4()}>
+                        <s.PhotoImg src={`https://storage.googleapis.com/${el}`} onClick={() => props.onClickPhoto(el)} />
+                        <s.ChildDiv onClick={() => props.onClickDelete(index)}>x</s.ChildDiv>
+                      </s.MomDiv>
+                    );
+                  })}
+                </s.Slick>
+              </s.SlickDiv>
+            </>
+          )}
 
           <s.ClothesInfoLabel>옷 정보</s.ClothesInfoLabel>
           <s.ItemDiv>
@@ -95,40 +132,10 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
             <s.TagsDiv>
               <s.TagsLabel>태그</s.TagsLabel>
               <s.ItemLabel>지역</s.ItemLabel>
-
-              {/* {props.regionCategory.map((el) => {
-                  return props.editRegion === "" ? (
-                    aaa === el ? (
-                      <s.RegionTagDiv style={{ backgroundColor: "#fff2b2", color: "#333" }}>{el}</s.RegionTagDiv>
-                    ) : (
-                      <s.RegionTagDiv key={uuidv4()} onClick={() => props.onClickRegion(el)} regionSelected={props.regionSelected === el}>
-                        {el}
-                      </s.RegionTagDiv>
-                    )
-                  ) : (
-                    <div></div>
-                  ); */}
-              {/* // props.editRegion === el ? (
-                  //   <s.RegionTagDiv style={{ backgroundColor: "#fff2b2", color: "#333" }}>{el}</s.RegionTagDiv>
-                  // ) : (
-                  //   <s.RegionTagDiv key={uuidv4()} onClick={() => props.onClickRegion(el)} regionSelected={props.regionSelected === el}>
-                  //     {el}
-                  //   </s.RegionTagDiv>
-                  // );
-                })} */}
-              {/* {props.regionCategory.map((el) => {
-                  return props.fetchData?.fetchFeed.region.id === el ? (
-                    <s.RegionTagDiv style={{ backgroundColor: "#fff2b2", color: "#333" }}>{el}</s.RegionTagDiv>
-                  ) : (
-                    <s.RegionTagDiv key={uuidv4()} onClick={() => props.onClickRegion(el)} regionSelected={props.regionSelected === el}>
-                      {el}
-                    </s.RegionTagDiv>
-                  );
-                })} */}
               {props.isEdit ? (
                 <s.RegionUl>
                   {props.regionCategory.map((el) => (
-                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
+                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} isRegionMatched={props.myRegion === el}>
                       {/* regionId={props.regionId === el} : 페치 불들어노는 시험용 */}
                       {el}
                     </s.RegionTagLi>
@@ -137,7 +144,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
               ) : (
                 <s.RegionUl>
                   {props.regionCategory.map((el) => (
-                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} myRegion={props.myRegion === el}>
+                    <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} isRegionMatched={props.myRegion === el}>
                       {el}
                     </s.RegionTagLi>
                   ))}
@@ -190,9 +197,7 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
               </s.EtcUl>
             </s.TagsDiv>
           </s.RightBottomDiv>
-          <s.SubmitButton isActive={props.isActive} onClick={props.openModal}>
-            {props.isEdit ? "수정" : "등록"}
-          </s.SubmitButton>
+          <s.SubmitButton isActive={props.isActive}>{props.isEdit ? "수정" : "등록"}</s.SubmitButton>
         </s.RightDiv>
       </s.Form>
     </s.WrapperDiv>

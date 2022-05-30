@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Detail from "./feedDetail.styles";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
@@ -13,6 +13,8 @@ import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
 import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
+import { LightTooltip } from "../../common/mui";
+import { Button, IconButton } from "@mui/material";
 
 function FeedDetailUI(props) {
   const router = useRouter();
@@ -36,23 +38,25 @@ function FeedDetailUI(props) {
   };
 
   const [deleteFeed] = useMutation(M_DELETE_FEED);
+  const isMatched = props.data?.fetchFeed.user.nickname === props.userData?.fetchUser.nickname;
 
   const onClickDeleteFeed = async (e) => {
-    try {
-      await deleteFeed({
-        variables: { feedId: String(e.target.id) },
-      });
-      toast.success("피드 삭제 완료!", {
-        icon: "😊",
-      });
-      router.push("/ootd");
-    } catch (error) {
-      alert(error.message);
-    }
+    if (isMatched)
+      try {
+        await deleteFeed({
+          variables: { feedId: String(e.target.id) },
+        });
+        toast.success("피드 삭제 완료!", {
+          icon: "😊",
+        });
+        router.push("/ootd");
+      } catch (error) {
+        alert(error.message);
+      }
   };
 
   const onClickMoveToEdit = () => {
-    router.push(`/feeds/${props.data?.fetchFeed.id}/edit`);
+    if (isMatched) router.push(`/feeds/${props.data?.fetchFeed.id}/edit`);
   };
 
   const showMaxCnt = 4;
@@ -65,6 +69,11 @@ function FeedDetailUI(props) {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
+
+  // 툴팁 좋아요 개수
+  const likeCount = props.data?.fetchFeed.likeCount;
+
+  console.log(props.feedLike?.fetchFeedLike);
 
   return (
     <Detail.Wrapper__Div>
@@ -124,13 +133,20 @@ function FeedDetailUI(props) {
             >
               {props.data?.fetchFeed.user.nickname}
             </Detail.UserId__Div>
+
             <Detail.IconBox__Div>
-              <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
-              {props.isLike ? (
-                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
-              ) : (
-                <LikeIcon id={props.data?.fetchFeed.id} onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
-              )}
+              <IconButton>
+                <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
+              </IconButton>
+              <LightTooltip title={likeCount}>
+                <IconButton>
+                  {props.isLike ? (
+                    <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
+                  ) : (
+                    <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
+                  )}
+                </IconButton>
+              </LightTooltip>
             </Detail.IconBox__Div>
           </Detail.FeedDetail_Top__Div>
 
