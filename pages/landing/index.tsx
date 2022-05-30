@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useRouter } from "next/router";
 
 const Body = styled.div`
   width: 100%;
@@ -241,16 +240,7 @@ const Looking = styled.span`
   color: rgba(0, 0, 0, 0.6);
 `;
 
-function Landing() {
-  const router = useRouter();
-
-  const onClickMoveToLogin = () => {
-    router.push("/login");
-  };
-
-  const onClickMoveToOnboarding = () => {
-    router.push("/onboarding1");
-  };
+function landing1() {
   return (
     <Body>
       <Wrapper1>
@@ -276,11 +266,11 @@ function Landing() {
         <LandingTitle>온도에 맞는 옷을 입고 싶은 날</LandingTitle>
         <Ondoui>온도衣</Ondoui>
         <MainLogo src="/images/mainlogo.svg" />
-        <Login onClick={onClickMoveToLogin}>로그인</Login>
-        <Looking onClick={onClickMoveToOnboarding}>둘러보기</Looking>
+        <Login>로그인</Login>
+        <Looking>둘러보기</Looking>
       </Wrapper3>
     </Body>
   );
 }
 
-export default Landing;
+export default landing1;

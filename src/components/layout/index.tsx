@@ -8,9 +8,9 @@ interface ILayoutProps {
   children: ReactNode;
 }
 
-const HIDDEN = ["/", "/login", "/signup", "/onboarding1", "/onboarding2", "/onboarding3"];
+const HIDDEN = ["/", "/login", "/signup", "/onboarding1", "/onboarding2", "/onboarding3", "/landing"];
 
-const OnlyforRest = ["/", "/feeds", "/mypage", "/ootd", "/otherUser", "/tempClothes"];
+const OnlyforRest = ["/", "/feeds", "/mypage", "/ootd", "/otherUser", "/tempClothes", "/landing"];
 
 const LayOut = (props: ILayoutProps) => {
   const router = useRouter();
