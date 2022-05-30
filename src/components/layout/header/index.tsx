@@ -116,6 +116,7 @@ const OOTDLi = styled.li`
 
 const MyPageLi = styled.li`
   cursor: pointer;
+  z-index: 98;
 `;
 
 const LoginLi = styled.li`
