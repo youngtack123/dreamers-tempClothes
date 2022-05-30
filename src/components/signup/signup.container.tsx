@@ -62,30 +62,36 @@ export default function Signup() {
   };
 
   const signUpFunc = async () => {
-    try {
-      const signUpResult = await m_createUser({
-        variables: {
-          createUserInput: {
-            regionId: inputs.region,
-            email: inputs.email,
-            password: inputs.password,
-            phone: inputs.phone,
-            gender: inputs.gender,
-            style: inputs.style,
-            nickname: inputs.nickname,
+    if (authOk) {
+      try {
+        const signUpResult = await m_createUser({
+          variables: {
+            createUserInput: {
+              regionId: inputs.region,
+              email: inputs.email,
+              password: inputs.password,
+              phone: inputs.phone,
+              gender: inputs.gender,
+              style: inputs.style,
+              nickname: inputs.nickname,
+            },
           },
-        },
-      });
-      console.log("회원가입 결과", signUpResult);
-      toast.success("회원 가입 성공!", {
-        icon: "😊",
-      });
-      router.push("/login");
-    } catch (error) {
-      toast.error(error.message, {
+        });
+        console.log("회원가입 결과", signUpResult);
+        toast.success("회원 가입 성공!", {
+          icon: "😊",
+        });
+        router.push("/login");
+      } catch (error) {
+        toast.error(error.message, {
+          icon: "🤔",
+        });
+        console.log(error.message);
+      }
+    } else if (!authOk) {
+      toast.error("인증 절차를 진행해 주세요!", {
         icon: "🤔",
       });
-      console.log(error.message);
     }
   };
 
@@ -170,6 +176,10 @@ export default function Signup() {
   };
 
   const confirmAuthNumber = async () => {
+    if (inputs.authNumber.length !== 6) {
+      alert("인증번호가 맞지 않습니다!");
+      return;
+    }
     try {
       const authNumberResult = await m_authNumber({
         variables: {
