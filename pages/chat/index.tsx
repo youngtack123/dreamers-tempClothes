@@ -41,9 +41,15 @@ const FETCH_USER = gql`
   }
 `;
 
-const CREATE_ROOM = gql`
-  mutation createRoom($opponentNickname: String!) {
-    createRoom(opponentNickname: $opponentNickname)
+const CHAT_PAYMENT = gql`
+  mutation {
+    payChat {
+      id
+      email
+      phone
+      gender
+      style
+    }
   }
 `;
 
@@ -120,15 +126,16 @@ const SubmitButton = styled.button`
 const ChatInputDiv = styled.div`
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-bottom: 1rem;
 `;
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const [nickName, setNickName] = useState("");
-  const [socket, setSocket] = useState("");
+  const [room, setRoom] = useState(1);
+  const [socket, setSocket] = useState<any>("");
   const [nickNameOk, setNickNameOk] = useState(false);
-  const [CreateRoom, setCreateRoom] = useState<any>();
-  const { closeChatModal, another } = props;
+  const { closeChatModal } = props;
 
   const { data: fetchUser } = useQuery(FETCH_USER);
   const { data, refetch } = useQuery(CHATLOG, {
@@ -136,8 +143,7 @@ const Chat = (props) => {
       opponentNickname: fetchUser?.fetchUser.nickname,
     },
   });
-
-  const [createRoom] = useMutation(CREATE_ROOM);
+  const [payChat] = useMutation(CHAT_PAYMENT);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -154,28 +160,41 @@ const Chat = (props) => {
   }, [fetchUser]);
 
   useEffect(() => {
-    alert("채팅은 500원이 차감됩니다!");
-    payChatFunc();
+    if (!confirm("채팅은 500원이 차감됩니다!")) {
+      // 취소(아니오) 버튼 클릭 시 이벤트
+      closeChatModal(false);
+    } else {
+      // 확인(예) 버튼 클릭 시 이벤트
+      if (!data) {
+        payChatFunc();
+      } else {
+        alert("이전 채팅기록이 있음으로 차감이 되지 않습니다!");
+      }
+    }
   }, []);
 
   useEffect(() => {
     if (nickNameOk) {
       const socket = io("https://team01.leo3179.shop/chat", { transports: ["websocket"], upgrade: false });
       const nickname = fetchUser?.fetchUser.nickname;
-      socket.emit("message", CreateRoom, nickname, message);
+      const room = 1;
+
+      socket.emit("message", room, nickname, message);
+
       socket.on("connect", () => {
         /* 누군가 채팅침 */
 
-        socket.on(CreateRoom, (data) => {
+        socket.on(String(room), (data) => {
           console.log("누군가가 채팅침", data);
           refetch();
         });
         /* 누군가 입장 */
-        socket.on("receive" + CreateRoom, (receive) => {
+        socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
           refetch();
         });
       });
+      setRoom(room);
       setSocket(socket);
     } else if (!nickNameOk) {
       return;
@@ -184,12 +203,7 @@ const Chat = (props) => {
 
   const payChatFunc = async () => {
     try {
-      const createRoomResult = await createRoom({
-        variables: {
-          opponentNickname: another,
-        },
-      });
-      setCreateRoom(createRoomResult?.data.createRoom);
+      const payChatResult = await payChat();
     } catch (error) {
       alert(error.message);
       closeChatModal(true);
@@ -203,9 +217,7 @@ const Chat = (props) => {
   function msg_send() {
     /* 메시지 전송 */
     const nickname = fetchUser?.fetchUser.nickname;
-    console.log(CreateRoom, nickname, message);
-    // console.log("전송", room, nickname, message);
-    socket.emit("send", CreateRoom, nickname, message);
+    socket.emit("send", room, nickname, message);
     inputRef.current.value = "";
   }
 
