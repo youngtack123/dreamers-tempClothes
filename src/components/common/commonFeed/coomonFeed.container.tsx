@@ -21,22 +21,15 @@ const M_TOGGLE_LIKE_FEED = gql`
   }
 `;
 
-const CREATE_ROOM = gql`
-  mutation createRoom($guestNickname: String!) {
-    createRoom(guestNickname: $guestNickname)
-  }
-`;
-
 const OotdFeed = (props) => {
   const router = useRouter();
 
   const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
   const [isLike, setIsLike] = useState(false);
-  const [createRoom] = useMutation(CREATE_ROOM);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [chatModalOpen, setChatModalOpen] = useState(false);
-  const [createRoomId, setCreateRoomId] = useState<any>("");
+
   const openModal = () => {
     setModalOpen(true);
   };
@@ -70,24 +63,6 @@ const OotdFeed = (props) => {
     router.push("/otherUser");
   };
 
-  const createRoomFunc = async () => {
-    try {
-      const createRoomResult = await createRoom({
-        variables: {
-          guestNickname: props.el.user.nickname,
-        },
-      });
-      setCreateRoomId(createRoomResult);
-    } catch (error) {
-      toast.error(error.message, {
-        icon: "🤔",
-      });
-    }
-  };
-
-  useEffect(() => {
-    AOS.init();
-  });
 
   return (
     <>
@@ -116,7 +91,7 @@ const OotdFeed = (props) => {
           )}
           <DMIcon
             onClick={() => {
-              openChatModal(), createRoomFunc();
+              openChatModal();
             }}
             style={{ cursor: "pointer" }}
             width="18"
@@ -180,7 +155,7 @@ const OotdFeed = (props) => {
       </Modal2>
 
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
-        <Chat closeChatModal={closeChatModal} another={props.el.user.nickname} createRoomId={createRoomId}></Chat>
+        <Chat closeChatModal={closeChatModal}></Chat>
       </Modal>
     </>
   );
