@@ -99,8 +99,8 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
 
         <s.TagDiv>
           <s.PageDiv>지금衣</s.PageDiv>
-          {props.tagData?.fetchFeedTags[0].tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[0].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
-          {props.tagData?.fetchFeedTags[1].tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[1].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
+          {props.tagData?.fetchFeedTags[0]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[0].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
+          {props.tagData?.fetchFeedTags[1]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[1].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
         </s.TagDiv>
       </s.LeftTempDiv>
 
