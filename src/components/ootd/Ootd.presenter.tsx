@@ -12,18 +12,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import Link from "next/link";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { useMediaQuery } from "react-responsive";
-import MFeedsWrite from "../feeds/forMobile/mFeedsWrite.container";
 import { IOotdUIProps } from "./Ootd.types";
 import Modal2 from "../common/commonModal2";
 
 const OotdUI = (props: IOotdUIProps) => {
-  const isPc = useMediaQuery({
-    query: "(min-width:825px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:824px)",
-  });
-
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
   const [isVisible, setIsVisible] = useState(false);
@@ -191,12 +183,7 @@ const OotdUI = (props: IOotdUIProps) => {
         <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
 
         <Modal2 open={modalOpen} close={closeModal}>
-          {isPc && <FeedsWrite closeModal={closeModal} />}
-          {isMobile && (
-            <Modal open={modalOpen} close={closeModal}>
-              <MFeedsWrite closeModal={closeModal} />
-            </Modal>
-          )}
+          <FeedsWrite closeModal={closeModal} />
         </Modal2>
       </Ootd.Container__Div>
     </>

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Modal from "../common/commonModal";
+import Modal2 from "../common/commonModal2";
 import FeedDetail from "../feeds/detail/feedDetail.container";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { Q_GET_WEATHER } from "./tempClothes.queries";
@@ -128,14 +128,14 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
       )}
       <s.WriteButton onClick={openModal}>+</s.WriteButton>
       {!whichModal && (
-        <Modal open={modalOpen} close={closeModal}>
-          <FeedsWrite />
-        </Modal>
+        <Modal2 open={modalOpen} close={closeModal}>
+          <FeedsWrite closeModal={closeModal} />
+        </Modal2>
       )}
       {whichModal && (
-        <Modal open={modalOpen} close={closeModal}>
+        <Modal2 open={modalOpen} close={closeModal}>
           <FeedDetail tagFeed={tagFeed} />
-        </Modal>
+        </Modal2>
       )}
     </s.WrapperDiv>
   );

@@ -40,7 +40,7 @@ const MyPagePresenter = (props) => {
               비밀번호 변경
             </S.Menuli>
             <S.Menuli onClick={openModal}>단추 충전</S.Menuli>
-            <S.Menuli>회원탈퇴</S.Menuli>
+            {/* <S.Menuli>회원탈퇴</S.Menuli> */}
           </S.MenuUl>
         </S.MenuDiv>
         <S.MyPageContendWrapperDiv>
@@ -48,9 +48,6 @@ const MyPagePresenter = (props) => {
           {selectMyPageListData === "개인정보 수정" && <MyPageEditInfoContainter />}
           {selectMyPageListData === "비밀번호 변경" && <MyPageChangePassWordContainer />}
         </S.MyPageContendWrapperDiv>
-        {/* <Modal open={modalOpen} close={closeModal} header="단추 충전">
-          <Payment setModalOpen={setModalOpen}></Payment>
-        </Modal> */}
         <Modal2 open={modalOpen} close={closeModal} header="단추 충전">
           <Payment setModalOpen={setModalOpen}></Payment>
         </Modal2>
