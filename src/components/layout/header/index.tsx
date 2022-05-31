@@ -198,24 +198,6 @@ const Header = () => {
   const [createRoomId, setCreateRoomId] = useState<any>("");
   const anchorRef = useRef(null);
 
-  console.log("chatMate", chatMate);
-
-  const createRoomFunc = async () => {
-    try {
-      const createRoomResult = await createRoom({
-        variables: {
-          guestNickname: data?.fetchUser.nickname,
-        },
-      });
-      console.log("createRoomResult", createRoomResult);
-      setCreateRoomId(createRoomResult?.data.createRoom);
-    } catch (error) {
-      toast.error(error.message, {
-        icon: "🤔",
-      });
-    }
-  };
-
   const openChatModal = () => {
     setChatModalOpen(true);
   };
