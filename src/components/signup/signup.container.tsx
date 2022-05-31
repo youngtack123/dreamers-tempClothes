@@ -174,7 +174,9 @@ export default function Signup() {
 
   const confirmAuthNumber = async () => {
     if (inputs.authNumber.length !== 6) {
-      alert("인증번호 형식이 올바르지 않습니다!");
+      toast.error("인증번호를 다시 확인해 주세요!", {
+        icon: "🤔",
+      });
       return;
     }
     const authNumberResult = await m_authNumber({

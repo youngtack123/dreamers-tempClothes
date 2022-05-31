@@ -7,18 +7,11 @@ import { toast } from "react-toastify";
 import useUpdateEffect from "../../src/components/common/customHook/useUpdateEffect";
 import { useCallback } from "react";
 
-const CHATLOG = gql`
-  query fetchLogs($opponentNickname: String!) {
-    fetchLogs(opponentNickname: $opponentNickname) {
-      id
-      room
-      message
-      user {
-        nickname
-      }
-    }
-  }
-`;
+// const CREATE_ROOM = gql`
+//   mutation createRoom($guestNickname: String!) {
+//     createRoom(guestNickname: $guestNickname)
+//   }
+// `;
 
 const FETCH_USER = gql`
   query {
@@ -37,6 +30,32 @@ const FETCH_USER = gql`
         lon
       }
       deletedAt
+    }
+  }
+`;
+
+const FETCH_LOGS = gql`
+  query fetchLogs($guestNickname: String!) {
+    fetchLogs(guestNickname: $guestNickname) {
+      id
+      message
+      user {
+        nickname
+      }
+      chatRoom {
+        host
+        guest
+      }
+    }
+  }
+`;
+
+const FETCH_ROOM = gql`
+  query fetchRoom($guestNickname: String!) {
+    fetchRoom(guestNickname: $guestNickname) {
+      id
+      host
+      guest
     }
   }
 `;
@@ -132,24 +151,37 @@ const ChatInputDiv = styled.div`
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const [nickName, setNickName] = useState("");
-  const [room, setRoom] = useState(1);
+  const [Room, setRoom] = useState("");
   const [socket, setSocket] = useState<any>("");
   const [nickNameOk, setNickNameOk] = useState(false);
-  const { closeChatModal } = props;
+  const [fetchLogOk, setFetchLogOk] = useState(false);
+  const { closeChatModal, another, createRoomId } = props;
 
   const { data: fetchUser } = useQuery(FETCH_USER);
-  const { data, refetch } = useQuery(CHATLOG, {
+  const { data: fetchRoomData } = useQuery(FETCH_ROOM, {
     variables: {
-      opponentNickname: fetchUser?.fetchUser.nickname,
+      guestNickname: another,
     },
   });
+  const { data: fetchLog } = useQuery(FETCH_LOGS, {
+    variables: {
+      guestNickname: fetchRoomData?.fetchRoom.host,
+    },
+  });
+  // const [createRoom] = useMutation(CREATE_ROOM);
   const [payChat] = useMutation(CHAT_PAYMENT);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
 
+  // useEffect(() => {
+  //   scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  // }, [data]);
+
   useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-  }, [data]);
+    if (fetchLog) {
+      setFetchLogOk(true);
+    }
+  }, [fetchLog]);
 
   useEffect(() => {
     if (fetchUser) {
@@ -160,38 +192,27 @@ const Chat = (props) => {
   }, [fetchUser]);
 
   useEffect(() => {
-    if (!confirm("채팅은 500원이 차감됩니다!")) {
-      // 취소(아니오) 버튼 클릭 시 이벤트
-      closeChatModal(false);
-    } else {
-      // 확인(예) 버튼 클릭 시 이벤트
-      if (!data) {
-        payChatFunc();
-      } else {
-        alert("이전 채팅기록이 있음으로 차감이 되지 않습니다!");
-      }
-    }
-  }, []);
-
-  useEffect(() => {
     if (nickNameOk) {
       const socket = io("https://team01.leo3179.shop/chat", { transports: ["websocket"], upgrade: false });
-      const nickname = fetchUser?.fetchUser.nickname;
-      const room = 1;
-
+      const nickname = fetchRoomData?.fetchRoom.host;
+      let room;
+      if (createRoomId?.data?.createRoom === fetchRoomData?.fetchRoom.id) {
+        room = fetchRoomData?.fetchRoom.id;
+        console.log("aaa", room);
+      } else {
+        room = createRoomId?.data.createRoom;
+        console.log("bbb", room);
+      }
       socket.emit("message", room, nickname, message);
 
       socket.on("connect", () => {
         /* 누군가 채팅침 */
-
-        socket.on(String(room), (data) => {
+        socket.on(room, (data) => {
           console.log("누군가가 채팅침", data);
-          refetch();
         });
         /* 누군가 입장 */
         socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
-          refetch();
         });
       });
       setRoom(room);
@@ -201,14 +222,14 @@ const Chat = (props) => {
     }
   }, [nickNameOk]);
 
-  const payChatFunc = async () => {
-    try {
-      const payChatResult = await payChat();
-    } catch (error) {
-      alert(error.message);
-      closeChatModal(true);
-    }
-  };
+  // const payChatFunc = async () => {
+  //   try {
+  //     const payChatResult = await payChat();
+  //   } catch (error) {
+  //     alert(error.message);
+  //     closeChatModal(true);
+  //   }
+  // };
 
   const messageHandler = (e: any) => {
     setMessage(e.target.value);
@@ -217,14 +238,14 @@ const Chat = (props) => {
   function msg_send() {
     /* 메시지 전송 */
     const nickname = fetchUser?.fetchUser.nickname;
-    socket.emit("send", room, nickname, message);
+    socket.emit("send", Room, nickname, message);
     inputRef.current.value = "";
   }
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       msg_send();
-      refetch();
+
       inputRef.current.value = "";
     }
   };
@@ -233,7 +254,7 @@ const Chat = (props) => {
     <div>
       <h1 style={{ marginLeft: "1rem", marginTop: "1rem" }}>{`${fetchUser?.fetchUser.nickname}님 반갑습니다`}</h1>
       <div>
-        {data?.fetchLogs.map((el, index) => {
+        {fetchLog?.fetchLogs.map((el, index) => {
           if (fetchUser?.fetchUser.nickname === el?.user.nickname) {
             return (
               <ChatFlexDiv key={index}>
@@ -261,7 +282,7 @@ const Chat = (props) => {
           <ChatInput type="text" id="msg" onChange={messageHandler} placeholder="메세지 입력을 기다리고 있어요!" onKeyPress={handleKeyPress} ref={inputRef} />
           <SubmitButton
             onClick={() => {
-              msg_send(), refetch();
+              msg_send();
             }}
             ref={scrollRef}
           >

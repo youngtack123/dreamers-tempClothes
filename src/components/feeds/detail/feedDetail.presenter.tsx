@@ -43,7 +43,9 @@ function FeedDetailUI(props) {
         });
         router.push("/ootd");
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message, {
+          icon: "🤔",
+        });
       }
   };
 

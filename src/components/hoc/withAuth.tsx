@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { accessTokenState, restoreAccessTokenLoadable } from "../common/store";
 import { getAccessToken } from "../lib/getAccessToken";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/display-name
 export const withAuth = (Componenet: any) => (props: any) => {
@@ -16,7 +17,9 @@ export const withAuth = (Componenet: any) => (props: any) => {
     if (!accessToken) {
       restoreAccessToken.toPromise().then((newAccessToken) => {
         if (!newAccessToken) {
-          alert("로그인 후 이용 가능합니다!!!");
+          toast.error("로그인 후 이용 가능합니다.", {
+            icon: "🤔",
+          });
           Router.push("/");
         }
       });
