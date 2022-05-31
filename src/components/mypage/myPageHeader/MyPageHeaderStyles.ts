@@ -27,8 +27,8 @@ export const MyPageHeaderWeatherDiv = styled.div`
 `;
 
 export const MyPageHeaderSunnyImg = styled.img`
-  width: 8.5rem;
-  height: 8.5rem;
+  width: 8rem;
+  height: 8rem;
   margin-right: 1.3rem;
 `;
 
