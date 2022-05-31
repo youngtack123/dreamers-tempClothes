@@ -14,6 +14,8 @@ import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { useMediaQuery } from "react-responsive";
 import { IOotdUIProps } from "./Ootd.types";
 import Modal2 from "../common/commonModal2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const OotdUI = (props: IOotdUIProps) => {
   const router = useRouter();
@@ -54,10 +56,14 @@ const OotdUI = (props: IOotdUIProps) => {
     });
   }
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <>
       <Ootd.Container__Div>
-        <div>
+        <div data-aos="fade-right" data-aos-duration="1350" data-aos-delay="300">
           <Ootd.Container_Side__Div>
             <Ootd.TodayInfo__Div>
               <Ootd.Date__Div>
@@ -168,7 +174,7 @@ const OotdUI = (props: IOotdUIProps) => {
 
           <Ootd.MasonryLayout breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
             {props.data?.fetchFeeds.feeds.map((el, idx) => (
-              <div key={idx}>
+              <div data-aos="fade-up" data-aos-duration="2000" key={idx}>
                 <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
               </div>
             ))}

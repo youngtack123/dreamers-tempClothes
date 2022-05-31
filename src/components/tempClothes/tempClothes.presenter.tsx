@@ -7,6 +7,8 @@ import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { Q_GET_WEATHER } from "./tempClothes.queries";
 import * as s from "./tempClothes.styles";
 import { ITempClothesUIProps } from "./tempClothes.types";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const today = () => {
   let now = new Date();
@@ -75,10 +77,14 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
     setNonMember(localStorage.getItem("onboarding3"));
   }, []);
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <s.WrapperDiv>
       {/* 현재 시간, 기온, 추천 옷차림 태그 부분 */}
-      <s.LeftTempDiv>
+      <s.LeftTempDiv data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350" data-aos-delay="300">
         <s.TimeDiv>
           <s.CurrentTimeDiv>지금 시간</s.CurrentTimeDiv>
           <s.Daytime>{AmPm()}</s.Daytime>
@@ -110,6 +116,8 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
           return el.feed.map((el, index) => {
             return (
               <s.LookBookItemImg
+                data-aos="fade-up"
+                data-aos-duration="2000"
                 key={index}
                 onClick={() => {
                   selectId(el.id), openModal();
