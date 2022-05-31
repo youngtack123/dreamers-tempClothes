@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import Modal from "../../../src/components/common/commonModal";
-import { aaa } from "../../../src/components/common/store";
 import FeedDetail from "../../../src/components/feeds/detail/feedDetail.container";
 
 function DetailPage() {

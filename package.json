@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build:ssg": "next build && next export",
+    "build:ssr": "next build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
