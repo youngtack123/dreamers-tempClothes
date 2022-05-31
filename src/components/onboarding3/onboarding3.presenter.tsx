@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as s from "./onboarding3.styles";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function Onboarding3UI() {
   const router = useRouter();
@@ -23,9 +26,13 @@ export default function Onboarding3UI() {
     localStorage.setItem("onboarding3", e.target.innerText);
   };
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <s.WrapperDiv>
-      <s.ItemWrapperDiv>
+      <s.ItemWrapperDiv data-aos="fade-up" data-aos-duration="2000">
         <s.QuestionDiv>거주하시는 곳을 알려주세요!</s.QuestionDiv>
 
         <s.StyleDiv>

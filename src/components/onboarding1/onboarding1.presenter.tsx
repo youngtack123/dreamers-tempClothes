@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
 import * as s from "./onboarding1.styles";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function Onboarding1UI(props) {
   const router = useRouter();
@@ -16,9 +19,13 @@ export default function Onboarding1UI(props) {
     router.push("/");
   };
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <s.WrapperDiv>
-      <s.ItemWrapperDiv>
+      <s.ItemWrapperDiv data-aos="fade-up" data-aos-duration="2000">
         <s.QuestionDiv>성별을 알려주세요!</s.QuestionDiv>
         <s.ButtonDiv>
           <s.ManButton value={"여성"} onClick={props.onClickSelect} isSelected={props.isSelected}>
