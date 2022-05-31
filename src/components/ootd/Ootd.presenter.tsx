@@ -174,7 +174,7 @@ const OotdUI = (props: IOotdUIProps) => {
 
           <Ootd.MasonryLayout breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
             {props.data?.fetchFeeds.feeds.map((el, idx) => (
-              <div data-aos="fade-up" data-aos-duration="2000" key={idx}>
+              <div key={idx}>
                 <OotdFeed key={idx} el={el} myTag={props.myTag} myRegion={props.myRegion} tagSelected={props.tagSelected} id={el.id} />
               </div>
             ))}
