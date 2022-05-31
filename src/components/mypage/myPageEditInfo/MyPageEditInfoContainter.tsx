@@ -34,7 +34,9 @@ const MyPageEditInfoContainter = () => {
       [name]: value,
     });
   };
-
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
   const onClickEventTag = (e: any) => {
     if (e.target.id === "style") {
       setInputs({
