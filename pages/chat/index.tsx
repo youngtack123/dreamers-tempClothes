@@ -188,7 +188,7 @@ const Chat = (props) => {
           console.log("누군가가 채팅침", data);
           refetch();
         });
-        /* 누군가 입장 */
+        /* 누군가 입장장 */
         socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
           refetch();
