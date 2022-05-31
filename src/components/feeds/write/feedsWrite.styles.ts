@@ -40,6 +40,7 @@ export const PhotoBoxDiv = styled.div`
   margin-bottom: 25px;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 `;
 export const PhotoClickImg = styled.img`
   width: 36px;
@@ -164,6 +165,7 @@ export const RegionTagLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  cursor: pointer;
 `;
 export const StyleUl = styled.ul`
   width: 340px;
@@ -189,6 +191,7 @@ export const StyleTagLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  cursor: pointer;
 `;
 export const OuterItemUl = styled.ul`
   width: 340px;
@@ -213,6 +216,7 @@ export const OuterTagLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  cursor: pointer;
 `;
 export const TopUl = styled.ul`
   width: 340px;
@@ -241,6 +245,7 @@ export const TopTagLi = styled.li`
   :nth-child(2) {
     font-size: 10px;
   }
+  cursor: pointer;
 `;
 export const LongTagDiv = styled.div`
   width: 60px;
@@ -281,6 +286,7 @@ export const BottomTagLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  cursor: pointer;
 `;
 export const EtcUl = styled.ul`
   width: 270px;
@@ -304,6 +310,7 @@ export const EtcLi = styled.li`
     background-color: #fff2b2;
     color: #333333;
   }
+  cursor: pointer;
 `;
 export const SubmitButton = styled.button`
   width: 70px;
@@ -315,6 +322,7 @@ export const SubmitButton = styled.button`
   color: ${(props: ISubmitButtonProps) => (props.isActive ? "#333" : "#b2b2b2")};
   border: ${(props: ISubmitButtonProps) => (props.isActive ? "1px solid #FFDD87" : "none")};
   margin-left: 278px;
+  cursor: pointer;
 `;
 
 export const ThumbnailDiv = styled.div`

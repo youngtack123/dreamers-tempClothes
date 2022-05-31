@@ -18,12 +18,14 @@ const MyPageHeaderPresenter = (props: any) => {
     };
   };
 
+  console.log(weahterData);
+
   return (
     <S.MyPageHeaderWrapperDiv>
       <S.MyPageHeaderWeatherDiv>
         <S.MyPageWeatherFirstDiv>
           {/* 날씨 맑음 부분 */}
-          {weahterData?.getWeather.weatherIcon === "01d" || (weahterData?.getWeather.weatherIcon === "01n" && <S.MyPageHeaderSunnyImg src="../images/🦆 _Weather Sunny_.png" alt="weatherSunny" />)}
+          {(weahterData?.getWeather.weatherIcon === "01d" || weahterData?.getWeather.weatherIcon === "01n") && <S.MyPageHeaderSunnyImg src="../images/🦆 _Weather Sunny_.png" alt="weatherSunny" />}
           {/* 날씨 구름 + 해 부분 */}
           {(weahterData?.getWeather.weatherIcon === "02d" || weahterData?.getWeather.weatherIcon === "02n") && <S.MyPageHeaderSunnyImg src="/images/sunnycloudy.png" />}
           {/* 날씨 구름 부분 */}

@@ -12,18 +12,12 @@ import InfiniteScroll from "react-infinite-scroller";
 import Link from "next/link";
 import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { useMediaQuery } from "react-responsive";
-import MFeedsWrite from "../feeds/forMobile/mFeedsWrite.container";
 import { IOotdUIProps } from "./Ootd.types";
 import Modal2 from "../common/commonModal2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const OotdUI = (props: IOotdUIProps) => {
-  const isPc = useMediaQuery({
-    query: "(min-width:825px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:824px)",
-  });
-
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
   const [isVisible, setIsVisible] = useState(false);
@@ -62,10 +56,14 @@ const OotdUI = (props: IOotdUIProps) => {
     });
   }
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <>
       <Ootd.Container__Div>
-        <div>
+        <div data-aos="fade-right" data-aos-duration="1350" data-aos-delay="300">
           <Ootd.Container_Side__Div>
             <Ootd.TodayInfo__Div>
               <Ootd.Date__Div>
@@ -191,12 +189,7 @@ const OotdUI = (props: IOotdUIProps) => {
         <Ootd.WriteButton onClick={openModal}>+</Ootd.WriteButton>
 
         <Modal2 open={modalOpen} close={closeModal}>
-          {isPc && <FeedsWrite closeModal={closeModal} />}
-          {isMobile && (
-            <Modal open={modalOpen} close={closeModal}>
-              <MFeedsWrite closeModal={closeModal} />
-            </Modal>
-          )}
+          <FeedsWrite closeModal={closeModal} />
         </Modal2>
       </Ootd.Container__Div>
     </>

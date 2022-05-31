@@ -49,7 +49,7 @@ const ApolloConfig = (props: any) => {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://team01.leo3179.shop/graphql", // api 연결
+    uri: "https://t1dreamers.shop/graphql", // api 연결
     headers: {
       Authorization: `Bearer ${accessToken}`,
     }, // axios의 interceptor와 비슷한 개념인듯함 헤더에다가 토큰값 넣어줌

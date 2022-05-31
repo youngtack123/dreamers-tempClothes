@@ -335,13 +335,7 @@ const Header = () => {
           </MainMenuUl>
         </MainMenuNav>
       </HeaderContentDiv>
-      <button
-        onClick={() => {
-          openChatModal(), createRoomFunc();
-        }}
-      >
-        채팅연결
-      </button>
+
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
         <Chat closeChatModal={closeChatModal} another={chatMate?.fetchChatMate} createRoomId={createRoomId}></Chat>
       </Modal>

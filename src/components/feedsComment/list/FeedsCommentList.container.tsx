@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Q_FETCH_COMMENTS } from "../write/FeedsCommentWrite.queries";
 import FeedsCommentListUI from "./FeedsCommentList.presenter";
 import { M_DELETE_COMMENT } from "./FeedsCommentList.queries";
-import InfiniteScroll from "react-infinite-scroller";
 import { toast } from "react-toastify";
 
 const FeedsCommentList = (props) => {
@@ -43,31 +42,12 @@ const FeedsCommentList = (props) => {
     }
   };
 
-  const onLoadMore = () => {
-    if (!data) return;
-
-    fetchMore({
-      variables: {
-        page: Math.ceil(data?.fetchComments.comments?.length / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchComments.comments) return { fetchComments: [...prev.fetchComments.comments] };
-
-        return {
-          fetchComments: [...prev.fetchComments.comments, ...fetchMoreResult.fetchComments.comments],
-        };
-      },
-    });
-  };
-
   return (
     <>
       <div style={{ height: "603", overflow: "auto" }}>
-        <InfiniteScroll pageStart={0} onLoadMore={onLoadMore} hasMore={true} useWindow={false}>
-          {comment.map((el) => (
-            <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} IDforFetch={props.IDforFetch} />
-          ))}
-        </InfiniteScroll>
+        {comment.map((el) => (
+          <FeedsCommentListUI key={el.id} el={el} onDeleteComment={onDeleteComment} IDforFetch={props.IDforFetch} />
+        ))}
       </div>
     </>
   );

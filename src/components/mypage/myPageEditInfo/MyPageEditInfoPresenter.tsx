@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Timer from "../../lib/timer";
 import * as S from "./MyPageEditInfoStyles";
 import { useRecoilState } from "recoil";
@@ -24,6 +24,7 @@ const MyPageEditInfoPresenter = (props) => {
   const onClickRegionBottom = (id) => {
     setRegionBottom(id);
   };
+
   return (
     <S.RealMyPageEditInfoWrapper>
       <S.MyPageEditInfoInputDiv>

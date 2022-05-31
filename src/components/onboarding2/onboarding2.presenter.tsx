@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as s from "./onboarding2.styles";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function Onboarding2UI() {
   const router = useRouter();
@@ -23,9 +26,13 @@ export default function Onboarding2UI() {
     router.push("/onboarding1");
   };
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <s.WrapperDiv>
-      <s.ItemWrapperDiv>
+      <s.ItemWrapperDiv data-aos="fade-up" data-aos-duration="2000">
         <s.QuestionDiv>즐겨 입는 스타일을 알려주세요!</s.QuestionDiv>
 
         <s.StyleDiv>

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Modal from "../../common/commonModal";
+import Modal2 from "../../common/commonModal2";
 import FeedDetail from "../../feeds/detail/feedDetail.container";
 import * as S from "./MyPageFeedStyles";
 const MyPageFeedPresenter = (props) => {
@@ -38,9 +39,9 @@ const MyPageFeedPresenter = (props) => {
           </S.NoImageDiv>
         )}
       </S.MyPageFeedLookBooxDiv>
-      <Modal open={modalOpen} close={closeModal} header="게시글 상세정보">
+      <Modal2 open={modalOpen} close={closeModal} header="게시글 상세정보">
         <FeedDetail myPageFeedId={myPageFeedId}></FeedDetail>
-      </Modal>
+      </Modal2>
     </S.MyPageFeedWrapperDiv>
   );
 };

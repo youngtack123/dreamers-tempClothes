@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Body = styled.div`
   width: 100%;
@@ -240,7 +242,7 @@ const Login = styled.span`
 
 const Looking = styled.span`
   position: absolute;
-  left: 106.9rem;
+  left: 106.7rem;
   top: 74.8rem;
   font-family: "Pretendard";
   font-style: normal;
@@ -305,30 +307,44 @@ function Landing() {
     gsap.from(downArrow2.current, { duration: 1, autoAlpha: 5, y: 20, repeat: 100, yoyo: true });
   }, []);
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <Body>
       <Wrapper1>
-        <MainImg src="/images/landimg1.png" />
+        <MainImg data-aos="fade-left" data-aos-easing="ease-in-sine" data-aos-duration="1200" src="/images/landimg1.png" />
         <SmallLogo src="/images/landui.svg" />
         <TitleKo>당신의 완벽한 외출을 위해</TitleKo>
         <DecoBar></DecoBar>
-        <TitleEng1>For your perfect </TitleEng1>
-        <TitleEng2>excursion</TitleEng2>
+        <TitleEng1 data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350">
+          For your perfect{" "}
+        </TitleEng1>
+        <TitleEng2 data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350">
+          excursion
+        </TitleEng2>
         {isVisible && <DownArrowImg ref={downArrow1} src="/images/downArrow.png" onClick={scrollToMiddle} />}
       </Wrapper1>
       <Wrapper2>
-        <SubTitleEng1>match clothes</SubTitleEng1>
-        <SubImg1 src="/images/land2-1.png" />
-        <SubImg3 src="images/land2-3.png" />
-        <SubImg2 src="/images/land2-2.png" />
-        <SubTitleEng2>with temp</SubTitleEng2>
-        <SmallLogo2 src="/images/landui.svg" />
-        <SubTitleKo>당신의 완벽한 날씨를 위해</SubTitleKo>
+        <SubTitleEng1 data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350" data-aos-delay="300">
+          match clothes
+        </SubTitleEng1>
+        <SubImg1 data-aos="fade-zoom-in" data-aos-duration="1500" data-aos-easing="ease-in-sine" src="/images/land2-1.png" />
+        <SubImg3 src="images/land2-3.png" data-aos="fade-zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="1500" />
+        <SubImg2 src="/images/land2-2.png" data-aos="fade-zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="1500" />
+        <SubTitleEng2 data-aos="fade-left" data-aos-easing="ease-in-sine" data-aos-duration="1350" data-aos-delay="300">
+          with temp
+        </SubTitleEng2>
+        <SmallLogo2 data-aos="fade-up" data-aos-duration="2000" src="/images/landui.svg" />
+        <SubTitleKo data-aos="fade-up" data-aos-duration="2000">
+          당신의 완벽한 날씨를 위해
+        </SubTitleKo>
         {isVisible2 && <DownArrowImg ref={downArrow2} src="/images/downArrow.png" onClick={scrollToBottom} />}
       </Wrapper2>
       <Wrapper3>
-        <LineBox></LineBox>
-        <LandImg src="/images/land3.png" />
+        <LineBox data-aos-delay="200" data-aos="fade-up" data-aos-duration="2000"></LineBox>
+        <LandImg data-aos-delay="200" data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350" src="/images/land3.png" />
         <LandingTitle>온도에 맞는 옷을 입고 싶은 날</LandingTitle>
         <Ondoui>온도衣</Ondoui>
         <MainLogo src="/images/mainlogo.svg" />

@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import * as feed from "./commonFeed.styles";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import Modal from "../common/commonModal";
 import FeedDetail from "../../feeds/detail/feedDetail.container";
 import Link from "next/link";
@@ -12,6 +12,8 @@ import Chat from "../../../../pages/chat";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import Modal2 from "../commonModal2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const M_TOGGLE_LIKE_FEED = gql`
   mutation toggleLikeFeed($feedId: String!) {
@@ -60,6 +62,7 @@ const OotdFeed = (props) => {
     localStorage.setItem("nickname", nickname);
     router.push("/otherUser");
   };
+
 
   return (
     <>

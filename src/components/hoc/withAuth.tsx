@@ -20,7 +20,7 @@ export const withAuth = (Componenet: any) => (props: any) => {
           toast.error("로그인 후 이용 가능합니다.", {
             icon: "🤔",
           });
-          Router.push("/");
+          Router.push("/login");
         }
       });
     }
