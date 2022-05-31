@@ -11,6 +11,8 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
 import { toast } from "react-toastify";
+import Modal from "../../common/commonModal";
+import Chat from "../../../../pages/chat";
 
 const HeaderWrapperDiv = styled.div`
   background-color: white;
@@ -166,13 +168,60 @@ const FETCH_USER = gql`
   }
 `;
 
+const CHAT_MATE = gql`
+  query {
+    fetchChatMate
+  }
+`;
+
+const CREATE_ROOM = gql`
+  mutation createRoom($guestNickname: String!) {
+    createRoom(guestNickname: $guestNickname)
+  }
+`;
+
 const Header = () => {
   const [m_logout] = useMutation(LOGOUT);
+  const [createRoom] = useMutation(CREATE_ROOM);
   const { data } = useQuery(FETCH_USER);
+  const { data: chatMate } = useQuery(CHAT_MATE);
   const router = useRouter();
 
+  // const { data: fetchLogs } = useQuery(FETCH_LOGS, {
+  //   variables: {
+  //     guestNickname: data?.fetchUser.nickname,
+  //   },
+  // });
+
   const [open, setOpen] = useState(false);
+  const [chatModalOpen, setChatModalOpen] = useState(false);
+  const [createRoomId, setCreateRoomId] = useState<any>("");
   const anchorRef = useRef(null);
+
+  console.log("chatMate", chatMate);
+
+  const createRoomFunc = async () => {
+    try {
+      const createRoomResult = await createRoom({
+        variables: {
+          guestNickname: data?.fetchUser.nickname,
+        },
+      });
+      console.log("createRoomResult", createRoomResult);
+      setCreateRoomId(createRoomResult?.data.createRoom);
+    } catch (error) {
+      toast.error(error.message, {
+        icon: "🤔",
+      });
+    }
+  };
+
+  const openChatModal = () => {
+    setChatModalOpen(true);
+  };
+  const closeChatModal = () => {
+    setChatModalOpen(false);
+  };
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -249,7 +298,7 @@ const Header = () => {
         <HorizonBarDiv></HorizonBarDiv>
         {data?.fetchUser.nickname ? (
           <HiUserSpan>
-            기온에 맞는 옷을 입고 싶은 <UserNameSpan>{data?.fetchUser.nickname}</UserNameSpan> 님, 환영합니다.
+            온도에 맞는 옷을 입고 싶은 <UserNameSpan>{data?.fetchUser.nickname}</UserNameSpan> 님, 환영합니다.
           </HiUserSpan>
         ) : (
           <></>
@@ -304,6 +353,16 @@ const Header = () => {
           </MainMenuUl>
         </MainMenuNav>
       </HeaderContentDiv>
+      <button
+        onClick={() => {
+          openChatModal(), createRoomFunc();
+        }}
+      >
+        채팅연결
+      </button>
+      <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
+        <Chat closeChatModal={closeChatModal} another={chatMate?.fetchChatMate} createRoomId={createRoomId}></Chat>
+      </Modal>
     </HeaderWrapperDiv>
   );
 };
