@@ -168,12 +168,6 @@ const FETCH_USER = gql`
   }
 `;
 
-const CHAT_MATE = gql`
-  query {
-    fetchChatMate
-  }
-`;
-
 const CREATE_ROOM = gql`
   mutation createRoom($guestNickname: String!) {
     createRoom(guestNickname: $guestNickname)
@@ -184,7 +178,7 @@ const Header = () => {
   const [m_logout] = useMutation(LOGOUT);
   const [createRoom] = useMutation(CREATE_ROOM);
   const { data } = useQuery(FETCH_USER);
-  const { data: chatMate } = useQuery(CHAT_MATE);
+
   const router = useRouter();
 
   // const { data: fetchLogs } = useQuery(FETCH_LOGS, {
@@ -236,11 +230,13 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      router.push("/");
-      await m_logout();
-      localStorage.clear();
+      const logoutResult = await m_logout();
+      console.log(logoutResult);
+      // router.push("/");
+      // toast.success("로그아웃 성공!", {
+      //   icon: "😊",
+      // });
       // location.reload();
-      router.push("/");
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
@@ -335,10 +331,6 @@ const Header = () => {
           </MainMenuUl>
         </MainMenuNav>
       </HeaderContentDiv>
-
-      <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
-        <Chat closeChatModal={closeChatModal} another={chatMate?.fetchChatMate} createRoomId={createRoomId}></Chat>
-      </Modal>
     </HeaderWrapperDiv>
   );
 };

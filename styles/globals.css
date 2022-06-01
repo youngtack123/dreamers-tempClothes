@@ -193,6 +193,7 @@ li {
   border: 0;
 }
 .modal2 > section {
+  width: 80%;
   margin: 0 auto;
   border-radius: 10px;
   border: 1px solid #999;

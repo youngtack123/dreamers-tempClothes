@@ -12,7 +12,6 @@ import Chat from "../../../../pages/chat";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import Modal2 from "../commonModal2";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
 const M_TOGGLE_LIKE_FEED = gql`
@@ -62,7 +61,6 @@ const OotdFeed = (props) => {
     localStorage.setItem("nickname", nickname);
     router.push("/otherUser");
   };
-
 
   return (
     <>
@@ -155,7 +153,7 @@ const OotdFeed = (props) => {
       </Modal2>
 
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
-        <Chat closeChatModal={closeChatModal}></Chat>
+        <Chat closeChatModal={closeChatModal} another={props.el.user.nickname}></Chat>
       </Modal>
     </>
   );

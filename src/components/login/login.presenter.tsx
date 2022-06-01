@@ -37,7 +37,7 @@ export default function LoginUI(props: any) {
 
           <s.SocialItemDiv>
             <s.NaverImg src="/images/naver.png" />
-            <Link href="https://team01.leo3179.shop/login/naver">
+            <Link href="https://t1dreamers.shop/login/naver">
               <a>
                 <s.EachItemDiv>네이버 계정으로 로그인</s.EachItemDiv>
               </a>
@@ -46,7 +46,7 @@ export default function LoginUI(props: any) {
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.KakaoImg src="/images/kakao.png" />
-            <Link href="https://team01.leo3179.shop/login/kakao">
+            <Link href="https://t1dreamers.shop/login/kakao">
               <a>
                 <s.EachItemDiv>카카오 계정으로 로그인</s.EachItemDiv>
               </a>
@@ -54,7 +54,7 @@ export default function LoginUI(props: any) {
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.GoogleImg src="/images/google.png" />
-            <Link href="https://team01.leo3179.shop/login/google">
+            <Link href="https://t1dreamers.shop/login/google">
               <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
             </Link>
           </s.SocialItemDiv>
