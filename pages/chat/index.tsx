@@ -7,11 +7,10 @@ import { toast } from "react-toastify";
 import useUpdateEffect from "../../src/components/common/customHook/useUpdateEffect";
 import { useCallback } from "react";
 
-const CHATLOG = gql`
+const CHAT_LOG = gql`
   query fetchLogs($opponentNickname: String!) {
     fetchLogs(opponentNickname: $opponentNickname) {
       id
-      room
       message
       user {
         nickname
@@ -104,10 +103,11 @@ const ChatInputBtnDiv = styled.div`
   display: flex;
   border: 1px solid #bebebe;
   border-radius: 30px;
+  justify-content: space-between;
 `;
 
 const ChatInput = styled.input`
-  width: 41.6rem;
+  width: 70.6rem;
   height: 4.5rem;
   border: none;
   background-color: white;
@@ -135,10 +135,10 @@ const Chat = (props) => {
   const [room, setRoom] = useState("");
   const [socket, setSocket] = useState<any>("");
   const [nickNameOk, setNickNameOk] = useState(false);
-  const { closeChatModal } = props;
+  const { closeChatModal, another } = props;
 
   const { data: fetchUser } = useQuery(FETCH_USER);
-  const { data, refetch } = useQuery(CHATLOG, {
+  const { data, refetch } = useQuery(CHAT_LOG, {
     variables: {
       opponentNickname: fetchUser?.fetchUser.nickname,
     },
@@ -158,6 +158,7 @@ const Chat = (props) => {
       setNickNameOk(false);
     }
   }, [fetchUser]);
+  console.log(data?.fetchlogs);
 
   useEffect(() => {
     if (!confirm("채팅은 500원이 차감됩니다!")) {
@@ -179,11 +180,10 @@ const Chat = (props) => {
       const nickname = fetchUser?.fetchUser.nickname;
       const room = "1";
 
-      socket.emit("message", room, nickname, message);
+      socket.emit("message", 1, nickname, message);
 
       socket.on("connect", () => {
         /* 누군가 채팅침 */
-
         socket.on(room, (data) => {
           console.log("누군가가 채팅침", data);
           refetch();
@@ -216,6 +216,7 @@ const Chat = (props) => {
 
   function msg_send() {
     /* 메시지 전송 */
+    console.log(data);
     const nickname = fetchUser?.fetchUser.nickname;
     socket.emit("send", room, nickname, message);
     refetch();
@@ -235,7 +236,7 @@ const Chat = (props) => {
       <h1 style={{ marginLeft: "1rem", marginTop: "1rem" }}>{`${fetchUser?.fetchUser.nickname}님 반갑습니다`}</h1>
       <div>
         {data?.fetchLogs.map((el, index) => {
-          if (fetchUser?.fetchUser.nickname === el?.user.nickname) {
+          if (fetchUser?.fetchUser.nickname === el.user.nickname) {
             return (
               <ChatFlexDiv key={index}>
                 <ChatSendFlexDiv>
@@ -245,7 +246,7 @@ const Chat = (props) => {
                 </ChatSendFlexDiv>
               </ChatFlexDiv>
             );
-          } else if (fetchUser?.fetchUser.nickname !== el?.user.nickname) {
+          } else if (fetchUser?.fetchUser.nickname !== el.user.nickname) {
             return (
               <ChatFlexDiv key={index}>
                 <img src="../images/user.png" width="50"></img>
@@ -266,7 +267,7 @@ const Chat = (props) => {
             }}
             ref={scrollRef}
           >
-            제출
+            전송
           </SubmitButton>
         </ChatInputBtnDiv>
       </ChatInputDiv>
