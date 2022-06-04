@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import { amountState } from "../store";
 
 const CREATE_BUTTON = gql`
-  mutation createButton($imp_uid: String!, $amount: Float!) {
+  mutation createButton($imp_uid: String!, $amount: Int!) {
     createButton(imp_uid: $imp_uid, amount: $amount) {
       id
       imp_uid

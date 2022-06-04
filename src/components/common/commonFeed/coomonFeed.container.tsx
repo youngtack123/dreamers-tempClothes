@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import * as feed from "./commonFeed.styles";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import Modal from "../common/commonModal";
 import FeedDetail from "../../feeds/detail/feedDetail.container";
 import Link from "next/link";
@@ -12,16 +12,11 @@ import Chat from "../../../../pages/chat";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import Modal2 from "../commonModal2";
+import "aos/dist/aos.css";
 
 const M_TOGGLE_LIKE_FEED = gql`
   mutation toggleLikeFeed($feedId: String!) {
     toggleLikeFeed(feedId: $feedId)
-  }
-`;
-
-const CREATE_ROOM = gql`
-  mutation createRoom($guestNickname: String!) {
-    createRoom(guestNickname: $guestNickname)
   }
 `;
 
@@ -30,11 +25,10 @@ const OotdFeed = (props) => {
 
   const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
   const [isLike, setIsLike] = useState(false);
-  const [createRoom] = useMutation(CREATE_ROOM);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [chatModalOpen, setChatModalOpen] = useState(false);
-  const [createRoomId, setCreateRoomId] = useState<any>("");
+
   const openModal = () => {
     setModalOpen(true);
   };
@@ -68,21 +62,6 @@ const OotdFeed = (props) => {
     router.push("/otherUser");
   };
 
-  const createRoomFunc = async () => {
-    try {
-      const createRoomResult = await createRoom({
-        variables: {
-          guestNickname: props.el.user.nickname,
-        },
-      });
-      setCreateRoomId(createRoomResult);
-    } catch (error) {
-      toast.error(error.message, {
-        icon: "🤔",
-      });
-    }
-  };
-
   return (
     <>
       <feed.FeedTop__Div>
@@ -110,7 +89,7 @@ const OotdFeed = (props) => {
           )}
           <DMIcon
             onClick={() => {
-              openChatModal(), createRoomFunc();
+              openChatModal();
             }}
             style={{ cursor: "pointer" }}
             width="18"
@@ -174,7 +153,7 @@ const OotdFeed = (props) => {
       </Modal2>
 
       <Modal open={chatModalOpen} close={closeChatModal} header="채팅하기">
-        <Chat closeChatModal={closeChatModal} another={props.el.user.nickname} createRoomId={createRoomId}></Chat>
+        <Chat closeChatModal={closeChatModal} another={props.el.user.nickname}></Chat>
       </Modal>
     </>
   );

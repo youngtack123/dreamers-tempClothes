@@ -7,11 +7,17 @@ import { toast } from "react-toastify";
 import useUpdateEffect from "../../src/components/common/customHook/useUpdateEffect";
 import { useCallback } from "react";
 
-// const CREATE_ROOM = gql`
-//   mutation createRoom($guestNickname: String!) {
-//     createRoom(guestNickname: $guestNickname)
-//   }
-// `;
+const CHAT_LOG = gql`
+  query fetchLogs($opponentNickname: String!) {
+    fetchLogs(opponentNickname: $opponentNickname) {
+      id
+      message
+      user {
+        nickname
+      }
+    }
+  }
+`;
 
 const FETCH_USER = gql`
   query {
@@ -30,32 +36,6 @@ const FETCH_USER = gql`
         lon
       }
       deletedAt
-    }
-  }
-`;
-
-const FETCH_LOGS = gql`
-  query fetchLogs($guestNickname: String!) {
-    fetchLogs(guestNickname: $guestNickname) {
-      id
-      message
-      user {
-        nickname
-      }
-      chatRoom {
-        host
-        guest
-      }
-    }
-  }
-`;
-
-const FETCH_ROOM = gql`
-  query fetchRoom($guestNickname: String!) {
-    fetchRoom(guestNickname: $guestNickname) {
-      id
-      host
-      guest
     }
   }
 `;
@@ -123,10 +103,11 @@ const ChatInputBtnDiv = styled.div`
   display: flex;
   border: 1px solid #bebebe;
   border-radius: 30px;
+  justify-content: space-between;
 `;
 
 const ChatInput = styled.input`
-  width: 41.6rem;
+  width: 70.6rem;
   height: 4.5rem;
   border: none;
   background-color: white;
@@ -151,37 +132,24 @@ const ChatInputDiv = styled.div`
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const [nickName, setNickName] = useState("");
-  const [Room, setRoom] = useState("");
+  const [room, setRoom] = useState("");
   const [socket, setSocket] = useState<any>("");
   const [nickNameOk, setNickNameOk] = useState(false);
-  const [fetchLogOk, setFetchLogOk] = useState(false);
-  const { closeChatModal, another, createRoomId } = props;
+  const { closeChatModal, another } = props;
 
   const { data: fetchUser } = useQuery(FETCH_USER);
-  const { data: fetchRoomData } = useQuery(FETCH_ROOM, {
+  const { data, refetch } = useQuery(CHAT_LOG, {
     variables: {
-      guestNickname: another,
+      opponentNickname: fetchUser?.fetchUser.nickname,
     },
   });
-  const { data: fetchLog } = useQuery(FETCH_LOGS, {
-    variables: {
-      guestNickname: fetchRoomData?.fetchRoom.host,
-    },
-  });
-  // const [createRoom] = useMutation(CREATE_ROOM);
   const [payChat] = useMutation(CHAT_PAYMENT);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
 
-  // useEffect(() => {
-  //   scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-  // }, [data]);
-
   useEffect(() => {
-    if (fetchLog) {
-      setFetchLogOk(true);
-    }
-  }, [fetchLog]);
+    scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  }, [data]);
 
   useEffect(() => {
     if (fetchUser) {
@@ -190,29 +158,40 @@ const Chat = (props) => {
       setNickNameOk(false);
     }
   }, [fetchUser]);
+  console.log(data?.fetchlogs);
+
+  useEffect(() => {
+    if (!confirm("채팅은 500원이 차감됩니다!")) {
+      // 취소(아니오) 버튼 클릭 시 이벤트
+      closeChatModal(false);
+    } else {
+      // 확인(예) 버튼 클릭 시 이벤트
+      if (!data) {
+        payChatFunc();
+      } else {
+        alert("이전 채팅기록이 있음으로 차감이 되지 않습니다!");
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (nickNameOk) {
-      const socket = io("https://team01.leo3179.shop/chat", { transports: ["websocket"], upgrade: false });
-      const nickname = fetchRoomData?.fetchRoom.host;
-      let room;
-      if (createRoomId?.data?.createRoom === fetchRoomData?.fetchRoom.id) {
-        room = fetchRoomData?.fetchRoom.id;
-        console.log("aaa", room);
-      } else {
-        room = createRoomId?.data.createRoom;
-        console.log("bbb", room);
-      }
-      socket.emit("message", room, nickname, message);
+      const socket = io("https://server.t1dreamers.shop/graphql/chat", { transports: ["websocket"], upgrade: false });
+      const nickname = fetchUser?.fetchUser.nickname;
+      const room = "1";
+
+      socket.emit("message", 1, nickname, message);
 
       socket.on("connect", () => {
         /* 누군가 채팅침 */
         socket.on(room, (data) => {
           console.log("누군가가 채팅침", data);
+          refetch();
         });
-        /* 누군가 입장 */
+        /* 누군가 입장장 */
         socket.on("receive" + room, (receive) => {
           console.log("누군가가 입장했어", receive);
+          refetch();
         });
       });
       setRoom(room);
@@ -222,14 +201,14 @@ const Chat = (props) => {
     }
   }, [nickNameOk]);
 
-  // const payChatFunc = async () => {
-  //   try {
-  //     const payChatResult = await payChat();
-  //   } catch (error) {
-  //     alert(error.message);
-  //     closeChatModal(true);
-  //   }
-  // };
+  const payChatFunc = async () => {
+    try {
+      const payChatResult = await payChat();
+    } catch (error) {
+      alert(error.message);
+      closeChatModal(true);
+    }
+  };
 
   const messageHandler = (e: any) => {
     setMessage(e.target.value);
@@ -237,15 +216,17 @@ const Chat = (props) => {
 
   function msg_send() {
     /* 메시지 전송 */
+    console.log(data);
     const nickname = fetchUser?.fetchUser.nickname;
-    socket.emit("send", Room, nickname, message);
+    socket.emit("send", room, nickname, message);
+    refetch();
     inputRef.current.value = "";
   }
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       msg_send();
-
+      refetch();
       inputRef.current.value = "";
     }
   };
@@ -254,8 +235,8 @@ const Chat = (props) => {
     <div>
       <h1 style={{ marginLeft: "1rem", marginTop: "1rem" }}>{`${fetchUser?.fetchUser.nickname}님 반갑습니다`}</h1>
       <div>
-        {fetchLog?.fetchLogs.map((el, index) => {
-          if (fetchUser?.fetchUser.nickname === el?.user.nickname) {
+        {data?.fetchLogs.map((el, index) => {
+          if (fetchUser?.fetchUser.nickname === el.user.nickname) {
             return (
               <ChatFlexDiv key={index}>
                 <ChatSendFlexDiv>
@@ -265,7 +246,7 @@ const Chat = (props) => {
                 </ChatSendFlexDiv>
               </ChatFlexDiv>
             );
-          } else if (fetchUser?.fetchUser.nickname !== el?.user.nickname) {
+          } else if (fetchUser?.fetchUser.nickname !== el.user.nickname) {
             return (
               <ChatFlexDiv key={index}>
                 <img src="../images/user.png" width="50"></img>
@@ -282,11 +263,11 @@ const Chat = (props) => {
           <ChatInput type="text" id="msg" onChange={messageHandler} placeholder="메세지 입력을 기다리고 있어요!" onKeyPress={handleKeyPress} ref={inputRef} />
           <SubmitButton
             onClick={() => {
-              msg_send();
+              msg_send(), refetch();
             }}
             ref={scrollRef}
           >
-            제출
+            전송
           </SubmitButton>
         </ChatInputBtnDiv>
       </ChatInputDiv>

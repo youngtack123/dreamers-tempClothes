@@ -84,11 +84,11 @@ export const AreYouUserDiv = styled.div`
   margin-bottom: 4.6rem;
 `;
 export const AlreadyUserDiv = styled.div`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #7e7272;
 `;
 export const GoToLoginDiv = styled.div`
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-decoration: underline;
   cursor: pointer;
   :hover {

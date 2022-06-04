@@ -14,6 +14,8 @@ import FeedsWrite from "../feeds/write/feedsWrite.container";
 import { useMediaQuery } from "react-responsive";
 import { IOotdUIProps } from "./Ootd.types";
 import Modal2 from "../common/commonModal2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const OotdUI = (props: IOotdUIProps) => {
   const router = useRouter();
@@ -54,10 +56,14 @@ const OotdUI = (props: IOotdUIProps) => {
     });
   }
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <>
       <Ootd.Container__Div>
-        <div>
+        <div data-aos="fade-right" data-aos-duration="1350" data-aos-delay="300">
           <Ootd.Container_Side__Div>
             <Ootd.TodayInfo__Div>
               <Ootd.Date__Div>
