@@ -176,7 +176,7 @@ const Chat = (props) => {
 
   useEffect(() => {
     if (nickNameOk) {
-      const socket = io("https://team01.leo3179.shop/chat", { transports: ["websocket"], upgrade: false });
+      const socket = io("https://server.t1dreamers.shop/graphql/chat", { transports: ["websocket"], upgrade: false });
       const nickname = fetchUser?.fetchUser.nickname;
       const room = "1";
 
