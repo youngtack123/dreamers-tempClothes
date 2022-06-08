@@ -68,7 +68,7 @@ const MyPageEditInfoContainter = () => {
       toast.success("회원정보 수정 완료!", {
         icon: "😊",
       });
-      router.push("/mypage");
+      router.push("/login");
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",

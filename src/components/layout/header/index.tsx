@@ -207,6 +207,10 @@ const Header = () => {
   const logout = async () => {
     try {
       await m_logout();
+      toast.success("로그아웃 성공!", {
+        icon: "😊",
+      });
+      router.push("/login");
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
