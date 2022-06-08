@@ -315,7 +315,6 @@ export const EtcLi = styled.li`
 export const SubmitButton = styled.button`
   width: 70px;
   height: 40px;
-  // background: #eeeeee;
   background: ${(props: ISubmitButtonProps) => (props.isActive ? "#FFEA86" : "#eee")};
   border-radius: 30px;
   font-size: 14px;
@@ -335,7 +334,6 @@ export const Slick = styled(Slider)`
   width: 300px;
   height: 65px;
   margin-bottom: 25px;
-  /* margin-left: 10px; */
   .slick-slider /*슬라이드 틀 조정*/ {
     display: inline-block;
   }
