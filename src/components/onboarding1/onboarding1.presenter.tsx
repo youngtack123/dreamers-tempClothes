@@ -3,8 +3,9 @@ import * as s from "./onboarding1.styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { IOnboarding1UIProps } from "./onboarding1.types";
 
-export default function Onboarding1UI(props) {
+export default function Onboarding1UI(props: IOnboarding1UIProps) {
   const router = useRouter();
 
   const onMoveToLogin = () => {

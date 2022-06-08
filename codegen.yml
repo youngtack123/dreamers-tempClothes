@@ -1,0 +1,7 @@
+schema: https://server.t1dreamers.shop/graphql
+generates:
+  ./src/components/types/types.ts:
+    plugins:
+      - typescript
+    config:
+      typesPrefix: I

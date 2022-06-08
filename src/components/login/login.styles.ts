@@ -169,3 +169,9 @@ export const EachItemDiv = styled.div`
   font-size: 1.2rem;
   margin-left: 0.5rem;
 `;
+// ========================================
+//                 a 태그 부분
+// ========================================
+export const A = styled.a`
+  color: #333;
+`;

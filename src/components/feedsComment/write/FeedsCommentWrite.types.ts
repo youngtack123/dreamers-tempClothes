@@ -1,8 +1,8 @@
-export interface IWriteComment {
+export interface FormValue {
   comment?: string;
 }
 export interface IFeedsCommentWriteUIProps {
   register: any;
   handleSubmit: any;
-  onClickWriteComment: (data: IWriteComment) => void;
+  onClickWriteComment: (data: FormValue) => void;
 }

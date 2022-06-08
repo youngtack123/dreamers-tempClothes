@@ -1,29 +1,27 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useRecoilState } from "recoil";
-import { Q_FETCH_SUB_COMMENTS } from "../../feedsNestedComment/write/NestedCommentWrite.queries";
+import { IMutation, IMutationCreateCommentArgs } from "../../types/types";
 import FeedsCommentWriteUI from "./FeedsCommentWrite.presenter";
 import { M_CREATE_COMMENT, Q_FETCH_COMMENTS } from "./FeedsCommentWrite.queries";
-import { IWriteComment } from "./FeedsCommentWrite.types";
+import { FormValue } from "./FeedsCommentWrite.types";
 
 const FeedsCommentWrite = (props) => {
-  const [createComment] = useMutation(M_CREATE_COMMENT);
+  const [createComment] = useMutation<Pick<IMutation, "createComment">, IMutationCreateCommentArgs>(M_CREATE_COMMENT);
 
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit, setValue } = useForm<FormValue>({
     mode: "onChange",
   });
 
-  const onClickWriteComment = async (data: IWriteComment) => {
+  const onClickWriteComment: SubmitHandler<FormValue> = async (data) => {
     const { comment } = data;
 
     try {
-      const result = await createComment({
+      await createComment({
         variables: {
           createCommentInput: {
             commentDetail: comment,
             feedId: props.IDforFetch,
-            // feedId: String(router.query.feedId),
           },
         },
         refetchQueries: [
@@ -33,7 +31,6 @@ const FeedsCommentWrite = (props) => {
           },
         ],
       });
-      // alert("댓글 등록이 완료되었습니다!");
       setValue("comment", "");
     } catch (error) {
       toast.error(error.message, {

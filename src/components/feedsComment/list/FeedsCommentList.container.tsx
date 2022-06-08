@@ -3,30 +3,30 @@ import { Q_FETCH_COMMENTS } from "../write/FeedsCommentWrite.queries";
 import FeedsCommentListUI from "./FeedsCommentList.presenter";
 import { M_DELETE_COMMENT } from "./FeedsCommentList.queries";
 import { toast } from "react-toastify";
+import { MouseEvent } from "react";
+import { IMutation, IMutationDeleteCommentArgs, IQuery, IQueryFetchCommentsArgs } from "../../types/types";
 
 const FeedsCommentList = (props) => {
-  const [deleteComment] = useMutation(M_DELETE_COMMENT);
+  const [deleteComment] = useMutation<Pick<IMutation, "deleteComment">, IMutationDeleteCommentArgs>(M_DELETE_COMMENT);
 
-  const { data, fetchMore } = useQuery(Q_FETCH_COMMENTS, {
+  const { data } = useQuery<Pick<IQuery, "fetchComments">, IQueryFetchCommentsArgs>(Q_FETCH_COMMENTS, {
     variables: {
-      // feedId: String(router.query.feedId),
       feedId: props.IDforFetch,
-      // feedId: "67e8a648-6c86-46e1-8919-d52c6550c119",
     },
   });
 
   const comment = [];
-  data?.fetchComments.comments?.map((el) => {
+  data?.fetchComments.comments?.map((el: any) => {
     if (el.pComment === null) {
       return comment.push(el);
     }
   });
 
-  const onDeleteComment = async (event) => {
+  const onDeleteComment = async (e: MouseEvent<HTMLDivElement>) => {
     try {
       await deleteComment({
         variables: {
-          commentId: String(event.target.id),
+          commentId: String((e.target as HTMLDivElement).id),
         },
         refetchQueries: [
           {

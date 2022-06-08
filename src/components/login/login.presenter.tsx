@@ -1,9 +1,18 @@
 import { useRouter } from "next/router";
 import * as s from "./login.styles";
 import Link from "next/link";
+import { ChangeEvent } from "react";
 
-export default function LoginUI(props: any) {
-  const { handleLoginInputs, login, loginInputs } = props;
+interface ILoginUIProps {
+  handleLoginInputs: (e: ChangeEvent<HTMLInputElement>) => void;
+  login: () => void;
+  loginInputs: {
+    email: string;
+    password: string;
+  };
+}
+
+export default function LoginUI(props: ILoginUIProps) {
   const router = useRouter();
   const onMoveToSignUp = () => {
     router.push("/signup");
@@ -16,15 +25,15 @@ export default function LoginUI(props: any) {
       <s.InputWrapperDiv>
         <s.ItemInputDiv>
           <s.ItemNameDiv>이메일</s.ItemNameDiv>
-          <s.ItemInput name="email" onChange={handleLoginInputs} />
+          <s.ItemInput name="email" onChange={props.handleLoginInputs} />
         </s.ItemInputDiv>
         <s.PasswordInputDiv>
           <s.ItemNameDiv>비밀번호</s.ItemNameDiv>
-          <s.ItemInput type="password" name="password" onChange={handleLoginInputs} />
+          <s.ItemInput type="password" name="password" onChange={props.handleLoginInputs} />
         </s.PasswordInputDiv>
       </s.InputWrapperDiv>
       <s.RestDiv>
-        {loginInputs.email && loginInputs.password ? <s.LoginButtonOk onClick={login}>로그인</s.LoginButtonOk> : <s.LoginButton>로그인</s.LoginButton>}
+        {props.loginInputs.email && props.loginInputs.password ? <s.LoginButtonOk onClick={props.login}>로그인</s.LoginButtonOk> : <s.LoginButton>로그인</s.LoginButton>}
 
         <s.AlreadyUserDiv>
           <s.AreYouUserDiv>계정이 없으신가요?</s.AreYouUserDiv>
@@ -37,24 +46,23 @@ export default function LoginUI(props: any) {
 
           <s.SocialItemDiv>
             <s.NaverImg src="/images/naver.png" />
-            <Link href="https://t1dreamers.shop/login/naver">
-              <a>
+            <Link href="https://server.t1dreamers.shop/login/naver">
+              <s.A>
                 <s.EachItemDiv>네이버 계정으로 로그인</s.EachItemDiv>
-              </a>
+              </s.A>
             </Link>
-            {/* <s.EachItemDiv onClick={() => window.open("http://team01.leo3179.shop/login/naver")}>네이버 계정으로 로그인</s.EachItemDiv> */}
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.KakaoImg src="/images/kakao.png" />
-            <Link href="https://t1dreamers.shop/login/kakao">
-              <a>
+            <Link href="https://server.t1dreamers.shop/login/kakao">
+              <s.A>
                 <s.EachItemDiv>카카오 계정으로 로그인</s.EachItemDiv>
-              </a>
+              </s.A>
             </Link>
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.GoogleImg src="/images/google.png" />
-            <Link href="https://t1dreamers.shop/login/google">
+            <Link href="https://server.t1dreamers.shop/login/google">
               <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
             </Link>
           </s.SocialItemDiv>

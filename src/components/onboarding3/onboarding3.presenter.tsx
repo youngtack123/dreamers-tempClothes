@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import * as s from "./onboarding3.styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export default function Onboarding3UI() {
   const router = useRouter();
-  const [clickTag, setClickTag] = useState("");
+  const [clickTag, setClickTag] = useState<string>("");
 
   const onMoveToLogin = () => {
     router.push("/login");
@@ -21,9 +21,9 @@ export default function Onboarding3UI() {
     router.push("/onboarding2");
   };
 
-  const onClickTag = (e) => {
-    setClickTag(e.target.innerText);
-    localStorage.setItem("onboarding3", e.target.innerText);
+  const onClickTag = (e: MouseEvent<HTMLDivElement>) => {
+    setClickTag((e.target as HTMLDivElement).innerText);
+    localStorage.setItem("onboarding3", (e.target as HTMLDivElement).innerText);
   };
 
   useEffect(() => {
