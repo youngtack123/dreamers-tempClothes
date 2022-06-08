@@ -1,20 +1,21 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { M_CREATE_COMMENT } from "../../feedsComment/write/FeedsCommentWrite.queries";
+import { IMutation, IMutationCreateCommentArgs } from "../../types/types";
 import NestedCommentWriteUI from "./NestedCommentWrite.presenter";
 import { Q_FETCH_SUB_COMMENTS } from "./NestedCommentWrite.queries";
 import { INestedCommentWriteProps, IWriteNestedComment } from "./NestedCommentWrite.types";
 
 const NestedCommentWrite = (props: INestedCommentWriteProps) => {
-  const [createNestedComment] = useMutation(M_CREATE_COMMENT);
+  const [createNestedComment] = useMutation<Pick<IMutation, "createComment">, IMutationCreateCommentArgs>(M_CREATE_COMMENT);
 
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
   });
 
-  const onWriteNestedComment = async (data: IWriteNestedComment) => {
+  const onWriteNestedComment: SubmitHandler<IWriteNestedComment> = async (data) => {
     const { comment } = data;
 
     try {

@@ -1,24 +1,26 @@
 import LoginUI from "./login.presenter";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "./login.quries";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../common/store/index";
-import useUpdateEffect from "../common/customHook/useUpdateEffect";
 import { toast } from "react-toastify";
+import { IMutation, IMutationLoginArgs } from "../types/types";
 
 export default function Login() {
   const router = useRouter();
-  const [, setAccessToken] = useRecoilState(accessTokenState);
-  const [loginInputs, setLoginInputs] = useState({
+  const [, setAccessToken] = useRecoilState<string>(accessTokenState);
+
+  type InputItems = { email: string; password: string };
+  const [loginInputs, setLoginInputs] = useState<InputItems>({
     email: "",
     password: "",
   });
 
-  const [loginUser] = useMutation(LOGIN);
+  const [loginUser] = useMutation<Pick<IMutation, "login">, IMutationLoginArgs>(LOGIN);
 
-  const handleLoginInputs = (e: any) => {
+  const handleLoginInputs = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInputs({
       ...loginInputs,

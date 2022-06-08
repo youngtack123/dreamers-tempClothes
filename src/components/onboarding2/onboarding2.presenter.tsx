@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import * as s from "./onboarding2.styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -8,10 +8,10 @@ import { useEffect } from "react";
 export default function Onboarding2UI() {
   const router = useRouter();
 
-  const [isSelected, setIsSelected] = useState<String>("");
+  const [isSelected, setIsSelected] = useState<string>("");
 
-  const onClickSelect = (e) => {
-    setIsSelected(e.target.innerText);
+  const onClickSelect = (e: MouseEvent<HTMLDivElement>) => {
+    setIsSelected((e.target as HTMLDivElement).innerText);
   };
 
   const onMoveToLogin = () => {

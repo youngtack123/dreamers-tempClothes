@@ -2,12 +2,10 @@ import { ChangeEvent, MouseEvent } from "react";
 import { FormState, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
 export interface IFeedsWriteProps {
-  onClickRegion?: (e: any) => void;
-  onClickTag?: (e: any) => void;
+  onClickRegion?: (e: string) => void;
+  onClickTag?: (e: string) => void;
   isEdit?: boolean;
   fetchData?: any;
-  regionId?: string;
-  tagFetch?: any;
   fetchImg?: any;
   closeModal?: () => void;
 }
@@ -24,18 +22,16 @@ export interface IFeedsWriteUIProps {
   isActive: boolean;
   isEdit: boolean;
   fetchData: any;
-  myRegion: any;
-  myTag: any;
+  myRegion: string;
+  myTag: string[];
   regionCategory: any;
   tagCategory: any;
-  onClickRegion: (e: any) => void;
-  onClickTag: (e: any) => void;
+  onClickRegion: (e: string) => void;
+  onClickTag: (e: string) => void;
   onClickUpdate: (data: IFormValue) => void;
   onClickSubmit: (data: IFormValue) => void;
   register: UseFormRegister<IFormValue>;
   handleSubmit: UseFormHandleSubmit<IFormValue>;
-  regionId: string;
-  tagFetch: any;
   formState: FormState<IFormValue>;
   fetchImg: any;
 }

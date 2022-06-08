@@ -176,14 +176,20 @@ export const RegionTagWrapperDiv = styled.div`
   margin-right: 1rem;
   margin-bottom: 1.5rem;
 `;
-export const RegionTagBottomLineDiv = styled.div`
-  width: 35.4rem;
+
+export const RegionTagContentDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
+
+export const RegionDiv = styled.div`
+  font-size: 1.2rem;
+  padding-bottom: 3.5rem;
+  width: 10rem;
+`;
+
 export const GenderDiv = styled.div`
   font-size: 1.2rem;
   padding-right: 1rem;
@@ -191,6 +197,7 @@ export const GenderDiv = styled.div`
 export const TagItemDiv = styled.div`
   width: 5rem;
   height: 2rem;
+  margin-bottom: 1rem;
   line-height: 2rem;
   font-size: 1.1rem;
   border-radius: 5rem;

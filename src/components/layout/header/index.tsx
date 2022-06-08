@@ -11,8 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
 import { toast } from "react-toastify";
-import Modal from "../../common/commonModal";
-import Chat from "../../../../pages/chat";
+import { IMutation, IQuery } from "../../types/types";
 
 const HeaderWrapperDiv = styled.div`
   background-color: white;
@@ -47,7 +46,6 @@ const HorizonBarDiv = styled.div`
   width: 120rem;
   height: 1px;
   background: #ddd;
-  // border: 0.5px solid #eee;
   position: relative;
 `;
 
@@ -168,49 +166,27 @@ const FETCH_USER = gql`
   }
 `;
 
-const CREATE_ROOM = gql`
-  mutation createRoom($guestNickname: String!) {
-    createRoom(guestNickname: $guestNickname)
-  }
-`;
-
 const Header = () => {
-  const [m_logout] = useMutation(LOGOUT);
-  const [createRoom] = useMutation(CREATE_ROOM);
-  const { data } = useQuery(FETCH_USER);
+  const [m_logout] = useMutation<Pick<IMutation, "logout">>(LOGOUT);
+  const { data } = useQuery<Pick<IQuery, "fetchUser">>(FETCH_USER);
 
   const router = useRouter();
 
-  // const { data: fetchLogs } = useQuery(FETCH_LOGS, {
-  //   variables: {
-  //     guestNickname: data?.fetchUser.nickname,
-  //   },
-  // });
-
-  const [open, setOpen] = useState(false);
-  const [chatModalOpen, setChatModalOpen] = useState(false);
-  const [createRoomId, setCreateRoomId] = useState<any>("");
+  const [open, setOpen] = useState<boolean>(false);
   const anchorRef = useRef(null);
-
-  const openChatModal = () => {
-    setChatModalOpen(true);
-  };
-  const closeChatModal = () => {
-    setChatModalOpen(false);
-  };
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
+  function handleListKeyDown(event: any) {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
@@ -230,13 +206,11 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      const logoutResult = await m_logout();
-      console.log(logoutResult);
-      // router.push("/");
-      // toast.success("로그아웃 성공!", {
-      //   icon: "😊",
-      // });
-      // location.reload();
+      await m_logout();
+      toast.success("로그아웃 성공!", {
+        icon: "😊",
+      });
+      router.push("/login");
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",

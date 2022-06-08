@@ -1,6 +1,7 @@
+import { MouseEvent } from "react";
+
 export interface IFeedsCommentListUIProps {
   el: any;
-  onDeleteComment: (event) => void;
+  onDeleteComment: (e: MouseEvent<HTMLDivElement>) => void;
   IDforFetch: string;
-  // onLoadMore: () => void;
 }

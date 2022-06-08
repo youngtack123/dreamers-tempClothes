@@ -5,26 +5,22 @@ export const WrapperDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* position: relative; */
 `;
 export const LeftTempDiv = styled.div`
-  /* width: 33.5rem; */
   width: 335px;
   height: 548px;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   position: fixed;
-  /* top: 0px; */
-  /* z-index: 1; */
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0.7rem 0.6rem 1.2rem -0.5rem rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   padding: 2.8rem 2.1rem 4.2rem;
-  // padding-right: 2.1rem;
   margin-top: 2.6rem;
-  margin-right: 80rem;
+  /* margin-right: 80rem; */
+  position: sticky;
+  top: 0px;
 `;
 // ======================================================
 //                      현재 시간 부분
@@ -40,17 +36,14 @@ export const CurrentTimeDiv = styled.div`
   font-size: 2rem;
   font-size: 20px;
   color: #b7e576;
-  //margin-bottom: 1.5rem;
 `;
 export const Daytime = styled.div`
   font-weight: 800;
-  /* font-size: 2.8rem; */
   font-size: 28px;
   color: #b7e576;
 `;
 export const Time = styled.div`
   font-weight: 800;
-  /* font-size: 2.8rem; */
   font-size: 28px;
   color: #b7e576;
   margin-bottom: 4.5rem;
@@ -86,26 +79,18 @@ export const TodayTempDiv = styled.div`
 `;
 export const TodayDiv = styled.div`
   font-weight: 500;
-  /* font-size: 2rem; */
   font-size: 20px;
   color: #9ed763;
-  // margin-bottom: 1.5rem;
 `;
 export const TempNumDiv = styled.div`
   font-weight: 800;
-  /* font-size: 3.4rem; */
   font-size: 37px;
-  color: #9ed763; // 연두
-  /* color: #FFEA86; // 노랑 */
-  /* color: #9DC4FF; // 파랑 */
+  color: #9ed763;
 `;
 export const DegreeDiv = styled.div`
   font-weight: 800;
-  /* font-size: 3.4rem; */
   font-size: 37px;
-  color: #9ed763; // 연두
-  /* color: #FFEA86; */ // 노랑
-  /* color: #9DC4FF; // 파랑 */
+  color: #9ed763;
   margin-bottom: 5rem;
 `;
 // ======================================================
@@ -116,17 +101,13 @@ export const TagDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  // margin-bottom: 3.4rem;
 `;
 export const PageDiv = styled.div`
   font-weight: 500;
-  /* font-size: 2rem; */
   font-size: 20px;
   color: rgba(68, 189, 72, 0.7);
-  // margin-bottom: 1.5rem;
 `;
 export const RecommendTop = styled.div`
-  /* font-size: 3.2rem; */
   font-size: 32px;
   font-weight: 600;
   color: rgba(68, 189, 72, 0.7);
@@ -139,12 +120,11 @@ export const RecommendTop = styled.div`
 export const RightLookBookDiv = styled.div`
   width: 78.6rem;
   display: flex;
-  /* flex-direction: row; */
   flex-flow: row-reverse wrap;
   margin-left: 3rem;
   margin-top: 2.6rem;
   justify-content: flex-end;
-  margin-left: 40rem;
+  /* margin-left: 40rem; */
 `;
 export const LookBookItemImg = styled.img`
   width: 230px;
@@ -173,7 +153,6 @@ export const WriteButton = styled.button`
   font-size: 40px;
   color: white;
   position: fixed;
-  /* margin-left: 1120px; */
   cursor: pointer;
   :hover {
     background-color: #ffea86;

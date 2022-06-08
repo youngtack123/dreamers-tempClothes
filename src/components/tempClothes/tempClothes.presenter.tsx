@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Modal2 from "../common/commonModal2";
 import FeedDetail from "../feeds/detail/feedDetail.container";
@@ -9,6 +8,7 @@ import * as s from "./tempClothes.styles";
 import { ITempClothesUIProps } from "./tempClothes.types";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { IQuery, IQueryGetWeatherArgs } from "../types/types";
 
 const today = () => {
   let now = new Date();
@@ -34,15 +34,15 @@ const AmPm = () => {
 };
 
 const TempClothesUI = (props: ITempClothesUIProps) => {
-  const [tagFeed, setTagFeed] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [whichModal, setWhichModal] = useState(false);
+  const [tagFeed, setTagFeed] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [whichModal, setWhichModal] = useState<boolean>(false);
 
-  const [nonMember, setNonMember] = useState("");
+  const [nonMember, setNonMember] = useState<string>("");
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const { data: nonMemberWeatherData } = useQuery(Q_GET_WEATHER, {
+  const { data: nonMemberWeatherData } = useQuery<Pick<IQuery, "getWeather">, IQueryGetWeatherArgs>(Q_GET_WEATHER, {
     variables: { regionName: String(nonMember) },
   });
 
@@ -84,31 +84,33 @@ const TempClothesUI = (props: ITempClothesUIProps) => {
   return (
     <s.WrapperDiv>
       {/* 현재 시간, 기온, 추천 옷차림 태그 부분 */}
-      <s.LeftTempDiv data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350" data-aos-delay="300">
-        <s.TimeDiv>
-          <s.CurrentTimeDiv>지금 시간</s.CurrentTimeDiv>
-          <s.Daytime>{AmPm()}</s.Daytime>
-          <s.Time>{today()}</s.Time>
-        </s.TimeDiv>
+      <div>
+        <s.LeftTempDiv data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="1350" data-aos-delay="300">
+          <s.TimeDiv>
+            <s.CurrentTimeDiv>지금 시간</s.CurrentTimeDiv>
+            <s.Daytime>{AmPm()}</s.Daytime>
+            <s.Time>{today()}</s.Time>
+          </s.TimeDiv>
 
-        <s.MiddleDiv>
-          <s.RegionDiv>
-            <s.TodayDiv>지금 지역</s.TodayDiv>
-            <s.SelectedRegionDiv>{props.userData?.fetchUser.region.id || nonMember}</s.SelectedRegionDiv>
-          </s.RegionDiv>
-          <s.TodayTempDiv>
-            <s.TodayDiv>지금 기온</s.TodayDiv>
-            <s.TempNumDiv>{Math.round(props.weatherData?.getWeather.temp) || Math.round(nonMemberWeatherData?.getWeather.temp) || 0}</s.TempNumDiv>
-            <s.DegreeDiv>°C</s.DegreeDiv>
-          </s.TodayTempDiv>
-        </s.MiddleDiv>
+          <s.MiddleDiv>
+            <s.RegionDiv>
+              <s.TodayDiv>지금 지역</s.TodayDiv>
+              <s.SelectedRegionDiv>{props.userData?.fetchUser.region.id || nonMember}</s.SelectedRegionDiv>
+            </s.RegionDiv>
+            <s.TodayTempDiv>
+              <s.TodayDiv>지금 기온</s.TodayDiv>
+              <s.TempNumDiv>{Math.round(props.weatherData?.getWeather.temp) || Math.round(nonMemberWeatherData?.getWeather.temp) || 0}</s.TempNumDiv>
+              <s.DegreeDiv>°C</s.DegreeDiv>
+            </s.TodayTempDiv>
+          </s.MiddleDiv>
 
-        <s.TagDiv>
-          <s.PageDiv>지금衣</s.PageDiv>
-          {props.tagData?.fetchFeedTags[0]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[0].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
-          {props.tagData?.fetchFeedTags[1]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[1].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
-        </s.TagDiv>
-      </s.LeftTempDiv>
+          <s.TagDiv>
+            <s.PageDiv>지금衣</s.PageDiv>
+            {props.tagData?.fetchFeedTags[0]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[0].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
+            {props.tagData?.fetchFeedTags[1]?.tagName ? <s.RecommendTop># {props.tagData?.fetchFeedTags[1].tagName}</s.RecommendTop> : <s.RecommendTop>데이터 분석중</s.RecommendTop>}
+          </s.TagDiv>
+        </s.LeftTempDiv>
+      </div>
 
       {/* 사진들 뿌리는 부분 */}
       <s.RightLookBookDiv>

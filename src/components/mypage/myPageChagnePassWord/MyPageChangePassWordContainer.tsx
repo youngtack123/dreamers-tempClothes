@@ -3,6 +3,7 @@ import MyPageChangePassWordPresenter from "./MyPageChangePassWordPresenter";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PASSWORD } from "./MyPageChangePassWordQuries";
 import { toast } from "react-toastify";
+import { ChangeEvent } from "react";
 
 const MyPageChangePassWordContainer = () => {
   const [inputs, setInputs] = useState({
@@ -12,7 +13,7 @@ const MyPageChangePassWordContainer = () => {
   });
   const [m_changePassword] = useMutation(UPDATE_PASSWORD);
 
-  const handlePassword = (e) => {
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,

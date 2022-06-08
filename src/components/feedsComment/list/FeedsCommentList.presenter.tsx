@@ -5,8 +5,8 @@ import * as s from "./FeedsCommentList.styles";
 import { IFeedsCommentListUIProps } from "./FeedsCommentList.types";
 
 const FeedsCommentListUI = (props: IFeedsCommentListUIProps) => {
-  const [isNested, setIsNested] = useState(false);
-  const [mention, setMention] = useState("");
+  const [isNested, setIsNested] = useState<boolean>(false);
+  const [mention, setMention] = useState<string>("");
 
   // 대댓글 멘션 기능
   const onWriteMention = (nickname: string) => () => {

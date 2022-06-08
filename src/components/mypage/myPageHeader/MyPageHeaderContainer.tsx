@@ -13,7 +13,7 @@ const MyPageHeaderContainer = () => {
     },
   });
 
-  return <MyPageHeaderPresenter selectMyPageRef={selectMyPageRef} fetchUserData={fetchUserData} weahterData={weahterData}></MyPageHeaderPresenter>;
+  return <MyPageHeaderPresenter fetchUserData={fetchUserData} weahterData={weahterData}></MyPageHeaderPresenter>;
 };
 
 export default MyPageHeaderContainer;

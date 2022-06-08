@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
@@ -53,8 +53,8 @@ export default function Signup() {
   });
   const [clickGender, setClickGender] = useState("");
   const [clickStyle, setClickStyle] = useState("");
-  const [clickRegionTop, setClickRegionTop] = useState("");
-  const [clickRegionBottom, setRegionBottom] = useState("");
+  const [clickRegion, setClickRegion] = useState("");
+
   const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
     setInputs({
@@ -221,6 +221,10 @@ export default function Signup() {
     }
   };
 
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
+
   const onClickTagGender = (id) => {
     setClickGender(id);
   };
@@ -229,14 +233,9 @@ export default function Signup() {
     setClickStyle(id);
   };
 
-  const onClickRegionTop = (id) => {
-    setClickRegionTop(id);
+  const onClickRegion = (id) => {
+    setClickRegion(id);
   };
-
-  const onClickRegionBottom = (id) => {
-    setRegionBottom(id);
-  };
-
   const noAuthSignUp = () => {
     toast.error("인증이 완료되지 않았습니다!", {
       icon: "🤔",
@@ -259,10 +258,8 @@ export default function Signup() {
       onClickTagStyle={onClickTagStyle}
       clickGender={clickGender}
       clickStyle={clickStyle}
-      onClickRegionTop={onClickRegionTop}
-      clickRegionTop={clickRegionTop}
-      onClickRegionBottom={onClickRegionBottom}
-      clickRegionBottom={clickRegionBottom}
+      onClickRegion={onClickRegion}
+      clickRegion={clickRegion}
     />
   );
 }
