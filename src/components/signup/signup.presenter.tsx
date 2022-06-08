@@ -3,9 +3,40 @@ import Timer from "../lib/timer";
 import * as s from "./signup.styles";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent, MouseEvent } from "react";
 
-export default function SignupUI(props: any) {
+interface IpropsSignupUI {
+  handleSignUpInputs: (e: ChangeEvent<HTMLInputElement>) => void;
+  signUpFunc: () => void;
+  onClickEventTag: (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLSpanElement>) => void;
+  overLapId: () => void;
+  overLapNic: () => void;
+  inputs: {
+    nickname: string;
+    email: string;
+    password: string;
+    passwordOk: string;
+    phone: string;
+    authNumber: string;
+    gender: string;
+    style: string;
+    region: string;
+  };
+  createPhoneAuth: () => void;
+  confirmAuthNumber: () => void;
+  onClickTagGender: (id: string) => void;
+  onClickTagStyle: (id: string) => void;
+  onClickRegionTop: (id: string) => void;
+  onClickRegionBottom: (id: string) => void;
+  socialLoginData: any;
+  updateUserFunc: () => void;
+  clickGender: string;
+  clickStyle: string;
+  clickRegionTop: string;
+  clickRegionBottom: string;
+}
+
+export default function SignupUI(props: IpropsSignupUI) {
   const {
     handleSignUpInputs,
     signUpFunc,
@@ -121,8 +152,8 @@ export default function SignupUI(props: any) {
                 return (
                   <s.TagItemDiv
                     id="gender"
-                    onClick={() => {
-                      onClickEventTag(), onClickTagGender(el);
+                    onClick={(event) => {
+                      onClickEventTag(event), onClickTagGender(el);
                     }}
                     key={index}
                     style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}

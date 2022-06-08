@@ -1,6 +1,18 @@
 import React from "react";
 import * as S from "./MyPageChangePassWordStyle";
-const MyPageChangePassWordPresenter = (props) => {
+import { ChangeEvent } from "react";
+
+interface IPropsMyPageChangePassword {
+  changePasswordFunc: () => void;
+  handlePassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputs: {
+    originPassword: string;
+    changePassword: string;
+    passwordOk: string;
+  };
+}
+
+const MyPageChangePassWordPresenter = (props: IPropsMyPageChangePassword) => {
   const { changePasswordFunc, handlePassword, inputs } = props;
   return (
     <S.MyPageChangePassWordWrapper>

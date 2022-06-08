@@ -7,6 +7,7 @@ import { timerState } from "../../common/store";
 import { useRouter } from "next/router";
 import { CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC } from "../../signup/signup.quries";
 import { toast } from "react-toastify";
+import { ChangeEvent, MouseEvent } from "react";
 
 const MyPageEditInfoContainter = () => {
   const [inputs, setInputs] = useState({
@@ -26,29 +27,27 @@ const MyPageEditInfoContainter = () => {
   const [authOk, setAuthFalse] = useState(false);
   const [, setSendAuthNumber] = useRecoilState(timerState);
 
-  useEffect(() => {}, [inputs]);
-  const handleInfo = (e: any) => {
+  const handleInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,
       [name]: value,
     });
   };
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
-  const onClickEventTag = (e: any) => {
-    if (e.target.id === "style") {
+
+  const onClickEventTag = (e: MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    if (target.id === "style") {
       setInputs({
         ...inputs,
-        [e.target.id]: e.target.innerText,
+        [target.id]: target.innerText,
       });
     }
 
-    if (e.target.id === "region") {
+    if (target.id === "region") {
       setInputs({
         ...inputs,
-        [e.target.id]: e.target.innerText,
+        [target.id]: target.innerText,
       });
     }
   };
@@ -151,6 +150,9 @@ const MyPageEditInfoContainter = () => {
       });
     }
   };
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
 
   return (
     <MyPageEditInfoPresenter

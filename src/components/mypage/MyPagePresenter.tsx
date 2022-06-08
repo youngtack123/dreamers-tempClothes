@@ -10,7 +10,13 @@ import Payment from "../common/commonModal/payment";
 import Modal from "../common/commonModal";
 import { useState } from "react";
 import Modal2 from "../common/commonModal2";
-const MyPagePresenter = (props) => {
+
+interface IPropsPresenter {
+  onClickMyPageList: (index: number) => void;
+  selectMyPageRef: any;
+}
+
+const MyPagePresenter = (props: IPropsPresenter) => {
   const [selectMyPageListData] = useRecoilState(selectMyPageList);
   const { onClickMyPageList, selectMyPageRef } = props;
 
