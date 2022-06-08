@@ -47,23 +47,25 @@ export default function LoginUI(props: ILoginUIProps) {
           <s.SocialItemDiv>
             <s.NaverImg src="/images/naver.png" />
             <Link href="https://server.t1dreamers.shop/login/naver">
-              <s.A>
+              <a>
                 <s.EachItemDiv>네이버 계정으로 로그인</s.EachItemDiv>
-              </s.A>
+              </a>
             </Link>
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.KakaoImg src="/images/kakao.png" />
             <Link href="https://server.t1dreamers.shop/login/kakao">
-              <s.A>
+              <a>
                 <s.EachItemDiv>카카오 계정으로 로그인</s.EachItemDiv>
-              </s.A>
+              </a>
             </Link>
           </s.SocialItemDiv>
           <s.SocialItemDiv>
             <s.GoogleImg src="/images/google.png" />
             <Link href="https://server.t1dreamers.shop/login/google">
-              <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
+              <a>
+                <s.EachItemDiv>구글 계정으로 로그인</s.EachItemDiv>
+              </a>
             </Link>
           </s.SocialItemDiv>
         </s.SocialLoginDiv>
