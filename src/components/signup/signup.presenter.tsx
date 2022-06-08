@@ -3,40 +3,9 @@ import Timer from "../lib/timer";
 import * as s from "./signup.styles";
 import { useRecoilState } from "recoil";
 import { authState, timerState } from "../common/store";
-import { useEffect, useState, ChangeEvent, MouseEvent } from "react";
+import { useEffect, useState } from "react";
 
-interface IpropsSignupUI {
-  handleSignUpInputs: (e: ChangeEvent<HTMLInputElement>) => void;
-  signUpFunc: () => void;
-  onClickEventTag: (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLSpanElement>) => void;
-  overLapId: () => void;
-  overLapNic: () => void;
-  inputs: {
-    nickname: string;
-    email: string;
-    password: string;
-    passwordOk: string;
-    phone: string;
-    authNumber: string;
-    gender: string;
-    style: string;
-    region: string;
-  };
-  createPhoneAuth: () => void;
-  confirmAuthNumber: () => void;
-  onClickTagGender: (id: string) => void;
-  onClickTagStyle: (id: string) => void;
-  onClickRegionTop: (id: string) => void;
-  onClickRegionBottom: (id: string) => void;
-  socialLoginData: any;
-  updateUserFunc: () => void;
-  clickGender: string;
-  clickStyle: string;
-  clickRegionTop: string;
-  clickRegionBottom: string;
-}
-
-export default function SignupUI(props: IpropsSignupUI) {
+export default function SignupUI(props: any) {
   const {
     handleSignUpInputs,
     signUpFunc,
@@ -52,10 +21,8 @@ export default function SignupUI(props: IpropsSignupUI) {
     clickGender,
     onClickTagStyle,
     clickStyle,
-    onClickRegionTop,
-    clickRegionTop,
-    onClickRegionBottom,
-    clickRegionBottom,
+    onClickRegion,
+    clickRegion,
   } = props;
   const [sendAuthNumber] = useRecoilState(timerState);
   const router = useRouter();
@@ -65,9 +32,7 @@ export default function SignupUI(props: IpropsSignupUI) {
   };
   const [genderData, setGenderData] = useState(["남성", "여성"]);
   const [styleData, setStyleData] = useState(["캐주얼", "스트릿", "트레이닝", "포멀", "세미포멀"]);
-  const [regionTopData, setRegionTopData] = useState(["서울", "경기", "강원", "충북", "충남"]);
-  const [regionBottomData, setRegionBottomData] = useState(["경북", "경남", "전북", "전남", "제주"]);
-
+  const [regionData, setRegionTopData] = useState(["서울", "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주"]);
   return (
     <s.Body>
       <s.WrapperDiv>
@@ -152,8 +117,8 @@ export default function SignupUI(props: IpropsSignupUI) {
                 return (
                   <s.TagItemDiv
                     id="gender"
-                    onClick={(event) => {
-                      onClickEventTag(event), onClickTagGender(el);
+                    onClick={() => {
+                      onClickEventTag(), onClickTagGender(el);
                     }}
                     key={index}
                     style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
@@ -208,70 +173,39 @@ export default function SignupUI(props: IpropsSignupUI) {
               }
             })}
           </s.StyleTagWrapperDiv>
-
           <s.RegionTagWrapperDiv>
-            <s.GenderDiv>거주지역</s.GenderDiv>
-            {regionTopData.map((el, index) => {
-              if (el === clickRegionTop) {
-                return (
-                  <s.TagItemDiv
-                    id="region"
-                    onClick={(event) => {
-                      onClickEventTag(event), onClickRegionTop(el);
-                    }}
-                    key={index}
-                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
-                  >
-                    {el}
-                  </s.TagItemDiv>
-                );
-              } else {
-                return (
-                  <s.TagItemDiv
-                    id="region"
-                    onClick={(event) => {
-                      onClickEventTag(event), onClickRegionTop(el);
-                    }}
-                    key={index}
-                  >
-                    {el}
-                  </s.TagItemDiv>
-                );
-              }
-            })}
+            <s.RegionDiv>거주지역</s.RegionDiv>
+            <s.RegionTagContentDiv>
+              {regionData.map((el, index) => {
+                if (el === clickRegion) {
+                  return (
+                    <s.TagItemDiv
+                      key={index}
+                      id="region"
+                      onClick={(event) => {
+                        onClickRegion(el), onClickEventTag(event);
+                      }}
+                      style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
+                    >
+                      {el}
+                    </s.TagItemDiv>
+                  );
+                } else {
+                  return (
+                    <s.TagItemDiv
+                      key={index}
+                      id="region"
+                      onClick={(event) => {
+                        onClickRegion(el), onClickEventTag(event);
+                      }}
+                    >
+                      {el}
+                    </s.TagItemDiv>
+                  );
+                }
+              })}
+            </s.RegionTagContentDiv>
           </s.RegionTagWrapperDiv>
-
-          <s.RegionTagBottomLineDiv>
-            <s.GenderDiv style={{ color: "white" }}>거주지역</s.GenderDiv>
-            {regionBottomData.map((el, index) => {
-              if (el === clickRegionBottom) {
-                return (
-                  <s.TagItemDiv
-                    id="region"
-                    onClick={(event) => {
-                      onClickEventTag(event), onClickRegionBottom(el);
-                    }}
-                    key={index}
-                    style={{ background: "#FFF2B2", border: "1px solid #FFDD87" }}
-                  >
-                    {el}
-                  </s.TagItemDiv>
-                );
-              } else {
-                return (
-                  <s.TagItemDiv
-                    id="region"
-                    onClick={(event) => {
-                      onClickEventTag(event), onClickRegionBottom(el);
-                    }}
-                    key={index}
-                  >
-                    {el}
-                  </s.TagItemDiv>
-                );
-              }
-            })}
-          </s.RegionTagBottomLineDiv>
         </s.TagsDiv>
 
         {/* 회원가입 버튼, 이미 회원인가요 부분 */}

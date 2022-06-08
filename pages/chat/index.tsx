@@ -1,11 +1,8 @@
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
-import { jsx, keyframes } from "@emotion/react";
-import { toast } from "react-toastify";
-import useUpdateEffect from "../../src/components/common/customHook/useUpdateEffect";
-import { useCallback } from "react";
+import { keyframes } from "@emotion/react";
 
 const CHAT_LOG = gql`
   query fetchLogs($opponentNickname: String!) {
@@ -133,7 +130,7 @@ const Chat = (props) => {
   const [message, setMessage] = useState("");
   const [nickName, setNickName] = useState("");
   const [room, setRoom] = useState("");
-  const [socket, setSocket] = useState<any>("");
+  const [socket, setSocket] = useState<Socket>();
   const [nickNameOk, setNickNameOk] = useState(false);
   const { closeChatModal, another } = props;
 
@@ -162,10 +159,8 @@ const Chat = (props) => {
 
   useEffect(() => {
     if (!confirm("채팅은 500원이 차감됩니다!")) {
-      // 취소(아니오) 버튼 클릭 시 이벤트
       closeChatModal(false);
     } else {
-      // 확인(예) 버튼 클릭 시 이벤트
       if (!data) {
         payChatFunc();
       } else {
@@ -176,21 +171,18 @@ const Chat = (props) => {
 
   useEffect(() => {
     if (nickNameOk) {
-      const socket = io("https://server.t1dreamers.shop/graphql/chat", { transports: ["websocket"], upgrade: false });
+      const socket = io("https://server.t1dreamers.shop/chat", { transports: ["websocket"], upgrade: false });
       const nickname = fetchUser?.fetchUser.nickname;
       const room = "1";
 
       socket.emit("message", 1, nickname, message);
 
       socket.on("connect", () => {
-        /* 누군가 채팅침 */
         socket.on(room, (data) => {
-          console.log("누군가가 채팅침", data);
           refetch();
         });
-        /* 누군가 입장장 */
+
         socket.on("receive" + room, (receive) => {
-          console.log("누군가가 입장했어", receive);
           refetch();
         });
       });
@@ -203,7 +195,7 @@ const Chat = (props) => {
 
   const payChatFunc = async () => {
     try {
-      const payChatResult = await payChat();
+      await payChat();
     } catch (error) {
       alert(error.message);
       closeChatModal(true);
@@ -215,8 +207,6 @@ const Chat = (props) => {
   };
 
   function msg_send() {
-    /* 메시지 전송 */
-    console.log(data);
     const nickname = fetchUser?.fetchUser.nickname;
     socket.emit("send", room, nickname, message);
     refetch();

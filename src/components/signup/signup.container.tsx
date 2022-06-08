@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useState, ChangeEvent, MouseEvent, useEffect } from "react";
+import { useEffect, useState } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
@@ -53,9 +53,9 @@ export default function Signup() {
   });
   const [clickGender, setClickGender] = useState("");
   const [clickStyle, setClickStyle] = useState("");
-  const [clickRegionTop, setClickRegionTop] = useState("");
-  const [clickRegionBottom, setRegionBottom] = useState("");
-  const handleSignUpInputs = (e: ChangeEvent<HTMLInputElement>) => {
+  const [clickRegion, setClickRegion] = useState("");
+
+  const handleSignUpInputs = (e: any) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,
@@ -198,26 +198,25 @@ export default function Signup() {
     }
   };
 
-  const onClickEventTag = (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLSpanElement>) => {
-    const target = e.currentTarget;
-    if (target.id === "style") {
+  const onClickEventTag = (e: any) => {
+    if (e.target.id === "style") {
       setInputs({
         ...inputs,
-        [target.id]: target.innerText,
+        [e.target.id]: e.target.innerText,
       });
     }
 
-    if (target.id === "gender") {
+    if (e.target.id === "gender") {
       setInputs({
         ...inputs,
-        [target.id]: target.innerText,
+        [e.target.id]: e.target.innerText,
       });
     }
 
-    if (target.id === "region") {
+    if (e.target.id === "region") {
       setInputs({
         ...inputs,
-        [target.id]: target.innerText,
+        [e.target.id]: e.target.innerText,
       });
     }
   };
@@ -226,22 +225,17 @@ export default function Signup() {
     console.log(inputs);
   }, [inputs]);
 
-  const onClickTagGender = (id: string) => {
+  const onClickTagGender = (id) => {
     setClickGender(id);
   };
 
-  const onClickTagStyle = (id: string) => {
+  const onClickTagStyle = (id) => {
     setClickStyle(id);
   };
 
-  const onClickRegionTop = (id: string) => {
-    setClickRegionTop(id);
+  const onClickRegion = (id) => {
+    setClickRegion(id);
   };
-
-  const onClickRegionBottom = (id: string) => {
-    setRegionBottom(id);
-  };
-
   const noAuthSignUp = () => {
     toast.error("인증이 완료되지 않았습니다!", {
       icon: "🤔",
@@ -257,16 +251,15 @@ export default function Signup() {
       inputs={inputs}
       createPhoneAuth={createPhoneAuth}
       confirmAuthNumber={confirmAuthNumber}
+      noAuthSignUp={noAuthSignUp}
       socialLoginData={socialLoginData}
       updateUserFunc={updateUserFunc}
       onClickTagGender={onClickTagGender}
       onClickTagStyle={onClickTagStyle}
       clickGender={clickGender}
       clickStyle={clickStyle}
-      onClickRegionTop={onClickRegionTop}
-      clickRegionTop={clickRegionTop}
-      onClickRegionBottom={onClickRegionBottom}
-      clickRegionBottom={clickRegionBottom}
+      onClickRegion={onClickRegion}
+      clickRegion={clickRegion}
     />
   );
 }
