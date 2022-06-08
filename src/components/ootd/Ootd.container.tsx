@@ -21,8 +21,6 @@ const OotdPage = () => {
     },
   });
 
-  // console.log(data?.fetchFeeds.feeds);
-
   const { data: userData } = useQuery(Q_FETCH_USER);
 
   const { data: tempData } = useQuery(Q_GET_WEATHER, {

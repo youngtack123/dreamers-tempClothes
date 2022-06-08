@@ -155,10 +155,9 @@ const Chat = (props) => {
       setNickNameOk(false);
     }
   }, [fetchUser]);
-  console.log(data?.fetchlogs);
 
   useEffect(() => {
-    if (!confirm("채팅은 500원이 차감됩니다!")) {
+    if (!confirm("채팅은 단추 5개가 차감됩니다!")) {
       closeChatModal(false);
     } else {
       if (!data) {

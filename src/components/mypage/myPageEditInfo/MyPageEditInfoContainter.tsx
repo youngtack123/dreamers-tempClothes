@@ -150,9 +150,6 @@ const MyPageEditInfoContainter = () => {
       });
     }
   };
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
 
   return (
     <MyPageEditInfoPresenter

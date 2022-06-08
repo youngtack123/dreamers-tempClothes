@@ -24,8 +24,6 @@ const MyPageHeaderPresenter = (props: IPropsMyPageHeaderPresenter) => {
     };
   };
 
-  console.log(weahterData);
-
   return (
     <S.MyPageHeaderWrapperDiv>
       <S.MyPageHeaderWeatherDiv>

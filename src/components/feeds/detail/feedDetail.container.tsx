@@ -32,7 +32,7 @@ function FeedDetail(props) {
 
   const onClickLike = async () => {
     try {
-      const result = await toggleLikeFeed({
+      await toggleLikeFeed({
         variables: {
           feedId: myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "",
         },
@@ -42,14 +42,7 @@ function FeedDetail(props) {
             variables: { feedId: myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "" },
           },
         ],
-        // refetchQueries: [
-        //   {
-        //     query: Q_FETCH_FEED,
-        //     variables: { feedId: myPageFeedId ? String(myPageFeedId) : tagFeed ? String(tagFeed) : ootdFeedId ? String(ootdFeedId) : "" },
-        //   },
-        // ],
       });
-      console.log("result", result);
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",

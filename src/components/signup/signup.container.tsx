@@ -221,10 +221,6 @@ export default function Signup() {
     }
   };
 
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
-
   const onClickTagGender = (id) => {
     setClickGender(id);
   };

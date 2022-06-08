@@ -59,7 +59,6 @@ const OotdFeed = (props) => {
           },
         ],
       });
-      console.log(result);
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
