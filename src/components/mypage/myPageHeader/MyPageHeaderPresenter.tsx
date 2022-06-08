@@ -3,8 +3,14 @@ import * as S from "./MyPageHeaderStyles";
 import Script from "next/script";
 import Modal from "../../common/commonModal";
 import Payment from "../../common/commonModal/payment";
-const MyPageHeaderPresenter = (props: any) => {
-  const { onClickMyPageList, fetchUserData, weahterData } = props;
+
+interface IPropsMyPageHeaderPresenter {
+  fetchUserData: any;
+  weahterData: any;
+}
+
+const MyPageHeaderPresenter = (props: IPropsMyPageHeaderPresenter) => {
+  const { fetchUserData, weahterData } = props;
   const [modalOpen, setModalOpen] = useState(false);
 
   const getDate = () => {

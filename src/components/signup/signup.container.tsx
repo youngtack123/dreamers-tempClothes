@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, ChangeEvent, MouseEvent, useEffect } from "react";
 import SignupUI from "./signup.presenter";
 import { useRouter } from "next/router";
 import { CREATE_USER, CONFIRM_OVERLAP_EMAIL, CONFIRM_OVERLAP_NIC, CONFIRM_AUTH_NUMBER, CREATE_PHONE_AUTH, UPDATE_USER } from "./signup.quries";
@@ -55,7 +55,7 @@ export default function Signup() {
   const [clickStyle, setClickStyle] = useState("");
   const [clickRegionTop, setClickRegionTop] = useState("");
   const [clickRegionBottom, setRegionBottom] = useState("");
-  const handleSignUpInputs = (e: any) => {
+  const handleSignUpInputs = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,
@@ -198,42 +198,47 @@ export default function Signup() {
     }
   };
 
-  const onClickEventTag = (e: any) => {
-    if (e.target.id === "style") {
+  const onClickEventTag = (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLSpanElement>) => {
+    const target = e.currentTarget;
+    if (target.id === "style") {
       setInputs({
         ...inputs,
-        [e.target.id]: e.target.innerText,
+        [target.id]: target.innerText,
       });
     }
 
-    if (e.target.id === "gender") {
+    if (target.id === "gender") {
       setInputs({
         ...inputs,
-        [e.target.id]: e.target.innerText,
+        [target.id]: target.innerText,
       });
     }
 
-    if (e.target.id === "region") {
+    if (target.id === "region") {
       setInputs({
         ...inputs,
-        [e.target.id]: e.target.innerText,
+        [target.id]: target.innerText,
       });
     }
   };
 
-  const onClickTagGender = (id) => {
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
+
+  const onClickTagGender = (id: string) => {
     setClickGender(id);
   };
 
-  const onClickTagStyle = (id) => {
+  const onClickTagStyle = (id: string) => {
     setClickStyle(id);
   };
 
-  const onClickRegionTop = (id) => {
+  const onClickRegionTop = (id: string) => {
     setClickRegionTop(id);
   };
 
-  const onClickRegionBottom = (id) => {
+  const onClickRegionBottom = (id: string) => {
     setRegionBottom(id);
   };
 
@@ -252,7 +257,6 @@ export default function Signup() {
       inputs={inputs}
       createPhoneAuth={createPhoneAuth}
       confirmAuthNumber={confirmAuthNumber}
-      noAuthSignUp={noAuthSignUp}
       socialLoginData={socialLoginData}
       updateUserFunc={updateUserFunc}
       onClickTagGender={onClickTagGender}

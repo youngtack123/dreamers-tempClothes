@@ -4,7 +4,15 @@ import Modal from "../../common/commonModal";
 import Modal2 from "../../common/commonModal2";
 import FeedDetail from "../../feeds/detail/feedDetail.container";
 import * as S from "./MyPageFeedStyles";
-const MyPageFeedPresenter = (props) => {
+
+interface IPropsMyPageFeedPresenter {
+  userData: any;
+  fetchMyFeed: any;
+  selectId: (id: string) => void;
+  myPageFeedId: string;
+}
+
+const MyPageFeedPresenter = (props: IPropsMyPageFeedPresenter) => {
   const { userData, fetchMyFeed, selectId, myPageFeedId } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
