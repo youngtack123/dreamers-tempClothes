@@ -37,7 +37,7 @@ export default function Login() {
         },
       });
       setAccessToken(loginResult?.data?.login);
-      toast.success("로그인 성공!", {
+      toast.success("로그인 성공!!", {
         icon: "😊",
       });
       router.push("/tempClothes");
