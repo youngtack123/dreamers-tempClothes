@@ -37,7 +37,10 @@ export const Q_FETCH_USER = gql`
 
 export const Q_FETCH_FEED_LIKE = gql`
   query fetchFeedLike($feedId: String!) {
-    fetchFeedLike(feedId: $feedId)
+    fetchFeedLike(feedId: $feedId) {
+      isLike
+      likeCount
+    }
   }
 `;
 

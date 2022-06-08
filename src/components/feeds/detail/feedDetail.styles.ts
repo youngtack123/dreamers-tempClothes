@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import LikeIcon from "../../../../public/images/emptyheart.svg";
-import DMIcon from "../../../../public/images/dm.svg";
 import Slider from "react-slick";
 import { keyframes } from "@emotion/react";
 import { IFeedDetailButtonProps } from "./feedDetail.types";
@@ -211,14 +209,21 @@ export const IconBox__Div = styled.div`
   position: relative;
 `;
 
-export const LikeCount__Span = styled.span`
-  padding: 0.2rem 1rem;
-  background-color: #fff2b2;
-  border-radius: 30px;
-  font-size: 1.2rem;
+export const LikeIcon__Div = styled.div`
+  &:hover > div {
+    visibility: visible;
+  }
+`;
+
+export const LikeCountTooltip__Div = styled.div`
+  color: #bebebe;
+  font-size: 10px;
   position: absolute;
-  top: -30px;
-  right: -6px;
+  top: -2.2rem;
+  right: 0;
+  text-align: right;
+  visibility: hidden;
+  width: 90px;
 `;
 
 export const Content__Div = styled.div`
