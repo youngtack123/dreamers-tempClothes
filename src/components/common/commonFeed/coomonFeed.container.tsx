@@ -13,18 +13,22 @@ import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import Modal2 from "../commonModal2";
 import "aos/dist/aos.css";
+import { M_TOGGLE_LIKE_FEED, Q_FETCH_FEED, Q_FETCH_FEED_LIKE } from "../../feeds/detail/feedDetail.queries";
+import { Q_FETCH_FEEDS } from "../../ootd/Ootd.queries";
 
-const M_TOGGLE_LIKE_FEED = gql`
-  mutation toggleLikeFeed($feedId: String!) {
-    toggleLikeFeed(feedId: $feedId)
-  }
-`;
+// const M_TOGGLE_LIKE_FEED = gql`
+//   mutation toggleLikeFeed($feedId: String!) {
+//     toggleLikeFeed(feedId: $feedId)
+//   }
+// `;
 
 const OotdFeed = (props) => {
   const router = useRouter();
 
   const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
-  const [isLike, setIsLike] = useState(false);
+  const { data: feedLike } = useQuery(Q_FETCH_FEED_LIKE, {
+    variables: { feedId: props.el.id },
+  });
 
   const [modalOpen, setModalOpen] = useState(false);
   const [chatModalOpen, setChatModalOpen] = useState(false);
@@ -42,14 +46,20 @@ const OotdFeed = (props) => {
   const closeChatModal = () => {
     setChatModalOpen(false);
   };
-  const onClickLike = (e) => {
+  const onClickLike = async (e) => {
     try {
-      toggleLikeFeed({
+      const result = await toggleLikeFeed({
         variables: {
           feedId: String(e.currentTarget.id),
         },
+        refetchQueries: [
+          {
+            query: Q_FETCH_FEED_LIKE,
+            variables: { feedId: e.currentTarget.id },
+          },
+        ],
       });
-      setIsLike(!isLike);
+      console.log(result);
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
@@ -82,7 +92,7 @@ const OotdFeed = (props) => {
         </feed.FeedImageBox__Div>
 
         <feed.HoverIcon__Div>
-          {isLike ? (
+          {feedLike?.fetchFeedLike.isLike ? (
             <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
           ) : (
             <LikeIcon id={props.el.id} onClick={onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#fff" />

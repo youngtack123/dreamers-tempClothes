@@ -64,7 +64,7 @@ function FeedDetailUI(props) {
     slidesToScroll: 1,
   };
   // 툴팁 좋아요 개수
-  const likeCount = props.data?.fetchFeed.likeCount;
+  const likeCount = props.feedLike?.fetchFeedLike.likeCount;
 
   return (
     <Detail.Wrapper__Div>
@@ -135,11 +135,14 @@ function FeedDetailUI(props) {
             <Detail.IconBox__Div>
               <DMIcon style={{ cursor: "pointer" }} width="18" height="17.5" stroke="#bebebe" />
 
-              {props.isLike ? (
-                <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
-              ) : (
-                <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
-              )}
+              <Detail.LikeIcon__Div>
+                <Detail.LikeCountTooltip__Div>{likeCount} likes</Detail.LikeCountTooltip__Div>
+                {props.feedLike?.fetchFeedLike.isLike ? (
+                  <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" fill="#F14848" stroke="#F14848" />
+                ) : (
+                  <LikeIcon onClick={props.onClickLike} style={{ cursor: "pointer" }} width="18" height="16" stroke="#bebebe" />
+                )}
+              </Detail.LikeIcon__Div>
             </Detail.IconBox__Div>
           </Detail.FeedDetail_Top__Div>
 
