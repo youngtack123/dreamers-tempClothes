@@ -1,25 +1,25 @@
-import { useMutation, useQuery } from "@apollo/client";
-import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { useMutation } from "@apollo/client";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
 import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
 import { regionCategory, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useRouter } from "next/router";
 import { checkValidationImage } from "./image.validation";
 import { IFeedsWriteProps, IFormValue, IUpdateFeedInput } from "./feedsWrite.types";
-import { Modal } from "antd";
 import "antd/dist/antd.css";
-import { Flip, toast, Zoom } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CustomToastContainer } from "../../common/toast";
+import { IMutation, IMutationCreateFeedArgs, IMutationUpdateFeedArgs } from "../../types/types";
 
 const FeedsWrite = (props: IFeedsWriteProps) => {
   const router = useRouter();
 
-  const [myTag, setMyTag] = useState<String[]>([]);
-  const [myRegion, setMyRegion] = useState<String>("");
+  const [createFeed] = useMutation<Pick<IMutation, "createFeed">, IMutationCreateFeedArgs>(M_CREATE_FEED);
+  const [updateFeed] = useMutation<Pick<IMutation, "updateFeed">, IMutationUpdateFeedArgs>(M_UPDATE_FEED);
+
+  const [myTag, setMyTag] = useState<string[]>([]);
+  const [myRegion, setMyRegion] = useState<string>("");
   const [editRegion, setEditRegion] = useState("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -27,15 +27,12 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
     mode: "onChange",
   });
 
-  const [createFeed] = useMutation(M_CREATE_FEED);
-  const [updateFeed] = useMutation(M_UPDATE_FEED);
-
-  const onClickRegion = (e: any) => {
+  const onClickRegion = (e: string) => {
     setMyRegion(e);
   };
 
   // 태그 선택하기
-  const onClickTag = (e: any) => {
+  const onClickTag = (e: string) => {
     if (myTag.includes(e)) {
       const newMyTag = myTag.filter((tagEl) => tagEl !== e);
       setMyTag(newMyTag);
@@ -90,7 +87,7 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
   // 등록 버튼 활성화
   useEffect(() => {
     const active = () => {
-      if (myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) {
+      if ((myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) || (props.fetchData?.fetchFeed.feedImg.length !== 0 && myRegion.length !== 0 && myTag.length !== 0)) {
         setIsActive(true);
       } else {
         setIsActive(false);
@@ -99,7 +96,6 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
     active();
   }, [myTag, imageUrl, myRegion]);
 
-  /////// 피드 등록 버튼
   const onClickSubmit = async (data: IFormValue) => {
     if (myTag.length === 0) {
       toast.warning("태그가 없어요!", {
@@ -129,6 +125,7 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
         toast.success("피드 등록 성공!", {
           icon: "😊",
         });
+        router.push("/mypage");
         props.closeModal();
       } catch (error) {
         toast.error(error.message, {
@@ -138,7 +135,6 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
     }
   };
 
-  // 피드 수정 버튼
   const onClickUpdate = async (data: IFormValue) => {
     const updateFeedInput: IUpdateFeedInput = {};
     if (data.detail) updateFeedInput.detail = data.detail;
@@ -151,16 +147,16 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
     if (imageUrl) updateFeedInput.imgURLs = imageUrl;
 
     try {
-      const result = await updateFeed({
+      await updateFeed({
         variables: {
           updateFeedInput,
           feedId: String(router.query.feedId),
         },
       });
+      router.push("/mypage");
       toast.success("피드 수정 성공!", {
         icon: "😊",
       });
-      router.push(`/ootd`);
     } catch (error) {
       toast.error(error.message, {
         icon: "🤔",
@@ -178,31 +174,21 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
         fileRef={fileRef}
         imageUrl={imageUrl}
         showPhoto={showPhoto}
-        // 피드 등록 함수
         onClickRegion={onClickRegion}
         onClickTag={onClickTag}
         onClickSubmit={onClickSubmit}
         register={register}
         handleSubmit={handleSubmit}
-        // 지역, 태그
         regionCategory={regionCategory}
         tagCategory={tagCategory}
-        // 수정
         isEdit={props.isEdit}
         fetchData={props.fetchData}
         onClickUpdate={onClickUpdate}
-        // 수정 태그
         editRegion={editRegion}
-        // 해보는 중
         myRegion={myRegion}
         myTag={myTag}
-        regionId={props.regionId}
-        tagFetch={props.tagFetch}
-        // 폼 버튼 활성화
         formState={formState}
-        // 버튼 활성화
         isActive={isActive}
-        // 이미지 페치
         fetchImg={props.fetchImg}
       />
     </>

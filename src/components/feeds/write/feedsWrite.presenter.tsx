@@ -1,12 +1,8 @@
 import * as s from "./feedsWrite.styles";
-import Slider from "react-slick";
-import styled from "@emotion/styled";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Modal from "../../common/commonModal";
 import { IFeedsWriteUIProps } from "./feedsWrite.types";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
 
 const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
   const showMaxCnt = 4;
@@ -22,13 +18,11 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
 
   return (
     <s.WrapperDiv>
-      {/* 사진, 옷 정보 섹션 */}
       <s.Form onSubmit={props.isEdit ? props.handleSubmit(props.onClickUpdate) : props.handleSubmit(props.onClickSubmit)}>
         <s.LeftDiv>
           <s.PhotoLabel>사진</s.PhotoLabel>
           {props.isEdit ? (
             <>
-              {/* 피드 수정 */}
               {props.showPhoto ? (
                 <s.PhotoBoxDiv onClick={props.onClickImage}>
                   <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
@@ -71,7 +65,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
             </>
           ) : (
             <>
-              {/* 피드 작성 */}
               {props.showPhoto ? (
                 <s.PhotoBoxDiv onClick={props.onClickImage}>
                   <s.PhotoClickImg src="/images/uploadimg.png" onClick={props.onClickImage} />
@@ -120,7 +113,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
           </s.ItemDiv>
         </s.LeftDiv>
 
-        {/* 내용, 태그 섹션 */}
         <s.RightDiv>
           <s.ContentsLabel>내용</s.ContentsLabel>
           <s.ContentsTextArea {...props.register("detail")} defaultValue={props.fetchData?.fetchFeed.detail} placeholder="내용을 입력해주세요" />
@@ -133,7 +125,6 @@ const FeedsWriteUI = (props: IFeedsWriteUIProps) => {
                 <s.RegionUl>
                   {props.regionCategory.map((el) => (
                     <s.RegionTagLi key={uuidv4()} onClick={() => props.onClickRegion(el)} isRegionMatched={props.myRegion === el}>
-                      {/* regionId={props.regionId === el} : 페치 불들어노는 시험용 */}
                       {el}
                     </s.RegionTagLi>
                   ))}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import * as Detail from "./feedDetail.styles";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
@@ -7,14 +7,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { M_DELETE_FEED } from "./feedDetail.queries";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
-import Modal from "../../common/commonModal";
-import FeedsWrite from "../write/feedsWrite.container";
 import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container";
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
-import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
-import { LightTooltip } from "../../common/mui";
-import { Button, IconButton } from "@mui/material";
+import { IMutation, IMutationDeleteFeedArgs } from "../../types/types";
 
 function FeedDetailUI(props) {
   const router = useRouter();
@@ -29,14 +25,15 @@ function FeedDetailUI(props) {
     router.push("/otherUser");
   };
 
-  const [deleteFeed] = useMutation(M_DELETE_FEED);
+  const [deleteFeed] = useMutation<Pick<IMutation, "deleteFeed">, IMutationDeleteFeedArgs>(M_DELETE_FEED);
   const isMatched = props.data?.fetchFeed.user.nickname === props.userData?.fetchUser.nickname;
 
-  const onClickDeleteFeed = async (e) => {
+  const onClickDeleteFeed = async (e: MouseEvent<HTMLSpanElement>) => {
+    const target = e.currentTarget;
     if (isMatched)
       try {
         await deleteFeed({
-          variables: { feedId: String(e.target.id) },
+          variables: { feedId: String(target.id) },
         });
         toast.success("피드 삭제 완료!", {
           icon: "😊",
