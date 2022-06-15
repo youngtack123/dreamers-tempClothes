@@ -1,9 +1,9 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import * as Detail from "./feedDetail.styles";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import MoreIcon from "../../../../public/images/more.svg";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { M_DELETE_FEED } from "./feedDetail.queries";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
@@ -11,10 +11,11 @@ import FeedsCommentList from "../../feedsComment/list/FeedsCommentList.container
 import FeedsCommentWrite from "../../feedsComment/write/FeedsCommentWrite.container";
 import { toast } from "react-toastify";
 import { IMutation, IMutationDeleteFeedArgs } from "../../types/types";
+import { IFeedDetailUIProps } from "./feedDetail.types";
 
-function FeedDetailUI(props) {
+function FeedDetailUI(props: IFeedDetailUIProps) {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setIsOpen((isOpen) => !isOpen);

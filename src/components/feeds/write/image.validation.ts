@@ -9,7 +9,6 @@ export function checkValidationImage(file?: FileList) {
       return false;
     }
     if (!img?.type.includes("png") && !img?.type.includes("jpeg") && !img?.type.includes("jpg")) {
-      // alert("파일 확장자가 올바르지 않습니다.(png, jpeg, jpg만 가능)");
       toast.error("파일 확장자가 올바르지 않아요!", {
         icon: "🥺",
       });

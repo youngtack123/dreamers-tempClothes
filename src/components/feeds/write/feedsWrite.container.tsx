@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedsWriteUI from "./feedsWrite.presenter";
-import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS, Q_FETCH_FEED } from "./feedsWrite.queries";
+import { M_CREATE_FEED, M_UPDATE_FEED, M_UPLOAD_FEED_IMGS } from "./feedsWrite.queries";
 import { regionCategory, tagCategory } from "../../common/store";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
 
   const [myTag, setMyTag] = useState<string[]>([]);
   const [myRegion, setMyRegion] = useState<string>("");
-  const [editRegion, setEditRegion] = useState("");
+  const [editRegion, setEditRegion] = useState<string>("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const { register, handleSubmit, formState } = useForm<IFormValue>({
@@ -108,7 +108,7 @@ const FeedsWrite = (props: IFeedsWriteProps) => {
     }
     if (myTag.length !== 0 && imageUrl.length !== 0 && myRegion.length !== 0) {
       try {
-        const feedResult = await createFeed({
+        await createFeed({
           variables: {
             createFeedInput: {
               detail: data.detail,

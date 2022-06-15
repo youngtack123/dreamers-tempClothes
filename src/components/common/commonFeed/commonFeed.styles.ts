@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Fillheart from "../../../../public/images/fillheart.svg";
 import Emptyheart from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/dm.svg";
 
@@ -47,9 +46,7 @@ export const FeedBody__Div = styled.div`
 export const FeedImageBox__Div = styled.div`
   width: 230px;
   height: 300px;
-  // background-color: #bebebe;
   overflow: hidden;
-  // position: relative;
 `;
 
 export const FeedImage__Img = styled.img`
@@ -79,9 +76,6 @@ export const LikeHeart = styled(Emptyheart)`
   height: 18px;
   width: 17px;
   cursor: pointer;
-  /* position: absolute;
-  bottom: 10px;
-  left: 10px; */
 `;
 
 export const UnLikeHeart = styled(Emptyheart)`
@@ -91,9 +85,6 @@ export const UnLikeHeart = styled(Emptyheart)`
   height: 15px;
   width: 17px;
   cursor: pointer;
-  /* position: absolute;
-  bottom: 20px;
-  left: 20px; */
 `;
 
 export const Dm = styled(DMIcon)`
@@ -101,9 +92,6 @@ export const Dm = styled(DMIcon)`
   height: 14px;
   width: 16px;
   cursor: pointer;
-  /* position: absolute;
-  bottom: 10px;
-  right: 10px; */
 `;
 
 export const FeedBottom__Div = styled.div`

@@ -1,37 +1,28 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import * as feed from "./commonFeed.styles";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-// import Modal from "../common/commonModal";
+import { useState } from "react";
 import FeedDetail from "../../feeds/detail/feedDetail.container";
-import Link from "next/link";
 import Modal from "../commonModal";
-import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import Chat from "../../../../pages/chat";
 import LikeIcon from "../../../../public/images/emptyheart.svg";
 import DMIcon from "../../../../public/images/talk.svg";
 import Modal2 from "../commonModal2";
 import "aos/dist/aos.css";
-import { M_TOGGLE_LIKE_FEED, Q_FETCH_FEED, Q_FETCH_FEED_LIKE } from "../../feeds/detail/feedDetail.queries";
-import { Q_FETCH_FEEDS } from "../../ootd/Ootd.queries";
-
-// const M_TOGGLE_LIKE_FEED = gql`
-//   mutation toggleLikeFeed($feedId: String!) {
-//     toggleLikeFeed(feedId: $feedId)
-//   }
-// `;
+import { M_TOGGLE_LIKE_FEED, Q_FETCH_FEED_LIKE } from "../../feeds/detail/feedDetail.queries";
+import { IMutation, IMutationToggleLikeFeedArgs, IQuery, IQueryFetchFeedLikeArgs } from "../../types/types";
 
 const OotdFeed = (props) => {
   const router = useRouter();
 
-  const [toggleLikeFeed] = useMutation(M_TOGGLE_LIKE_FEED);
-  const { data: feedLike } = useQuery(Q_FETCH_FEED_LIKE, {
+  const [toggleLikeFeed] = useMutation<Pick<IMutation, "toggleLikeFeed">, IMutationToggleLikeFeedArgs>(M_TOGGLE_LIKE_FEED);
+  const { data: feedLike } = useQuery<Pick<IQuery, "fetchFeedLike">, IQueryFetchFeedLikeArgs>(Q_FETCH_FEED_LIKE, {
     variables: { feedId: props.el.id },
   });
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [chatModalOpen, setChatModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [chatModalOpen, setChatModalOpen] = useState<boolean>(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -46,9 +37,9 @@ const OotdFeed = (props) => {
   const closeChatModal = () => {
     setChatModalOpen(false);
   };
-  const onClickLike = async (e) => {
+  const onClickLike = async (e: any) => {
     try {
-      const result = await toggleLikeFeed({
+      await toggleLikeFeed({
         variables: {
           feedId: String(e.currentTarget.id),
         },
@@ -84,7 +75,6 @@ const OotdFeed = (props) => {
         </feed.UserName__Span>
       </feed.FeedTop__Div>
 
-      {/* /feeds/[feedId]?feedId=${props.el.id} */}
       <feed.FeedBody__Div>
         <feed.FeedImageBox__Div id={props.el.id} onClick={openModal}>
           <feed.FeedImage__Img src={`https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` ? `https://storage.googleapis.com/${props.el.feedImg[0]?.imgURL}` : ""} />

@@ -1,15 +1,14 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { FETCH_MY_FEED } from "../../mypage/myPageFeed/MyPageFeedQuries";
 import { IMutation, IMutationToggleLikeFeedArgs, IQuery, IQueryFetchFeedArgs, IQueryFetchFeedLikeArgs } from "../../types/types";
 import FeedDetailUI from "./feedDetail.presenter";
 import { M_TOGGLE_LIKE_FEED, Q_FETCH_FEED, Q_FETCH_FEED_LIKE, Q_FETCH_USER } from "./feedDetail.queries";
 
 function FeedDetail(props) {
   const { myPageFeedId, ootdFeedId, tagFeed } = props; //mypage으로부터 받아오는 feedId
-  const router = useRouter();
+
+  const [showPhoto, setShowPhoto] = useState<string>("");
 
   // 페치 피드
   const { data } = useQuery<Pick<IQuery, "fetchFeed">, IQueryFetchFeedArgs>(Q_FETCH_FEED, {
@@ -26,7 +25,7 @@ function FeedDetail(props) {
   });
 
   // 페치 유저
-  const { data: userData } = useQuery(Q_FETCH_USER);
+  const { data: userData } = useQuery<Pick<IQuery, "fetchUser">>(Q_FETCH_USER);
 
   const [toggleLikeFeed] = useMutation<Pick<IMutation, "toggleLikeFeed">, IMutationToggleLikeFeedArgs>(M_TOGGLE_LIKE_FEED);
 
@@ -50,9 +49,7 @@ function FeedDetail(props) {
     }
   };
 
-  const [showPhoto, setShowPhoto] = useState<string>("");
-
-  const onClickPhoto = (photo: any) => {
+  const onClickPhoto = (photo: string) => {
     setShowPhoto(photo);
   };
 
