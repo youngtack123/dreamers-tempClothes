@@ -16,14 +16,19 @@ export type Scalars = {
   Upload: any;
 };
 
-export type IChat = {
-  __typename?: 'Chat';
+export type IChatMessage = {
+  __typename?: 'ChatMessage';
   createdAt: Scalars['DateTime'];
-  deletedAt: Scalars['DateTime'];
   id: Scalars['String'];
   message: Scalars['String'];
   room: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  user: IUser;
+};
+
+export type IChatRoom = {
+  __typename?: 'ChatRoom';
+  id: Scalars['String'];
+  room: Scalars['String'];
   user: IUser;
 };
 
@@ -92,10 +97,17 @@ export type IFeedLike = {
 export type IFeedTag = {
   __typename?: 'FeedTag';
   count: Scalars['Int'];
-  deletedAt: Scalars['DateTime'];
   feed: Array<IFeed>;
+  feedTagCategory?: Maybe<IFeedTagCategory>;
   id: Scalars['String'];
   tagName: Scalars['String'];
+};
+
+export type IFeedTagCategory = {
+  __typename?: 'FeedTagCategory';
+  categoryName: Scalars['String'];
+  feedTag?: Maybe<Array<IFeedTag>>;
+  id: Scalars['String'];
 };
 
 export type IMutation = {
@@ -111,6 +123,7 @@ export type IMutation = {
   createPhoneAuth: Scalars['String'];
   createRedis: Scalars['String'];
   createRegion: IRegion;
+  createRoom: IChatRoom;
   createUser: IUser;
   deleteComment: Scalars['Boolean'];
   deleteFeed: Scalars['Boolean'];
@@ -184,6 +197,11 @@ export type IMutationCreateRegionArgs = {
   lat: Scalars['String'];
   lon: Scalars['String'];
   regionId: Scalars['String'];
+};
+
+
+export type IMutationCreateRoomArgs = {
+  opponentNickname: Scalars['String'];
 };
 
 
@@ -288,12 +306,13 @@ export type IPaymentButton = {
 
 export type IQuery = {
   __typename?: 'Query';
+  connectionRoom: IChatRoom;
   fetchComments: IFetchCommentOutput;
   fetchFeed: IFeed;
   fetchFeedLike: IFetchFeedLikeOutput;
   fetchFeedTags: Array<IFeedTag>;
   fetchFeeds: IFetchFeedOutput;
-  fetchLogs: Array<IChat>;
+  fetchLogs: Array<IChatMessage>;
   fetchMyFeeds: IFetchFeedOutput;
   fetchNickname: IUser;
   fetchRedis: Scalars['String'];
@@ -303,6 +322,11 @@ export type IQuery = {
   fetchUserFeeds: IFetchFeedOutput;
   fetchUsers: Array<IUser>;
   getWeather: IWeatherOutPut;
+};
+
+
+export type IQueryConnectionRoomArgs = {
+  hostNickname: Scalars['String'];
 };
 
 
@@ -335,7 +359,7 @@ export type IQueryFetchFeedsArgs = {
 
 
 export type IQueryFetchLogsArgs = {
-  opponentNickname: Scalars['String'];
+  room: Scalars['String'];
 };
 
 

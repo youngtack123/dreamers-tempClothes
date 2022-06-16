@@ -7,6 +7,9 @@ export const CREATE_USER = gql`
       phone
       gender
       style
+      region {
+        id
+      }
     }
   }
 `;

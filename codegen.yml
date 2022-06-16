@@ -1,4 +1,4 @@
-schema: https://server.t1dreamers.shop/graphql
+schema: https://team-project.leo3179.shop/graphql
 generates:
   ./src/components/types/types.ts:
     plugins:

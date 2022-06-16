@@ -11,6 +11,8 @@ export const Q_FETCH_USER = gql`
   query {
     fetchUser {
       id
+      gender
+      style
       region {
         id
         lat
